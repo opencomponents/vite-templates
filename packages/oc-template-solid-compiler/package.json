@@ -1,6 +1,6 @@
 {
-  "name": "oc-template-react-compiler",
-  "version": "6.0.0",
+  "name": "oc-template-solid-compiler",
+  "version": "0.4.0",
   "description": "",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -10,16 +10,16 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/guestlinelabs/oc-template-react.git"
+    "url": "https://github.com/guestlinelabs/oc-template-solid.git"
   },
   "bugs": {
-    "url": "https://github.com/guestlinelabs/oc-template-react/issues"
+    "url": "https://github.com/guestlinelabs/oc-template-solid/issues"
   },
-  "homepage": "https://github.com/guestlinelabs/oc-template-react#readme",
+  "homepage": "https://github.com/guestlinelabs/oc-template-solid#readme",
   "keywords": [
     "oc",
     "opencomponents",
-    "react",
+    "solidjs",
     "oc-template"
   ],
   "author": {
@@ -28,17 +28,16 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@vitejs/plugin-react": "^4.0.0",
     "chalk": "^3.0.0",
     "cssesc": "^3.0.0",
     "immer": "^9.0.6",
     "oc-generic-template-compiler": "2.1.0",
-    "oc-statics-compiler": "2.1.0",
-    "oc-template-react": "*",
+    "oc-statics-compiler": "2.0.10",
+    "oc-template-solid": "*",
     "oc-vite-compiler": "*",
-    "react": "18.2.0",
-    "react-dom": "18.2.0",
-    "resolve": "^1.20.0"
+    "resolve": "^1.20.0",
+    "solid-js": "^1.7.8",
+    "vite-plugin-solid": "^2.7.0"
   },
   "files": [
     "dist",
@@ -47,13 +46,9 @@
     "LICENSE"
   ],
   "devDependencies": {
-    "@types/cssesc": "^3.0.2",
-    "@types/react": "^18.0.28",
-    "@types/react-dom": "^18.0.11",
     "fs-extra": "^10.0.0",
     "lodash": "^4.17.4",
     "prettier": "^2.3.2",
-    "prettier-config-guestline": "2.0.0",
-    "typescript": "^5.2.2"
+    "prettier-config-guestline": "2.0.0"
   }
 }
