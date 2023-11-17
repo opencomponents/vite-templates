@@ -1,0 +1,20 @@
+{
+  "name": "oc-server",
+  "version": "0.0.1",
+  "description": "",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "prepare": "npm run build"
+  },
+  "keywords": [
+    "oc",
+    "opencomponents"
+  ],
+  "author": {
+    "name": "Ricardo Devis Agullo",
+    "email": "mkredz@gmail.com"
+  },
+  "license": "MIT"
+}

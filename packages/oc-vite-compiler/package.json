@@ -1,0 +1,49 @@
+{
+  "name": "oc-vite-compiler",
+  "version": "2.1.2",
+  "description": "OC-Vite-Compiler",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "prepare": "npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/opencomponents/vite-templates.git"
+  },
+  "bugs": {
+    "url": "https://github.com/opencomponents/vite-templates/issues"
+  },
+  "homepage": "https://github.com/opencomponents/vite-templates#readme",
+  "keywords": [
+    "oc",
+    "opencomponents"
+  ],
+  "author": {
+    "name": "Ricardo Devis Agullo",
+    "email": "mkredz@gmail.com"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "@babel/core": "^7.18.9",
+    "builtin-modules": "^3.3.0",
+    "fs-extra": "^10.1.0",
+    "oc-hash-builder": "^1.0.5",
+    "oc-view-wrapper": "^1.0.6",
+    "oc-vite": "*",
+    "vite": "^4.5.0",
+    "vite-plugin-environment": "^1.1.3"
+  },
+  "files": [
+    "dist",
+    "LICENSE",
+    "README.md"
+  ],
+  "devDependencies": {
+    "@types/fs-extra": "^11.0.4",
+    "@types/node": "^20.9.0",
+    "oc-generic-template-compiler": "^2.1.1",
+    "typescript": "^5.2.2"
+  }
+}
