@@ -1,3 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`When files writing fails should return an error 1`] = `"src/app.tsx compilation failed - sorry I failed"`;
