@@ -1,0 +1,56 @@
+{
+  "name": "oc-template-preact-compiler",
+  "version": "0.2.0",
+  "description": "",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "prepare": "npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/guestlinelabs/oc-template-preact.git"
+  },
+  "bugs": {
+    "url": "https://github.com/guestlinelabs/oc-template-preact/issues"
+  },
+  "homepage": "https://github.com/guestlinelabs/oc-template-preact#readme",
+  "keywords": [
+    "oc",
+    "opencomponents",
+    "preact",
+    "oc-template"
+  ],
+  "author": {
+    "name": "Ricardo Devis Agullo",
+    "email": "mkredz@gmail.com"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "@preact/preset-vite": "^2.5.0",
+    "chalk": "^3.0.0",
+    "immer": "^9.0.6",
+    "oc-generic-template-compiler": "2.1.0",
+    "oc-statics-compiler": "2.0.10",
+    "oc-template-preact": "*",
+    "oc-vite-compiler": "*",
+    "preact": "^10",
+    "resolve": "^1.20.0"
+  },
+  "peerDependencies": {
+    "preact": "^10"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE",
+    "scaffold"
+  ],
+  "devDependencies": {
+    "fs-extra": "^10.0.0",
+    "lodash": "^4.17.4",
+    "prettier": "^2.3.2",
+    "prettier-config-guestline": "2.0.0"
+  }
+}
