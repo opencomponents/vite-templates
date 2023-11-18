@@ -4,7 +4,9 @@ import { getInfo } from 'oc-template-es6';
 import { viteView, viteServer } from 'oc-vite-compiler';
 import { htmlTemplate } from './htmlTemplate';
 
-export const compiler = createCompile({
+export type CompilerOptions = ReturnType<typeof createCompile>;
+
+export const compiler: CompilerOptions = createCompile({
   compileView: (options, cb) =>
     viteView(
       {

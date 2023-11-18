@@ -9,12 +9,14 @@ import { preact } from '@preact/preset-vite';
 import preactOCProviderTemplate from './preactOCProviderTemplate';
 import htmlTemplate from './htmlTemplate';
 
-export const compiler = (createCompile as any)({
-  compileView: (options: any, cb: any) =>
+export type CompilerOptions = ReturnType<typeof createCompile>;
+
+export const compiler: CompilerOptions = createCompile({
+  compileView: (options, cb) =>
     viteView(
       {
         ...options,
-        plugins: [preact()],
+        plugins: [preact() as any],
         viewWrapper: ({ viewPath }) => preactOCProviderTemplate({ viewPath }),
         htmlTemplate,
         externals: getInfo().externals

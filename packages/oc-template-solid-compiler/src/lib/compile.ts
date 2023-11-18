@@ -7,12 +7,14 @@ import solid from 'vite-plugin-solid';
 import solidOCProviderTemplate from './solidOCProviderTemplate';
 import htmlTemplate from './htmlTemplate';
 
-export const compile = (createCompile as any)({
-  compileView: (options: any, cb: any) =>
+export type CompilerOptions = ReturnType<typeof createCompile>;
+
+export const compile: CompilerOptions = createCompile({
+  compileView: (options, cb) =>
     viteView(
       {
         ...options,
-        plugins: [solid()],
+        plugins: [solid() as any],
         viewWrapper: ({ viewPath }) => solidOCProviderTemplate({ viewPath }),
         htmlTemplate,
         externals: getInfo().externals

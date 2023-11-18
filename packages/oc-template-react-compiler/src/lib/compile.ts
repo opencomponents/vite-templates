@@ -7,8 +7,10 @@ import react from '@vitejs/plugin-react';
 import reactOCProviderTemplate from './reactOCProviderTemplate';
 import htmlTemplate from './htmlTemplate';
 
-export const compile = (createCompile as any)({
-  compileView: (options: any, cb: any) =>
+export type CompilerOptions = ReturnType<typeof createCompile>;
+
+export const compile: CompilerOptions = createCompile({
+  compileView: (options, cb) =>
     viteView(
       {
         ...options,
