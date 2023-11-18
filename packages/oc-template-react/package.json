@@ -50,8 +50,5 @@
       "url": "https://unpkg.com/react-dom@18.2.0/umd/react-dom.production.min.js",
       "devUrl": "https://unpkg.com/react-dom@18.2.0/umd/react-dom.development.js"
     }
-  },
-  "devDependencies": {
-    "typescript": "^5.2.2"
   }
 }
