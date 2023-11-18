@@ -6,11 +6,11 @@ import { getInfo } from 'oc-template-preact';
 import { viteView, viteServer } from 'oc-vite-compiler';
 import { preact } from '@preact/preset-vite';
 
-import peactOCProviderTemplate from './peactOCProviderTemplate';
+import preactOCProviderTemplate from './preactOCProviderTemplate';
 import htmlTemplate from './htmlTemplate';
 
 export const compiler = (createCompile as any)({
-  compileView: (options, cb) =>
+  compileView: (options: any, cb: any) =>
     viteView(
       {
         ...options,
