@@ -16,5 +16,10 @@
     "name": "Ricardo Devis Agullo",
     "email": "mkredz@gmail.com"
   },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
   "license": "MIT"
 }

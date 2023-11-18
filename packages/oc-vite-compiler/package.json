@@ -37,8 +37,8 @@
   },
   "files": [
     "dist",
-    "LICENSE",
-    "README.md"
+    "README.md",
+    "LICENSE"
   ],
   "devDependencies": {
     "@types/fs-extra": "^11.0.4",
