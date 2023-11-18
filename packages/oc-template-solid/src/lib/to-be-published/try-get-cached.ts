@@ -1,9 +1,13 @@
-"use strict";
+import Cache from 'nice-cache';
 
-const Cache = require("nice-cache");
 const cache = new Cache({});
 
-module.exports = function(type, key, predicate, callback) {
+export default function tryGetCached(
+  type: string,
+  key: string,
+  predicate: (cb: (err: Error | null, data: any) => void) => void,
+  callback: (err: Error | null, data?: any) => void
+) {
   const cached = cache.get(type, key);
 
   if (cached) {
@@ -18,4 +22,4 @@ module.exports = function(type, key, predicate, callback) {
     cache.set(type, key, res);
     callback(null, res);
   });
-};
+}

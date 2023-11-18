@@ -1,4 +1,4 @@
-import render from 'preact-render-to-string';
+declare const renderSolid: any;
 
 import createPredicate from './to-be-published/get-js-from-url';
 import tryGetCached from './to-be-published/try-get-cached';
@@ -23,7 +23,7 @@ export function render(options: any, callback: any) {
       (err: any, CachedApp: any) => {
         if (err) return callback(err);
         try {
-          const preactHtml = render(CachedApp(props));
+          const preactHtml = renderSolid(CachedApp(props));
 
           const html = options.template(
             Object.assign({}, options.model, {

@@ -4,21 +4,12 @@ import vm from 'vm';
 type GetJsFromUrlOptions = {
   url: string;
   key: string;
-  reactKey: string;
-  globals: Record<string, any>;
   timeout?: number;
   extractor: (key: string, context: Record<string, any>) => string;
 };
 
 const getJsFromUrl =
-  ({
-    url,
-    key,
-    reactKey,
-    globals,
-    timeout = 5000,
-    extractor,
-  }: GetJsFromUrlOptions) =>
+  ({ url, key, timeout = 5000, extractor }: GetJsFromUrlOptions) =>
   (cb: any) => {
     request(
       {
@@ -35,7 +26,7 @@ const getJsFromUrl =
           });
         }
 
-        const context = Object.assign({}, globals);
+        const context = {};
 
         try {
           vm.runInNewContext(
@@ -48,7 +39,7 @@ const getJsFromUrl =
         } catch (err) {
           return cb(err);
         }
-        const cached = extractor(reactKey, context);
+        const cached = extractor('solidKey', context);
         cb(null, cached);
       }
     );
