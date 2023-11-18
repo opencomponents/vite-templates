@@ -59,7 +59,7 @@ function checkTs(pkg) {
     'compilerOptions.outDir': './dist',
     'compilerOptions.strict': true,
     'compilerOptions.esModuleInterop': true,
-    include: ['./src'],
+    include: ['./src'].concat(isPkgTemplate(pkg) ? './globals.d.ts' : []),
   };
   let checks = [];
   for (const [prop, expected] of Object.entries(expectations)) {
@@ -88,4 +88,8 @@ function checkPath(obj, prop, expected) {
 
 function isPkgCompiler(pkg) {
   return pkg.endsWith('-compiler') && pkg !== 'oc-vite-compiler';
+}
+
+function isPkgTemplate(pkg) {
+  return pkg.startsWith('oc-template-') && !pkg.endsWith('-compiler');
 }
