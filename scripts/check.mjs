@@ -35,11 +35,11 @@ function checkPkg(pkg) {
   const expectations = {
     'scripts.build': 'tsc',
     'scripts.prepare': 'npm run build',
-    files: ['dist', 'README.md', 'LICENSE'].concat(
-      isPkgCompiler(pkg) ? 'scaffold' : []
-    ),
+    'scripts.clean': 'rm -rf .turbo && rm -rf node_modules && rm -rf dist',
+    files: ['dist/**'].concat(isPkgCompiler(pkg) ? 'scaffold' : []),
     main: 'dist/index.js',
     types: 'dist/index.d.ts',
+    // lint: "eslint \"src/**/*.ts*\"",
     license: 'MIT',
   };
   let checks = [];

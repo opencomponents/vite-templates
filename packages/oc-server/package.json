@@ -6,7 +6,8 @@
   "types": "dist/index.d.ts",
   "scripts": {
     "build": "tsc",
-    "prepare": "npm run build"
+    "prepare": "npm run build",
+    "clean": "rm -rf .turbo && rm -rf node_modules && rm -rf dist"
   },
   "keywords": [
     "oc",
@@ -17,9 +18,7 @@
     "email": "mkredz@gmail.com"
   },
   "files": [
-    "dist",
-    "README.md",
-    "LICENSE"
+    "dist/**"
   ],
   "license": "MIT"
 }
