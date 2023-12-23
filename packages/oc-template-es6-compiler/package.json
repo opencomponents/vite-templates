@@ -6,7 +6,8 @@
   "types": "dist/index.d.ts",
   "scripts": {
     "build": "tsc",
-    "prepare": "npm run build"
+    "prepare": "npm run build",
+    "clean": "rm -rf .turbo && rm -rf node_modules && rm -rf dist"
   },
   "repository": {
     "type": "git",
@@ -36,9 +37,7 @@
     "oc-vite-compiler": "*"
   },
   "files": [
-    "dist",
-    "README.md",
-    "LICENSE",
+    "dist/**",
     "scaffold"
   ]
 }

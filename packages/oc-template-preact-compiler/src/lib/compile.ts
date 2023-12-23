@@ -1,5 +1,3 @@
-'use strict';
-
 import { createCompile } from 'oc-generic-template-compiler';
 import compileStatics from 'oc-statics-compiler';
 import { getInfo } from 'oc-template-preact';

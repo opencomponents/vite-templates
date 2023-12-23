@@ -6,7 +6,8 @@
   "types": "dist/index.d.ts",
   "scripts": {
     "build": "tsc",
-    "prepare": "npm run build"
+    "prepare": "npm run build",
+    "clean": "rm -rf .turbo && rm -rf node_modules && rm -rf dist"
   },
   "repository": {
     "type": "git",
@@ -29,8 +30,6 @@
     "oc-generic-template-renderer": "2.0.9"
   },
   "files": [
-    "dist",
-    "README.md",
-    "LICENSE"
+    "dist/**"
   ]
 }

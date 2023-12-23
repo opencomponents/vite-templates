@@ -3,6 +3,7 @@ dist
 tmp
 _package
 .nx/cache
+.turbo
 
 # dependencies
 node_modules

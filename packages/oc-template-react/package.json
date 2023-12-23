@@ -6,7 +6,8 @@
   "types": "dist/index.d.ts",
   "scripts": {
     "build": "tsc",
-    "prepare": "npm run build"
+    "prepare": "npm run build",
+    "clean": "rm -rf .turbo && rm -rf node_modules && rm -rf dist"
   },
   "repository": {
     "type": "git",
@@ -35,9 +36,7 @@
     "react-dom": "18.2.0"
   },
   "files": [
-    "dist",
-    "README.md",
-    "LICENSE"
+    "dist/**"
   ],
   "externals": {
     "react": {
