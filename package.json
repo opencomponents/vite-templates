@@ -20,6 +20,10 @@
     "prettier": "^2.5.1",
     "turbo": "^1.9.3"
   },
+  "prettier": {
+    "singleQuote": true,
+    "useTabs": false
+  },
   "workspaces": [
     "packages/*"
   ]
