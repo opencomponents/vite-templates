@@ -38,7 +38,8 @@ export class Server<
       let res: any;
       try {
         if (actionName && this.actions[actionName]) {
-          res = await this.actions[actionName](params, context);
+          const data = params?.data ?? params;
+          res = await this.actions[actionName](data, context);
         } else {
           res = await this.initial(params, context);
         }

@@ -43,7 +43,11 @@ function getAction<T>(options: {
   });
 }
 
-console.log('HELLO');
+declare const window: Window & {
+  oc?: {
+    renderedComponents: Record<string, { baseUrl: string; version: string }>;
+  };
+};
 
 export const serverClient: ServerClient<RegisteredServer> = new Proxy(
   {},
@@ -52,21 +56,8 @@ export const serverClient: ServerClient<RegisteredServer> = new Proxy(
       return (data: any) => {
         const componentName = '';
         const componentVersion = '';
-        let url = document
-          .querySelector(
-            `oc-component[data-name="${componentName}"][data-version="${componentVersion}"]`
-          )
-          ?.getAttribute('href');
-        if (!url?.startsWith('http')) {
-          url = `${window.location.protocol}${url}`;
-        }
-        const base = new URL(url);
         const baseUrl =
-          base.origin +
-          base.pathname.replace(
-            new RegExp(`/${componentName}/[\\dx]\.[\\dx]\.[\\dx].*`),
-            ''
-          );
+          window.oc?.renderedComponents?.[componentName]?.baseUrl ?? '/';
 
         return getAction({
           action: prop,

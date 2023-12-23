@@ -95,6 +95,26 @@ async function compileView(options: CompileClientOptions) {
     root: componentPath,
     mode: production ? 'production' : 'development',
     plugins: [
+      {
+        name: 'OcServerRuntime',
+        enforce: 'pre',
+        transform(code: string, id: string) {
+          if (id.includes('node_modules/oc-server/dist/serverClient.js')) {
+            code = code.replace(
+              /("|')COMPONENT_NAME("|')/,
+              `"${componentPackage.name}"`
+            );
+            code = code.replace(
+              /("|')COMPONENT_VERSION("|')/,
+              `"${componentPackage.version}"`
+            );
+            return {
+              code,
+              map: null,
+            };
+          }
+        },
+      },
       ...plugins,
       EnvironmentPlugin(['NODE_ENV']),
       cssModules(),
