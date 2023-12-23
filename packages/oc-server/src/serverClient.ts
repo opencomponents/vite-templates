@@ -54,8 +54,8 @@ export const serverClient: ServerClient<RegisteredServer> = new Proxy(
   {
     get(_target, prop: string) {
       return (data: any) => {
-        const componentName = '';
-        const componentVersion = '';
+        const componentName = 'COMPONENT_NAME';
+        const componentVersion = 'COMPONENT_VERSION';
         const baseUrl =
           window.oc?.renderedComponents?.[componentName]?.baseUrl ?? '/';
 
