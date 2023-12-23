@@ -104,9 +104,7 @@ async function checkPreviousBuild(version) {
 }
 
 async function main() {
-  const vitePkgJson = await readJSON('./vite/packages/vite/package.json');
-
-  const wasBuilt = checkPreviousBuild();
+  const wasBuilt = await checkPreviousBuild();
   if (wasBuilt) {
     console.log('Build already in place');
     process.exit(0);
@@ -123,6 +121,7 @@ async function main() {
   rmDir('./vite/.git');
 
   console.log('Checking package jsons');
+  const vitePkgJson = await readJSON('./vite/packages/vite/package.json');
   checkPackages(pkgJson, vitePkgJson);
 
   console.log('Installing');
