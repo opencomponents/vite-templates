@@ -14,7 +14,9 @@ const higherOrderServerTemplate: ServerWrapper = ({
   bundleHashKey,
 }) => {
   return `
-import { data as dataProvider } from '${removeExtension(serverPath)}';
+import * as servers from '${removeExtension(serverPath)}';
+
+const dataProvider = servers['server'] ? servers['server'].getData() : servers['data'];
 
 export const data = (context : any, callback : (error: any, data?: any) => void) => {
   dataProvider(context, (error: any, model: any) => {
