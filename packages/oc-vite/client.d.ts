@@ -3,6 +3,11 @@
 // CSS modules
 type CSSModuleClasses = { readonly [key: string]: string }
 
+declare module '*.css' {
+  const classes: CSSModuleClasses
+  export default classes
+}
+
 declare module '*.module.css' {
   const classes: CSSModuleClasses
   export default classes
@@ -37,7 +42,6 @@ declare module '*.module.sss' {
 }
 
 // CSS
-declare module '*.css' {}
 declare module '*.scss' {}
 declare module '*.sass' {}
 declare module '*.less' {}
