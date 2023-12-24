@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useData } from 'oc-template-react-compiler/utils/useData';
+import { serverClient } from 'oc-server';
 import styles from './styles.css';
 import logo from '../public/logo.png';
 import type { AdditionalData, ClientProps } from './types';
@@ -16,7 +17,7 @@ const App: React.FC<ClientProps> = () => {
   const fetchMoreData = async () => {
     setError('');
     try {
-      const data = await getData({ userId, getMoreData: true });
+      const data = await serverClient.getMoreData({ userId });
       setAdditionalData(data);
     } catch (err) {
       setError(String(err));
