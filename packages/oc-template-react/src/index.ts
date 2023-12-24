@@ -5,7 +5,7 @@ import ReactDOM from 'react-dom';
 import fs from 'fs';
 
 const packageJson = JSON.parse(
-  fs.readFileSync(path.join(__dirname, './package.json'), 'utf-8')
+  fs.readFileSync(path.join(__dirname, '../package.json'), 'utf-8')
 );
 
 export * from './lib/render';
