@@ -1,5 +1,5 @@
-import { Context } from 'oc-template-solid-compiler';
-import { AdditionalData, ClientProps, OcParameters } from './types';
+import { Server } from 'oc-server';
+import { ClientProps, OcParameters } from './types';
 
 const database = [
   { name: 'John Doe', age: 34, hobbies: ['Swimming', 'Basketball'] },
@@ -10,25 +10,27 @@ async function getUser(userId: number) {
   return database[userId];
 }
 
-export async function data(
-  context: Context<OcParameters>,
-  callback: (error: any, data: ClientProps | AdditionalData) => void
-) {
-  const { userId } = context.params;
+export const server = new Server(async (params: OcParameters): Promise<ClientProps> => {
+  const { userId } = params;
   const user = await getUser(userId);
-  const shouldGetMoreData = context.params.getMoreData;
+
   const [firstName, lastName] = user.name.split(/\s+/);
-
-  if (shouldGetMoreData) {
-    return callback(null, {
-      age: user.age,
-      hobbies: user.hobbies
-    });
-  }
-
-  return callback(null, {
+  return {
     userId,
     firstName,
     lastName
-  });
+  };
+}).action('getMoreData', async (params: OcParameters) => {
+  const { userId } = params;
+  const user = await getUser(userId);
+  return {
+    age: user.age,
+    hobbies: user.hobbies
+  };
+});
+
+declare module 'oc-server' {
+  interface Register {
+    server: typeof server;
+  }
 }

@@ -1,5 +1,6 @@
 import { createSignal, Show, For } from 'solid-js';
 import { useData } from 'oc-template-solid-compiler/dist/utils/useData';
+import { serverClient } from 'oc-server';
 import styles from './styles.css';
 import type { AdditionalData, ClientProps } from './types';
 
@@ -8,15 +9,19 @@ interface AppProps extends ClientProps {
 }
 
 const App = () => {
-  const { firstName, lastName, userId, getData, getSetting } = useData<AppProps>();
+  const { firstName, lastName, userId, getSetting } = useData<AppProps>();
   const staticPath = getSetting('staticPath');
   const [additionalData, setAdditionalData] = createSignal<AdditionalData | null>(null);
   const [error, setError] = createSignal('');
 
-  function handleClick() {
-    getData({ userId, getMoreData: true })
-      .then((response) => setAdditionalData(response))
-      .catch((err) => setError(err));
+  async function handleClick() {
+    const data = await serverClient.getMoreData({ userId });
+
+    try {
+      setAdditionalData(data);
+    } catch (error) {
+      setError(String(error));
+    }
   }
 
   return (
