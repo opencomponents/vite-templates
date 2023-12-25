@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useData } from 'oc-template-react-compiler/utils/useData';
+import { useData } from 'oc-template-react-compiler/dist/utils/useData';
 import { serverClient } from 'oc-server';
 import styles from './styles.css';
 import logo from '../public/logo.png';

@@ -5,7 +5,7 @@ export default function preactOCProviderTemplate({ viewPath }: { viewPath: strin
   import { render } from 'preact';
   import { useEffect } from 'preact/hooks';
   import View from '${removeExtension(viewPath)}';
-  import { DataProvider } from 'oc-template-preact-compiler/utils/useData'
+  import { DataProvider } from 'oc-template-preact-compiler/dist/utils/useData'
 
   function OCProvider(props: any): any {
     const { _staticPath, _baseUrl, _componentName, _componentVersion, ...rest } = props;

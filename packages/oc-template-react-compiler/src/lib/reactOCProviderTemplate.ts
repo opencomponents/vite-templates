@@ -4,7 +4,7 @@ export default function reactOCProviderTemplate({ viewPath }: { viewPath: string
   return `
   import React from 'react';
   import View from '${removeExtension(viewPath)}';
-  import { DataProvider } from 'oc-template-react-compiler/utils/useData'
+  import { DataProvider } from 'oc-template-react-compiler/dist/utils/useData'
 
   class OCProvider extends React.Component {
     componentDidMount(){

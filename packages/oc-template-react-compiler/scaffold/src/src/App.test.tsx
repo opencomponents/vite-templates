@@ -1,7 +1,7 @@
 import React from 'react';
 import { describe, it, afterEach, beforeEach, expect, vi } from 'vitest';
 import { render, screen } from '@testing-library/react';
-import { DataProvider } from 'oc-template-react-compiler/utils/useData';
+import { DataProvider } from 'oc-template-react-compiler/dist/utils/useData';
 
 import App from './App';
 

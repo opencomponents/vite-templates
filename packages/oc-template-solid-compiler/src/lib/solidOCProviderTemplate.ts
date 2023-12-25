@@ -4,7 +4,7 @@ export default function solidOCProviderTemplate({ viewPath }: { viewPath: string
   return `
   import { render } from 'solid-js/web';
   import View from '${removeExtension(viewPath)}';
-  import { DataProvider } from 'oc-template-solid-compiler/utils/useData'
+  import { DataProvider } from 'oc-template-solid-compiler/dist/utils/useData'
 
   function OCProvider(props: any): any {
     const { _staticPath, _baseUrl, _componentName, _componentVersion, ...rest } = props;

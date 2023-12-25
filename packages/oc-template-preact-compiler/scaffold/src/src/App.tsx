@@ -1,5 +1,5 @@
 import { useState } from 'preact/hooks';
-import { useData } from 'oc-template-preact-compiler/utils/useData';
+import { useData } from 'oc-template-preact-compiler/dist/utils/useData';
 import styles from './styles.css';
 import type { AdditionalData, ClientProps } from './types';
 
