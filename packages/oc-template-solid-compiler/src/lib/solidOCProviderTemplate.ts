@@ -21,8 +21,8 @@ export default function solidOCProviderTemplate({ viewPath }: { viewPath: string
         if (err) {
           return cb(err);
         }
-        const { _staticPath, _baseUrl, _componentName, _componentVersion, ...rest } = (data.solidComponent.props as any); 
-        cb(null, rest, data.solidComponent.props);
+        const { _staticPath, _baseUrl, _componentName, _componentVersion, ...rest } = (data.component.props as any); 
+        cb(null, rest, data.component.props);
       });
     }
 
