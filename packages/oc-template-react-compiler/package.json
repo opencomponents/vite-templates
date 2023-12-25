@@ -4,18 +4,6 @@
   "description": "",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
-  "exports": {
-    ".": {
-      "import": "./dist/index.js",
-      "require": "./dist/index.js",
-      "types": "./dist/index.d.ts"
-    },
-    "./utils/useData": {
-      "import": "./dist/utils/useData.js",
-      "require": "./dist/utils/useData.js",
-      "types": "./dist/utils/useData.d.ts"
-    }
-  },
   "scripts": {
     "build": "tsc",
     "prepare": "npm run build",
