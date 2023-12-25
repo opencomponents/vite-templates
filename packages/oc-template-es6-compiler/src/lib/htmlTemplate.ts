@@ -4,7 +4,7 @@ export function htmlTemplate({ css, bundle }: { css: string; bundle: string }) {
   return `function(model){
   const fn = ${bundle};
   return '' + 
-    fn(model) +
+    fn(model.component.props) +
     '${
       css
         ? '<style>' +
