@@ -1,2 +1,1 @@
-/// <reference types="oc-template-react" />
-/// <reference types="vite/client" />
+/// <reference types="oc-vite/client" />

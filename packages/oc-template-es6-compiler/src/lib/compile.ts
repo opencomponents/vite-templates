@@ -6,7 +6,7 @@ import { htmlTemplate } from './htmlTemplate';
 
 export type CompilerOptions = ReturnType<typeof createCompile>;
 
-export const compiler: CompilerOptions = createCompile({
+export const compile: CompilerOptions = createCompile({
   compileView: (options, cb) =>
     viteView(
       {

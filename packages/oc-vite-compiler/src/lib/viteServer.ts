@@ -72,6 +72,7 @@ async function compileServer(options: CompileServerOptions) {
         minify: production,
         rollupOptions: {
           external: (id) => {
+            if (id === 'oc-server') return false;
             if (nodeModuleMatcher.test(id)) {
               if (moduleWithPathMatcher.test(id)) {
                 id = id.split('/')[0];
