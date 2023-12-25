@@ -21,15 +21,6 @@ declare global {
   interface Window {
     oc: OC;
   }
-
-  namespace JSX {
-    interface IntrinsicElements {
-      'oc-component': React.DetailedHTMLProps<
-        React.HTMLAttributes<HTMLElement> & { href: string },
-        HTMLElement
-      >;
-    }
-  }
 }
 
 export interface AcceptLanguage {

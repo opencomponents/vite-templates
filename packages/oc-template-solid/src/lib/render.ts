@@ -23,11 +23,11 @@ export function render(options: any, callback: any) {
       (err: any, CachedApp: any) => {
         if (err) return callback(err);
         try {
-          const preactHtml = renderSolid(CachedApp(props));
+          const solidHtml = renderSolid(CachedApp(props));
 
           const html = options.template(
             Object.assign({}, options.model, {
-              __html: preactHtml,
+              __html: solidHtml,
             })
           );
           return callback(null, html);
