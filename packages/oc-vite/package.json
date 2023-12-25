@@ -1,6 +1,6 @@
 {
   "name": "oc-vite",
-  "version": "5.0.9",
+  "version": "5.0.8",
   "type": "module",
   "license": "MIT",
   "author": "Evan You",
@@ -44,9 +44,6 @@
     "type": "git",
     "url": "git+https://github.com/vitejs/vite.git",
     "directory": "packages/vite"
-  },
-  "scripts": {
-    "prepare": "node prepare.mjs"
   },
   "dependencies": {
     "esbuild": "^0.19.3",
