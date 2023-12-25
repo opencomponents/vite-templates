@@ -3,7 +3,7 @@
     "target": "ES2022",
     "jsx": "preserve",
     "jsxImportSource": "solid-js",
-    "module": "commonjs",
+    "module": "CommonJS",
     "declaration": true,
     "outDir": "./dist",
     "esModuleInterop": true,
@@ -11,5 +11,6 @@
     "strict": true,
     "skipLibCheck": true
   },
-  "include": ["./src"]
+  "include": ["./src"],
+  "exclude": ["./src/utils"]
 }
