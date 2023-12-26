@@ -23,6 +23,7 @@ export const data = (context : any, callback : (error: any, data?: any) => void)
     if (error) {
       return callback(error);
     }
+    if (model == null) return callback(null, { __oc_emptyResponse: true });
     const props = Object.assign({}, model, {
       _staticPath: context.staticPath,
       _baseUrl: context.baseUrl,
