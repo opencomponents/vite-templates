@@ -63,3 +63,14 @@ export type RegisteredServer = Register extends {
 }
   ? TServer
   : AnyServer;
+
+type InitialData<TServer extends AnyServer> = () => TServer extends Server<
+  any,
+  any,
+  any,
+  infer O
+>
+  ? Exclude<O, undefined | null>
+  : any;
+export const initialData: InitialData<RegisteredServer> = () =>
+  '__INITIAL__DATA__';

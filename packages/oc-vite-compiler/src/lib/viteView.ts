@@ -113,6 +113,13 @@ async function compileView(options: CompileClientOptions) {
               map: null,
             };
           }
+          if (id.includes('node_modules/oc-server/dist/Server.js')) {
+            code = code.replace(/("|')__INITIAL__DATA__("|')/, '{}');
+            return {
+              code,
+              map: null,
+            };
+          }
         },
       },
       ...plugins,
