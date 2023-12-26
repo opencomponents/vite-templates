@@ -16,7 +16,7 @@ const higherOrderServerTemplate: ServerWrapper = ({
   return `
 import * as servers from '${removeExtension(serverPath)}';
 
-const dataProvider = servers['server'] ? servers['server'].getData() : servers['data'];
+const dataProvider = servers['data'] ? servers['data'] : servers['server'].getData();
 
 export const data = (context : any, callback : (error: any, data?: any) => void) => {
   dataProvider(context, (error: any, model: any) => {
