@@ -24,7 +24,7 @@ export default function preactOCProviderTemplate({ viewPath }: { viewPath: strin
         if (err) {
           return cb(err);
         }
-        cb(null, rest, data.preactComponent.props);
+        cb(null, rest, data.component.props);
       });
     }
 
