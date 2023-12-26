@@ -11,12 +11,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/opencomponents/base-templates.git"
+    "url": "https://github.com/opencomponents/vite-templates.git"
   },
   "bugs": {
-    "url": "https://github.com/opencomponents/base-templates/issues"
+    "url": "https://github.com/opencomponents/vite-templates/issues"
   },
-  "homepage": "https://github.com/opencomponents/base-templates#readme",
+  "homepage": "https://github.com/opencomponents/vite-templates#readme",
   "keywords": [
     "oc",
     "opencomponents"

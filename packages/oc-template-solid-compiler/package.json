@@ -1,6 +1,6 @@
 {
   "name": "oc-template-solid-compiler",
-  "version": "0.4.0",
+  "version": "0.5.0",
   "description": "",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -11,12 +11,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/guestlinelabs/oc-template-solid.git"
+    "url": "https://github.com/opencomponents/vite-templates.git"
   },
   "bugs": {
-    "url": "https://github.com/guestlinelabs/oc-template-solid/issues"
+    "url": "https://github.com/opencomponents/vite-templates/issues"
   },
-  "homepage": "https://github.com/guestlinelabs/oc-template-solid#readme",
+  "homepage": "https://github.com/opencomponents/vite-templates#readme",
   "keywords": [
     "oc",
     "opencomponents",

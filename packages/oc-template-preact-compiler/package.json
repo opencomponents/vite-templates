@@ -1,6 +1,6 @@
 {
   "name": "oc-template-preact-compiler",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -11,12 +11,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/guestlinelabs/oc-template-preact.git"
+    "url": "https://github.com/opencomponents/vite-templates.git"
   },
   "bugs": {
-    "url": "https://github.com/guestlinelabs/oc-template-preact/issues"
+    "url": "https://github.com/opencomponents/vite-templates/issues"
   },
-  "homepage": "https://github.com/guestlinelabs/oc-template-preact#readme",
+  "homepage": "https://github.com/opencomponents/vite-templates#readme",
   "keywords": [
     "oc",
     "opencomponents",
