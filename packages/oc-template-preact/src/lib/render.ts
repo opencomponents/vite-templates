@@ -5,10 +5,10 @@ import tryGetCached from './to-be-published/try-get-cached';
 
 export function render(options: any, callback: any) {
   try {
-    const url = options.model.preactComponent.src;
-    const key = options.model.preactComponent.key;
-    const preactKey = options.model.reactComponent.key;
-    const props = options.model.preactComponent.props;
+    const url = options.model.component.src;
+    const key = options.model.component.key;
+    const preactKey = options.model.component.key;
+    const props = options.model.component.props;
     const extractor = (key: any, context: any) =>
       context.oc.preactComponents[key];
     const getJsFromUrl = createPredicate({

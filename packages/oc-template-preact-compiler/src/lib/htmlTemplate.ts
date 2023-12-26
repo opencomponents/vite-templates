@@ -13,8 +13,8 @@ export default function viewTemplate({
 }) {
   return `function(model){
   var modelHTML =  model.__html ? model.__html : '';
-  var staticPath = model.preactComponent.props._staticPath;
-  var props = JSON.stringify(model.preactComponent.props);
+  var staticPath = model.component.props._staticPath;
+  var props = JSON.stringify(model.component.props);
   window.oc = window.oc || {};
   window.oc.__typescriptReactTemplate = window.oc.__typescriptReactTemplate || { count: 0 };
   oc.preactComponents = oc.preactComponents || {};

@@ -1,5 +1,6 @@
 import { useState } from 'preact/hooks';
 import { useData } from 'oc-template-preact-compiler/dist/utils/useData';
+import { serverClient } from 'oc-server';
 import styles from './styles.css';
 import type { AdditionalData, ClientProps } from './types';
 
@@ -16,7 +17,7 @@ const App = () => {
   const fetchMoreData = async () => {
     setError('');
     try {
-      const data = await getData({ userId, getMoreData: true });
+      const data = await serverClient.getMoreData({ userId });
       setAdditionalData(data);
     } catch (err) {
       setError(String(err));

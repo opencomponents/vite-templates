@@ -1,4 +1,4 @@
-import { Context } from 'oc-template-preact-compiler';
+import { Server } from 'oc-server';
 import { AdditionalData, ClientProps, OcParameters } from './types';
 
 const database = [
@@ -10,25 +10,26 @@ async function getUser(userId: number) {
   return database[userId];
 }
 
-export async function data(
-  context: Context<OcParameters>,
-  callback: (error: any, data: ClientProps | AdditionalData) => void
-) {
-  const { userId } = context.params;
-  const user = await getUser(userId);
-  const shouldGetMoreData = context.params.getMoreData;
+export const server = new Server(async (params: OcParameters): Promise<ClientProps> => {
+  const user = await getUser(params.userId);
   const [firstName, lastName] = user.name.split(/\s+/);
 
-  if (shouldGetMoreData) {
-    return callback(null, {
-      age: user.age,
-      hobbies: user.hobbies
-    });
-  }
-
-  return callback(null, {
-    userId,
+  return {
+    userId: params.userId,
     firstName,
     lastName
-  });
+  };
+}).action('getMoreData', async (params: OcParameters): Promise<AdditionalData> => {
+  const user = await getUser(params.userId);
+
+  return {
+    age: user.age,
+    hobbies: user.hobbies
+  };
+});
+
+declare module 'oc-server' {
+  interface Register {
+    server: typeof server;
+  }
 }
