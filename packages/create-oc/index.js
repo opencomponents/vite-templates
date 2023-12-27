@@ -53,6 +53,7 @@ fs.writeFileSync(
 );
 replaceJson(`./${componentName}/package.json`, (pkg) => ({
   ...pkg,
+  name: componentName,
   scripts: {
     ...(pkg.scripts || {}),
     start: `oc dev .. --components ${componentName}`,
