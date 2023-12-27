@@ -1,5 +1,9 @@
+#!/usr/bin/env node
+
 import prompts from 'prompts';
-import fs from 'fs';
+import path from 'node:path';
+import fs from 'node:fs';
+import { fileURLToPath } from 'node:url';
 
 const { componentName, template } = await prompts([
   {
@@ -32,9 +36,14 @@ try {
   throw err;
 }
 
+const templateDir = path.resolve(
+  fileURLToPath(import.meta.url),
+  `../templates/${template}`
+);
+
 console.log();
 console.log('Creating the template');
-fs.cpSync(`./templates/${template}`, `./${componentName}`, {
+fs.cpSync(templateDir, `./${componentName}`, {
   recursive: true,
 });
 fs.writeFileSync(
