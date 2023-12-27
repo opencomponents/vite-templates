@@ -160,7 +160,8 @@ async function compileView(options: CompileClientOptions) {
   const cssStyles = cssAssets
     .map(
       (x) =>
-        ((x as Rollup.OutputAsset).source as string).replace(/\r?\n/g, '') ?? ''
+        ((x as Rollup.OutputAsset).source as string).replace(/\r?\n|\t/g, '') ??
+        ''
     )
     .join(' ')
     .replace(/'/g, '"');
