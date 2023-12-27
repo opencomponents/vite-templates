@@ -60,6 +60,6 @@
   ],
   "devDependencies": {
     "prettier": "^2.3.2",
-    "prettier-config-guestline": "^1.0.1"
+    "prettier-config-guestline": "2.0.0"
   }
 }

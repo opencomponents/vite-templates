@@ -1,17 +1,28 @@
-'use strict';
+import { createCompile } from 'oc-generic-template-compiler';
+import compileStatics from 'oc-statics-compiler';
+import { getInfo } from 'oc-template-solid';
+import { viteView, viteServer } from 'oc-vite-compiler';
+import solid from 'vite-plugin-solid';
 
-const createCompile = require('oc-generic-template-compiler').createCompile;
-const compileStatics = require('oc-statics-compiler');
-const getInfo = require('oc-template-elm').getInfo;
+import elmOCProviderTemplate from './elmOCProviderTemplate';
+import htmlTemplate from './htmlTemplate';
 
-const compileServer = require('./compileServer');
-const compileView = require('./compileView');
-const verifyConfig = require('./verifyConfig');
+export type CompilerOptions = ReturnType<typeof createCompile>;
 
-const compiler = createCompile({
-  compileServer,
+export const compile: CompilerOptions = createCompile({
+  compileView: (options, cb) =>
+    viteView(
+      {
+        ...options,
+        plugins: [solid() as any],
+        viewWrapper: ({ viewPath }) => elmOCProviderTemplate({ viewPath, jsPath: 'dontknow' }),
+        htmlTemplate: (props) => htmlTemplate({ ...props, bundleName: 'dontknow' }),
+        externals: getInfo().externals
+      },
+      cb
+    ),
+  compileServer: viteServer,
   compileStatics,
-  compileView,
   getInfo
 });
 
@@ -26,8 +37,3 @@ const compiler = createCompile({
 // verbose,
 // watch,
 // production
-module.exports = function compile(options, callback) {
-  verifyConfig(options.componentPath);
-
-  return compiler(options, callback);
-};

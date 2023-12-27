@@ -1,7 +1,14 @@
-const extractName = (path) => path.match(/(\w+)\.elm$/)[1];
-const removeJsExtension = (path) => path.replace(/\.(t|j)s?$/, '');
+const extractName = (path: string) => path.match(/(\w+)\.elm$/)![1];
+const removeJsExtension = (path: string) => path.replace(/\.(t|j)s?$/, '');
 
-const elmOCProviderTemplate = ({ jsPath, viewPath }) => `
+export default function elmOCProviderTemplate({
+  jsPath,
+  viewPath
+}: {
+  jsPath: string;
+  viewPath: string;
+}) {
+  return `
   import Component from '${viewPath}';
   ${jsPath ? `import jsApp from '${removeJsExtension(jsPath)}'` : ''}
 
@@ -43,5 +50,4 @@ const elmOCProviderTemplate = ({ jsPath, viewPath }) => `
 
   export default init;
 `;
-
-module.exports = elmOCProviderTemplate;
+}
