@@ -1,8 +1,8 @@
 import { createCompile } from 'oc-generic-template-compiler';
 import compileStatics from 'oc-statics-compiler';
-import { getInfo } from 'oc-template-solid';
+import { getInfo } from 'oc-template-elm';
 import { viteView, viteServer } from 'oc-vite-compiler';
-import solid from 'vite-plugin-solid';
+import elm from 'vite-plugin-elm';
 
 import elmOCProviderTemplate from './elmOCProviderTemplate';
 import htmlTemplate from './htmlTemplate';
@@ -14,8 +14,8 @@ export const compile: CompilerOptions = createCompile({
     viteView(
       {
         ...options,
-        plugins: [solid() as any],
-        viewWrapper: ({ viewPath }) => elmOCProviderTemplate({ viewPath, jsPath: 'dontknow' }),
+        plugins: [elm() as any],
+        viewWrapper: ({ viewPath }) => elmOCProviderTemplate({ viewPath, jsPath: undefined }),
         htmlTemplate: (props) => htmlTemplate({ ...props, bundleName: 'dontknow' }),
         externals: getInfo().externals
       },

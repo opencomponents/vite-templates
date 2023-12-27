@@ -5,7 +5,7 @@ export default function elmOCProviderTemplate({
   jsPath,
   viewPath
 }: {
-  jsPath: string;
+  jsPath?: string;
   viewPath: string;
 }) {
   return `

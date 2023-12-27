@@ -47,12 +47,13 @@
     "oc-get-unix-utc-timestamp": "1.0.2",
     "oc-hash-builder": "1.0.2",
     "oc-statics-compiler": "2.0.10",
-    "oc-template-elm": "0.0.1",
+    "oc-template-elm": "*",
     "oc-templates-messages": "1.0.2",
     "oc-view-wrapper": "1.0.3",
     "resolve": "1.18.1",
     "strip-ansi": "^6.0.0",
-    "text-table": "^0.2.0"
+    "text-table": "^0.2.0",
+    "vite-plugin-elm": "^2.8.0"
   },
   "files": [
     "dist/**",
