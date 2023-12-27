@@ -62,7 +62,7 @@ async function compileView(options: CompileClientOptions) {
   const componentPackage = options.componentPackage;
   const externals = options.externals || [];
   const production = !!options.production;
-  const viewExtension = viewFileName.match(/\.\w{1,5}$/)?.[0] ?? '.js';
+  const viewExtension = viewFileName.match(/\.(jsx?|tsx?)$/)?.[0] ?? '.js';
 
   const viewWrapperFn =
     options.viewWrapper ||
