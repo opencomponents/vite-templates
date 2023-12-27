@@ -62,7 +62,7 @@ async function compileView(options: CompileClientOptions) {
   const componentPackage = options.componentPackage;
   const externals = options.externals || [];
   const production = !!options.production;
-  const viewExtension = viewFileName.match(/\.\w{1,5}$/)?.[0] ?? '.js';
+  const viewExtension = viewFileName.match(/\.(jsx?|tsx?)$/)?.[0] ?? '.js';
 
   const viewWrapperFn =
     options.viewWrapper ||
@@ -122,7 +122,9 @@ async function compileView(options: CompileClientOptions) {
     ] as any,
     logLevel: 'silent',
     build: {
-      sourcemap: production ? false : 'inline',
+      // Source map doesn't work properly because the bundle gets wrapped into more code and the
+      // lines don't match anymore (would be nice to fix this somehow)
+      sourcemap: false,
       lib: { entry: viewWrapperPath, formats: ['iife'], name: clientName },
       write: false,
       minify: production,
@@ -160,7 +162,8 @@ async function compileView(options: CompileClientOptions) {
   const cssStyles = cssAssets
     .map(
       (x) =>
-        ((x as Rollup.OutputAsset).source as string).replace(/\r?\n/g, '') ?? ''
+        ((x as Rollup.OutputAsset).source as string).replace(/\r?\n|\t/g, '') ??
+        ''
     )
     .join(' ')
     .replace(/'/g, '"');
