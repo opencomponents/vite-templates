@@ -9,7 +9,7 @@ export default function elmOCProviderTemplate({
   viewPath: string;
 }) {
   return `
-  import Component from '${viewPath}';
+  import { Elm } from '${viewPath}';
   ${jsPath ? `import jsApp from '${removeJsExtension(jsPath)}'` : ''}
 
   function getData(providerProps, parameters, cb) {
@@ -27,8 +27,13 @@ export default function elmOCProviderTemplate({
     });
   }
 
-  function init({ node, flags: { _baseUrl, _componentName, _componentVersion, _staticPath, ...flags } }) {
+  function renderer(model, node) {
+    const { _baseUrl, _componentName, _componentVersion, _staticPath, ...props } = model;
     const app = Component.Elm["${extractName(viewPath)}"].init({ node, flags });
+    const app = Elm["${extractName(viewPath)}"].init({
+      node,
+      flags: props
+    })
 
     if (app.ports && app.ports.getData) {
       app.ports.getData.subscribe(parameters => {
