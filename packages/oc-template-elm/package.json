@@ -4,6 +4,11 @@
   "description": "OC-Template-Elm",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "prepare": "npm run build",
+    "clean": "rm -rf .turbo && rm -rf node_modules && rm -rf dist"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/opencomponents/vite-templates.git"
