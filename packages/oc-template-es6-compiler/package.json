@@ -1,7 +1,7 @@
 {
   "name": "oc-template-es6-compiler",
   "version": "4.0.0",
-  "description": "OC-Template-ES6-Compiler",
+  "description": "Compiler for the ES6 OC template",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {

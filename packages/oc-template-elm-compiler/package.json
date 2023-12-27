@@ -1,7 +1,7 @@
 {
   "name": "oc-template-elm-compiler",
   "version": "0.1.0",
-  "description": "",
+  "description": "Compiler for the Elm OC template",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {

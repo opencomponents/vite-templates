@@ -1,7 +1,7 @@
 {
   "name": "oc-template-react-compiler",
   "version": "6.0.0",
-  "description": "",
+  "description": "Compiler for the React OC template",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
