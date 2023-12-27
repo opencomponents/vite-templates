@@ -5,7 +5,7 @@ Home for the new vite-based [OpenComponents](https://github.com/opentable/oc) te
 
 ## Installing a template
 
-Just run `npx create-oc@latest` and choose!
+Just run `npm create oc@latest` and choose!
 
 
 ## Templates
