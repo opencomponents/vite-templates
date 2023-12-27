@@ -1,0 +1,34 @@
+{
+  "name": "base-component-elm",
+  "description": "",
+  "version": "1.0.0",
+  "scripts": {},
+  "oc": {
+    "files": {
+      "data": "src/server.ts",
+      "template": {
+        "src": "src/Main.elm",
+        "type": "oc-template-elm"
+      }
+    },
+    "parameters": {
+      "name": {
+        "default": "World",
+        "description": "Your name",
+        "example": "Jane Doe",
+        "mandatory": false,
+        "type": "string"
+      }
+    }
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@types/enzyme": "*",
+    "@types/jest": "*",
+    "@types/react": "*",
+    "enzyme": "^3.11.0",
+    "oc-template-elm-compiler": "*",
+    "elm": "*",
+    "typescript": "*"
+  }
+}
