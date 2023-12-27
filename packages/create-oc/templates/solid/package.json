@@ -1,0 +1,42 @@
+{
+  "name": "base-component-solid",
+  "description": "",
+  "version": "1.0.0",
+  "scripts": {
+    "lint": "eslint --max-warnings 0 --ext .js,.jsx,.ts,.tsx src",
+    "build": "tsc --noEmit && oc package .",
+    "test": "vitest"
+  },
+  "oc": {
+    "files": {
+      "data": "src/server.ts",
+      "template": {
+        "src": "src/App.tsx",
+        "type": "oc-template-solid"
+      },
+      "static": [
+        "public"
+      ]
+    },
+    "parameters": {
+      "userId": {
+        "default": 1,
+        "description": "The user id from the user database",
+        "example": 1,
+        "mandatory": true,
+        "type": "number"
+      }
+    }
+  },
+  "devDependencies": {
+    "@solidjs/testing-library": "^0.7.0",
+    "@testing-library/jest-dom": "^5.16.5",
+    "@types/testing-library__jest-dom": "^5.14.5",
+    "jsdom": "^21.1.1",
+    "oc-server": "*",
+    "oc-template-solid-compiler": "0.4.0",
+    "solid-js": "^1.8.7",
+    "typescript": "5.0.2",
+    "vitest": "^0.29.7"
+  }
+}
