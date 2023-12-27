@@ -16,7 +16,7 @@ export const compile: CompilerOptions = createCompile({
         ...options,
         plugins: [elm() as any],
         viewWrapper: ({ viewPath }) => elmOCProviderTemplate({ viewPath, jsPath: undefined }),
-        htmlTemplate: (props) => htmlTemplate({ ...props, bundleName: 'dontknow' }),
+        htmlTemplate,
         externals: getInfo().externals
       },
       cb

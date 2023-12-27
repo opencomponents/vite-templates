@@ -22,14 +22,13 @@ export default function elmOCProviderTemplate({
       if (err) {
         return cb(err);
       }
-      const { _staticPath, _baseUrl, _componentName, _componentVersion, ...rest } = data.elmComponent.flags; 
+      const { _staticPath, _baseUrl, _componentName, _componentVersion, ...rest } = data.component.props; 
       cb(null, rest);
     });
   }
 
   function renderer(model, node) {
     const { _baseUrl, _componentName, _componentVersion, _staticPath, ...props } = model;
-    const app = Component.Elm["${extractName(viewPath)}"].init({ node, flags });
     const app = Elm["${extractName(viewPath)}"].init({
       node,
       flags: props
@@ -53,6 +52,6 @@ export default function elmOCProviderTemplate({
     return app;
   }
 
-  export default init;
+  export default renderer;
 `;
 }

@@ -122,7 +122,9 @@ async function compileView(options: CompileClientOptions) {
     ] as any,
     logLevel: 'silent',
     build: {
-      sourcemap: production ? false : 'inline',
+      // Source map doesn't work properly because the bundle gets wrapped into more code and the
+      // lines don't match anymore (would be nice to fix this somehow)
+      sourcemap: false,
       lib: { entry: viewWrapperPath, formats: ['iife'], name: clientName },
       write: false,
       minify: production,
