@@ -19,14 +19,3 @@ export const compile: CompilerOptions = createCompile({
   compileStatics,
   getInfo,
 });
-
-// OPTIONS
-// =======
-// componentPath
-// componentPackage,
-// logger,
-// minify
-// ocPackage
-// publishPath
-// verbose,
-// watch,

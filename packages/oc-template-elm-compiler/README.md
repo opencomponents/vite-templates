@@ -20,7 +20,7 @@ port dataReceiver : (E.Value -> msg) -> Sub msg
 
 ## Custom ports
 
-So what can you do if you want to have extra custom ports? (Maybe to listen to OC events). In that case you can use an additional optional property in the OC object to point to a JavaScript (or TypeScript) file, inside the files property.
+So what can you do if you want to have extra custom ports? (Maybe to listen to OC events). In that case you can point your entry as a javascript file.
 
 ```json
 {
@@ -28,9 +28,7 @@ So what can you do if you want to have extra custom ports? (Maybe to listen to O
     "files": {
       "data": "src/server.ts",
       "template": {
-        "src": "src/Main.elm",
-        // You don't have to define this one if not needed.
-        "js": "src/custom.js",
+        "src": "src/index.js",
         "type": "oc-template-elm"
       }
     }
@@ -38,16 +36,20 @@ So what can you do if you want to have extra custom ports? (Maybe to listen to O
 }
 ```
 
-Then, on that file, just `export default` a function that will take your Elm `app` as a parameter, like so:
+Then, on that file, just `export default` an object that will take two parameters: `program` with your Elm main program and `js` with a function that takes the elm app as a parameter where you can set whatever you want
 
 ```js
-/// src/custom.js
+/// src/index.js
+import { Elm } from "./Main.elm";
 
-export default (app) => {
-  window.oc.events.on('myEvent', (event) => {
-    // Elm will get event data on that port!
-    app.ports.myPortReceiver.send(event.data);
-  });
+export default {
+  js: (app) => {
+    window.oc.events.on("myEvent", (event) => {
+      // Elm will get event data on that port!
+      app.ports.myPortReceiver.send(event.data);
+    });
+  },
+  program: Elm.Main,
 };
 ```
 

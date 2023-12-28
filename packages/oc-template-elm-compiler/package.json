@@ -30,7 +30,6 @@
   "license": "MIT",
   "dependencies": {
     "chalk": "^3.0.0",
-    "cssesc": "^3.0.0",
     "elm": "^0.19.1-6",
     "oc-generic-template-compiler": "2.0.4",
     "oc-statics-compiler": "2.0.10",

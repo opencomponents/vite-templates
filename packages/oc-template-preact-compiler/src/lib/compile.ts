@@ -5,7 +5,6 @@ import { viteView, viteServer } from 'oc-vite-compiler';
 import { preact } from '@preact/preset-vite';
 
 import preactOCProviderTemplate from './preactOCProviderTemplate';
-import htmlTemplate from './htmlTemplate';
 
 export type CompilerOptions = ReturnType<typeof createCompile>;
 
@@ -15,8 +14,7 @@ export const compile: CompilerOptions = createCompile({
       {
         ...options,
         plugins: [preact() as any],
-        viewWrapper: ({ viewPath }) => preactOCProviderTemplate({ viewPath }),
-        htmlTemplate,
+        viewWrapper: preactOCProviderTemplate,
         externals: getInfo().externals
       },
       cb
@@ -25,15 +23,3 @@ export const compile: CompilerOptions = createCompile({
   compileStatics,
   getInfo
 });
-
-// OPTIONS
-// =======
-// componentPath
-// componentPackage,
-// logger,
-// minify
-// ocPackage
-// publishPath
-// verbose,
-// watch,
-// production

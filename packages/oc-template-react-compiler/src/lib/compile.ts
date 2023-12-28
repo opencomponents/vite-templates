@@ -5,7 +5,6 @@ import { viteView, viteServer } from 'oc-vite-compiler';
 import react from '@vitejs/plugin-react';
 
 import reactOCProviderTemplate from './reactOCProviderTemplate';
-import htmlTemplate from './htmlTemplate';
 
 export type CompilerOptions = ReturnType<typeof createCompile>;
 
@@ -15,8 +14,7 @@ export const compile: CompilerOptions = createCompile({
       {
         ...options,
         plugins: [(react as any)()],
-        viewWrapper: ({ viewPath }) => reactOCProviderTemplate({ viewPath }),
-        htmlTemplate,
+        viewWrapper: reactOCProviderTemplate,
         externals: getInfo().externals
       },
       cb
@@ -25,15 +23,3 @@ export const compile: CompilerOptions = createCompile({
   compileStatics,
   getInfo
 });
-
-// OPTIONS
-// =======
-// componentPath
-// componentPackage,
-// logger,
-// minify
-// ocPackage
-// publishPath
-// verbose,
-// watch,
-// production

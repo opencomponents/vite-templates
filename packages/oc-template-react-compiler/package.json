@@ -31,7 +31,6 @@
   "dependencies": {
     "@vitejs/plugin-react": "^4.0.0",
     "chalk": "^3.0.0",
-    "cssesc": "^3.0.0",
     "immer": "^9.0.6",
     "oc-generic-template-compiler": "2.1.0",
     "oc-statics-compiler": "2.1.1",
@@ -46,7 +45,6 @@
     "scaffold"
   ],
   "devDependencies": {
-    "@types/cssesc": "^3.0.2",
     "@types/react": "^18.0.28",
     "@types/react-dom": "^18.0.11",
     "lodash": "^4.17.4",
