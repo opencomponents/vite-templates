@@ -7,17 +7,16 @@ import hashBuilder from 'oc-hash-builder';
 import ocViewWrapper from 'oc-view-wrapper';
 import cssModules from './cssModulesPlugin';
 import htmlTemplate, { HtmlTemplate } from './htmlTemplate';
-import type GenericCompiler from 'oc-generic-template-compiler';
-import type { PluginOption, Rollup } from 'oc-vite';
+import type { CompilerOptions } from 'oc-generic-template-compiler';
+import type { PluginOption, Rollup } from 'vite';
 
-type Compilers = Parameters<(typeof GenericCompiler)['createCompile']>[0];
-type CompileClientOptions = Parameters<Compilers['compileView']>[0] & {
+export interface ViteViewOptions {
   publishFileName?: string;
   viewWrapper?: (opts: { viewPath: string }) => string;
   plugins?: PluginOption[];
   externals?: any;
   htmlTemplate?: (opts: HtmlTemplate) => void;
-};
+}
 
 const clientName = 'clientBundle';
 const removeExtension = (path: string) => path.replace(/\.(t|j)sx?$/, '');
@@ -35,7 +34,7 @@ const partition = <T>(array: T[], predicate: (x: T) => boolean): [T[], T[]] => {
   return [matches, rest];
 };
 
-async function compileView(options: CompileClientOptions) {
+async function compileView(options: ViteViewOptions & CompilerOptions) {
   function processRelativePath(relativePath: string) {
     let pathStr = path.join(options.componentPath, relativePath);
     if (process.platform === 'win32') {
