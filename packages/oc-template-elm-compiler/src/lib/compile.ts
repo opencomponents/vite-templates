@@ -1,25 +1,10 @@
-import { createCompile } from 'oc-generic-template-compiler';
-import compileStatics from 'oc-statics-compiler';
 import { getInfo } from 'oc-template-elm';
-import { viteView, viteServer } from 'oc-vite-compiler';
 import elm from 'vite-plugin-elm';
-
+import { createCompile } from 'oc-vite-compiler';
 import elmOCProviderTemplate from './elmOCProviderTemplate';
 
-export type CompilerOptions = ReturnType<typeof createCompile>;
-
-export const compile: CompilerOptions = createCompile({
-  compileView: (options, cb) =>
-    viteView(
-      {
-        ...options,
-        plugins: [elm() as any],
-        viewWrapper: elmOCProviderTemplate,
-        externals: getInfo().externals
-      },
-      cb
-    ),
-  compileServer: viteServer,
-  compileStatics,
+export const compile = createCompile({
+  plugins: [elm() as any],
+  viewWrapper: elmOCProviderTemplate,
   getInfo
 });
