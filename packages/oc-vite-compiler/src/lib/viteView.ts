@@ -6,6 +6,7 @@ import EnvironmentPlugin from 'vite-plugin-environment';
 import hashBuilder from 'oc-hash-builder';
 import ocViewWrapper from 'oc-view-wrapper';
 import cssModules from './cssModulesPlugin';
+import htmlTemplate, { HtmlTemplate } from './htmlTemplate';
 import type GenericCompiler from 'oc-generic-template-compiler';
 import type { PluginOption, Rollup } from 'oc-vite';
 
@@ -15,13 +16,7 @@ type CompileClientOptions = Parameters<Compilers['compileView']>[0] & {
   viewWrapper?: (opts: { viewPath: string }) => string;
   plugins?: PluginOption[];
   externals?: any;
-  htmlTemplate: (opts: {
-    templateId: string;
-    css: string;
-    externals: Array<{ name: string; global: string }>;
-    bundle: string;
-    hash: string;
-  }) => void;
+  htmlTemplate?: (opts: HtmlTemplate) => void;
 };
 
 const clientName = 'clientBundle';
@@ -177,8 +172,10 @@ async function compileView(options: CompileClientOptions) {
     .replace('oc-template-', '')
     .replace(/-/, '');
   const templateId = `oc-${shortTemplateType}Root-${componentPackage.name}`;
-  const templateString = options.htmlTemplate({
+  const htmlTemplateWrapper = options.htmlTemplate || htmlTemplate;
+  const templateString = htmlTemplateWrapper({
     templateId,
+    templateName: shortTemplateType,
     css: cssStyles,
     externals,
     bundle: wrappedBundle,
