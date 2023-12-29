@@ -63,3 +63,13 @@ export type RegisteredServer = Register extends {
 }
   ? TServer
   : AnyServer;
+
+type GetInitialData<TServer extends AnyServer> = TServer extends Server<
+  any,
+  any,
+  any,
+  infer O
+>
+  ? Exclude<O, undefined | null>
+  : any;
+export type InitialData = GetInitialData<RegisteredServer>;
