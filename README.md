@@ -17,6 +17,7 @@ Just run `npm create oc@latest` and choose!
 | [`oc-template-preact`](/packages/oc-template-preact) | [![npm version](https://badge.fury.io/js/oc-template-preact.svg)](http://badge.fury.io/js/oc-template-preact) |
 | [`oc-template-solid`](/packages/oc-template-solid) | [![npm version](https://badge.fury.io/js/oc-template-solid.svg)](http://badgebfury.io/js/oc-template-solid) |
 | [`oc-template-elm`](/packages/oc-template-elm) | [![npm version](https://badge.fury.io/js/oc-template-elm.svg)](http://badgebfury.io/js/oc-template-elm) |
+| [`oc-template-vue`](/packages/oc-template-vue) | [![npm version](https://badge.fury.io/js/oc-template-vue.svg)](http://badgebfury.io/js/oc-template-vue) |
 
 ## Other packages included
 
