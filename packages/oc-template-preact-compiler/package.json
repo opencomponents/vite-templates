@@ -1,6 +1,6 @@
 {
   "name": "oc-template-preact-compiler",
-  "version": "0.3.3",
+  "version": "0.3.4",
   "description": "Compiler for the Preact OC template",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -30,8 +30,8 @@
   "license": "MIT",
   "dependencies": {
     "@preact/preset-vite": "^2.5.0",
-    "oc-template-preact": "^0.1.0",
-    "oc-vite-compiler": "^3.3.0",
+    "oc-template-preact": "^0.1.1",
+    "oc-vite-compiler": "^3.4.0",
     "preact": "^10"
   },
   "peerDependencies": {

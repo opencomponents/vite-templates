@@ -1,6 +1,6 @@
 {
   "name": "oc-template-elm",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "OC-Template-Elm",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",

@@ -1,6 +1,6 @@
 {
   "name": "oc-template-preact",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "OC-Template-Preact",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
