@@ -1,6 +1,6 @@
 {
   "name": "oc-template-elm-compiler",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "Compiler for the Elm OC template",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
