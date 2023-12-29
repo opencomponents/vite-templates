@@ -6,7 +6,7 @@ export default function vueOCProviderTemplate({ viewPath }: { viewPath: string }
   import View from '${removeExtension(viewPath)}';
 
   function renderer(props, element, ssr) {
-    createApp(View, props).mount(element.id, ssr);
+    createApp(View, props).mount(element, ssr);
   }
 
   export default renderer;
