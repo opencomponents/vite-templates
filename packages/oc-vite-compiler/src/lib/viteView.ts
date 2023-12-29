@@ -6,13 +6,17 @@ import EnvironmentPlugin from 'vite-plugin-environment';
 import hashBuilder from 'oc-hash-builder';
 import ocViewWrapper from 'oc-view-wrapper';
 import cssModules from './cssModulesPlugin';
+import { providerFunctions } from './providerFunctions';
 import htmlTemplate, { HtmlTemplate } from './htmlTemplate';
 import type { CompilerOptions } from 'oc-generic-template-compiler';
 import type { PluginOption, Rollup } from 'vite';
 
 export interface ViteViewOptions {
   publishFileName?: string;
-  viewWrapper?: (opts: { viewPath: string }) => string;
+  viewWrapper?: (opts: {
+    viewPath: string;
+    providerFunctions: string;
+  }) => string;
   plugins?: PluginOption[];
   externals?: any;
   htmlTemplate?: (opts: HtmlTemplate) => void;
@@ -62,7 +66,7 @@ async function compileView(options: ViteViewOptions & CompilerOptions) {
     options.viewWrapper ||
     (({ viewPath }) =>
       `export { default } from "${removeExtension(viewPath)}";`);
-  const viewWrapperContent = viewWrapperFn({ viewPath });
+  const viewWrapperContent = viewWrapperFn({ viewPath, providerFunctions });
   const viewWrapperName = `_viewWrapperEntry${viewExtension}`;
   const viewWrapperPath = path.join(tempPath, viewWrapperName);
 

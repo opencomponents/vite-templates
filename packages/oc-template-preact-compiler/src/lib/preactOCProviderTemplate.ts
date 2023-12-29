@@ -1,46 +1,29 @@
 const removeExtension = (path: string) => path.replace(/\.(t|j)sx?$/, '');
 
-export default function preactOCProviderTemplate({ viewPath }: { viewPath: string }) {
+export default function preactOCProviderTemplate({
+  viewPath,
+  providerFunctions
+}: {
+  viewPath: string;
+  providerFunctions: string;
+}) {
   return `
   import { render } from 'preact';
   import { useEffect } from 'preact/hooks';
   import View from '${removeExtension(viewPath)}';
   import { DataProvider } from 'oc-template-preact-compiler/dist/utils/useData'
 
-  function OCProvider(props: any): any {
+  function OCProvider(props) {
     const { _staticPath, _baseUrl, _componentName, _componentVersion, ...rest } = props;
 
     useEffect(() => {
-      (window as any).oc.events.fire('oc:componentDidMount', rest);
+      window.oc.events.fire('oc:componentDidMount', rest);
     }, []);
 
-    function getData(providerProps: any, parameters: any, cb: (error: any, parameters?: any, props?: any) => void) {
-      return (window as any).oc.getData({
-        name: providerProps._componentName,
-        version: providerProps._componentVersion,
-        baseUrl: providerProps._baseUrl,
-        parameters
-      }, (err: any, data: any) => {
-        if (err) {
-          return cb(err);
-        }
-        const { _staticPath, _baseUrl, _componentName, _componentVersion, ...rest } = data.component.props;
-        cb(null, rest, data.component.props);
-      });
-    }
-
-    function getSetting(providerProps: any, setting: string) {
-      const settingHash = {
-        name: providerProps._componentName,
-        version: providerProps._componentVersion,
-        baseUrl: providerProps._baseUrl,
-        staticPath: providerProps._staticPath
-      };
-      return (settingHash as any)[setting];
-    }
+    ${providerFunctions}
    
-    (rest as any).getData = (parameters: any, cb: (error: any, parameters?: any, props?: any) => void) => getData(props, parameters, cb);
-    (rest as any).getSetting = (setting: string) => getSetting(props, setting);
+    rest.getData = getData;
+    rest.getSetting = getSetting;
 
     return (
       <DataProvider value={{...rest}}>
@@ -49,10 +32,8 @@ export default function preactOCProviderTemplate({ viewPath }: { viewPath: strin
     );
   }
 
-  function renderer(props, element) {
+  export default function renderer(props, element, ssr) {
     render(<OCProvider {...props} />, element);
   }
-
-  export default renderer;
 `;
 }

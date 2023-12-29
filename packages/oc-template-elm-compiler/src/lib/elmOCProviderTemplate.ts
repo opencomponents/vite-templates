@@ -1,35 +1,28 @@
 const extractName = (path: string) => path.match(/(\w+)\.elm$/)![1];
 const removeJsExtension = (path: string) => path.replace(/\.(t|j)s?$/, '');
 
-function elmEntry({ viewPath }: { viewPath: string }) {
+function elmEntry({
+  viewPath,
+  providerFunctions
+}: {
+  viewPath: string;
+  providerFunctions: string;
+}) {
   return `
   import { Elm } from '${viewPath}';
 
-  function getData(providerProps, parameters, cb) {
-    return window.oc.getData({
-      name: providerProps._componentName,
-      version: providerProps._componentVersion,
-      baseUrl: providerProps._baseUrl,
-      parameters
-    }, (err, data) => {
-      if (err) {
-        return cb(err);
-      }
-      const { _staticPath, _baseUrl, _componentName, _componentVersion, ...rest } = data.component.props; 
-      cb(null, rest);
-    });
-  }
-
-  function renderer(model, node) {
-    const { _baseUrl, _componentName, _componentVersion, _staticPath, ...props } = model;
+  export default function renderer(props, node) {
+    const { _baseUrl, _componentName, _componentVersion, _staticPath, ...rest } = props;
     const app = Elm["${extractName(viewPath)}"].init({
       node,
-      flags: props
+      flags: rest
     })
+
+    ${providerFunctions}
 
     if (app.ports && app.ports.getData) {
       app.ports.getData.subscribe(parameters => {
-        getData({ _baseUrl, _componentName, _componentVersion }, parameters, (err, data) => {
+        getData(parameters, (err, data) => {
           if (err && process.env.NODE_ENV !== 'production') {
             console.error('Error requesting OC Data', err);
           }
@@ -42,12 +35,10 @@ function elmEntry({ viewPath }: { viewPath: string }) {
 
     return app;
   }
-
-  export default renderer;
 `;
 }
 
-function jsEntry({ viewPath }: { viewPath: string }) {
+function jsEntry({ viewPath, providerFunctions }: { viewPath: string; providerFunctions: string }) {
   return `
   import config from '${removeJsExtension(viewPath)}';
   const { js, program } = config;
@@ -55,27 +46,14 @@ function jsEntry({ viewPath }: { viewPath: string }) {
   if (!program) throw new Error('Missing program in config');
   if (!program.init) throw new Error('Program does not look like an elm instance (missing init)');
 
-  function getData(providerProps, parameters, cb) {
-    return window.oc.getData({
-      name: providerProps._componentName,
-      version: providerProps._componentVersion,
-      baseUrl: providerProps._baseUrl,
-      parameters
-    }, (err, data) => {
-      if (err) {
-        return cb(err);
-      }
-      const { _staticPath, _baseUrl, _componentName, _componentVersion, ...rest } = data.component.props; 
-      cb(null, rest);
-    });
-  }
-
-  function renderer(model, node) {
-    const { _baseUrl, _componentName, _componentVersion, _staticPath, ...props } = model;
+  export default function renderer(props, node) {
+    const { _baseUrl, _componentName, _componentVersion, _staticPath, ...rest } = props;
     const app = program.init({
       node,
-      flags: props
+      flags: rest
     })
+
+    ${providerFunctions}
 
     if (app.ports && app.ports.getData) {
       app.ports.getData.subscribe(parameters => {
@@ -94,14 +72,18 @@ function jsEntry({ viewPath }: { viewPath: string }) {
 
     return app;
   }
-
-  export default renderer;
 `;
 }
 
-export default function elmOCProviderTemplate({ viewPath }: { viewPath: string }) {
+export default function elmOCProviderTemplate({
+  viewPath,
+  providerFunctions
+}: {
+  viewPath: string;
+  providerFunctions: string;
+}) {
   if (viewPath.endsWith('.elm')) {
-    return elmEntry({ viewPath });
+    return elmEntry({ viewPath, providerFunctions });
   }
-  return jsEntry({ viewPath });
+  return jsEntry({ viewPath, providerFunctions });
 }

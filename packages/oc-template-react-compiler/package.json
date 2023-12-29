@@ -30,8 +30,8 @@
   "license": "MIT",
   "dependencies": {
     "@vitejs/plugin-react": "^4.0.0",
-    "oc-template-react": "^4.0.0",
-    "oc-vite-compiler": "^3.2.0",
+    "oc-template-react": "*",
+    "oc-vite-compiler": "*",
     "react": "18.2.0",
     "react-dom": "18.2.0"
   },
