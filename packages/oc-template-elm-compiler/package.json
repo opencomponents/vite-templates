@@ -30,8 +30,8 @@
   "license": "MIT",
   "dependencies": {
     "elm": "^0.19.1-6",
-    "oc-template-elm": "*",
-    "oc-vite-compiler": "*",
+    "oc-template-elm": "0.1.0",
+    "oc-vite-compiler": "^3.3.0",
     "vite-plugin-elm": "^2.8.0"
   },
   "files": [

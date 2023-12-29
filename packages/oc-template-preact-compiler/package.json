@@ -30,8 +30,8 @@
   "license": "MIT",
   "dependencies": {
     "@preact/preset-vite": "^2.5.0",
-    "oc-template-preact": "*",
-    "oc-vite-compiler": "*",
+    "oc-template-preact": "^0.1.0",
+    "oc-vite-compiler": "^3.3.0",
     "preact": "^10"
   },
   "peerDependencies": {

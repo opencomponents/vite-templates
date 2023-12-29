@@ -29,8 +29,8 @@
   },
   "license": "MIT",
   "dependencies": {
-    "oc-template-solid": "*",
-    "oc-vite-compiler": "*",
+    "oc-template-solid": "^0.1.0",
+    "oc-vite-compiler": "^3.3.0",
     "solid-js": "^1.8.7",
     "vite-plugin-solid": "^2.8.0"
   },
