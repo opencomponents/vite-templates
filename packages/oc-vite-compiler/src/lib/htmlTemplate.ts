@@ -27,15 +27,15 @@ export default function htmlTemplate({
   var modelHTML =  model.__html ? model.__html : '';
   var staticPath = model.component.props._staticPath;
   var props = JSON.stringify(model.component.props);
-  window.oc = window.oc || {};
-  window.oc.__${templateName}Template = window.oc.__${templateName}Template || { count: 0 };
-  var count = window.oc.__${templateName}Template.count;
+  oc = oc || {};
+  oc.__${templateName}Template = oc.__${templateName}Template || { count: 0 };
+  var count = oc.__${templateName}Template.count;
   var templateId = "${templateId}-" + count;
-  window.oc.__${templateName}Template.count++;
+  oc.__${templateName}Template.count++;
   return '<div id="' + templateId + '" class="${templateId}">' + modelHTML + '</div>' +
     '${css ? '<style>' + escapeCSS(css) + '</style>' : ''}' +
     '<script>' +
-    'window.oc = window.oc || {};' +
+    'oc = oc || {};' +
     'oc.cmd = oc.cmd || [];' +
     'oc.cmd.push(function(oc){' +
     '${css ? "oc.events.fire(\\'oc:cssDidMount\\', \\'" + css + "\\');" : ''}' +

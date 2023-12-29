@@ -2,9 +2,10 @@ import request from 'minimal-request';
 import vm from 'vm';
 
 type GetJsFromUrlOptions = {
+  model: any;
   url: string;
   key: string;
-  reactKey: string;
+  componentKey: string;
   globals: Record<string, any>;
   timeout?: number;
   extractor: (key: string, context: Record<string, any>) => string;
@@ -12,9 +13,10 @@ type GetJsFromUrlOptions = {
 
 const getJsFromUrl =
   ({
+    model,
     url,
     key,
-    reactKey,
+    componentKey,
     globals,
     timeout = 5000,
     extractor,
@@ -41,14 +43,14 @@ const getJsFromUrl =
           vm.runInNewContext(
             `
         ${jsAsText}
-        oc.components['${key}']();
+        oc.components['${key}'](${JSON.stringify(model)});
         `,
             context
           );
         } catch (err) {
           return cb(err);
         }
-        const cached = extractor(reactKey, context);
+        const cached = extractor(componentKey, context);
         cb(null, cached);
       }
     );

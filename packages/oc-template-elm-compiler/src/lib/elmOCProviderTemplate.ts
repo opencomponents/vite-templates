@@ -11,7 +11,7 @@ function elmEntry({
   return `
   import { Elm } from '${viewPath}';
 
-  export default function renderer(props, node) {
+  function renderer(props, node) {
     const { _baseUrl, _componentName, _componentVersion, _staticPath, ...rest } = props;
     const app = Elm["${extractName(viewPath)}"].init({
       node,
@@ -35,6 +35,10 @@ function elmEntry({
 
     return app;
   }
+
+  renderer.component = Elm["${extractName(viewPath)}"];
+
+  export default renderer;
 `;
 }
 
@@ -46,7 +50,7 @@ function jsEntry({ viewPath, providerFunctions }: { viewPath: string; providerFu
   if (!program) throw new Error('Missing program in config');
   if (!program.init) throw new Error('Program does not look like an elm instance (missing init)');
 
-  export default function renderer(props, node) {
+  function renderer(props, node) {
     const { _baseUrl, _componentName, _componentVersion, _staticPath, ...rest } = props;
     const app = program.init({
       node,
@@ -72,6 +76,10 @@ function jsEntry({ viewPath, providerFunctions }: { viewPath: string; providerFu
 
     return app;
   }
+
+  renderer.component = program;
+
+  export default renderer;
 `;
 }
 

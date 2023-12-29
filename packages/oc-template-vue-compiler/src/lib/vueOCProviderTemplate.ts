@@ -18,6 +18,8 @@ export default function vueOCProviderTemplate({
     createApp(View, rest).mount(element, ssr);
   }
 
+  renderer.component = View;
+
   export default renderer;
 `;
 }

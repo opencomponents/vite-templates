@@ -7,15 +7,16 @@ import tryGetCached from './to-be-published/try-get-cached';
 
 export function render(options: any, callback: any) {
   try {
-    const url = options.model.reactComponent.src;
+    const url = options.model.component.src;
     const key = options.key;
-    const reactKey = options.model.reactComponent.key;
-    const props = options.model.reactComponent.props;
+    const componentKey = options.model.component.key;
+    const props = options.model.component.props;
     const extractor = (key: string, context: any) =>
-      context.oc.reactComponents[key];
+      context.oc.reactComponents[key].component;
     const getJsFromUrl = createPredicate({
+      model: options.model,
       key,
-      reactKey,
+      componentKey,
       url,
       globals: {
         React,
@@ -24,23 +25,28 @@ export function render(options: any, callback: any) {
       extractor,
     });
 
-    tryGetCached('reactComponent', reactKey, getJsFromUrl, (err, CachedApp) => {
-      if (err) return callback(err);
-      try {
-        const reactHtml = ReactDOMServer.renderToString(
-          React.createElement(CachedApp, props)
-        );
+    tryGetCached(
+      'reactComponent',
+      componentKey,
+      getJsFromUrl,
+      (err, CachedApp) => {
+        if (err) return callback(err);
+        try {
+          const reactHtml = ReactDOMServer.renderToString(
+            React.createElement(CachedApp, props)
+          );
 
-        const html = options.template(
-          Object.assign({}, options.model, {
-            __html: reactHtml,
-          })
-        );
-        return callback(null, html);
-      } catch (error) {
-        return callback(error);
+          const html = options.template(
+            Object.assign({}, options.model, {
+              __html: reactHtml,
+            })
+          );
+          return callback(null, html);
+        } catch (error) {
+          return callback(error);
+        }
       }
-    });
+    );
   } catch (err) {
     return callback(err);
   }

@@ -31,7 +31,7 @@ export default function reactOCProviderTemplate({
     );
   }
 
-  export default function renderer(props, element, ssr) {
+  function renderer(props, element, ssr) {
     if (window.ReactDOM.createRoot) {
       if (ssr) {
         window.ReactDOM.hydrateRoot(element, <OCProvider {...props} />);
@@ -46,5 +46,9 @@ export default function reactOCProviderTemplate({
       }
     }
   }
+
+  renderer.component = OCProvider;
+
+  export default renderer;
 `;
 }

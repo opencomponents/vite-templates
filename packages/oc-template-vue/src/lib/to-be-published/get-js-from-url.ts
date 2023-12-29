@@ -2,21 +2,32 @@ import request from 'minimal-request';
 import vm from 'vm';
 
 type GetJsFromUrlOptions = {
+  model: any;
   url: string;
   key: string;
+  componentKey: string;
+  globals?: Record<string, any>;
   timeout?: number;
   extractor: (key: string, context: Record<string, any>) => string;
 };
 
 const getJsFromUrl =
-  ({ url, key, timeout = 5000, extractor }: GetJsFromUrlOptions) =>
+  ({
+    model,
+    url,
+    key,
+    componentKey,
+    globals,
+    timeout = 5000,
+    extractor,
+  }: GetJsFromUrlOptions) =>
   (cb: any) => {
     request(
       {
         url,
         timeout,
       },
-      (err: any, jsAsText: any) => {
+      (err, jsAsText) => {
         if (err) {
           return cb({
             status: err,
@@ -26,20 +37,20 @@ const getJsFromUrl =
           });
         }
 
-        const context = {};
+        const context = Object.assign({}, globals);
 
         try {
           vm.runInNewContext(
             `
         ${jsAsText}
-        oc.components['${key}']();
+        oc.components['${key}'](${JSON.stringify(model)});
         `,
             context
           );
         } catch (err) {
           return cb(err);
         }
-        const cached = extractor('vueKey', context);
+        const cached = extractor(componentKey, context);
         cb(null, cached);
       }
     );

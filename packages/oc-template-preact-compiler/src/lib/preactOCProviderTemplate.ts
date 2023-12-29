@@ -32,8 +32,12 @@ export default function preactOCProviderTemplate({
     );
   }
 
-  export default function renderer(props, element, ssr) {
+  function renderer(props, element, ssr) {
     render(<OCProvider {...props} />, element);
   }
+
+  renderer.component = OCProvider;
+
+  export default renderer;
 `;
 }

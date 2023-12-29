@@ -5,10 +5,13 @@ export function render(options: any, callback: any) {
   try {
     const url = options.model.component.src;
     const key = options.model.component.key;
-    const flags = options.model.component.flags;
+    const flags = options.model.component.props;
+    const componentKey = options.model.component.key;
     const extractor = (key: string, context: any) =>
       context.oc.reactComponents[key];
     const getJsFromUrl = createPredicate({
+      model: options.model,
+      componentKey,
       key,
       url,
       extractor,
