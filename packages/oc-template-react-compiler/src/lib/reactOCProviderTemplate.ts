@@ -1,54 +1,54 @@
 const removeExtension = (path: string) => path.replace(/\.(t|j)sx?$/, '');
 
-export default function reactOCProviderTemplate({ viewPath }: { viewPath: string }) {
+export default function reactOCProviderTemplate({
+  viewPath,
+  providerFunctions
+}: {
+  viewPath: string;
+  providerFunctions: string;
+}) {
   return `
   import React from 'react';
   import View from '${removeExtension(viewPath)}';
   import { DataProvider } from 'oc-template-react-compiler/dist/utils/useData'
 
-  class OCProvider extends React.Component {
-    componentDidMount(){
-      const { _staticPath, _baseUrl, _componentName, _componentVersion, ...rest } = (this.props as any);
-      (window as any).oc.events.fire('oc:componentDidMount',  rest);
-    }
+  function OCProvider(props) {
+    const { _staticPath, _baseUrl, _componentName, _componentVersion, ...rest } = props;
 
-    getData(providerProps: any, parameters: any, cb: (error: any, parameters?: any, props?: any) => void) {
-      return (window as any).oc.getData({
-        name: providerProps._componentName,
-        version: providerProps._componentVersion,
-        baseUrl: providerProps._baseUrl,
-        parameters
-      }, (err: any, data: any) => {
-        if (err) {
-          return cb(err);
-        }
-        const { _staticPath, _baseUrl, _componentName, _componentVersion, ...rest } = (data.component.props as any); 
-        cb(null, rest, data.component.props);
-      });
-    }
+    React.useEffect(() => {
+      window.oc.events.fire('oc:componentDidMount', rest);
+    }, []);
 
-    getSetting(providerProps: any, setting: string) {
-      const settingHash = {
-        name: providerProps._componentName,
-        version: providerProps._componentVersion,
-        baseUrl: providerProps._baseUrl,
-        staticPath: providerProps._staticPath
-      };
-      return (settingHash as any)[setting];
-    }
+    ${providerFunctions}
+   
+    rest.getData = getData;
+    rest.getSetting = getSetting;
 
-    render() {
-      const { _staticPath, _baseUrl, _componentName, _componentVersion, ...rest } = (this.props as any);
-      (rest as any).getData = (parameters: any, cb: (error: any, parameters?: any, props?: any) => void) => this.getData(this.props, parameters, cb);
-      (rest as any).getSetting = (setting: string) => this.getSetting(this.props, setting);
-      return (
-        <DataProvider value={{...rest}}>
-          <View { ...rest } />
-        </DataProvider>
-      );
+    return (
+      <DataProvider value={{...rest}}>
+        <View { ...rest } />
+      </DataProvider>
+    );
+  }
+
+  function renderer(props, element, ssr) {
+    if (window.ReactDOM.createRoot) {
+      if (ssr) {
+        window.ReactDOM.hydrateRoot(element, <OCProvider {...props} />);
+      } else {
+        window.ReactDOM.createRoot(element).render(<OCProvider {...props} />);
+      }
+    } else {
+      if (ssr) {
+        window.ReactDOM.hydrate(<OCProvider {...props} />, element);
+      } else {
+        window.ReactDOM.render(<OCProvider {...props} />, element);
+      }
     }
   }
 
-  export default OCProvider
+  renderer.component = OCProvider;
+
+  export default renderer;
 `;
 }

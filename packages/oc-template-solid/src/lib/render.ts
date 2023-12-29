@@ -1,19 +1,22 @@
-declare const renderSolid: any;
+import { renderToString } from 'solid-js/web';
 
 import createPredicate from './to-be-published/get-js-from-url';
 import tryGetCached from './to-be-published/try-get-cached';
 
 export function render(options: any, callback: any) {
   try {
-    const url = options.model.solidComponent.src;
-    const key = options.model.solidComponent.key;
-    const props = options.model.solidComponent.props;
+    const url = options.model.component.src;
+    const key = options.key;
+    const componentKey = options.model.component.key;
+    const props = options.model.component.props;
     const extractor = (key: any, context: any) =>
-      context.oc.solidComponents[key];
+      context.oc.solidComponents[key].component;
     const getJsFromUrl = createPredicate({
       key,
       url,
       extractor,
+      componentKey,
+      model: options.model,
     });
 
     tryGetCached(
@@ -23,7 +26,7 @@ export function render(options: any, callback: any) {
       (err: any, CachedApp: any) => {
         if (err) return callback(err);
         try {
-          const solidHtml = renderSolid(CachedApp(props));
+          const solidHtml = renderToString(() => CachedApp(props));
 
           const html = options.template(
             Object.assign({}, options.model, {

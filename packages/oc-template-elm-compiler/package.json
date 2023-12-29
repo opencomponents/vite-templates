@@ -1,0 +1,45 @@
+{
+  "name": "oc-template-elm-compiler",
+  "version": "0.2.2",
+  "description": "Compiler for the Elm OC template",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "prepare": "npm run build",
+    "clean": "rm -rf .turbo && rm -rf node_modules && rm -rf dist"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/opencomponents/vite-templates.git"
+  },
+  "bugs": {
+    "url": "https://github.com/opencomponents/vite-templates/issues"
+  },
+  "homepage": "https://github.com/opencomponents/vite-templates#readme",
+  "keywords": [
+    "oc",
+    "opencomponents",
+    "elm",
+    "oc-template"
+  ],
+  "author": {
+    "name": "Ricardo Devis Agullo",
+    "email": "mkredz@gmail.com"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "elm": "^0.19.1-6",
+    "oc-template-elm": "*",
+    "oc-vite-compiler": "*",
+    "vite-plugin-elm": "^2.8.0"
+  },
+  "files": [
+    "dist/**",
+    "scaffold"
+  ],
+  "devDependencies": {
+    "prettier": "^2.3.2",
+    "prettier-config-guestline": "2.0.0"
+  }
+}

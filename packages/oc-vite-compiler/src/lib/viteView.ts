@@ -6,23 +6,21 @@ import EnvironmentPlugin from 'vite-plugin-environment';
 import hashBuilder from 'oc-hash-builder';
 import ocViewWrapper from 'oc-view-wrapper';
 import cssModules from './cssModulesPlugin';
-import type GenericCompiler from 'oc-generic-template-compiler';
-import type { PluginOption, Rollup } from 'oc-vite';
+import { providerFunctions } from './providerFunctions';
+import htmlTemplate, { HtmlTemplate } from './htmlTemplate';
+import type { CompilerOptions } from 'oc-generic-template-compiler';
+import type { PluginOption, Rollup } from 'vite';
 
-type Compilers = Parameters<(typeof GenericCompiler)['createCompile']>[0];
-type CompileClientOptions = Parameters<Compilers['compileView']>[0] & {
+export interface ViteViewOptions {
   publishFileName?: string;
-  viewWrapper?: (opts: { viewPath: string }) => string;
+  viewWrapper?: (opts: {
+    viewPath: string;
+    providerFunctions: string;
+  }) => string;
   plugins?: PluginOption[];
   externals?: any;
-  htmlTemplate: (opts: {
-    templateId: string;
-    css: string;
-    externals: Array<{ name: string; global: string }>;
-    bundle: string;
-    hash: string;
-  }) => void;
-};
+  htmlTemplate?: (opts: HtmlTemplate) => void;
+}
 
 const clientName = 'clientBundle';
 const removeExtension = (path: string) => path.replace(/\.(t|j)sx?$/, '');
@@ -40,7 +38,7 @@ const partition = <T>(array: T[], predicate: (x: T) => boolean): [T[], T[]] => {
   return [matches, rest];
 };
 
-async function compileView(options: CompileClientOptions) {
+async function compileView(options: ViteViewOptions & CompilerOptions) {
   function processRelativePath(relativePath: string) {
     let pathStr = path.join(options.componentPath, relativePath);
     if (process.platform === 'win32') {
@@ -62,13 +60,13 @@ async function compileView(options: CompileClientOptions) {
   const componentPackage = options.componentPackage;
   const externals = options.externals || [];
   const production = !!options.production;
-  const viewExtension = viewFileName.match(/\.\w{1,5}$/)?.[0] ?? '.js';
+  const viewExtension = viewFileName.match(/\.(jsx?|tsx?)$/)?.[0] ?? '.js';
 
   const viewWrapperFn =
     options.viewWrapper ||
     (({ viewPath }) =>
       `export { default } from "${removeExtension(viewPath)}";`);
-  const viewWrapperContent = viewWrapperFn({ viewPath });
+  const viewWrapperContent = viewWrapperFn({ viewPath, providerFunctions });
   const viewWrapperName = `_viewWrapperEntry${viewExtension}`;
   const viewWrapperPath = path.join(tempPath, viewWrapperName);
 
@@ -129,7 +127,9 @@ async function compileView(options: CompileClientOptions) {
     ] as any,
     logLevel: 'silent',
     build: {
-      sourcemap: production ? false : 'inline',
+      // Source map doesn't work properly because the bundle gets wrapped into more code and the
+      // lines don't match anymore (would be nice to fix this somehow)
+      sourcemap: false,
       lib: { entry: viewWrapperPath, formats: ['iife'], name: clientName },
       write: false,
       minify: production,
@@ -167,7 +167,8 @@ async function compileView(options: CompileClientOptions) {
   const cssStyles = cssAssets
     .map(
       (x) =>
-        ((x as Rollup.OutputAsset).source as string).replace(/\r?\n/g, '') ?? ''
+        ((x as Rollup.OutputAsset).source as string).replace(/\r?\n|\t/g, '') ??
+        ''
     )
     .join(' ')
     .replace(/'/g, '"');
@@ -181,8 +182,10 @@ async function compileView(options: CompileClientOptions) {
     .replace('oc-template-', '')
     .replace(/-/, '');
   const templateId = `oc-${shortTemplateType}Root-${componentPackage.name}`;
-  const templateString = options.htmlTemplate({
+  const htmlTemplateWrapper = options.htmlTemplate || htmlTemplate;
+  const templateString = htmlTemplateWrapper({
     templateId,
+    templateName: shortTemplateType,
     css: cssStyles,
     externals,
     bundle: wrappedBundle,

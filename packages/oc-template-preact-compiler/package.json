@@ -1,7 +1,7 @@
 {
   "name": "oc-template-preact-compiler",
-  "version": "0.3.0",
-  "description": "",
+  "version": "0.3.3",
+  "description": "Compiler for the Preact OC template",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
@@ -30,15 +30,9 @@
   "license": "MIT",
   "dependencies": {
     "@preact/preset-vite": "^2.5.0",
-    "chalk": "^3.0.0",
-    "cssesc": "^3.0.0",
-    "immer": "^9.0.6",
-    "oc-generic-template-compiler": "2.1.0",
-    "oc-statics-compiler": "2.1.1",
     "oc-template-preact": "*",
     "oc-vite-compiler": "*",
-    "preact": "^10",
-    "resolve": "^1.20.0"
+    "preact": "^10"
   },
   "peerDependencies": {
     "preact": "^10"
@@ -48,8 +42,6 @@
     "scaffold"
   ],
   "devDependencies": {
-    "@types/cssesc": "^3.0.2",
-    "lodash": "^4.17.4",
     "prettier": "^2.3.2",
     "prettier-config-guestline": "2.0.0"
   }

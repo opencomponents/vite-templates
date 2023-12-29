@@ -5,20 +5,21 @@ import fs from 'fs-extra';
 import coreModules from 'builtin-modules';
 import hashBuilder from 'oc-hash-builder';
 import serverWrapper, { ServerWrapper } from './serverWrapper';
-import type GenericCompiler from 'oc-generic-template-compiler';
+import type { CompilerServerOptions } from 'oc-generic-template-compiler';
 import type { PluginOption } from 'oc-vite';
 
-type Compilers = Parameters<(typeof GenericCompiler)['createCompile']>[0];
-type CompileServerOptions = Parameters<Compilers['compileServer']>[0] & {
+interface ViteServerOptions {
   publishFileName?: string;
   serverWrapper?: ServerWrapper;
   plugins?: PluginOption[];
-};
+}
 
 const nodeModuleMatcher = /^[a-z@][a-z\-/0-9.]+$/i;
 const moduleWithPathMatcher = /^(?!@).*\//g;
 
-async function compileServer(options: CompileServerOptions) {
+async function compileServer(
+  options: ViteServerOptions & CompilerServerOptions
+) {
   const componentPath = options.componentPath;
   const serverFileName = options.componentPackage.oc.files.data;
   let serverPath = path.join(options.componentPath, serverFileName);

@@ -1,39 +1,10 @@
-import { createCompile } from 'oc-generic-template-compiler';
-import compileStatics from 'oc-statics-compiler';
 import { getInfo } from 'oc-template-solid';
-import { viteView, viteServer } from 'oc-vite-compiler';
 import solid from 'vite-plugin-solid';
-
+import { createCompile } from 'oc-vite-compiler';
 import solidOCProviderTemplate from './solidOCProviderTemplate';
-import htmlTemplate from './htmlTemplate';
 
-export type CompilerOptions = ReturnType<typeof createCompile>;
-
-export const compile: CompilerOptions = createCompile({
-  compileView: (options, cb) =>
-    viteView(
-      {
-        ...options,
-        plugins: [solid() as any],
-        viewWrapper: ({ viewPath }) => solidOCProviderTemplate({ viewPath }),
-        htmlTemplate,
-        externals: getInfo().externals
-      },
-      cb
-    ),
-  compileServer: viteServer,
-  compileStatics,
+export const compile = createCompile({
+  plugins: [solid() as any],
+  viewWrapper: solidOCProviderTemplate,
   getInfo
 });
-
-// OPTIONS
-// =======
-// componentPath
-// componentPackage,
-// logger,
-// minify
-// ocPackage
-// publishPath
-// verbose,
-// watch,
-// production

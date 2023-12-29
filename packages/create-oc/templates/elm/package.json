@@ -1,0 +1,31 @@
+{
+  "name": "base-component-elm",
+  "description": "",
+  "version": "1.0.0",
+  "scripts": {},
+  "oc": {
+    "files": {
+      "data": "src/server.ts",
+      "template": {
+        "src": "src/Main.elm",
+        "type": "oc-template-elm"
+      }
+    },
+    "parameters": {
+      "userId": {
+        "default": 1,
+        "description": "The user id from the user database",
+        "example": 1,
+        "mandatory": true,
+        "type": "number"
+      }
+    }
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "oc-server": "*",
+    "oc-template-elm-compiler": "*",
+    "elm": "*",
+    "typescript": "*"
+  }
+}

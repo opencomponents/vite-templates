@@ -72,3 +72,7 @@ export const serverClient: ServerClient<RegisteredServer> = new Proxy(
     },
   }
 );
+
+export type ActionOutput<K extends keyof typeof serverClient> = Awaited<
+  ReturnType<(typeof serverClient)[K]>
+>;
