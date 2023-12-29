@@ -1,31 +1,62 @@
 <script setup lang="ts">
-import HelloWorld from './HelloWorld.vue';
+import { ref } from 'vue'
+import logo from '../public/logo.png';
+import { serverClient, ActionOutput } from 'oc-server'
+const props = defineProps<{ userId: number, firstName: string, lastName: string }>()
 
-defineProps<{ firstName: string, lastName: string }>()
+const additionalData = ref<ActionOutput<'getMoreData'> | null>(null);
+async function getAdditionalData() {
+  additionalData.value = await serverClient.getMoreData({ userId: props.userId });
+}
 </script>
 
 <template>
-  <div>
-    Hello {{ firstName }} 
-    <a href="https://vitejs.dev" target="_blank">
-    </a>
-    <a href="https://vuejs.org/" target="_blank">
-    </a>
+  <div className="container">
+    <img width="50" height="50" v-bind:src="logo" alt="Logo" />
+
+    <h1>
+      Hello, <span>{{ firstName }}</span> {{ lastName }}
+    </h1>
+    <div className={styles.info} v-if="additionalData">
+      <div className={styles.block}>Age: {{ additionalData.age }}</div>
+      <div className={styles.block}>
+        Hobbies:
+        <span v-for="hobby in additionalData.hobbies" :key="hobby">
+          {{ hobby.toLowerCase() }}
+        </span>
+      </div>
+    </div>
+    <button className="button" @click="getAdditionalData">
+      Get extra information
+    </button>
   </div>
-  <HelloWorld msg="Vite + Vue" />
 </template>
 
 <style scoped>
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
+.container {
+  background-color: #3b246c;
+  color: #fff;
+  font-family: sans-serif;
+  padding: 40px;
 }
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
+
+.button {
+  background-color: #a97613;
+  border: none;
+  padding: 15px 32px;
+  text-align: center;
+  font-size: 16px;
+  text-decoration: none;
+  display: inline-block;
+  color: inherit;
+  cursor: pointer;
 }
-.logo.vue:hover {
-  filter: drop-shadow(0 0 2em #42b883aa);
+
+h1 {
+  margin: 0 0 20px 0;
+}
+
+span {
+  text-decoration: underline;
 }
 </style>
