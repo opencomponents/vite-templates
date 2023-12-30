@@ -1,4 +1,3 @@
-import request from 'minimal-request';
 import vm from 'vm';
 
 type GetJsFromUrlOptions = {
@@ -21,39 +20,38 @@ const getJsFromUrl =
     timeout = 5000,
     extractor,
   }: GetJsFromUrlOptions) =>
-  (cb: any) => {
-    request(
-      {
-        url,
-        timeout,
-      },
-      (err, jsAsText) => {
-        if (err) {
-          return cb({
-            status: err,
-            response: {
-              error: `request ${url} failed (${jsAsText})`,
-            },
-          });
-        }
+  async () => {
+    const controller = new AbortController();
+    const signal = controller.signal;
 
-        const context = Object.assign({}, globals);
+    setTimeout(() => controller.abort(), timeout);
 
-        try {
-          vm.runInNewContext(
-            `
-        ${jsAsText}
-        oc.components['${key}'](${JSON.stringify(model)});
-        `,
-            context
-          );
-        } catch (err) {
-          return cb(err);
-        }
-        const cached = extractor(componentKey, context);
-        cb(null, cached);
-      }
+    let jsAsText: string;
+    try {
+      const response = await fetch(url, { signal });
+      jsAsText = await response.text();
+    } catch (err) {
+      throw {
+        status: err,
+        response: {
+          error: `request ${url} failed`,
+        },
+      };
+    }
+
+    const context = Object.assign({}, globals);
+
+    vm.runInNewContext(
+      `
+      ${jsAsText}
+      oc.components['${key}'](${JSON.stringify(model)});
+      `,
+      context
     );
+
+    const cached = extractor(componentKey, context);
+
+    return cached;
   };
 
 export default getJsFromUrl;
