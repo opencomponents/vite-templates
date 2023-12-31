@@ -1,5 +1,11 @@
 # oc-server
 
+## 0.3.0
+
+### Minor Changes
+
+- 91385c0: Add getInitialData and getSettings to oc-server and compiler
+
 ## 0.2.0
 
 ### Minor Changes
