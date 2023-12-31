@@ -76,8 +76,20 @@ type GetInitialData<TServer extends AnyServer> = TServer extends Server<
   ? Exclude<O, undefined | null>
   : any;
 export type InitialData = GetInitialData<RegisteredServer>;
+export type ComponentSettings = {
+  staticPath: string;
+  baseUrl: string;
+  name: string;
+  version: string;
+};
 
-declare const __initialData__: InitialData;
+declare const __$$oc_initialData__: InitialData;
+declare const __$$oc_Settings__: ComponentSettings;
 
 export const getInitialData: () => InitialData = () =>
-  typeof __initialData__ !== 'undefined' ? __initialData__ : ({} as any);
+  typeof __$$oc_initialData__ !== 'undefined'
+    ? __$$oc_initialData__
+    : ({} as any);
+
+export const getSettings: () => ComponentSettings = () =>
+  typeof __$$oc_Settings__ !== 'undefined' ? __$$oc_Settings__ : ({} as any);
