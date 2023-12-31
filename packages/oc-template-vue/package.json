@@ -34,5 +34,12 @@
   },
   "files": [
     "dist/**"
-  ]
+  ],
+  "externals": {
+    "vue": {
+      "global": "Vue",
+      "url": "https://unpkg.com/vue@3.4.3/dist/vue.global.prod.js",
+      "devUrl": "https://unpkg.com/vue@3.4.3/dist/vue.global.js"
+    }
+  }
 }
