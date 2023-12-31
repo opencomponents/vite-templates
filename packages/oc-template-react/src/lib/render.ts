@@ -1,53 +1,21 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import ReactDOMServer from 'react-dom/server';
+import { SsrOptions, ssr } from './to-be-published/ssr';
 
-import createPredicate from './to-be-published/get-js-from-url';
-import tryGetCached from './to-be-published/try-get-cached';
+import { callbackify } from 'util';
 
-export function render(options: any, callback: any) {
-  try {
-    const url = options.model.component.src;
-    const key = options.key;
-    const componentKey = options.model.component.key;
-    const props = options.model.component.props;
-    const extractor = (key: string, context: any) =>
-      context.oc.reactComponents[key].component;
-    const getJsFromUrl = createPredicate({
-      model: options.model,
-      key,
-      componentKey,
-      url,
-      globals: {
-        React,
-        ReactDOM,
-      },
-      extractor,
-    });
+export const render = callbackify((options: SsrOptions) => {
+  const renderer = (App: any, initialData: any) =>
+    ReactDOMServer.renderToString(React.createElement(App, initialData));
 
-    tryGetCached(
-      'reactComponent',
-      componentKey,
-      getJsFromUrl,
-      (err, CachedApp) => {
-        if (err) return callback(err);
-        try {
-          const reactHtml = ReactDOMServer.renderToString(
-            React.createElement(CachedApp, props)
-          );
-
-          const html = options.template(
-            Object.assign({}, options.model, {
-              __html: reactHtml,
-            })
-          );
-          return callback(null, html);
-        } catch (error) {
-          return callback(error);
-        }
-      }
-    );
-  } catch (err) {
-    return callback(err);
-  }
-}
+  return ssr({
+    componentName: 'react',
+    options,
+    renderer,
+    globals: {
+      React,
+      ReactDOM,
+    },
+  });
+});

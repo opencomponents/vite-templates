@@ -1,32 +1,45 @@
 import { Server } from 'oc-server';
-import { AdditionalData, ClientProps, OcParameters } from './types';
 
-const database = [
-  { name: 'John Doe', age: 34, hobbies: ['Swimming', 'Basketball'] },
-  { name: 'Jane Doe', age: 35, hobbies: ['Running', 'Rugby'] }
+const userDatabase = [
+  { name: 'John Doe', born: 1986, hobbies: ['Swimming', 'Basketball'] },
+  { name: 'Jane Doe', born: 1991, hobbies: ['Running', 'Rugby'] },
 ];
 
+const yearsFunFactDatabase: Record<number, string> = {
+  1986: "Halley's Comet made its closest approach to Earth in 1986, visible to the naked eye.",
+  1987: 'The first Final Fantasy game was released in 1987.',
+  1991: 'The first web page was created in 1991 by Tim Berners-Lee.',
+};
+
 async function getUser(userId: number) {
-  return database[userId];
+  return userDatabase[userId];
 }
 
-export const server = new Server(async (params: OcParameters): Promise<ClientProps> => {
+async function getFunFact(year: number) {
+  return yearsFunFactDatabase[year];
+}
+
+export const server = new Server(async (params: { userId: number }) => {
   const { userId } = params;
   const user = await getUser(userId);
   const [firstName, lastName] = user.name.split(/\s+/);
 
-  return {
-    userId,
-    firstName,
-    lastName
-  };
-}).action('getMoreData', async (params: OcParameters): Promise<AdditionalData> => {
-  const { userId } = params;
-  const user = await getUser(userId);
+  if (firstName === 'Invalid') {
+    return;
+  }
 
   return {
-    age: user.age,
-    hobbies: user.hobbies
+    firstName,
+    lastName,
+    born: user.born,
+    hobbies: user.hobbies,
+  };
+}).action('getMoreData', async (params: { year: number }) => {
+  const { year } = params;
+  const funFact = await getFunFact(year);
+
+  return {
+    funFact,
   };
 });
 

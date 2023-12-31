@@ -1,12 +1,11 @@
 {
   "name": "oc-template-vue",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "oc-template-vue",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
     "build": "tsc",
-    "prepare": "npm run build",
     "clean": "rm -rf .turbo && rm -rf node_modules && rm -rf dist"
   },
   "repository": {
@@ -35,5 +34,12 @@
   },
   "files": [
     "dist/**"
-  ]
+  ],
+  "externals": {
+    "vue": {
+      "global": "Vue",
+      "url": "https://unpkg.com/vue@3.4.3/dist/vue.global.prod.js",
+      "devUrl": "https://unpkg.com/vue@3.4.3/dist/vue.global.js"
+    }
+  }
 }

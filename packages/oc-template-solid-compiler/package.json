@@ -1,12 +1,11 @@
 {
   "name": "oc-template-solid-compiler",
-  "version": "0.6.3",
+  "version": "0.6.4",
   "description": "Compiler for the SolidJS OC template",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
     "build": "tsc && tsc --project tsconfig.solid.json",
-    "prepare": "npm run build",
     "clean": "rm -rf .turbo && rm -rf node_modules && rm -rf dist"
   },
   "repository": {
@@ -29,8 +28,8 @@
   },
   "license": "MIT",
   "dependencies": {
-    "oc-template-solid": "*",
-    "oc-vite-compiler": "*",
+    "oc-template-solid": "^0.1.1",
+    "oc-vite-compiler": "^3.4.0",
     "solid-js": "^1.8.7",
     "vite-plugin-solid": "^2.8.0"
   },

@@ -1,23 +1,21 @@
 import { useState } from 'react';
-import { useData } from 'oc-template-react-compiler/dist/utils/useData';
-import { serverClient } from 'oc-server';
+import { serverClient, InitialData, ActionOutput } from 'oc-server';
 import styles from './styles.css';
 import logo from '../public/logo.png';
-import type { AdditionalData, ClientProps } from './types';
 
-interface AppProps extends ClientProps {
-  getMoreData?: boolean;
-}
+type AdditionalData = ActionOutput<'getMoreData'>;
 
-const App: React.FC<ClientProps> = () => {
-  const { firstName, lastName, userId, getData } = useData<AppProps>();
-  const [additionalData, setAdditionalData] = useState<AdditionalData | null>(null);
+const App: React.FC<InitialData> = (props: InitialData) => {
+  const { firstName, lastName, born, hobbies } = props;
+  const [additionalData, setAdditionalData] = useState<AdditionalData | null>(
+    null
+  );
   const [error, setError] = useState('');
 
   const fetchMoreData = async () => {
     setError('');
     try {
-      const data = await serverClient.getMoreData({ userId });
+      const data = await serverClient.getMoreData({ year: born });
       setAdditionalData(data);
     } catch (err) {
       setError(String(err));
@@ -32,18 +30,18 @@ const App: React.FC<ClientProps> = () => {
     <div className={styles.container}>
       <img width="50" height="50" src={logo} alt="Logo" />
       <h1 style={{ margin: '0 0 20px 0' }}>
-        Hello, <span style={{ textDecoration: 'underline' }}>{firstName}</span> {lastName}
+        Hello, <span style={{ textDecoration: 'underline' }}>{firstName}</span>{' '}
+        {lastName}
       </h1>
-      {additionalData && (
-        <div className={styles.info}>
-          <div className={styles.block}>Age: {additionalData.age}</div>
-          <div className={styles.block}>
-            Hobbies: {additionalData.hobbies.map((x) => x.toLowerCase()).join(', ')}
-          </div>
+      <div className={styles.info}>
+        <div className={styles.block}>Born: {born}</div>
+        <div className={styles.block}>
+          Hobbies: {hobbies.map((x) => x.toLowerCase()).join(', ')}
         </div>
-      )}
+      </div>
+      {additionalData && <div>{additionalData.funFact}</div>}
       <button className={styles.button} onClick={fetchMoreData}>
-        Get extra information
+        Fun year fact
       </button>
     </div>
   );

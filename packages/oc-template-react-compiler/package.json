@@ -1,12 +1,11 @@
 {
   "name": "oc-template-react-compiler",
-  "version": "6.0.3",
+  "version": "6.0.4",
   "description": "Compiler for the React OC template",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
     "build": "tsc",
-    "prepare": "npm run build",
     "clean": "rm -rf .turbo && rm -rf node_modules && rm -rf dist"
   },
   "repository": {
@@ -30,8 +29,8 @@
   "license": "MIT",
   "dependencies": {
     "@vitejs/plugin-react": "^4.0.0",
-    "oc-template-react": "*",
-    "oc-vite-compiler": "*",
+    "oc-template-react": "^4.0.1",
+    "oc-vite-compiler": "^3.4.0",
     "react": "18.2.0",
     "react-dom": "18.2.0"
   },

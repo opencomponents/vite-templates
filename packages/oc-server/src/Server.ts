@@ -1,12 +1,12 @@
-import { Context, DataProvider } from './types';
+import { DataContext, DataProvider } from './types';
 
-type ContextWithoutParamsActions<E> = Omit<
-  Context<any, E>,
-  'params' | 'action'
+type ServerContext<E> = Omit<
+  DataContext<any, E>,
+  'params' | 'action' | 'setEmptyResponse'
 >;
 export type Action<I, O, E> = (
   params: I,
-  ctx: ContextWithoutParamsActions<E>
+  ctx: ServerContext<E>
 ) => Promise<O> | O;
 type AnyAction = Action<any, any, any>;
 
@@ -34,7 +34,10 @@ export class Server<
   }
 
   getData(): DataProvider<any, any, any> {
-    return async ({ action: actionName, params, ...context }, cb: any) => {
+    return async (
+      { action: actionName, params, setEmptyResponse, ...context },
+      cb: any
+    ) => {
       let res: any;
       try {
         if (actionName && this.actions[actionName]) {
@@ -64,7 +67,7 @@ export type RegisteredServer = Register extends {
   ? TServer
   : AnyServer;
 
-type InitialData<TServer extends AnyServer> = () => TServer extends Server<
+type GetInitialData<TServer extends AnyServer> = TServer extends Server<
   any,
   any,
   any,
@@ -72,5 +75,9 @@ type InitialData<TServer extends AnyServer> = () => TServer extends Server<
 >
   ? Exclude<O, undefined | null>
   : any;
-export const initialData: InitialData<RegisteredServer> = () =>
-  '__INITIAL__DATA__';
+export type InitialData = GetInitialData<RegisteredServer>;
+
+declare const __initialData__: InitialData;
+
+export const getInitialData: () => InitialData = () =>
+  typeof __initialData__ !== 'undefined' ? __initialData__ : ({} as any);

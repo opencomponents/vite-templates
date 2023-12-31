@@ -6,7 +6,6 @@
   "types": "dist/index.d.ts",
   "scripts": {
     "build": "tsc",
-    "prepare": "npm run build",
     "clean": "rm -rf .turbo && rm -rf node_modules && rm -rf dist"
   },
   "repository": {
@@ -33,8 +32,8 @@
     "cssesc": "^3.0.0",
     "oc-generic-template-compiler": "^2.1.3",
     "oc-statics-compiler": "2.1.1",
-    "oc-template-es6": "*",
-    "oc-vite-compiler": "*"
+    "oc-template-es6": "^1.0.7",
+    "oc-vite-compiler": "^3.3.0"
   },
   "files": [
     "dist/**",

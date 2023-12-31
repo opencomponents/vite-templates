@@ -1,12 +1,11 @@
 {
   "name": "oc-template-preact",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "OC-Template-Preact",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
     "build": "tsc",
-    "prepare": "npm run build",
     "clean": "rm -rf .turbo && rm -rf node_modules && rm -rf dist"
   },
   "repository": {

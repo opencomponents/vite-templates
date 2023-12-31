@@ -1,12 +1,11 @@
 {
   "name": "oc-template-react",
-  "version": "4.0.0",
+  "version": "4.0.1",
   "description": "OC-Template-React",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
     "build": "tsc",
-    "prepare": "npm run build",
     "clean": "rm -rf .turbo && rm -rf node_modules && rm -rf dist"
   },
   "repository": {
