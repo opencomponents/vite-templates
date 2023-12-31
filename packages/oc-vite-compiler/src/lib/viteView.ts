@@ -195,6 +195,7 @@ async function compileView(options: ViteViewOptions & CompilerOptions) {
     var __toOcStaticPathUrl = function(args) {
       return model.component.props._staticPath + '${staticFolder}/' + args;
     } 
+    var __initialData__ = model.component.props;
     var innerFn = ${templateString};
     return innerFn(model);
   }
