@@ -42,7 +42,7 @@ export interface Template {
   externals: External[];
 }
 
-export interface Context<T = any, E = Env> {
+export interface DataContext<T = any, E = Env> {
   action?: string;
   acceptLanguage: AcceptLanguage[];
   baseUrl: string;
@@ -60,6 +60,6 @@ export interface Context<T = any, E = Env> {
 type Callback<D, E = Error> = (error: E | null, data?: D) => void;
 
 export type DataProvider<Parameters = any, Return = any, Environment = Env> = (
-  context: Context<Parameters, Environment>,
+  context: DataContext<Parameters, Environment>,
   callback: Callback<Return>
 ) => void;
