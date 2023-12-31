@@ -1,5 +1,16 @@
 # oc-template-vue-compiler
 
+## 0.1.0
+
+### Minor Changes
+
+- e9a24bc: Make Vue external instead of bundled
+
+### Patch Changes
+
+- Updated dependencies [e9a24bc]
+  - oc-template-vue@0.1.0
+
 ## 0.0.3
 
 ### Patch Changes
