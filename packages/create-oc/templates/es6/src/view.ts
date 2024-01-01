@@ -15,8 +15,8 @@ export default ({ firstName, lastName, hobbies, born }: InitialData) => {
   return /* html */ `
     <div class="${styles.container}">
       <img width="50" height="50" src="${logo}" alt="Logo" />
-      <h1>
-        Hello, <span>${firstName}</span> ${lastName}
+      <h1 style="margin: 0 0 20px 0;">
+        Hello, <span style="text-decoration: underline;">${firstName}</span> ${lastName}
       </h1>
       <div class=${styles.info}>
         <div class=${styles.block}>Born: ${born}</div>
