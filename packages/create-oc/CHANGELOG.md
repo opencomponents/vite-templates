@@ -1,5 +1,11 @@
 # create-oc
 
+## 0.0.12
+
+### Patch Changes
+
+- bed46b0: Update templates and ignore CJS warnings on vite compiler
+
 ## 0.0.11
 
 ### Patch Changes

@@ -1,5 +1,11 @@
 # oc-vite-compiler
 
+## 3.5.2
+
+### Patch Changes
+
+- bed46b0: Update templates and ignore CJS warnings on vite compiler
+
 ## 3.5.1
 
 ### Patch Changes
