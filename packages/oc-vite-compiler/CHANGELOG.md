@@ -1,5 +1,11 @@
 # oc-vite-compiler
 
+## 3.5.1
+
+### Patch Changes
+
+- 7b9d492: Fix ES6 template by passing htmlTemplate param to compiler
+
 ## 3.5.0
 
 ### Minor Changes
