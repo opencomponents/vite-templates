@@ -3,7 +3,7 @@ import { serverClient, InitialData, ActionOutput } from 'oc-server';
 import styles from './styles.css';
 import logo from '../public/logo.png';
 
-type AdditionalData = ActionOutput<'getMoreData'>;
+type AdditionalData = ActionOutput<'funFact'>;
 
 const App: React.FC<InitialData> = (props: InitialData) => {
   const { firstName, lastName, born, hobbies } = props;
@@ -12,10 +12,10 @@ const App: React.FC<InitialData> = (props: InitialData) => {
   );
   const [error, setError] = useState('');
 
-  const fetchMoreData = async () => {
+  const getFunFact = async () => {
     setError('');
     try {
-      const data = await serverClient.getMoreData({ year: born });
+      const data = await serverClient.funFact({ year: born });
       setAdditionalData(data);
     } catch (err) {
       setError(String(err));
@@ -40,7 +40,7 @@ const App: React.FC<InitialData> = (props: InitialData) => {
         </div>
       </div>
       {additionalData && <div>{additionalData.funFact}</div>}
-      <button className={styles.button} onClick={fetchMoreData}>
+      <button className={styles.button} onClick={getFunFact}>
         Fun year fact
       </button>
     </div>

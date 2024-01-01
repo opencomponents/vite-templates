@@ -1,23 +1,21 @@
 import { useState } from 'preact/hooks';
-import { useData } from 'oc-template-preact-compiler/dist/utils/useData';
-import { serverClient } from 'oc-server';
+import { ActionOutput, InitialData, serverClient } from 'oc-server';
 import styles from './styles.css';
-import type { AdditionalData, ClientProps } from './types';
+import logo from '../public/logo.png';
 
-interface AppProps extends ClientProps {
-  getMoreData?: boolean;
-}
+type AdditionalData = ActionOutput<'funFact'>;
 
-const App = () => {
-  const { firstName, lastName, userId, getData, getSetting } = useData<AppProps>();
-  const staticPath = getSetting('staticPath');
-  const [additionalData, setAdditionalData] = useState<AdditionalData | null>(null);
+const App = (props: InitialData) => {
+  const { firstName, lastName, born, hobbies } = props;
+  const [additionalData, setAdditionalData] = useState<AdditionalData | null>(
+    null
+  );
   const [error, setError] = useState('');
 
-  const fetchMoreData = async () => {
+  const getFunFact = async () => {
     setError('');
     try {
-      const data = await serverClient.getMoreData({ userId });
+      const data = await serverClient.funFact({ year: born });
       setAdditionalData(data);
     } catch (err) {
       setError(String(err));
@@ -30,20 +28,20 @@ const App = () => {
 
   return (
     <div className={styles.container}>
-      <img width="50" height="50" src={`${staticPath}/public/logo.png`} alt="Logo" />
+      <img width="50" height="50" src={logo} alt="Logo" />
       <h1 style={{ margin: '0 0 20px 0' }}>
-        Hello, <span style={{ textDecoration: 'underline' }}>{firstName}</span> {lastName}
+        Hello, <span style={{ textDecoration: 'underline' }}>{firstName}</span>{' '}
+        {lastName}
       </h1>
-      {additionalData && (
-        <div className={styles.info}>
-          <div className={styles.block}>Age: {additionalData.age}</div>
-          <div className={styles.block}>
-            Hobbies: {additionalData.hobbies.map((x) => x.toLowerCase()).join(', ')}
-          </div>
+      <div className={styles.info}>
+        <div className={styles.block}>Born: {born}</div>
+        <div className={styles.block}>
+          Hobbies: {hobbies.map((x) => x.toLowerCase()).join(', ')}
         </div>
-      )}
-      <button className={styles.button} onClick={fetchMoreData}>
-        Get extra information
+      </div>
+      {additionalData && <div>{additionalData.funFact}</div>}
+      <button className={styles.button} onClick={getFunFact}>
+        Fun year fact
       </button>
     </div>
   );

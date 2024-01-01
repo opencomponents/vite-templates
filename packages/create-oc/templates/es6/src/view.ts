@@ -3,11 +3,11 @@ import styles from './styles.css';
 import logo from '../public/logo.png';
 
 declare const window: Window & {
-  fetchMoreData: () => Promise<void>;
+  getFunFact: () => Promise<void>;
 };
 
 export default ({ firstName, lastName, hobbies, born }: InitialData) => {
-  window.fetchMoreData = async () => {
+  window.getFunFact = async () => {
     const { funFact } = await serverClient.funFact({ year: born });
     document.querySelector('#funfact')!.innerHTML = funFact;
   };
@@ -25,7 +25,7 @@ export default ({ firstName, lastName, hobbies, born }: InitialData) => {
         </div>
       </div>
       <div id="funfact"></div>
-      <button class=${styles.button} onclick="fetchMoreData()">
+      <button class=${styles.button} onclick="getFunFact()">
         Fun year fact
       </button>
     </div>
