@@ -23,9 +23,9 @@
   },
   "dependencies": {},
   "devDependencies": {
-    "oc-server": "*",
-    "oc-template-elm-compiler": "*",
-    "elm": "*",
-    "typescript": "*"
+    "oc-server": "^0.3.0",
+    "oc-template-elm-compiler": "^0.3.0",
+    "elm": "^0.19.1-6",
+    "typescript": "^5.3.3"
   }
 }
