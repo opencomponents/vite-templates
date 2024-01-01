@@ -1,12 +1,12 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import logo from '../public/logo.png';
-import { serverClient, ActionOutput } from 'oc-server'
-const props = defineProps<{ userId: number, firstName: string, lastName: string }>()
+import { serverClient, InitialData, ActionOutput } from 'oc-server'
+const props = defineProps<{ firstName: string, lastName: string, born: number, hobbies: string[] }>()
 
-const additionalData = ref<ActionOutput<'getMoreData'> | null>(null);
-async function getAdditionalData() {
-  additionalData.value = await serverClient.getMoreData({ userId: props.userId });
+const additionalData = ref<ActionOutput<'funFact'> | null>(null);
+async function getFunFact() {
+  additionalData.value = await serverClient.funFact({ year: props.born });
 }
 </script>
 
@@ -17,17 +17,18 @@ async function getAdditionalData() {
     <h1>
       Hello, <span>{{ firstName }}</span> {{ lastName }}
     </h1>
-    <div className={styles.info} v-if="additionalData">
-      <div className={styles.block}>Age: {{ additionalData.age }}</div>
+    <div className={styles.info}>
+      <div className={styles.block}>Born: {{ born }}</div>
       <div className={styles.block}>
         Hobbies:
-        <span v-for="hobby in additionalData.hobbies" :key="hobby">
+        <span v-for="hobby in hobbies" :key="hobby">
           {{ hobby.toLowerCase() }}
         </span>
       </div>
     </div>
-    <button className="button" @click="getAdditionalData">
-      Get extra information
+    <div v-if="additionalData">{{ additionalData?.funFact }}</div>
+    <button className="button" @click="getFunFact">
+      Fun year fact
     </button>
   </div>
 </template>
