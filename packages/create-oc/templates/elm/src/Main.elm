@@ -104,8 +104,11 @@ view model =
             ]
         ]
         [ img [ Html.Styled.Attributes.width 50, Html.Styled.Attributes.height 50, src (model.staticPath ++ "public/logo.png"), alt "Logo" ] []
-        , h1 [] [ text ("Hello, " ++ model.firstName ++ " " ++ model.lastName) ]
-        , div [ class "info" ]
+        , h1 [ css [ margin4 (px 0) (px 0) (px 20) (px 0) ] ]
+            [ text ("Hello, ") 
+            , span [ css [ textDecoration underline ] ] [text (model.firstName)]
+            , text( " " ++ model.lastName ) ]
+        , div [ css [ marginBottom (px 20) ] ]
             [ div [ css [ margin2 (px 6) (px 0) ] ] [ text ("Born: " ++ String.fromInt model.born) ]
             , div [ css [ margin2 (px 6) (px 0) ] ] [ text ("Hobbies: " ++ String.join ", " (List.map String.toLower model.hobbies)) ]
             ]
@@ -128,7 +131,7 @@ view model =
                       ]
                   , onClick GetFunFact
                   ]
-                  [ text "Get Fun Fact" ]
+                  [ text "Fun year fact" ]
                       
         ]
 
