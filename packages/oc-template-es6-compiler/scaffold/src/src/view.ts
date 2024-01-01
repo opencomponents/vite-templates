@@ -3,11 +3,11 @@ import styles from './styles.css';
 import logo from '../public/logo.png';
 
 declare const window: Window & {
-  fetchMoreData: () => Promise<void>;
+  getFunFact: () => Promise<void>;
 };
 
 export default ({ firstName, lastName, hobbies, born }: InitialData) => {
-  window.fetchMoreData = async () => {
+  window.getFunFact = async () => {
     const { funFact } = await serverClient.funFact({ year: born });
     document.querySelector('#funfact')!.innerHTML = funFact;
   };
@@ -15,8 +15,8 @@ export default ({ firstName, lastName, hobbies, born }: InitialData) => {
   return /* html */ `
     <div class="${styles.container}">
       <img width="50" height="50" src="${logo}" alt="Logo" />
-      <h1>
-        Hello, <span>${firstName}</span> ${lastName}
+      <h1 style="margin: 0 0 20px 0;">
+        Hello, <span style="text-decoration: underline;">${firstName}</span> ${lastName}
       </h1>
       <div class=${styles.info}>
         <div class=${styles.block}>Born: ${born}</div>
@@ -25,7 +25,7 @@ export default ({ firstName, lastName, hobbies, born }: InitialData) => {
         </div>
       </div>
       <div id="funfact"></div>
-      <button class=${styles.button} onclick="fetchMoreData()">
+      <button class=${styles.button} onclick="getFunFact()">
         Fun year fact
       </button>
     </div>

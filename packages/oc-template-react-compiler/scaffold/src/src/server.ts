@@ -34,7 +34,7 @@ export const server = new Server(async (params: { userId: number }) => {
     born: user.born,
     hobbies: user.hobbies,
   };
-}).action('getMoreData', async (params: { year: number }) => {
+}).action('funFact', async (params: { year: number }) => {
   const { year } = params;
   const funFact = await getFunFact(year);
 

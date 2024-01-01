@@ -1,5 +1,11 @@
 # oc-template-preact-compiler
 
+## 0.4.1
+
+### Patch Changes
+
+- b2ac9fa: Compile preact useData with preact. update templates.
+
 ## 0.3.4
 
 ### Patch Changes
