@@ -2,12 +2,13 @@
 import { ref } from 'vue'
 import logo from '../public/logo.png';
 import { serverClient, ActionOutput } from 'oc-server'
-const props = defineProps<{ userId: number, firstName: string, lastName: string }>()
+const props = defineProps<{ firstName: string, lastName: string, born: number, hobbies: string[] }>()
 
-const additionalData = ref<ActionOutput<'getMoreData'> | null>(null);
-async function getAdditionalData() {
-  additionalData.value = await serverClient.getMoreData({ userId: props.userId });
+const additionalData = ref<ActionOutput<'funFact'> | null>(null);
+async function getFunFact() {
+  additionalData.value = await serverClient.funFact({ year: props.born });
 }
+const hobbies = props.hobbies.map((x) => x.toLowerCase()).join(', ')
 </script>
 
 <template>
@@ -17,17 +18,15 @@ async function getAdditionalData() {
     <h1>
       Hello, <span>{{ firstName }}</span> {{ lastName }}
     </h1>
-    <div className={styles.info} v-if="additionalData">
-      <div className={styles.block}>Age: {{ additionalData.age }}</div>
-      <div className={styles.block}>
-        Hobbies:
-        <span v-for="hobby in additionalData.hobbies" :key="hobby">
-          {{ hobby.toLowerCase() }}
-        </span>
+    <div className="info">
+      <div className="block">Born: {{ born }}</div>
+      <div className="block">
+        Hobbies: {{ hobbies }}
       </div>
     </div>
-    <button className="button" @click="getAdditionalData">
-      Get extra information
+    <div v-if="additionalData">{{ additionalData?.funFact }}</div>
+    <button className="button" @click="getFunFact">
+      Fun year fact
     </button>
   </div>
 </template>
@@ -52,11 +51,23 @@ async function getAdditionalData() {
   cursor: pointer;
 }
 
+.button:hover {
+  background-color: #c79535;
+}
+
 h1 {
   margin: 0 0 20px 0;
 }
 
 span {
   text-decoration: underline;
+}
+
+.info {
+  margin-bottom: 20px;
+}
+
+.block {
+  margin: 6px 0;
 }
 </style>

@@ -7,9 +7,12 @@
     "files": {
       "data": "src/server.ts",
       "template": {
-        "src": "src/Main.elm",
+        "src": "src/index.js",
         "type": "oc-template-elm"
-      }
+      },
+      "static": [
+        "public"
+      ]
     },
     "parameters": {
       "userId": {

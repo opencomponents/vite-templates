@@ -28,18 +28,20 @@ main =
 
 
 type alias Model =
-    { userId : Int, name : String, email : String, age : Maybe Int }
+    { staticPath: String, firstName : String, lastName : String, born : Int, hobbies : List String, funFact: Maybe String }
+
+type alias FactModel =
+    { funFact: String }
 
 
 type alias DataRequest =
-    { userId : Int }
+    { year : Int }
 
 
 encode : DataRequest -> E.Value
 encode data =
     E.object
-        [ ( "userId", E.int data.userId )
-        , ( "moreData", E.bool True )
+        [ ( "year", E.int data.year )
         ]
 
 
@@ -50,7 +52,7 @@ init flags =
             model
 
         Err _ ->
-            { name = "", email = "", userId = 0, age = Nothing }
+            { staticPath = "", firstName = "", lastName = "", born = 0, hobbies = [], funFact = Nothing }
     , Cmd.none
     )
 
@@ -70,87 +72,68 @@ isJust data =
 
 
 type Msg
-    = GetData
+    = GetFunFact
     | Recv E.Value
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
     case msg of
-        GetData ->
-            ( model, DataRequest model.userId |> encode |> getData )
+        GetFunFact ->
+            ( model, DataRequest model.born |> encode |> askFunFact )
 
         Recv data ->
-            ( case D.decodeValue decoder data of
+            ( case D.decodeValue factDecoder data of
                 Ok newModel ->
-                    newModel
+                    { model | funFact = Just newModel }
 
                 Err _ ->
-                    { name = "", email = "", userId = 0, age = Nothing }
+                    { staticPath = "", firstName = "", lastName = "", born = 0, hobbies = [], funFact = Nothing }
             , Cmd.none
             )
 
-
-
 -- VIEW
-
-
-inputStyle : Style
-inputStyle =
-    Css.batch
-        [ border3 (px 5) solid (rgb 255 240 255)
-        , boxShadow5 inset zero zero (px 8) (rgba 0 0 0 0.1)
-        , padding (px 15)
-        , backgroundColor (rgba 255 255 255 0.5)
-        , margin (px 10)
-        ]
-
-
-htmlIf : Html msg -> Bool -> Html msg
-htmlIf el cond =
-    if cond then
-        el
-
-    else
-        text ""
-
 
 view : Model -> Html Msg
 view model =
-    div
-        [ css
-            [ padding (px 20)
+    div [ css 
+            [ backgroundColor (hex "3b246c")
+            , color (hex "fff")
+            , fontFamilies [ "sans-serif" ]
+            , padding (px 40)
             ]
         ]
-        [ input
-            [ css [ inputStyle ]
-            , type_ "text"
-            , placeholder "Name"
-            , value model.name
+        [ img [ Html.Styled.Attributes.width 50, Html.Styled.Attributes.height 50, src (model.staticPath ++ "public/logo.png"), alt "Logo" ] []
+        , h1 [ css [ margin4 (px 0) (px 0) (px 20) (px 0) ] ]
+            [ text ("Hello, ") 
+            , span [ css [ textDecoration underline ] ] [text (model.firstName)]
+            , text( " " ++ model.lastName ) ]
+        , div [ css [ marginBottom (px 20) ] ]
+            [ div [ css [ margin2 (px 6) (px 0) ] ] [ text ("Born: " ++ String.fromInt model.born) ]
+            , div [ css [ margin2 (px 6) (px 0) ] ] [ text ("Hobbies: " ++ String.join ", " (List.map String.toLower model.hobbies)) ]
             ]
-            []
-        , input
-            [ css [ inputStyle ]
-            , type_ "text"
-            , placeholder "Email"
-            , value model.email
-            ]
-            []
-        , case model.age of
+        , case model.funFact of
             Nothing ->
                 text ""
 
-            Just age ->
-                input
-                    [ css [ inputStyle ]
-                    , type_ "number"
-                    , placeholder "Age"
-                    , String.fromInt age |> value
-                    ]
-                    []
-        , button [ onClick GetData ] [ text "Get more data" ]
+            Just fact ->
+                div [] [text (fact)]
+        , button [ css 
+                      [ backgroundColor (hex "a97613")
+                      , border (px 0)
+                      , padding2 (px 15) (px 32)
+                      , textAlign center
+                      , fontSize (px 16)
+                      , textDecoration none
+                      , display inlineBlock
+                      , color inherit
+                      , cursor pointer
+                      ]
+                  , onClick GetFunFact
+                  ]
+                  [ text "Fun year fact" ]
+                      
         ]
-
 
 
 -- SUBSCRIPTIONS
@@ -158,23 +141,29 @@ view model =
 
 subscriptions : Model -> Sub Msg
 subscriptions _ =
-    dataReceiver Recv
+    getFunFact Recv
 
 
 decoder : D.Decoder Model
 decoder =
-    D.map4 Model
-        (D.field "userId" D.int)
-        (D.field "name" D.string)
-        (D.field "email" D.string)
-        (D.maybe (D.field "age" D.int))
+    D.map6 Model
+        (D.field "staticPath" D.string)
+        (D.field "firstName" D.string)
+        (D.field "lastName" D.string)
+        (D.field "born" D.int)
+        (D.field "hobbies" (D.list D.string))
+        (D.maybe (D.field "funFact" D.string))
 
+-- decoder of a single string field
+factDecoder : D.Decoder String
+factDecoder =
+    D.field "funFact" D.string
 
 
 -- PORTS
 
 
-port getData : E.Value -> Cmd msg
+port askFunFact : E.Value -> Cmd msg
 
 
-port dataReceiver : (E.Value -> msg) -> Sub msg
+port getFunFact : (E.Value -> msg) -> Sub msg
