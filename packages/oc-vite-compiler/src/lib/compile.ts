@@ -19,6 +19,7 @@ export default function createCompile(params: {
         {
           ...options,
           plugins: params.plugins,
+          htmlTemplate: params.htmlTemplate,
           viewWrapper: params.viewWrapper,
           externals: params.getInfo().externals,
         },
