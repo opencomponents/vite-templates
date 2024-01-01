@@ -4,23 +4,22 @@
   "version": "1.0.0",
   "oc": {
     "files": {
-      "data": "server.js",
+      "data": "src/server.ts",
       "static": [
-        "img",
-        "css"
+        "public"
       ],
       "template": {
-        "src": "view.js",
+        "src": "src/view.ts",
         "type": "oc-template-es6"
       }
     },
     "parameters": {
-      "name": {
-        "default": "Jane Doe",
-        "description": "Your name",
-        "example": "Jane Doe",
-        "mandatory": false,
-        "type": "string"
+      "userId": {
+        "default": 1,
+        "description": "The user id from the user database",
+        "example": 1,
+        "mandatory": true,
+        "type": "number"
       }
     }
   },
