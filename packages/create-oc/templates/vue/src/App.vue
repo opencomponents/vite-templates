@@ -1,13 +1,14 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import logo from '../public/logo.png';
-import { serverClient, InitialData, ActionOutput } from 'oc-server'
+import { serverClient, ActionOutput } from 'oc-server'
 const props = defineProps<{ firstName: string, lastName: string, born: number, hobbies: string[] }>()
 
 const additionalData = ref<ActionOutput<'funFact'> | null>(null);
 async function getFunFact() {
   additionalData.value = await serverClient.funFact({ year: props.born });
 }
+const hobbies = props.hobbies.map((x) => x.toLowerCase()).join(', ')
 </script>
 
 <template>
@@ -17,13 +18,10 @@ async function getFunFact() {
     <h1>
       Hello, <span>{{ firstName }}</span> {{ lastName }}
     </h1>
-    <div className={styles.info}>
-      <div className={styles.block}>Born: {{ born }}</div>
-      <div className={styles.block}>
-        Hobbies:
-        <span v-for="hobby in hobbies" :key="hobby">
-          {{ hobby.toLowerCase() }}
-        </span>
+    <div className="info">
+      <div className="block">Born: {{ born }}</div>
+      <div className="block">
+        Hobbies: {{ hobbies }}
       </div>
     </div>
     <div v-if="additionalData">{{ additionalData?.funFact }}</div>
@@ -53,11 +51,23 @@ async function getFunFact() {
   cursor: pointer;
 }
 
+.button:hover {
+  background-color: #c79535;
+}
+
 h1 {
   margin: 0 0 20px 0;
 }
 
 span {
   text-decoration: underline;
+}
+
+.info {
+  margin-bottom: 20px;
+}
+
+.block {
+  margin: 6px 0;
 }
 </style>
