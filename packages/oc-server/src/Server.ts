@@ -1,6 +1,6 @@
 import { DataContext, DataProvider } from './types';
 
-type ServerContext<E> = Omit<
+type ServerContext<E = unknown> = Omit<
   DataContext<any, E>,
   'params' | 'action' | 'setEmptyResponse'
 >;
