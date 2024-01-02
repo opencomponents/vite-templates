@@ -1,5 +1,11 @@
 # oc-server
 
+## 0.3.2
+
+### Patch Changes
+
+- 2212d0e: Forgot to actually export it :/
+
 ## 0.3.1
 
 ### Patch Changes
