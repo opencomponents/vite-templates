@@ -1,5 +1,11 @@
 # oc-server
 
+## 0.3.1
+
+### Patch Changes
+
+- 8617f98: Export ServerContext type
+
 ## 0.3.0
 
 ### Minor Changes
