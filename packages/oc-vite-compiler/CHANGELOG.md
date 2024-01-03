@@ -1,5 +1,11 @@
 # oc-vite-compiler
 
+## 3.5.3
+
+### Patch Changes
+
+- f053326: Destruct props on default view wrapper
+
 ## 3.5.2
 
 ### Patch Changes

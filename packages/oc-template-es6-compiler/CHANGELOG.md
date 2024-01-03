@@ -1,5 +1,13 @@
 # oc-template-es6-compiler
 
+## 4.0.5
+
+### Patch Changes
+
+- f053326: Destruct props on default view wrapper
+- Updated dependencies [f053326]
+  - oc-vite-compiler@3.5.3
+
 ## 4.0.4
 
 ### Patch Changes
