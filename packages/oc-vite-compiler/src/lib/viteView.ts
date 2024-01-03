@@ -38,6 +38,16 @@ const partition = <T>(array: T[], predicate: (x: T) => boolean): [T[], T[]] => {
   return [matches, rest];
 };
 
+const defaultViewWrapper = ({ viewPath }: { viewPath: string }) =>
+  `export View from "${removeExtension(viewPath)}";
+  
+  export default function App(props) {
+    const { _staticPath, _baseUrl, _componentName, _componentVersion, ...rest } = props;
+
+    return View(props);
+  }
+  `;
+
 async function compileView(options: ViteViewOptions & CompilerOptions) {
   function processRelativePath(relativePath: string) {
     let pathStr = path.join(options.componentPath, relativePath);
@@ -62,10 +72,7 @@ async function compileView(options: ViteViewOptions & CompilerOptions) {
   const production = !!options.production;
   const viewExtension = viewFileName.match(/\.(jsx?|tsx?)$/)?.[0] ?? '.js';
 
-  const viewWrapperFn =
-    options.viewWrapper ||
-    (({ viewPath }) =>
-      `export { default } from "${removeExtension(viewPath)}";`);
+  const viewWrapperFn = options.viewWrapper || defaultViewWrapper;
   const viewWrapperContent = viewWrapperFn({ viewPath, providerFunctions });
   const viewWrapperName = `_viewWrapperEntry${viewExtension}`;
   const viewWrapperPath = path.join(tempPath, viewWrapperName);
