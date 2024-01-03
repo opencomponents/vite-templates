@@ -1,5 +1,13 @@
 # oc-template-react-compiler
 
+## 6.1.2
+
+### Patch Changes
+
+- 622dd8e: Add OC types definitions
+- Updated dependencies [622dd8e]
+  - oc-vite-compiler@3.5.4
+
 ## 6.1.1
 
 ### Patch Changes

@@ -1,5 +1,13 @@
 # oc-template-es6-compiler
 
+## 4.0.6
+
+### Patch Changes
+
+- 622dd8e: Add OC types definitions
+- Updated dependencies [622dd8e]
+  - oc-vite-compiler@3.5.4
+
 ## 4.0.5
 
 ### Patch Changes

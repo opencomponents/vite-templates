@@ -1,5 +1,13 @@
 # oc-template-preact-compiler
 
+## 0.4.3
+
+### Patch Changes
+
+- 622dd8e: Add OC types definitions
+- Updated dependencies [622dd8e]
+  - oc-vite-compiler@3.5.4
+
 ## 0.4.2
 
 ### Patch Changes

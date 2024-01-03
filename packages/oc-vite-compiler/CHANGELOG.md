@@ -1,5 +1,13 @@
 # oc-vite-compiler
 
+## 3.5.4
+
+### Patch Changes
+
+- 622dd8e: Add OC types definitions
+- Updated dependencies [622dd8e]
+  - oc-vite@5.0.9
+
 ## 3.5.3
 
 ### Patch Changes

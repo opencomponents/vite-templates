@@ -1,5 +1,13 @@
 # oc-template-elm-compiler
 
+## 0.3.2
+
+### Patch Changes
+
+- 622dd8e: Add OC types definitions
+- Updated dependencies [622dd8e]
+  - oc-vite-compiler@3.5.4
+
 ## 0.3.1
 
 ### Patch Changes
