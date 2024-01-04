@@ -12,10 +12,14 @@ for (const template of templates) {
   const templatePkg = JSON.parse(
     fs.readFileSync(`./templates/${template}/package.json`, 'utf8')
   );
+  const ocServerPkg = JSON.parse(
+    fs.readFileSync(`../oc-server/package.json`, 'utf8')
+  );
 
   templatePkg.devDependencies[
     `oc-template-${template}-compiler`
   ] = `^${compilerPkg.version}`;
+  templatePkg.devDependencies['oc-server'] = `^${ocServerPkg.version}`;
 
   fs.writeFileSync(
     `./templates/${template}/package.json`,
