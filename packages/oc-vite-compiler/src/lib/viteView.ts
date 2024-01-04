@@ -39,7 +39,7 @@ const partition = <T>(array: T[], predicate: (x: T) => boolean): [T[], T[]] => {
 };
 
 const defaultViewWrapper = ({ viewPath }: { viewPath: string }) =>
-  `export View from "${removeExtension(viewPath)}";
+  `import View from "${removeExtension(viewPath)}";
   
   export default function App(props) {
     const { _staticPath, _baseUrl, _componentName, _componentVersion, ...rest } = props;

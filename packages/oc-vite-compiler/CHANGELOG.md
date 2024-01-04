@@ -1,5 +1,11 @@
 # oc-vite-compiler
 
+## 3.5.6
+
+### Patch Changes
+
+- Fix default view wrapper import
+
 ## 3.5.4
 
 ### Patch Changes

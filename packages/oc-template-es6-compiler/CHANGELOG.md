@@ -1,5 +1,13 @@
 # oc-template-es6-compiler
 
+## 4.0.8
+
+### Patch Changes
+
+- Fix default view wrapper import
+- Updated dependencies
+  - oc-vite-compiler@3.5.6
+
 ## 4.0.7
 
 ### Patch Changes
