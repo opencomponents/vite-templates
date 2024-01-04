@@ -25,11 +25,7 @@
     "email": "nick@balestra.ch"
   },
   "license": "MIT",
-  "devDependencies": {
-    "@types/cssesc": "^3.0.2"
-  },
   "dependencies": {
-    "cssesc": "^3.0.0",
     "oc-generic-template-compiler": "^2.1.3",
     "oc-statics-compiler": "2.1.1",
     "oc-template-es6": "^1.0.7",
