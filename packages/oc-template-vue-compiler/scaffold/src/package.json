@@ -34,7 +34,7 @@
     "@vitejs/plugin-vue": "^5.0.0",
     "jsdom": "^21.1.1",
     "oc-server": "^0.3.0",
-    "oc-template-vue-compiler": "^0.2.0",
+    "oc-template-vue-compiler": "^0.2.3",
     "typescript": "5.0.2",
     "vitest": "^0.29.7",
     "vue": "^3.3.11",
