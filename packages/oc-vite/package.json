@@ -1,6 +1,7 @@
 {
   "name": "oc-vite",
-  "version": "5.0.9",
+  "version": "5.0.11",
+  "viteVersion": "5.0.10",
   "type": "module",
   "license": "MIT",
   "author": "Evan You",

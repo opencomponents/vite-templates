@@ -93,11 +93,11 @@ function fixRollup(path) {
   fs.writeFileSync(path, fixedBuild, 'utf-8');
 }
 
-async function checkPreviousBuild(version) {
+async function checkPreviousBuild() {
   try {
     const vitePackageJson = readJSON('./vite/packages/vite/package.json');
 
-    return vitePackageJson.version === version;
+    return vitePackageJson.version === pkgJson.viteVersion;
   } catch {
     return false;
   }
@@ -117,7 +117,7 @@ async function main() {
 
   console.log('Cloning repository');
   await exec('git clone https://github.com/vitejs/vite.git');
-  await exec(`git checkout v${pkgJson.version}`, { cwd: './vite' });
+  await exec(`git checkout v${pkgJson.viteVersion}`, { cwd: './vite' });
   rmDir('./vite/.git');
 
   console.log('Checking package jsons');
