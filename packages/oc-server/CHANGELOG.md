@@ -1,5 +1,11 @@
 # oc-server
 
+## 0.3.3
+
+### Patch Changes
+
+- ab79d18: Add id prop to getSettings function
+
 ## 0.3.2
 
 ### Patch Changes

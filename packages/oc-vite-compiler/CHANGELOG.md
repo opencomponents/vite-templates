@@ -1,5 +1,11 @@
 # oc-vite-compiler
 
+## 3.5.7
+
+### Patch Changes
+
+- ab79d18: Add id prop to getSettings function
+
 ## 3.5.6
 
 ### Patch Changes

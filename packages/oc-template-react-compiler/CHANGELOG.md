@@ -1,5 +1,13 @@
 # oc-template-react-compiler
 
+## 6.1.4
+
+### Patch Changes
+
+- ab79d18: Add id prop to getSettings function
+- Updated dependencies [ab79d18]
+  - oc-vite-compiler@3.5.7
+
 ## 6.1.3
 
 ### Patch Changes

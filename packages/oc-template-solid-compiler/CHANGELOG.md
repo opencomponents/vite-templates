@@ -1,5 +1,13 @@
 # oc-template-solid-compiler
 
+## 0.7.4
+
+### Patch Changes
+
+- ab79d18: Add id prop to getSettings function
+- Updated dependencies [ab79d18]
+  - oc-vite-compiler@3.5.7
+
 ## 0.7.3
 
 ### Patch Changes
