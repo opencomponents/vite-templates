@@ -1,5 +1,11 @@
 # oc-template-preact-compiler
 
+## 0.4.4
+
+### Patch Changes
+
+- 18434e4: Add known oc events to the type definitions
+
 ## 0.4.3
 
 ### Patch Changes

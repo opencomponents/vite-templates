@@ -1,5 +1,11 @@
 # oc-template-elm-compiler
 
+## 0.3.3
+
+### Patch Changes
+
+- 18434e4: Add known oc events to the type definitions
+
 ## 0.3.2
 
 ### Patch Changes

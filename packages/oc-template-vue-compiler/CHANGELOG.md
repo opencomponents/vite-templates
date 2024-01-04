@@ -1,5 +1,11 @@
 # oc-template-vue-compiler
 
+## 0.2.3
+
+### Patch Changes
+
+- 18434e4: Add known oc events to the type definitions
+
 ## 0.2.2
 
 ### Patch Changes

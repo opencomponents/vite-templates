@@ -1,5 +1,11 @@
 # oc-template-react-compiler
 
+## 6.1.3
+
+### Patch Changes
+
+- 18434e4: Add known oc events to the type definitions
+
 ## 6.1.2
 
 ### Patch Changes

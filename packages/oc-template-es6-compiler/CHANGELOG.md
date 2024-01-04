@@ -1,5 +1,11 @@
 # oc-template-es6-compiler
 
+## 4.0.7
+
+### Patch Changes
+
+- 18434e4: Add known oc events to the type definitions
+
 ## 4.0.6
 
 ### Patch Changes
