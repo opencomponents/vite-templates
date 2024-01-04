@@ -204,7 +204,7 @@ async function compileView(options: ViteViewOptions & CompilerOptions) {
     } 
     const { _staticPath, _baseUrl, _componentName, _componentVersion, ...rest } = model.component.props;
     var __$$oc_initialData__ = rest;
-    var __$$oc_Settings__ = {staticPath: _staticPath, baseUrl: _baseUrl, name: _componentName, version: _componentVersion};
+    var __$$oc_Settings__ = {id: model.id, staticPath: _staticPath, baseUrl: _baseUrl, name: _componentName, version: _componentVersion};
     var innerFn = ${templateString};
     return innerFn(model);
   }

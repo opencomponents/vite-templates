@@ -77,6 +77,7 @@ type GetInitialData<TServer extends AnyServer> = TServer extends Server<
   : any;
 export type InitialData = GetInitialData<RegisteredServer>;
 export type ComponentSettings = {
+  id: string;
   staticPath: string;
   baseUrl: string;
   name: string;
