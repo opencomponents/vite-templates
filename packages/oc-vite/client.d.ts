@@ -20,7 +20,40 @@ interface OC {
     }>;
   };
   events: {
-    on: (eventName: string, fn: (...data: any[]) => void) => void;
+    on: {
+      (
+        eventName: 'oc:rendered',
+        fn: (
+          evt: {},
+          data: {
+            baseUrl: string;
+            html: string;
+            id: string;
+            key: string;
+            name: string;
+            version: string;
+          }
+        ) => void
+      ): void;
+      (eventName: 'oc:ready', fn: (evt: {}, oc: OO) => void): void;
+      (eventName: 'oc:cssDidMount', fn: (evt: {}, css: string) => void): void;
+      (
+        eventName: 'oc:componentDidMount',
+        fn: (evt: {}, props: any) => void
+      ): void;
+      (
+        eventName: 'oc:failed',
+        fn: (
+          evt: {},
+          oc: {
+            originalError: any;
+            data: any;
+            component: HTMLElement;
+          }
+        ) => void
+      ): void;
+      (eventName: string, fn: (...data: any[]) => void): void;
+    };
     off: (eventName: string, fn?: (...data: any[]) => void) => void;
     fire: (eventName: string, data?: any) => void;
     reset: () => void;
