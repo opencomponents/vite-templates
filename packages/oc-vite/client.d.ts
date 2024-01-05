@@ -1,6 +1,7 @@
 /// <reference path="./types/importMeta.d.ts" />
 
 interface OC {
+  $: JQueryStatic;
   addStylesToHead: (styles: string) => void;
   build: (options: {
     baseUrl: string;
@@ -35,7 +36,7 @@ interface OC {
           }
         ) => void
       ): void;
-      (eventName: 'oc:ready', fn: (evt: {}, oc: OO) => void): void;
+      (eventName: 'oc:ready', fn: (evt: {}, oc: OC) => void): void;
       (eventName: 'oc:cssDidMount', fn: (evt: {}, css: string) => void): void;
       (
         eventName: 'oc:componentDidMount',
