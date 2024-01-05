@@ -1,5 +1,11 @@
 # oc-server
 
+## 0.4.1
+
+### Patch Changes
+
+- 1acfd78: Make actions and initial action public readonly for tests
+
 ## 0.3.3
 
 ### Patch Changes
