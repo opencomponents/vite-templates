@@ -30,7 +30,7 @@
   "dependencies": {
     "@preact/preset-vite": "^2.7.0",
     "oc-template-preact": "^0.1.1",
-    "oc-vite-compiler": "^3.5.9",
+    "oc-vite-compiler": "^3.5.10",
     "preact": "^10"
   },
   "peerDependencies": {

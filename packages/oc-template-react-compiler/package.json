@@ -30,7 +30,7 @@
   "dependencies": {
     "@vitejs/plugin-react": "^4.0.0",
     "oc-template-react": "^4.0.1",
-    "oc-vite-compiler": "^3.5.9",
+    "oc-vite-compiler": "^3.5.10",
     "react": "18.2.0",
     "react-dom": "18.2.0"
   },
