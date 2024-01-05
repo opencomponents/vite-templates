@@ -1,0 +1,24 @@
+{
+  "name": "e2e",
+  "type": "module",
+  "private": true,
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "start:clean": "node index.js clean",
+    "test": "playwright test --timeout=900000"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "execa": "^8.0.1",
+    "oc": "^0.49.41"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.40.1",
+    "@types/node": "^20.10.6"
+  }
+}
