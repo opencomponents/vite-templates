@@ -1,5 +1,13 @@
 # oc-template-es6-compiler
 
+## 4.0.10
+
+### Patch Changes
+
+- 989cdd6: Use default viewwrapper instead of custom for es6
+- Updated dependencies [989cdd6]
+  - oc-vite-compiler@3.5.8
+
 ## 4.0.9
 
 ### Patch Changes

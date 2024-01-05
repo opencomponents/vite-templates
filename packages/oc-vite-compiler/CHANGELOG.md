@@ -1,5 +1,11 @@
 # oc-vite-compiler
 
+## 3.5.8
+
+### Patch Changes
+
+- 989cdd6: Use default viewwrapper instead of custom for es6
+
 ## 3.5.7
 
 ### Patch Changes
