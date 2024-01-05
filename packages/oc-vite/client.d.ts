@@ -70,6 +70,13 @@ interface OC {
     },
     cb: (err: any, data: any) => void
   ) => void;
+  getAction: (options: {
+    component: string;
+    action?: string;
+    parameters?: Record<string, any>;
+    version?: string;
+    baseUrl?: string;
+  }) => void;
   load: (
     placeholder: string,
     href: string,
