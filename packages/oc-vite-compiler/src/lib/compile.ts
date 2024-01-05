@@ -7,6 +7,20 @@ import viteServer from './viteServer';
 import viteView, { ViteViewOptions } from './viteView';
 import type { PluginOption } from 'vite';
 
+type External = ReturnType<GetInfo>['externals'][number];
+function checkExternal(data: unknown): data is External {
+  return (
+    typeof data === 'object' &&
+    data !== null &&
+    typeof (data as { name: unknown }).name === 'string' &&
+    typeof (data as { global: unknown }).global === 'string' &&
+    typeof (data as { url: unknown }).url === 'string'
+  );
+}
+function checkExternals(data: unknown): data is External[] {
+  return Array.isArray(data) && data.every((item) => checkExternal(item));
+}
+
 export default function createCompile(params: {
   plugins?: PluginOption[];
   viewWrapper?: ViteViewOptions['viewWrapper'];
@@ -14,17 +28,34 @@ export default function createCompile(params: {
   getInfo: GetInfo;
 }) {
   return genericCompile({
-    compileView: (options, cb) =>
-      viteView(
+    compileView(options, cb) {
+      let externals: External[];
+      if (options.componentPackage.oc.files.template.externals) {
+        const valid = checkExternals(
+          options.componentPackage.oc.files.template.externals
+        );
+        if (valid) {
+          externals = options.componentPackage.oc.files.template.externals;
+        } else {
+          throw new Error(
+            `Invalid externals on ${options.componentPackage.name}. Expected an array of objects with name, global, and url properties.`
+          );
+        }
+      } else {
+        externals = params.getInfo().externals;
+      }
+
+      return viteView(
         {
           ...options,
           plugins: params.plugins,
           htmlTemplate: params.htmlTemplate,
           viewWrapper: params.viewWrapper,
-          externals: params.getInfo().externals,
+          externals,
         },
         cb
-      ),
+      );
+    },
     compileServer: viteServer,
     compileStatics,
     getInfo: params.getInfo,
