@@ -16,9 +16,11 @@ export class Server<
   InitialInput = any,
   InitialOutput = any
 > {
-  actions: A = {} as any;
+  public readonly actions: A = {} as any;
 
-  constructor(private initial: Action<InitialInput, InitialOutput, E>) {}
+  constructor(
+    public readonly initial: Action<InitialInput, InitialOutput, E>
+  ) {}
 
   action<ActionName extends string, I, O>(
     name: ActionName,
