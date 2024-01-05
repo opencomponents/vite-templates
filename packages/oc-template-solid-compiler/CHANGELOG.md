@@ -1,5 +1,13 @@
 # oc-template-solid-compiler
 
+## 0.8.1
+
+### Patch Changes
+
+- c994843: Add solidjs library to render
+- Updated dependencies [c994843]
+  - oc-template-solid@0.1.2
+
 ## 0.8.0
 
 ### Minor Changes
