@@ -1,5 +1,11 @@
 # oc-vite-compiler
 
+## 3.6.0
+
+### Minor Changes
+
+- 78b3bdc: Add option to describe your own externals in your package.json over oc.files.template.externals
+
 ## 3.5.8
 
 ### Patch Changes

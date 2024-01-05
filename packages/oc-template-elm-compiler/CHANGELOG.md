@@ -1,5 +1,16 @@
 # oc-template-elm-compiler
 
+## 0.4.0
+
+### Minor Changes
+
+- 78b3bdc: Add option to describe your own externals in your package.json over oc.files.template.externals
+
+### Patch Changes
+
+- Updated dependencies [78b3bdc]
+  - oc-vite-compiler@3.6.0
+
 ## 0.3.4
 
 ### Patch Changes
