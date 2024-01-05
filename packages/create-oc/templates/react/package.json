@@ -35,7 +35,7 @@
     "@types/react": "^18.0.28",
     "jsdom": "^21.1.1",
     "oc-server": "^0.4.0",
-    "oc-template-react-compiler": "^6.1.4",
+    "oc-template-react-compiler": "^6.2.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "typescript": "5.1.3",
