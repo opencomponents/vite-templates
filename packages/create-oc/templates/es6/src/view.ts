@@ -3,24 +3,22 @@ import styles from './styles.css';
 import logo from '../public/logo.png';
 import { getSettings } from 'oc-server';
 
-const onLoad = (cb: () => void) => {
+const onRender = (cb: (element: HTMLElement) => void) => {
   const { id } = getSettings();
   window.oc.events.on('oc:rendered', (e, data) => {
     if (data.id === id) {
-      cb();
+      cb(document.querySelector(`[id="${id}"]`)!);
     }
   });
 };
-const funFactSelector = Math.floor(Math.random() * 9999999999);
 
 export default ({ firstName, lastName, hobbies, born }: InitialData) => {
-  onLoad(() => {
-    document
+  onRender((element) => {
+    element
       .querySelector(`.${styles.button}`)
       ?.addEventListener('click', async () => {
         const { funFact } = await serverClient.funFact({ year: born });
-        document.querySelector(`[id="${funFactSelector}"]`)!.innerHTML =
-          funFact;
+        element.querySelector('#fun-year-fact')!.innerHTML = funFact;
       });
   });
 
@@ -36,7 +34,7 @@ export default ({ firstName, lastName, hobbies, born }: InitialData) => {
           <div>Hobbies: ${hobbies.map((x) => x.toLowerCase()).join(', ')}</div>
         </div>
       </div>
-      <div id="${funFactSelector}"></div>
+      <div id="fun-year-fact"></div>
       <button class=${styles.button}>
         Fun year fact
       </button>
