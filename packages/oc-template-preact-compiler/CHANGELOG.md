@@ -1,5 +1,13 @@
 # oc-template-preact-compiler
 
+## 0.5.1
+
+### Patch Changes
+
+- 5008296: Fix SSR for all new templates
+- Updated dependencies [5008296]
+  - oc-vite-compiler@3.6.1
+
 ## 0.5.0
 
 ### Minor Changes

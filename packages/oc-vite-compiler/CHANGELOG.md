@@ -1,5 +1,11 @@
 # oc-vite-compiler
 
+## 3.6.1
+
+### Patch Changes
+
+- 5008296: Fix SSR for all new templates
+
 ## 3.6.0
 
 ### Minor Changes

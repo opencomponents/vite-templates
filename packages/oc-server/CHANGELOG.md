@@ -1,5 +1,11 @@
 # oc-server
 
+## 0.4.2
+
+### Patch Changes
+
+- 5008296: Fix SSR for all new templates
+
 ## 0.4.1
 
 ### Patch Changes

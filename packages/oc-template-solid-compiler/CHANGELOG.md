@@ -1,5 +1,13 @@
 # oc-template-solid-compiler
 
+## 0.8.2
+
+### Patch Changes
+
+- 5008296: Fix SSR for all new templates
+- Updated dependencies [5008296]
+  - oc-vite-compiler@3.6.1
+
 ## 0.8.1
 
 ### Patch Changes

@@ -1,5 +1,14 @@
 # oc-template-react-compiler
 
+## 6.2.1
+
+### Patch Changes
+
+- 5008296: Fix SSR for all new templates
+- Updated dependencies [5008296]
+  - oc-vite-compiler@3.6.1
+  - oc-template-react@4.0.2
+
 ## 6.2.0
 
 ### Minor Changes
