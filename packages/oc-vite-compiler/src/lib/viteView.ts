@@ -189,6 +189,7 @@ async function compileView(options: ViteViewOptions & CompilerOptions) {
     .replace('oc-template-', '')
     .replace(/-/, '');
   const templateId = `oc-${shortTemplateType}Root-${componentPackage.name}`;
+  const hash = hashBuilder.fromString(wrappedBundle);
   const htmlTemplateWrapper = options.htmlTemplate || htmlTemplate;
   const templateString = htmlTemplateWrapper({
     templateId,
@@ -196,7 +197,8 @@ async function compileView(options: ViteViewOptions & CompilerOptions) {
     css: cssStyles,
     externals,
     bundle: wrappedBundle,
-    hash: bundleHash,
+    componentHash: bundleHash,
+    hash,
   });
   const wrappedTemplateString = `function(model) {
     var __toOcStaticPathUrl = function(args) {
@@ -209,7 +211,6 @@ async function compileView(options: ViteViewOptions & CompilerOptions) {
     return innerFn(model);
   }
   `;
-  const hash = hashBuilder.fromString(wrappedTemplateString);
   const view = ocViewWrapper(hash, wrappedTemplateString);
 
   await fs.unlink(viewWrapperPath);

@@ -8,8 +8,9 @@ export interface HtmlTemplate {
     name: string;
     global: string;
   }>;
-  bundle: string;
   hash: string;
+  bundle: string;
+  componentHash: string;
 }
 
 export default function htmlTemplate({
@@ -18,20 +19,32 @@ export default function htmlTemplate({
   externals,
   css,
   bundle,
+  componentHash,
   hash,
 }: HtmlTemplate) {
   return `function(model){
   oc.${templateName}Components = oc.${templateName}Components || {};
-  oc.${templateName}Components['${hash}'] = oc.${templateName}Components['${hash}'] || (${bundle});
+  oc.${templateName}Components['${componentHash}'] = oc.${templateName}Components['${componentHash}'] || (${bundle});
   if (!model) return;
   var modelHTML =  model.__html ? model.__html : '';
+  var ssr = !!modelHTML;
+  var externals = ${JSON.stringify(externals)};
   var staticPath = model.component.props._staticPath;
+  if (ssr) {
+    externals.push({
+      global: ['oc', 'components', '${hash}'],
+      url: staticPath + 'template.js',
+      name: "template"
+    });
+  }
   var props = JSON.stringify(model.component.props);
   oc = oc || {};
   oc.__${templateName}Template = oc.__${templateName}Template || { count: 0 };
   var count = oc.__${templateName}Template.count;
   var templateId = "${templateId}-" + count;
   oc.__${templateName}Template.count++;
+  var ssrCall = 'oc.components["${hash}"]({ component: { props:' + props + ' } });';
+
   return '<div id="' + templateId + '" class="${templateId}">' + modelHTML + '</div>' +
     '${css ? '<style>' + escapeCSS(css) + '</style>' : ''}' +
     '<script>' +
@@ -39,10 +52,12 @@ export default function htmlTemplate({
     'oc.cmd = oc.cmd || [];' +
     'oc.cmd.push(function(oc){' +
     '${css ? "oc.events.fire(\\'oc:cssDidMount\\', \\'" + css + "\\');" : ''}' +
-      'oc.requireSeries(${JSON.stringify(externals)}, function(){' +
+      'oc.requireSeries(' + JSON.stringify(externals) + ', function(){' +
         'var targetNode = document.getElementById("' + templateId + '");' +
         'targetNode.setAttribute("id","");' +
-        'oc.${templateName}Components["${hash}"](' + props + ', targetNode, ' + !!modelHTML  + ');' +
+        (ssr ? ssrCall : '') +
+        'oc.components["${hash}"]({ component: { props:' + props + ' } });' +
+        'oc.${templateName}Components["${componentHash}"](' + props + ', targetNode, ' + !!modelHTML  + ');' +
       '});' +
     '});' +
   '</script>'

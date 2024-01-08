@@ -1,6 +1,6 @@
 /// <reference types="oc-vite/client" />
 
-import { AnyServer, RegisteredServer, Action } from './Server';
+import { AnyServer, RegisteredServer, Action, getSettings } from './Server';
 
 type InferInput<R> = R extends Action<infer I, any, any> ? I : any;
 type InferOutput<R> = R extends Action<any, infer O, any> ? O : never;
@@ -19,7 +19,8 @@ export const serverClient: ServerClient<RegisteredServer> = new Proxy(
         const componentName = 'COMPONENT_NAME';
         const componentVersion = 'COMPONENT_VERSION';
         const baseUrl =
-          window.oc?.renderedComponents?.[componentName]?.baseUrl ?? '/';
+          getSettings().baseUrl ??
+          window.oc?.renderedComponents?.[componentName]?.baseUrl;
 
         return window.oc.getAction({
           action: prop,
