@@ -1,5 +1,11 @@
 # oc-vite-compiler
 
+## 3.6.2
+
+### Patch Changes
+
+- Fix checking server exports without making rollup angry
+
 ## 3.6.1
 
 ### Patch Changes

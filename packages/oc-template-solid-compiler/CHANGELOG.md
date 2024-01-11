@@ -1,5 +1,13 @@
 # oc-template-solid-compiler
 
+## 0.8.3
+
+### Patch Changes
+
+- Fix checking server exports without making rollup angry
+- Updated dependencies
+  - oc-vite-compiler@3.6.2
+
 ## 0.8.2
 
 ### Patch Changes

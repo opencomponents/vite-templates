@@ -1,5 +1,13 @@
 # oc-template-react-compiler
 
+## 6.2.2
+
+### Patch Changes
+
+- Fix checking server exports without making rollup angry
+- Updated dependencies
+  - oc-vite-compiler@3.6.2
+
 ## 6.2.1
 
 ### Patch Changes

@@ -1,5 +1,13 @@
 # oc-template-es6-compiler
 
+## 4.1.2
+
+### Patch Changes
+
+- Fix checking server exports without making rollup angry
+- Updated dependencies
+  - oc-vite-compiler@3.6.2
+
 ## 4.1.1
 
 ### Patch Changes

@@ -1,6 +1,7 @@
 const removeExtension = (path: string) => path.replace(/\.(j|t)sx?$/, '');
 
 export type ServerWrapper = (options: {
+  exports: string[];
   serverPath: string;
   componentName: string;
   componentVersion: string;
@@ -8,15 +9,19 @@ export type ServerWrapper = (options: {
 }) => string;
 
 const higherOrderServerTemplate: ServerWrapper = ({
+  exports,
   serverPath,
   componentName,
   componentVersion,
   bundleHashKey,
 }) => {
   return `
-import * as servers from '${removeExtension(serverPath)}';
-
-const dataProvider = servers['data'] ? servers['data'] : servers['server'].getData();
+${
+  exports.includes('server')
+    ? `import { server } from '${removeExtension(serverPath)}'
+       const dataProvider = server.getData();`
+    : `import { data as dataProvider } from '${removeExtension(serverPath)}'`
+}
 
 export const data = (context : any, callback : (error: any, data?: any) => void) => {
   dataProvider(context, (error: any, model: any) => {

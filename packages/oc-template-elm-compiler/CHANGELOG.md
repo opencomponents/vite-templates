@@ -1,5 +1,13 @@
 # oc-template-elm-compiler
 
+## 0.4.2
+
+### Patch Changes
+
+- Fix checking server exports without making rollup angry
+- Updated dependencies
+  - oc-vite-compiler@3.6.2
+
 ## 0.4.1
 
 ### Patch Changes

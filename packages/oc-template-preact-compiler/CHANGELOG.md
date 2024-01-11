@@ -1,5 +1,13 @@
 # oc-template-preact-compiler
 
+## 0.5.2
+
+### Patch Changes
+
+- Fix checking server exports without making rollup angry
+- Updated dependencies
+  - oc-vite-compiler@3.6.2
+
 ## 0.5.1
 
 ### Patch Changes

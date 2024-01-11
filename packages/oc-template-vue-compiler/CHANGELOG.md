@@ -1,5 +1,13 @@
 # oc-template-vue-compiler
 
+## 0.3.2
+
+### Patch Changes
+
+- Fix checking server exports without making rollup angry
+- Updated dependencies
+  - oc-vite-compiler@3.6.2
+
 ## 0.3.1
 
 ### Patch Changes

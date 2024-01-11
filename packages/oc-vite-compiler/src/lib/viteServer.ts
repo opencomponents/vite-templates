@@ -7,6 +7,7 @@ import hashBuilder from 'oc-hash-builder';
 import serverWrapper, { ServerWrapper } from './serverWrapper';
 import type { CompilerServerOptions } from 'oc-generic-template-compiler';
 import type { PluginOption } from 'oc-vite';
+import { init, parse } from 'es-module-lexer';
 
 interface ViteServerOptions {
   publishFileName?: string;
@@ -34,7 +35,10 @@ async function compileServer(
   const production = !!options.production;
 
   const wrapperFn = options.serverWrapper || serverWrapper;
+  await init;
+  const [, entryExports] = await parse(await fs.readFile(serverPath, 'utf-8'));
   const higherOrderServerContent = wrapperFn({
+    exports: entryExports.map((x) => x.n),
     bundleHashKey: options.compiledViewInfo.bundle.hashKey,
     serverPath,
     componentName,
