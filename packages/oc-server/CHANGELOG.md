@@ -1,5 +1,11 @@
 # oc-server
 
+## 0.4.3
+
+### Patch Changes
+
+- Add plugins interface extend
+
 ## 0.4.2
 
 ### Patch Changes

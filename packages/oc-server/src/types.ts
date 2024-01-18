@@ -28,8 +28,6 @@ export interface Env {
   name: string;
 }
 
-export interface Plugins {}
-
 export interface External {
   global: string;
   url: string;
@@ -42,13 +40,13 @@ export interface Template {
   externals: External[];
 }
 
-export interface DataContext<T = any, E = Env> {
+export interface DataContext<T = any, E = Env, P = Record<string, any>> {
   action?: string;
   acceptLanguage: AcceptLanguage[];
   baseUrl: string;
   env: E;
   params: T;
-  plugins: Plugins;
+  plugins: P;
   requestHeaders: Record<string, string>;
   requestIp: string;
   setEmptyResponse: () => void;
