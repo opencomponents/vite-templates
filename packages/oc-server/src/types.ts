@@ -40,7 +40,7 @@ export interface Template {
   externals: External[];
 }
 
-export interface DataContext<T = any, E = Env, P = Record<string, any>> {
+export interface DataContext<T = any, E = Env, P = any> {
   action?: string;
   acceptLanguage: AcceptLanguage[];
   baseUrl: string;

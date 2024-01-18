@@ -1,6 +1,6 @@
 import { DataContext, DataProvider } from './types';
 
-export type ServerContext<E = { name: string }, P = Record<string, any>> = Omit<
+export type ServerContext<E = { name: string }, P = any> = Omit<
   DataContext<any, E, P>,
   'params' | 'action' | 'setEmptyResponse'
 >;

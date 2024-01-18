@@ -1,5 +1,11 @@
 # oc-server
 
+## 0.4.4
+
+### Patch Changes
+
+- fix plugin type
+
 ## 0.4.3
 
 ### Patch Changes
