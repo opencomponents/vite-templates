@@ -1,5 +1,11 @@
 # oc-server
 
+## 0.4.5
+
+### Patch Changes
+
+- Call callback outside try catch so errors on callback itself are not catched by wrapper
+
 ## 0.4.4
 
 ### Patch Changes

@@ -48,11 +48,11 @@ export class Server<
         } else {
           res = await this.initial(params, context);
         }
-
-        cb(null, res);
       } catch (err) {
         cb(err);
+        return;
       }
+      cb(null, res);
     };
   }
 }
