@@ -33,7 +33,7 @@
     "@types/testing-library__jest-dom": "^5.14.5",
     "@vitejs/plugin-vue": "^5.0.0",
     "jsdom": "^21.1.1",
-    "oc-server": "^0.4.2",
+    "oc-server": "^0.4.5",
     "oc-template-vue-compiler": "^0.3.2",
     "typescript": "5.0.2",
     "vitest": "^0.29.7",
