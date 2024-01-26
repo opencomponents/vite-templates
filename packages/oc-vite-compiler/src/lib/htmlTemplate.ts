@@ -10,7 +10,6 @@ export interface HtmlTemplate {
   }>;
   hash: string;
   bundle: string;
-  componentHash: string;
 }
 
 export default function htmlTemplate({
@@ -19,12 +18,11 @@ export default function htmlTemplate({
   externals,
   css,
   bundle,
-  componentHash,
   hash,
 }: HtmlTemplate) {
   return `function(model){
   oc.${templateName}Components = oc.${templateName}Components || {};
-  oc.${templateName}Components['${componentHash}'] = oc.${templateName}Components['${componentHash}'] || (${bundle});
+  oc.${templateName}Components['${hash}'] = oc.${templateName}Components['${hash}'] || (${bundle});
   if (!model) return;
   var modelHTML =  model.__html ? model.__html : '';
   var ssr = !!modelHTML;
@@ -57,7 +55,7 @@ export default function htmlTemplate({
         'targetNode.setAttribute("id","");' +
         (ssr ? ssrCall : '') +
         'oc.components["${hash}"]({ component: { props:' + props + ' } });' +
-        'oc.${templateName}Components["${componentHash}"](' + props + ', targetNode, ' + !!modelHTML  + ');' +
+        'oc.${templateName}Components["${hash}"](' + props + ', targetNode, ' + !!modelHTML  + ');' +
       '});' +
     '});' +
   '</script>'

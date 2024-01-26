@@ -25,19 +25,6 @@ export interface ViteViewOptions {
 const clientName = 'clientBundle';
 const removeExtension = (path: string) => path.replace(/\.(t|j)sx?$/, '');
 
-const partition = <T>(array: T[], predicate: (x: T) => boolean): [T[], T[]] => {
-  const matches = [];
-  const rest = [];
-  for (const element of array) {
-    if (predicate(element)) {
-      matches.push(element);
-    } else {
-      rest.push(element);
-    }
-  }
-  return [matches, rest];
-};
-
 const defaultViewWrapper = ({ viewPath }: { viewPath: string }) =>
   `import View from "${removeExtension(viewPath)}";
 
@@ -95,11 +82,80 @@ async function compileView(options: ViteViewOptions & CompilerOptions) {
       (p: any) => !pluginsNames.includes(p?.name)
     ) ?? [];
 
+  const otherAssets: vite.Rollup.OutputAsset[] = [];
+  let hash = '';
+  const wrapperPlugin: vite.PluginOption = {
+    name: 'WrapEntry',
+    apply: 'build',
+    enforce: 'post',
+    generateBundle(_opts, bundle) {
+      const mainBundleName = `${clientName}.iife.js`;
+      const main = bundle[mainBundleName];
+      if (main.type !== 'chunk') {
+        throw new Error('Error compiling the bundle.');
+      }
+
+      let cssStyles = '';
+      for (const [key, out] of Object.entries(bundle)) {
+        if (key === mainBundleName) continue;
+        if (out.type === 'asset') {
+          if (out.fileName.endsWith('.css')) {
+            const source =
+              typeof out.source === 'string'
+                ? out.source
+                : new TextDecoder('utf-8').decode(out.source);
+            cssStyles += `${source
+              .replace(/\r?\n|\t/g, '')
+              .replace(/'/g, '"')}`;
+          } else {
+            otherAssets.push(out);
+          }
+        }
+      }
+
+      const iife = `
+           (function() {
+            ${main.code}
+            return ${clientName};
+           })()`;
+
+      const shortTemplateType = options.componentPackage.oc.files.template.type
+        .replace('oc-template-', '')
+        .replace(/-/, '');
+      const templateId = `oc-${shortTemplateType}Root-${componentPackage.name}`;
+      hash = hashBuilder.fromString(iife);
+      const htmlTemplateWrapper = options.htmlTemplate || htmlTemplate;
+      const templateString = htmlTemplateWrapper({
+        templateId,
+        templateName: shortTemplateType,
+        css: cssStyles,
+        externals,
+        bundle: iife,
+        hash,
+      });
+      const wrappedTemplateString = `function(model) {
+           var __toOcStaticPathUrl = function(args) {
+             return model.component.props._staticPath + '${staticFolder}/' + args;
+           } 
+           const { _staticPath, _baseUrl, _componentName, _componentVersion, ...rest } = model.component.props;
+           var __$$oc_initialData__ = rest;
+           var __$$oc_Settings__ = {id: model.id, staticPath: _staticPath, baseUrl: _baseUrl, name: _componentName, version: _componentVersion};
+           var innerFn = ${templateString};
+           return innerFn(model);
+         }
+         `;
+      const view = ocViewWrapper(hash, wrappedTemplateString);
+
+      main.code = view;
+    },
+  };
+
   const result = await vite.build({
     appType: 'custom',
     root: componentPath,
     mode: production ? 'production' : 'development',
     plugins: [
+      wrapperPlugin,
       {
         name: 'OcServerRuntime',
         enforce: 'pre',
@@ -137,7 +193,12 @@ async function compileView(options: ViteViewOptions & CompilerOptions) {
       // Source map doesn't work properly because the bundle gets wrapped into more code and the
       // lines don't match anymore (would be nice to fix this somehow)
       sourcemap: false,
-      lib: { entry: viewWrapperPath, formats: ['iife'], name: clientName },
+      lib: {
+        entry: viewWrapperPath,
+        formats: ['iife'],
+        name: clientName,
+        fileName: clientName,
+      },
       write: false,
       minify: production,
       rollupOptions: {
@@ -167,55 +228,10 @@ async function compileView(options: ViteViewOptions & CompilerOptions) {
       (x as Rollup.OutputChunk)?.facadeModuleId?.endsWith(viewWrapperName)
     )! as Rollup.OutputChunk
   ).code;
-  const [cssAssets, otherAssets] = partition(
-    out.output.filter((x) => x.type === 'asset'),
-    (x) => x.fileName.endsWith('.css')
-  );
-  const cssStyles = cssAssets
-    .map(
-      (x) =>
-        ((x as Rollup.OutputAsset).source as string).replace(/\r?\n|\t/g, '') ??
-        ''
-    )
-    .join(' ')
-    .replace(/'/g, '"');
-  const bundleHash = hashBuilder.fromString(bundle);
-  const wrappedBundle = `(function() {
-    ${bundle}
-    return ${clientName};
-  })()`;
-
-  const shortTemplateType = options.componentPackage.oc.files.template.type
-    .replace('oc-template-', '')
-    .replace(/-/, '');
-  const templateId = `oc-${shortTemplateType}Root-${componentPackage.name}`;
-  const hash = hashBuilder.fromString(wrappedBundle);
-  const htmlTemplateWrapper = options.htmlTemplate || htmlTemplate;
-  const templateString = htmlTemplateWrapper({
-    templateId,
-    templateName: shortTemplateType,
-    css: cssStyles,
-    externals,
-    bundle: wrappedBundle,
-    componentHash: bundleHash,
-    hash,
-  });
-  const wrappedTemplateString = `function(model) {
-    var __toOcStaticPathUrl = function(args) {
-      return model.component.props._staticPath + '${staticFolder}/' + args;
-    } 
-    const { _staticPath, _baseUrl, _componentName, _componentVersion, ...rest } = model.component.props;
-    var __$$oc_initialData__ = rest;
-    var __$$oc_Settings__ = {id: model.id, staticPath: _staticPath, baseUrl: _baseUrl, name: _componentName, version: _componentVersion};
-    var innerFn = ${templateString};
-    return innerFn(model);
-  }
-  `;
-  const view = ocViewWrapper(hash, wrappedTemplateString);
 
   await fs.unlink(viewWrapperPath);
   await fs.mkdir(publishPath, { recursive: true });
-  await fs.writeFile(path.join(publishPath, publishFileName), view);
+  await fs.writeFile(path.join(publishPath, publishFileName), bundle);
   if (staticFolder) {
     for (const asset of otherAssets) {
       // asset.fileName could have paths like assets/file.js
@@ -235,7 +251,7 @@ async function compileView(options: ViteViewOptions & CompilerOptions) {
       hashKey: hash,
       src: publishFileName,
     },
-    bundle: { hashKey: bundleHash },
+    bundle: { hashKey: hash },
   };
 }
 

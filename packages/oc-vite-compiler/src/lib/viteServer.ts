@@ -69,29 +69,7 @@ async function compileServer(
       appType: 'custom',
       root: componentPath,
       mode: production ? 'production' : 'development',
-      plugins: [
-        {
-          name: 'clean-data-export',
-          enforce: 'pre',
-          load(id) {
-            if (id === serverPath) {
-              let code = require('fs').readFileSync(id, 'utf-8');
-              const exportCount = (code.match(/export/g) || []).length;
-              const serverExportPattern =
-                /export\s+(const|function|async\s+function)\s+server\b/;
-              if (exportCount === 1 && serverExportPattern.test(code)) {
-                code = `${code}
-                export const data = null;
-              `;
-              }
-
-              return code;
-            }
-          },
-        },
-        ...plugins,
-        ...basePlugins,
-      ],
+      plugins: [...plugins, ...basePlugins],
       logLevel: options.verbose ? 'info' : 'silent',
       build: {
         lib: { entry: higherOrderServerPath, formats: ['cjs'] },
