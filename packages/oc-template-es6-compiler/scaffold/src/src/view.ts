@@ -7,7 +7,7 @@ const onRender = (cb: (element: HTMLElement) => void) => {
   const { id } = getSettings();
   window.oc.events.on('oc:rendered', (e, data) => {
     if (data.id === id) {
-      cb(document.querySelector(`[id="${id}"]`)!);
+      cb(data.element);
     }
   });
 };
