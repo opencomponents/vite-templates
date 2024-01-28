@@ -1,5 +1,13 @@
 # oc-template-elm-compiler
 
+## 0.4.3
+
+### Patch Changes
+
+- Add element type to oc:rendered event
+- Updated dependencies
+  - oc-vite-compiler@3.6.3
+
 ## 0.4.2
 
 ### Patch Changes

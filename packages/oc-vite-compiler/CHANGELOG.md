@@ -1,5 +1,13 @@
 # oc-vite-compiler
 
+## 3.6.3
+
+### Patch Changes
+
+- Add element type to oc:rendered event
+- Updated dependencies
+  - oc-vite@5.0.14
+
 ## 3.6.2
 
 ### Patch Changes

@@ -1,5 +1,13 @@
 # oc-template-react-compiler
 
+## 6.2.3
+
+### Patch Changes
+
+- Add element type to oc:rendered event
+- Updated dependencies
+  - oc-vite-compiler@3.6.3
+
 ## 6.2.2
 
 ### Patch Changes

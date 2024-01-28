@@ -1,5 +1,13 @@
 # oc-template-solid-compiler
 
+## 0.8.4
+
+### Patch Changes
+
+- Add element type to oc:rendered event
+- Updated dependencies
+  - oc-vite-compiler@3.6.3
+
 ## 0.8.3
 
 ### Patch Changes

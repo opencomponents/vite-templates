@@ -1,5 +1,13 @@
 # oc-template-preact-compiler
 
+## 0.5.3
+
+### Patch Changes
+
+- Add element type to oc:rendered event
+- Updated dependencies
+  - oc-vite-compiler@3.6.3
+
 ## 0.5.2
 
 ### Patch Changes

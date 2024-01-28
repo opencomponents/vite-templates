@@ -1,5 +1,13 @@
 # oc-template-vue-compiler
 
+## 0.3.3
+
+### Patch Changes
+
+- Add element type to oc:rendered event
+- Updated dependencies
+  - oc-vite-compiler@3.6.3
+
 ## 0.3.2
 
 ### Patch Changes

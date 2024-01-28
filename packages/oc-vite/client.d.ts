@@ -30,6 +30,7 @@ interface OC {
             baseUrl: string;
             html: string;
             id: string;
+            element: HTMLElement;
             key: string;
             name: string;
             version: string;

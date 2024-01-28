@@ -1,5 +1,13 @@
 # oc-template-es6-compiler
 
+## 4.1.3
+
+### Patch Changes
+
+- Add element type to oc:rendered event
+- Updated dependencies
+  - oc-vite-compiler@3.6.3
+
 ## 4.1.2
 
 ### Patch Changes
