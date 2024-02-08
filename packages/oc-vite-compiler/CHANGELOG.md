@@ -1,5 +1,16 @@
 # oc-vite-compiler
 
+## 3.7.0
+
+### Minor Changes
+
+- Update to vite 5.1
+
+### Patch Changes
+
+- Updated dependencies
+  - oc-vite@5.1.0
+
 ## 3.6.3
 
 ### Patch Changes

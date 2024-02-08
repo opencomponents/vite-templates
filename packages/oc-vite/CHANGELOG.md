@@ -1,5 +1,11 @@
 # oc-vite
 
+## 5.1.0
+
+### Minor Changes
+
+- Update to vite 5.1
+
 ## 5.0.14
 
 ### Patch Changes

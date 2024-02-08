@@ -1,5 +1,16 @@
 # oc-template-solid-compiler
 
+## 0.9.0
+
+### Minor Changes
+
+- Update to vite 5.1
+
+### Patch Changes
+
+- Updated dependencies
+  - oc-vite-compiler@3.7.0
+
 ## 0.8.4
 
 ### Patch Changes

@@ -1,5 +1,16 @@
 # oc-template-react-compiler
 
+## 6.3.0
+
+### Minor Changes
+
+- Update to vite 5.1
+
+### Patch Changes
+
+- Updated dependencies
+  - oc-vite-compiler@3.7.0
+
 ## 6.2.3
 
 ### Patch Changes

@@ -44,6 +44,14 @@ async function initialize(component, clean = false) {
     }
   );
   fs.cpSync(
+    '../packages/oc-vite/dist',
+    `./build/base-component-${component}/node_modules/oc-vite/dist`,
+    {
+      force: true,
+      recursive: true,
+    }
+  );
+  fs.cpSync(
     '../packages/oc-server/dist',
     `./build/base-component-${component}/node_modules/oc-server/dist`,
     {

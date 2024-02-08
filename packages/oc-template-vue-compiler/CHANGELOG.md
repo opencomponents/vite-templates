@@ -1,5 +1,16 @@
 # oc-template-vue-compiler
 
+## 0.4.0
+
+### Minor Changes
+
+- Update to vite 5.1
+
+### Patch Changes
+
+- Updated dependencies
+  - oc-vite-compiler@3.7.0
+
 ## 0.3.3
 
 ### Patch Changes
