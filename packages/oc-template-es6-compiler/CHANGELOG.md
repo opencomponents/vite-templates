@@ -1,5 +1,13 @@
 # oc-template-es6-compiler
 
+## 4.2.1
+
+### Patch Changes
+
+- 7e41a55: Ignore cjs warnings
+- Updated dependencies [7e41a55]
+  - oc-vite-compiler@3.7.1
+
 ## 4.2.0
 
 ### Minor Changes

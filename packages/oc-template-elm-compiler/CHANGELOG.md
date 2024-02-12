@@ -1,5 +1,13 @@
 # oc-template-elm-compiler
 
+## 0.5.1
+
+### Patch Changes
+
+- 7e41a55: Ignore cjs warnings
+- Updated dependencies [7e41a55]
+  - oc-vite-compiler@3.7.1
+
 ## 0.5.0
 
 ### Minor Changes

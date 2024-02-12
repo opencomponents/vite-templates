@@ -1,5 +1,13 @@
 # oc-template-react-compiler
 
+## 6.3.1
+
+### Patch Changes
+
+- 7e41a55: Ignore cjs warnings
+- Updated dependencies [7e41a55]
+  - oc-vite-compiler@3.7.1
+
 ## 6.3.0
 
 ### Minor Changes

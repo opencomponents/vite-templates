@@ -1,5 +1,13 @@
 # oc-template-solid-compiler
 
+## 0.9.1
+
+### Patch Changes
+
+- 7e41a55: Ignore cjs warnings
+- Updated dependencies [7e41a55]
+  - oc-vite-compiler@3.7.1
+
 ## 0.9.0
 
 ### Minor Changes
