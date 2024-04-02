@@ -1,5 +1,13 @@
 # oc-template-solid-compiler
 
+## 0.9.2
+
+### Patch Changes
+
+- Fix initial data closure by always recreating component closure
+- Updated dependencies
+  - oc-vite-compiler@3.7.2
+
 ## 0.9.1
 
 ### Patch Changes

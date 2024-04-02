@@ -1,5 +1,13 @@
 # oc-template-vue-compiler
 
+## 0.4.2
+
+### Patch Changes
+
+- Fix initial data closure by always recreating component closure
+- Updated dependencies
+  - oc-vite-compiler@3.7.2
+
 ## 0.4.1
 
 ### Patch Changes

@@ -65,17 +65,17 @@ async function start(clean = false) {
   if (clean) {
     fs.rmSync('./build', { recursive: true, force: true });
   }
+  const components = ['react', 'es6', 'solid', 'vue' /*'preact', 'elm' */];
+
   console.log('Initializing components');
-  await initialize('react', clean);
-  // initialize("preact", clean);
-  await initialize('es6', clean);
-  await initialize('solid', clean);
-  await initialize('vue', clean);
-  await initialize('elm', clean);
+  for (const component of components) {
+    await initialize(component, clean);
+  }
 
   console.log('Starting dev server');
   cli.dev(
     {
+      components: components.map((c) => `base-component-${c}`),
       dirPath: './build',
       logger: {
         ok: console.log,

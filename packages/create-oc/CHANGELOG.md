@@ -1,5 +1,11 @@
 # create-oc
 
+## 0.0.24
+
+### Patch Changes
+
+- Fix initial data closure by always recreating component closure
+
 ## 0.0.12
 
 ### Patch Changes
