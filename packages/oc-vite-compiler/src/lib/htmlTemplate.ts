@@ -22,7 +22,7 @@ export default function htmlTemplate({
 }: HtmlTemplate) {
   return `function(model){
   oc.${templateName}Components = oc.${templateName}Components || {};
-  oc.${templateName}Components['${hash}'] = oc.${templateName}Components['${hash}'] || (${bundle});
+  oc.${templateName}Components['${hash}'] = (${bundle});
   if (!model) return;
   var modelHTML =  model.__html ? model.__html : '';
   var ssr = !!modelHTML;
