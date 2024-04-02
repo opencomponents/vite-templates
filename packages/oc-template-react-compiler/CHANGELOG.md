@@ -1,5 +1,13 @@
 # oc-template-react-compiler
 
+## 6.3.2
+
+### Patch Changes
+
+- Fix initial data closure by always recreating component closure
+- Updated dependencies
+  - oc-vite-compiler@3.7.2
+
 ## 6.3.1
 
 ### Patch Changes

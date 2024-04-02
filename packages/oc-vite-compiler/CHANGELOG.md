@@ -1,5 +1,11 @@
 # oc-vite-compiler
 
+## 3.7.2
+
+### Patch Changes
+
+- Fix initial data closure by always recreating component closure
+
 ## 3.7.1
 
 ### Patch Changes

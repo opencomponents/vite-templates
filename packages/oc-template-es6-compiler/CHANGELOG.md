@@ -1,5 +1,13 @@
 # oc-template-es6-compiler
 
+## 4.2.2
+
+### Patch Changes
+
+- Fix initial data closure by always recreating component closure
+- Updated dependencies
+  - oc-vite-compiler@3.7.2
+
 ## 4.2.1
 
 ### Patch Changes
