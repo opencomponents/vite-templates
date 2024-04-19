@@ -47,7 +47,7 @@ function checkPackages(pkgJson, vitePkgJson) {
   }
 
   if (differences.length) {
-    throw new Error(JSON.stringify(differences));
+    throw new Error(JSON.stringify(differences, null, 2));
   }
 }
 
