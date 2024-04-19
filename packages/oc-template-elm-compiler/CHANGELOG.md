@@ -1,5 +1,18 @@
 # oc-template-elm-compiler
 
+## 0.6.0
+
+### Minor Changes
+
+- abdda37: Update vite
+
+### Patch Changes
+
+- f64af50: Fix sending arrays or non-objects on actions
+- Updated dependencies [f64af50]
+- Updated dependencies [abdda37]
+  - oc-vite-compiler@3.8.0
+
 ## 0.5.2
 
 ### Patch Changes

@@ -1,6 +1,6 @@
 {
   "name": "oc-vite-compiler",
-  "version": "3.7.2",
+  "version": "3.8.0",
   "description": "OC-Vite-Compiler",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -35,7 +35,7 @@
     "oc-hash-builder": "^1.0.5",
     "oc-statics-compiler": "^2.1.1",
     "oc-view-wrapper": "^1.0.6",
-    "oc-vite": "5.1.0",
+    "oc-vite": "5.2.9",
     "vite": "5.0.8",
     "vite-plugin-environment": "^1.1.3"
   },
