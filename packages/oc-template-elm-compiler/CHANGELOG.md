@@ -1,5 +1,13 @@
 # oc-template-elm-compiler
 
+## 0.6.1
+
+### Patch Changes
+
+- Update vite to oc-vite
+- Updated dependencies
+  - oc-vite-compiler@3.8.1
+
 ## 0.6.0
 
 ### Minor Changes

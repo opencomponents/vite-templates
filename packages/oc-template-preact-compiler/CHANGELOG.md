@@ -1,5 +1,13 @@
 # oc-template-preact-compiler
 
+## 0.7.1
+
+### Patch Changes
+
+- Update vite to oc-vite
+- Updated dependencies
+  - oc-vite-compiler@3.8.1
+
 ## 0.7.0
 
 ### Minor Changes

@@ -1,5 +1,11 @@
 # oc-vite-compiler
 
+## 3.8.1
+
+### Patch Changes
+
+- Update vite to oc-vite
+
 ## 3.8.0
 
 ### Minor Changes

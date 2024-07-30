@@ -1,5 +1,13 @@
 # oc-template-vue-compiler
 
+## 0.5.1
+
+### Patch Changes
+
+- Update vite to oc-vite
+- Updated dependencies
+  - oc-vite-compiler@3.8.1
+
 ## 0.5.0
 
 ### Minor Changes

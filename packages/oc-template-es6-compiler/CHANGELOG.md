@@ -1,5 +1,13 @@
 # oc-template-es6-compiler
 
+## 4.3.1
+
+### Patch Changes
+
+- Update vite to oc-vite
+- Updated dependencies
+  - oc-vite-compiler@3.8.1
+
 ## 4.3.0
 
 ### Minor Changes
