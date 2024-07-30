@@ -14,20 +14,38 @@ export type Action<I, O, E, P> = (
 ) => Promise<O> | O;
 type AnyAction = Action<any, any, any, any>;
 
+type IsGeneralStringName<T> = T extends { name: infer N }
+  ? N extends string
+    ? string extends N
+      ? true
+      : false
+    : false
+  : false;
+
 export class Server<
   E = { name: string },
-  P = Record<string, unknown>,
+  P = unknown,
   A extends Record<string, AnyAction> = {},
   InitialInput = any,
   InitialOutput = any
 > {
   constructor() {}
 
-  defineEnv<Env>(): Server<Env, P, A, InitialInput, InitialOutput> {
+  defineEnv<Env>(): P extends Record<string, any>
+    ? Omit<
+        Server<Env, P, A, InitialInput, InitialOutput>,
+        'defineEnv' | 'definePlugins'
+      >
+    : Omit<Server<Env, P, A, InitialInput, InitialOutput>, 'defineEnv'> {
     return this as any;
   }
 
-  definePlugins<Plugins>(): Server<E, Plugins, A, InitialInput, InitialOutput> {
+  definePlugins<Plugins>(): IsGeneralStringName<E> extends true
+    ? Omit<Server<E, Plugins, A, InitialInput, InitialOutput>, 'definePlugins'>
+    : Omit<
+        Server<E, Plugins, A, InitialInput, InitialOutput>,
+        'definePlugins' | 'defineEnv'
+      > {
     return this as any;
   }
 
