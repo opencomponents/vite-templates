@@ -1,17 +1,44 @@
 import { DataContext, DataProvider } from './types';
 
+type Prettify<T> = {
+  [K in keyof T]: T[K];
+} & {};
+
 export type ServerContext<E = { name: string }, P = any> = Omit<
   DataContext<any, E, P>,
   'params' | 'action' | 'setEmptyResponse'
 >;
-export type Action<I, O, E> = (
+export type Action<I, O, E, P> = (
   params: I,
-  ctx: ServerContext<E>
+  ctx: ServerContext<E, P>
 ) => Promise<O> | O;
-type AnyAction = Action<any, any, any>;
+type AnyAction = Action<any, any, any, any>;
 
 export class Server<
+  E = { name: string },
+  P = Record<string, unknown>,
+  A extends Record<string, AnyAction> = {},
+  InitialInput = any,
+  InitialOutput = any
+> {
+  constructor() {}
+
+  defineEnv<Env>(): Server<Env, P, A, InitialInput, InitialOutput> {
+    return this as any;
+  }
+
+  definePlugins<Plugins>(): Server<E, Plugins, A, InitialInput, InitialOutput> {
+    return this as any;
+  }
+
+  handler<I, O>(action: Action<I, O, E, P>): HandledServer<E, P, A, I, O> {
+    return new HandledServer<E, P, A, I, O>(action);
+  }
+}
+
+class HandledServer<
   E,
+  P,
   A extends Record<string, AnyAction> = {},
   InitialInput = any,
   InitialOutput = any
@@ -19,15 +46,16 @@ export class Server<
   public readonly actions: A = {} as any;
 
   constructor(
-    public readonly initial: Action<InitialInput, InitialOutput, E>
+    public readonly initial: Action<InitialInput, InitialOutput, E, P>
   ) {}
 
   action<ActionName extends string, I, O>(
     name: ActionName,
-    action: Action<I, O, E>
-  ): Server<
+    action: Action<I, O, E, P>
+  ): HandledServer<
     E,
-    A & Record<ActionName, Action<I, O, E>>,
+    P,
+    Prettify<A & Record<ActionName, Action<I, O, E, P>>>,
     InitialInput,
     InitialOutput
   > {
@@ -46,7 +74,7 @@ export class Server<
           const data = params?.data ?? params;
           res = await this.actions[actionName](data, context);
         } else {
-          res = await this.initial(params, context);
+          res = await this.initial!(params, context);
         }
       } catch (err) {
         cb(err);
@@ -61,7 +89,7 @@ export interface Register {
   // server: Server
 }
 
-export type AnyServer = Server<any, any>;
+export type AnyServer = HandledServer<any, any>;
 
 export type RegisteredServer = Register extends {
   server: infer TServer extends AnyServer;
@@ -69,7 +97,7 @@ export type RegisteredServer = Register extends {
   ? TServer
   : AnyServer;
 
-type GetInitialData<TServer extends AnyServer> = TServer extends Server<
+type GetInitialData<TServer extends AnyServer> = TServer extends HandledServer<
   any,
   any,
   any,

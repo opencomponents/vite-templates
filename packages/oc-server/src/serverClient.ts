@@ -2,8 +2,8 @@
 
 import { AnyServer, RegisteredServer, Action, getSettings } from './Server';
 
-type InferInput<R> = R extends Action<infer I, any, any> ? I : any;
-type InferOutput<R> = R extends Action<any, infer O, any> ? O : never;
+type InferInput<R> = R extends Action<infer I, any, any, any> ? I : any;
+type InferOutput<R> = R extends Action<any, infer O, any, any> ? O : never;
 
 type ServerClient<TServer extends AnyServer> = {
   readonly [Property in keyof TServer['actions']]: (
