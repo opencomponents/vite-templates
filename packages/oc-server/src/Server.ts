@@ -3,6 +3,8 @@ import { DataContext, DataProvider } from './types';
 type Prettify<T> = {
   [K in keyof T]: T[K];
 } & {};
+type IfAny<T, Y, N> = 0 extends 1 & T ? Y : N;
+type IsAny<T> = IfAny<T, true, never>;
 
 export type ServerContext<E = { name: string }, P = any, S = any> = Omit<
   DataContext<any, E, P, S>,
@@ -42,7 +44,16 @@ export class Server<
 
   middleware<I, O>(
     action: Action<I, O, E, P, unknown>
-  ): Server<E, P, A, InitialInput, InitialOutput, I, O> {
+  ): Omit<
+    Server<E, P, A, InitialInput, InitialOutput, I, O>,
+    P extends Record<string, unknown>
+      ? IsGeneralStringName<E> extends false
+        ? 'middleware' | 'definePlugins' | 'defineEnv'
+        : 'middleware' | 'definePlugins'
+      : IsGeneralStringName<E> extends false
+      ? 'middleware' | 'defineEnv'
+      : 'middleware'
+  > {
     this._middleware = action as any;
     return this as any;
   }
