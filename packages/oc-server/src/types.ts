@@ -40,7 +40,7 @@ export interface Template {
   externals: External[];
 }
 
-export interface DataContext<T = any, E = Env, P = any> {
+export type DataContext<T = any, E = Env, P = any, S = unknown> = {
   action?: string;
   acceptLanguage: AcceptLanguage[];
   baseUrl: string;
@@ -53,7 +53,7 @@ export interface DataContext<T = any, E = Env, P = any> {
   setHeader: (header: string, value: string) => void;
   staticPath: string;
   templates: Template[];
-}
+} & (S extends Record<string, unknown> ? { state: S } : {});
 
 type Callback<D, E = Error> = (error: E | null, data?: D) => void;
 

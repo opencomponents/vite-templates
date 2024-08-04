@@ -4,15 +4,15 @@ type Prettify<T> = {
   [K in keyof T]: T[K];
 } & {};
 
-export type ServerContext<E = { name: string }, P = any> = Omit<
-  DataContext<any, E, P>,
+export type ServerContext<E = { name: string }, P = any, S = any> = Omit<
+  DataContext<any, E, P, S>,
   'params' | 'action' | 'setEmptyResponse'
 >;
-export type Action<I, O, E, P> = (
+export type Action<I, O, E, P, S> = (
   params: I,
-  ctx: ServerContext<E, P>
+  ctx: ServerContext<E, P, S>
 ) => Promise<O> | O;
-type AnyAction = Action<any, any, any, any>;
+type AnyAction = Action<any, any, any, any, any>;
 
 type IsGeneralStringName<T> = T extends { name: infer N }
   ? N extends string
@@ -27,9 +27,25 @@ export class Server<
   P = unknown,
   A extends Record<string, AnyAction> = {},
   InitialInput = any,
-  InitialOutput = any
+  InitialOutput = any,
+  MiddlewareInput = any,
+  MiddlewareOutput = any
 > {
+  private _middleware: Action<
+    MiddlewareInput,
+    MiddlewareOutput,
+    E,
+    P,
+    unknown
+  > | null = null;
   constructor() {}
+
+  middleware<I, O>(
+    action: Action<I, O, E, P, unknown>
+  ): Server<E, P, A, InitialInput, InitialOutput, I, O> {
+    this._middleware = action as any;
+    return this as any;
+  }
 
   defineEnv<Env>(): P extends Record<string, any>
     ? Omit<
@@ -49,8 +65,13 @@ export class Server<
     return this as any;
   }
 
-  handler<I, O>(action: Action<I, O, E, P>): HandledServer<E, P, A, I, O> {
-    return new HandledServer<E, P, A, I, O>(action);
+  handler<I, O>(
+    action: Action<I, O, E, P, MiddlewareOutput>
+  ): HandledServer<E, P, A, I, O, MiddlewareInput, MiddlewareOutput> {
+    return new HandledServer<E, P, A, I, O, MiddlewareInput, MiddlewareOutput>(
+      action,
+      this._middleware
+    );
   }
 }
 
@@ -59,23 +80,40 @@ class HandledServer<
   P,
   A extends Record<string, AnyAction> = {},
   InitialInput = any,
-  InitialOutput = any
+  InitialOutput = any,
+  MiddlewareInput = any,
+  MiddlewareOutput = any
 > {
   public readonly actions: A = {} as any;
 
   constructor(
-    public readonly initial: Action<InitialInput, InitialOutput, E, P>
+    public readonly initial: Action<
+      InitialInput,
+      InitialOutput,
+      E,
+      P,
+      MiddlewareOutput
+    >,
+    private readonly _middleware: Action<
+      MiddlewareInput,
+      MiddlewareOutput,
+      E,
+      P,
+      unknown
+    > | null = null
   ) {}
 
   action<ActionName extends string, I, O>(
     name: ActionName,
-    action: Action<I, O, E, P>
+    action: Action<I, O, E, P, MiddlewareOutput>
   ): HandledServer<
     E,
     P,
-    Prettify<A & Record<ActionName, Action<I, O, E, P>>>,
+    Prettify<A & Record<ActionName, Action<I, O, E, P, MiddlewareOutput>>>,
     InitialInput,
-    InitialOutput
+    InitialOutput,
+    MiddlewareInput,
+    MiddlewareOutput
   > {
     this.actions[name] = action as any;
     return this;
@@ -88,11 +126,16 @@ class HandledServer<
     ) => {
       let res: any;
       try {
+        if (this._middleware) {
+          const data = await this._middleware(params, context);
+          params.state = data;
+        }
+
         if (actionName && this.actions[actionName]) {
           const data = params?.data ?? params;
           res = await this.actions[actionName](data, context);
         } else {
-          res = await this.initial!(params, context);
+          res = await this.initial!(params, context as any);
         }
       } catch (err) {
         cb(err);
@@ -115,7 +158,10 @@ export type RegisteredServer = Register extends {
   ? TServer
   : AnyServer;
 
+export type GetMiddlewareInput<TServer extends AnyServer> =
+  TServer extends HandledServer<any, any, any, any, any, infer I> ? I : any;
 type GetInitialData<TServer extends AnyServer> = TServer extends HandledServer<
+  any,
   any,
   any,
   any,
