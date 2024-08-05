@@ -54,7 +54,7 @@ export default function htmlTemplate({
         'var targetNode = document.getElementById("' + templateId + '");' +
         'targetNode.setAttribute("id","");' +
         (ssr ? ssrCall : '') +
-        'oc.components["${hash}"]({ component: { props:' + props + ' } });' +
+        'oc.components["${hash}"]({ id: ' + model.id + ', component: { props:' + props + ' } });' +
         'oc.${templateName}Components["${hash}"](' + props + ', targetNode, ' + !!modelHTML  + ');' +
       '});' +
     '});' +
