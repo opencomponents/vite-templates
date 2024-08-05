@@ -1,5 +1,11 @@
 # oc-template-vue-compiler
 
+## 0.5.3
+
+### Patch Changes
+
+- Update templates
+
 ## 0.5.2
 
 ### Patch Changes

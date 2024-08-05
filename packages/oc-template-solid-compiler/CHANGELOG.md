@@ -1,5 +1,11 @@
 # oc-template-solid-compiler
 
+## 0.10.3
+
+### Patch Changes
+
+- Update templates
+
 ## 0.10.2
 
 ### Patch Changes
