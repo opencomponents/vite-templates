@@ -3,8 +3,6 @@ import { DataContext, DataProvider } from './types';
 type Prettify<T> = {
   [K in keyof T]: T[K];
 } & {};
-type IfAny<T, Y, N> = 0 extends 1 & T ? Y : N;
-type IsAny<T> = IfAny<T, true, never>;
 
 export type ServerContext<E = { name: string }, P = any, S = any> = Omit<
   DataContext<any, E, P, S>,
