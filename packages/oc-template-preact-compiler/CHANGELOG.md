@@ -1,5 +1,13 @@
 # oc-template-preact-compiler
 
+## 0.7.2
+
+### Patch Changes
+
+- Fix passing id when rerender
+- Updated dependencies
+  - oc-vite-compiler@3.8.2
+
 ## 0.7.1
 
 ### Patch Changes
