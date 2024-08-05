@@ -139,7 +139,7 @@ class HandledServer<
       try {
         if (this._middleware) {
           const data = await this._middleware(params, context);
-          params.state = data;
+          (context as any).state = data;
         }
 
         if (actionName && this.actions[actionName]) {
