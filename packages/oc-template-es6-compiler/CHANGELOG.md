@@ -1,5 +1,13 @@
 # oc-template-es6-compiler
 
+## 4.3.2
+
+### Patch Changes
+
+- Fix passing id when rerender
+- Updated dependencies
+  - oc-vite-compiler@3.8.2
+
 ## 4.3.1
 
 ### Patch Changes

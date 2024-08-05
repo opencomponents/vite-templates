@@ -1,5 +1,13 @@
 # oc-template-react-compiler
 
+## 6.4.2
+
+### Patch Changes
+
+- Fix passing id when rerender
+- Updated dependencies
+  - oc-vite-compiler@3.8.2
+
 ## 6.4.1
 
 ### Patch Changes

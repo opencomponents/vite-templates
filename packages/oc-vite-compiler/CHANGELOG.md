@@ -1,5 +1,11 @@
 # oc-vite-compiler
 
+## 3.8.2
+
+### Patch Changes
+
+- Fix passing id when rerender
+
 ## 3.8.1
 
 ### Patch Changes

@@ -1,5 +1,13 @@
 # oc-template-solid-compiler
 
+## 0.10.2
+
+### Patch Changes
+
+- Fix passing id when rerender
+- Updated dependencies
+  - oc-vite-compiler@3.8.2
+
 ## 0.10.1
 
 ### Patch Changes
