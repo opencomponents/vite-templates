@@ -1,5 +1,11 @@
 # oc-template-elm-compiler
 
+## 0.6.3
+
+### Patch Changes
+
+- Update templates
+
 ## 0.6.2
 
 ### Patch Changes
