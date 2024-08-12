@@ -1,13 +1,30 @@
 /// <reference types="oc-vite/client" />
 
-import { AnyServer, RegisteredServer, Action, getSettings } from './Server';
+import {
+  AnyServer,
+  RegisteredServer,
+  Action,
+  getSettings,
+  GetMiddlewareInput,
+} from './Server';
 
-type InferInput<R> = R extends Action<infer I, any, any> ? I : any;
-type InferOutput<R> = R extends Action<any, infer O, any> ? O : never;
+type Prettify<T> = {
+  [K in keyof T]: T[K];
+} & {};
+type IfAny<T, Y, N> = 0 extends 1 & T ? Y : N;
+type IsAny<T> = IfAny<T, true, never>;
+
+type InferInput<R> = R extends Action<infer I, any, any, any, any> ? I : any;
+type InferOutput<R> = R extends Action<any, infer O, any, any, any> ? O : never;
 
 type ServerClient<TServer extends AnyServer> = {
   readonly [Property in keyof TServer['actions']]: (
-    input: InferInput<TServer['actions'][Property]>
+    input: Prettify<
+      InferInput<TServer['actions'][Property]> &
+        (IsAny<GetMiddlewareInput<TServer>> extends never
+          ? GetMiddlewareInput<TServer>
+          : {})
+    >
   ) => Promise<InferOutput<TServer['actions'][Property]>>;
 };
 
