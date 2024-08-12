@@ -1,5 +1,11 @@
 # oc-server
 
+## 1.0.0
+
+### Major Changes
+
+- Change API to correctly type all parts
+
 ## 0.4.5
 
 ### Patch Changes
