@@ -1,5 +1,11 @@
 # oc-template-react-compiler
 
+## 6.4.4
+
+### Patch Changes
+
+- Upgrade react plugin
+
 ## 6.4.3
 
 ### Patch Changes
