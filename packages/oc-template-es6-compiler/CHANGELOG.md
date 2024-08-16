@@ -1,5 +1,11 @@
 # oc-template-es6-compiler
 
+## 4.3.5
+
+### Patch Changes
+
+- Fix plugins in dev
+
 ## 4.3.4
 
 ### Patch Changes

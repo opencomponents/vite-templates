@@ -21,7 +21,7 @@ const promisify =
 
 const plugins = getMockedPlugins(
   { err: () => {}, log: () => {}, ok: () => {}, warn: () => {} },
-  process.cwd()
+  path.join(process.cwd(), '..')
 );
 const pkg: {
   name: string;
@@ -102,7 +102,9 @@ function getContext(req: Request, params: any, action?: any) {
     easeUrl: '/',
     env: { name: 'local' },
     params,
-    plugins,
+    plugins: Object.fromEntries(
+      plugins.map((plugin) => [plugin.name, plugin.register.execute])
+    ),
     renderComponent: () => {
       throw new Error(
         'renderComponent is not implemented in the server context'
@@ -187,6 +189,9 @@ async function createServer({
   const { dev: clientJs } = ocClientBrowser.compileSync();
   const app = express();
   const dataProvider = getDataProvider();
+  for (const plugin of plugins) {
+    plugin.register.register(null, null, () => {});
+  }
 
   app.use(express.json());
 

@@ -1,5 +1,11 @@
 # oc-template-vue-compiler
 
+## 0.5.5
+
+### Patch Changes
+
+- Fix plugins in dev
+
 ## 0.5.4
 
 ### Patch Changes

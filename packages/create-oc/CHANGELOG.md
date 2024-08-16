@@ -1,5 +1,11 @@
 # create-oc
 
+## 0.0.27
+
+### Patch Changes
+
+- Fix plugins in dev
+
 ## 0.0.26
 
 ### Patch Changes

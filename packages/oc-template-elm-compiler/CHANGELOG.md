@@ -1,5 +1,11 @@
 # oc-template-elm-compiler
 
+## 0.6.5
+
+### Patch Changes
+
+- Fix plugins in dev
+
 ## 0.6.4
 
 ### Patch Changes

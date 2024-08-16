@@ -1,5 +1,11 @@
 # oc-template-react-compiler
 
+## 6.5.1
+
+### Patch Changes
+
+- Fix plugins in dev
+
 ## 6.5.0
 
 ### Minor Changes

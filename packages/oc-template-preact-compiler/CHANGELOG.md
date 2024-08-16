@@ -1,5 +1,11 @@
 # oc-template-preact-compiler
 
+## 0.7.5
+
+### Patch Changes
+
+- Fix plugins in dev
+
 ## 0.7.4
 
 ### Patch Changes

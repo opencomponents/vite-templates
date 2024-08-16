@@ -1,5 +1,11 @@
 # oc-template-solid-compiler
 
+## 0.10.5
+
+### Patch Changes
+
+- Fix plugins in dev
+
 ## 0.10.4
 
 ### Patch Changes

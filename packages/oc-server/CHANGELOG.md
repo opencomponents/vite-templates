@@ -1,5 +1,11 @@
 # oc-server
 
+## 1.1.1
+
+### Patch Changes
+
+- Fix plugins in dev
+
 ## 1.1.0
 
 ### Minor Changes
