@@ -1,5 +1,11 @@
 # oc-server
 
+## 1.1.3
+
+### Patch Changes
+
+- Add oc-client if not added externally on html
+
 ## 1.1.2
 
 ### Patch Changes

@@ -173,7 +173,14 @@ async function getHtmlTemplate(
     }
     template = template.replace(
       '</body>',
-      `${appBlock({
+      `<script>
+        if (!window.oc?.status) {
+          const script = document.createElement('script');
+          script.src = '/oc-client/client.js';
+          document.body.appendChild(script);
+        }
+      </script>
+      ${appBlock({
         name: pkg.name,
         version: pkg.version,
         entry: appEntry,
