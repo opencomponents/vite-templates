@@ -15,6 +15,9 @@ export const appBlock = ({
   window.__$$oc_initialData__ = Object.freeze(data);
   window.__$$oc_Settings__ = Object.freeze({ baseUrl: '/', id: 'root', name: '${name}', staticPath: '/', version: '${version}' });
 
+  window.oc = window.oc || {};
+  window.oc.cmd = window.oc.cmd || [];
+
   import App from "${entry}";
   import React from 'react';
   import { createRoot } from 'react-dom/client';
@@ -22,7 +25,10 @@ export const appBlock = ({
   const app = React.createElement(App, data);
   const container = document.getElementById('root');
   const root = createRoot(container);
-  root.render(app);
+
+  window.oc.cmd.push(() => {
+    root.render(app);
+  });
 </script>
 `;
 

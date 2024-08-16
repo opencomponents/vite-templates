@@ -1,5 +1,11 @@
 # oc-server
 
+## 1.1.2
+
+### Patch Changes
+
+- Fix custom html template rendering
+
 ## 1.1.1
 
 ### Patch Changes

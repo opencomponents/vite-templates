@@ -171,7 +171,14 @@ async function getHtmlTemplate(
         'If you use a custom html entry it has to have a closing body tag'
       );
     }
-    template = template.replace('</body>', `${appBlock}</body>`);
+    template = template.replace(
+      '</body>',
+      `${appBlock({
+        name: pkg.name,
+        version: pkg.version,
+        entry: appEntry,
+      })}</body>`
+    );
   } catch (error) {
     template = getBaseTemplate(appBlock);
   }

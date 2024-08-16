@@ -1,5 +1,11 @@
 # oc-template-react-compiler
 
+## 6.5.2
+
+### Patch Changes
+
+- Fix custom html template rendering
+
 ## 6.5.1
 
 ### Patch Changes
