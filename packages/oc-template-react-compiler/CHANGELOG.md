@@ -1,5 +1,11 @@
 # oc-template-react-compiler
 
+## 6.5.0
+
+### Minor Changes
+
+- Add HMR capabilities in oc-server. Add React support.
+
 ## 6.4.4
 
 ### Patch Changes

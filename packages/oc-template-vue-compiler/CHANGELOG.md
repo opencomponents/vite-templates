@@ -1,5 +1,11 @@
 # oc-template-vue-compiler
 
+## 0.5.4
+
+### Patch Changes
+
+- Add HMR capabilities in oc-server. Add React support.
+
 ## 0.5.3
 
 ### Patch Changes

@@ -1,5 +1,11 @@
 # create-oc
 
+## 0.0.26
+
+### Patch Changes
+
+- Add HMR capabilities in oc-server. Add React support.
+
 ## 0.0.24
 
 ### Patch Changes

@@ -1,5 +1,11 @@
 # oc-template-elm-compiler
 
+## 0.6.4
+
+### Patch Changes
+
+- Add HMR capabilities in oc-server. Add React support.
+
 ## 0.6.3
 
 ### Patch Changes

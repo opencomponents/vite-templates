@@ -1,5 +1,11 @@
 # oc-template-solid-compiler
 
+## 0.10.4
+
+### Patch Changes
+
+- Add HMR capabilities in oc-server. Add React support.
+
 ## 0.10.3
 
 ### Patch Changes

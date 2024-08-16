@@ -1,5 +1,11 @@
 # oc-server
 
+## 1.1.0
+
+### Minor Changes
+
+- Add HMR capabilities in oc-server. Add React support.
+
 ## 1.0.0
 
 ### Major Changes

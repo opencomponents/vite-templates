@@ -1,5 +1,11 @@
 # oc-template-es6-compiler
 
+## 4.3.4
+
+### Patch Changes
+
+- Add HMR capabilities in oc-server. Add React support.
+
 ## 4.3.3
 
 ### Patch Changes
