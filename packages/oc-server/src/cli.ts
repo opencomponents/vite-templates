@@ -211,8 +211,7 @@ async function createServer({
 
   const vite = await createViteServer({
     server: { middlewareMode: true },
-    // @ts-ignore
-    plugins: [cssModulesPlugin(), template.plugin()],
+    plugins: [cssModulesPlugin(), template.plugin?.()].filter(Boolean),
     mode: 'development',
     optimizeDeps: {
       exclude: ['fsevents'],
@@ -296,7 +295,7 @@ if (major < 22) {
 
 interface Template {
   appBlock: (opts: { name: string; version: string; entry: string }) => string;
-  plugin: any;
+  plugin?: () => any;
 }
 
 function cli(template: Template) {

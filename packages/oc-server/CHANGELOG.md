@@ -1,5 +1,11 @@
 # oc-server
 
+## 1.1.4
+
+### Patch Changes
+
+- Allow empty plugin
+
 ## 1.1.3
 
 ### Patch Changes
