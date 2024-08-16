@@ -1,5 +1,11 @@
 # oc-template-elm-compiler
 
+## 0.6.6
+
+### Patch Changes
+
+- Fix server scaffold for oc-server 1.0+
+
 ## 0.6.5
 
 ### Patch Changes

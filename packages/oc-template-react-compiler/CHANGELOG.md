@@ -1,5 +1,11 @@
 # oc-template-react-compiler
 
+## 6.5.3
+
+### Patch Changes
+
+- Fix server scaffold for oc-server 1.0+
+
 ## 6.5.2
 
 ### Patch Changes

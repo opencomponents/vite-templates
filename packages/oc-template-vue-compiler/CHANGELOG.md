@@ -1,5 +1,11 @@
 # oc-template-vue-compiler
 
+## 0.5.6
+
+### Patch Changes
+
+- Fix server scaffold for oc-server 1.0+
+
 ## 0.5.5
 
 ### Patch Changes

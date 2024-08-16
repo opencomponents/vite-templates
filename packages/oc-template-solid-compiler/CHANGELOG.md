@@ -1,5 +1,11 @@
 # oc-template-solid-compiler
 
+## 0.10.6
+
+### Patch Changes
+
+- Fix server scaffold for oc-server 1.0+
+
 ## 0.10.5
 
 ### Patch Changes

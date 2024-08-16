@@ -1,5 +1,11 @@
 # create-oc
 
+## 0.0.28
+
+### Patch Changes
+
+- Fix server scaffold for oc-server 1.0+
+
 ## 0.0.27
 
 ### Patch Changes

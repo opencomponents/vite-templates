@@ -1,5 +1,11 @@
 # oc-template-es6-compiler
 
+## 4.3.6
+
+### Patch Changes
+
+- Fix server scaffold for oc-server 1.0+
+
 ## 4.3.5
 
 ### Patch Changes

@@ -19,30 +19,32 @@ async function getFunFact(year: number) {
   return yearsFunFactDatabase[year];
 }
 
-export const server = new Server(async (params: { userId: number }, ctx) => {
-  const { userId } = params;
-  const user = await getUser(userId);
-  const [firstName, lastName] = user.name.split(/\s+/);
+export const server = new Server()
+  .handler(async (params: { userId: number }, ctx) => {
+    const { userId } = params;
+    const user = await getUser(userId);
+    const [firstName, lastName] = user.name.split(/\s+/);
 
-  if (firstName === 'Invalid') {
-    return;
-  }
+    if (firstName === 'Invalid') {
+      return;
+    }
 
-  return {
-    firstName,
-    lastName,
-    born: user.born,
-    hobbies: user.hobbies,
-    staticPath: ctx.staticPath,
-  };
-}).action('funFact', async (params: { year: number }) => {
-  const { year } = params;
-  const funFact = await getFunFact(year);
+    return {
+      firstName,
+      lastName,
+      born: user.born,
+      hobbies: user.hobbies,
+      staticPath: ctx.staticPath,
+    };
+  })
+  .action('funFact', async (params: { year: number }) => {
+    const { year } = params;
+    const funFact = await getFunFact(year);
 
-  return {
-    funFact,
-  };
-});
+    return {
+      funFact,
+    };
+  });
 
 declare module 'oc-server' {
   interface Register {

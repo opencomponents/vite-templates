@@ -1,6 +1,6 @@
 {
   "name": "oc-template-preact-compiler",
-  "version": "0.7.5",
+  "version": "0.7.6",
   "description": "Compiler for the Preact OC template",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",

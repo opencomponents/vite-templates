@@ -1,5 +1,11 @@
 # oc-template-preact-compiler
 
+## 0.7.6
+
+### Patch Changes
+
+- Fix server scaffold for oc-server 1.0+
+
 ## 0.7.5
 
 ### Patch Changes
