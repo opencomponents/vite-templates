@@ -1,5 +1,11 @@
 # oc-template-preact-compiler
 
+## 0.8.0
+
+### Minor Changes
+
+- Add support for all templates except elm of HMR
+
 ## 0.7.6
 
 ### Patch Changes

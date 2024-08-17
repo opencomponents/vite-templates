@@ -1,4 +1,4 @@
-import plugin from '@vitejs/plugin-react';
+import plugin from '@vitejs/plugin-vue';
 
 export const appBlock = ({
   name,
@@ -20,15 +20,13 @@ export const appBlock = ({
   window.oc.cmd = window.oc.cmd || [];
 
   import App from "${entry}";
-  import React from 'react';
-  import { createRoot } from 'react-dom/client';
+  import { createApp } from 'vue';
 
-  const app = React.createElement(App, data);
   const container = document.getElementById('root');
-  const root = createRoot(container);
+  const app = createApp(App, data);
 
   window.oc.cmd.push(() => {
-    root.render(app);
+    app.mount(container);
     window.oc.events.fire('oc:rendered', { ...settings, element: container,  });
   });
 </script>

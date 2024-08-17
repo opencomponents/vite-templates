@@ -1,5 +1,11 @@
 # oc-template-es6-compiler
 
+## 4.4.0
+
+### Minor Changes
+
+- Add support for all templates except elm of HMR
+
 ## 4.3.6
 
 ### Patch Changes

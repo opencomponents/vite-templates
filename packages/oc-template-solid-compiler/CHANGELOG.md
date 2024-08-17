@@ -1,5 +1,11 @@
 # oc-template-solid-compiler
 
+## 0.11.0
+
+### Minor Changes
+
+- Add support for all templates except elm of HMR
+
 ## 0.10.6
 
 ### Patch Changes

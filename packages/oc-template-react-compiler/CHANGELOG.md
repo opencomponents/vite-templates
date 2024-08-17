@@ -1,5 +1,11 @@
 # oc-template-react-compiler
 
+## 6.6.0
+
+### Minor Changes
+
+- Add support for all templates except elm of HMR
+
 ## 6.5.3
 
 ### Patch Changes

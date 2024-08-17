@@ -1,5 +1,11 @@
 # oc-template-vue-compiler
 
+## 0.6.0
+
+### Minor Changes
+
+- Add support for all templates except elm of HMR
+
 ## 0.5.6
 
 ### Patch Changes
