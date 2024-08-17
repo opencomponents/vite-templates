@@ -1,5 +1,11 @@
 # create-oc
 
+## 0.0.29
+
+### Patch Changes
+
+- Remove oc dependency from oc-server
+
 ## 0.0.28
 
 ### Patch Changes

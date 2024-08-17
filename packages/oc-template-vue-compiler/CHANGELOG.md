@@ -1,5 +1,11 @@
 # oc-template-vue-compiler
 
+## 0.6.1
+
+### Patch Changes
+
+- Remove oc dependency from oc-server
+
 ## 0.6.0
 
 ### Minor Changes

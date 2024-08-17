@@ -1,5 +1,11 @@
 # oc-template-solid-compiler
 
+## 0.11.1
+
+### Patch Changes
+
+- Remove oc dependency from oc-server
+
 ## 0.11.0
 
 ### Minor Changes

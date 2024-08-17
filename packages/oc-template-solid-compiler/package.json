@@ -1,6 +1,6 @@
 {
   "name": "oc-template-solid-compiler",
-  "version": "0.11.0",
+  "version": "0.11.1",
   "description": "Compiler for the SolidJS OC template",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",

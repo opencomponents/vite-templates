@@ -1,5 +1,11 @@
 # oc-server
 
+## 1.1.5
+
+### Patch Changes
+
+- Remove oc dependency from oc-server
+
 ## 1.1.4
 
 ### Patch Changes

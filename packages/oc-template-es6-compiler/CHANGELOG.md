@@ -1,5 +1,11 @@
 # oc-template-es6-compiler
 
+## 4.4.1
+
+### Patch Changes
+
+- Remove oc dependency from oc-server
+
 ## 4.4.0
 
 ### Minor Changes

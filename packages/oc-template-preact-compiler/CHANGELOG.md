@@ -1,5 +1,11 @@
 # oc-template-preact-compiler
 
+## 0.8.1
+
+### Patch Changes
+
+- Remove oc dependency from oc-server
+
 ## 0.8.0
 
 ### Minor Changes

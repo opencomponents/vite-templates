@@ -1,5 +1,11 @@
 # oc-template-react-compiler
 
+## 6.6.1
+
+### Patch Changes
+
+- Remove oc dependency from oc-server
+
 ## 6.6.0
 
 ### Minor Changes
