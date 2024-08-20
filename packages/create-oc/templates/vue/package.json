@@ -4,6 +4,7 @@
   "version": "1.0.0",
   "scripts": {
     "lint": "eslint --max-warnings 0 --ext .js,.jsx,.ts,.tsx src",
+    "dev": "oc-server dev",
     "build": "vue-tsc --noEmit && oc package .",
     "test": "vitest"
   },

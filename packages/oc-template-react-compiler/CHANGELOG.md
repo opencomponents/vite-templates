@@ -1,5 +1,11 @@
 # oc-template-react-compiler
 
+## 6.6.2
+
+### Patch Changes
+
+- Add ocserver dev
+
 ## 6.6.1
 
 ### Patch Changes

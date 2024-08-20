@@ -1,5 +1,11 @@
 # oc-template-preact-compiler
 
+## 0.8.2
+
+### Patch Changes
+
+- Add ocserver dev
+
 ## 0.8.1
 
 ### Patch Changes

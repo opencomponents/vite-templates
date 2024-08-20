@@ -1,5 +1,11 @@
 # oc-template-es6-compiler
 
+## 4.4.2
+
+### Patch Changes
+
+- Add ocserver dev
+
 ## 4.4.1
 
 ### Patch Changes

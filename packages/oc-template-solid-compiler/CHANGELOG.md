@@ -1,5 +1,11 @@
 # oc-template-solid-compiler
 
+## 0.11.2
+
+### Patch Changes
+
+- Add ocserver dev
+
 ## 0.11.1
 
 ### Patch Changes
