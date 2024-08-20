@@ -69,7 +69,41 @@ async function compileServer(
       appType: 'custom',
       root: componentPath,
       mode: production ? 'production' : 'development',
-      plugins: [...plugins, ...basePlugins],
+      plugins: [
+        ...plugins,
+        ...basePlugins,
+        {
+          name: 'save-parameters',
+          transform(code, id) {
+            if (id === higherOrderServerPath && !production) {
+              code = `
+            ${code}
+            try {
+              const fs = require("fs");
+              const path = require("path");
+              const parameters = server._parameters;
+              if (Object.keys(parameters).length > 0) {
+                const pkgPath = path.join(process.cwd(), "package.json");
+                const pkg = JSON.parse(fs.readFileSync(pkgPath, "utf8"));
+                const prevParameters = pkg.oc.parameters || {};
+            
+                if (JSON.stringify(prevParameters) !== JSON.stringify(parameters)) {
+                  pkg.oc.parameters = Object.assign(prevParameters, parameters);
+                  fs.writeFileSync(pkgPath, JSON.stringify(pkg, null, 2), "utf-8");
+                }
+              }
+            } catch (e){
+              console.log("fail", e);
+            }
+            `;
+            }
+            return {
+              code,
+              map: null,
+            };
+          },
+        },
+      ],
       logLevel: options.verbose ? 'info' : 'silent',
       build: {
         lib: { entry: higherOrderServerPath, formats: ['cjs'] },
@@ -100,6 +134,9 @@ async function compileServer(
 
     await fs.ensureDir(publishPath);
     await fs.writeFile(path.join(publishPath, publishFileName), bundle);
+    try {
+      require(path.join(publishPath, publishFileName));
+    } catch {}
 
     return {
       type: 'node.js',

@@ -22,6 +22,57 @@ type IsGeneralStringName<T> = T extends { name: infer N }
     : false
   : false;
 
+type OcParameter = {
+  description?: string;
+  mandatory?: boolean;
+} & (
+  | {
+      type: 'string';
+      example?: string;
+      default?: string;
+    }
+  | {
+      type: 'boolean';
+      example?: boolean;
+      default?: boolean;
+    }
+  | {
+      type: 'number';
+      example?: number;
+      default?: number;
+    }
+);
+type OcParameters = Record<string, OcParameter>;
+
+type TransformStringifiedTypeToType<T> = T extends 'string'
+  ? string
+  : T extends 'number'
+  ? number
+  : T extends 'boolean'
+  ? boolean
+  : never;
+
+type TransformOcParameters<T extends OcParameters> = Prettify<
+  Pick<
+    {
+      [K in keyof T]: TransformStringifiedTypeToType<T[K]['type']>;
+    },
+    {
+      [K in keyof T]: T[K]['mandatory'] extends true ? K : never;
+    }[keyof T]
+  > &
+    Partial<
+      Pick<
+        {
+          [K in keyof T]: TransformStringifiedTypeToType<T[K]['type']>;
+        },
+        {
+          [K in keyof T]: T[K]['mandatory'] extends true ? never : K;
+        }[keyof T]
+      >
+    >
+>;
+
 export class Server<
   E = { name: string },
   P = unknown,
@@ -31,6 +82,7 @@ export class Server<
   MiddlewareInput = any,
   MiddlewareOutput = any
 > {
+  private _parameters: OcParameters = {};
   private _middleware: Action<
     MiddlewareInput,
     MiddlewareOutput,
@@ -40,7 +92,7 @@ export class Server<
   > | null = null;
   constructor() {}
 
-  middleware<I, O>(
+  middleware<I = MiddlewareInput, O = MiddlewareOutput>(
     action: Action<I, O, E, P, unknown>
   ): Omit<
     Server<E, P, A, InitialInput, InitialOutput, I, O>,
@@ -53,6 +105,21 @@ export class Server<
       : 'middleware'
   > {
     this._middleware = action as any;
+    return this as any;
+  }
+
+  setParameters<T extends OcParameters>(
+    params: T
+  ): Server<
+    E,
+    P,
+    A,
+    TransformOcParameters<T>,
+    InitialOutput,
+    TransformOcParameters<T>,
+    MiddlewareOutput
+  > {
+    this._parameters = params;
     return this as any;
   }
 
@@ -74,12 +141,13 @@ export class Server<
     return this as any;
   }
 
-  handler<I, O>(
+  handler<I = InitialInput, O = InitialOutput>(
     action: Action<I, O, E, P, MiddlewareOutput>
   ): HandledServer<E, P, A, I, O, MiddlewareInput, MiddlewareOutput> {
     return new HandledServer<E, P, A, I, O, MiddlewareInput, MiddlewareOutput>(
       action,
-      this._middleware
+      this._middleware,
+      this._parameters
     );
   }
 }
@@ -109,7 +177,8 @@ class HandledServer<
       E,
       P,
       unknown
-    > | null = null
+    > | null = null,
+    private readonly _parameters: OcParameters = {}
   ) {}
 
   action<ActionName extends string, I, O>(
