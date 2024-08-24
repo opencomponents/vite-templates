@@ -1,5 +1,11 @@
 # oc-template-preact-compiler
 
+## 0.8.3
+
+### Patch Changes
+
+- Update react and solid deps
+
 ## 0.8.2
 
 ### Patch Changes

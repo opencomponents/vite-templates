@@ -1,6 +1,6 @@
 {
   "name": "oc-template-solid",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "oc-template-solid",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -31,7 +31,7 @@
     "minimal-request": "3.0.0",
     "nice-cache": "0.0.5",
     "oc-generic-template-renderer": "2.0.9",
-    "solid-js": "^1.8.8"
+    "solid-js": "^1.8.21"
   },
   "files": [
     "dist/**"

@@ -1,5 +1,11 @@
 # oc-template-vue-compiler
 
+## 0.6.3
+
+### Patch Changes
+
+- Update react and solid deps
+
 ## 0.6.2
 
 ### Patch Changes

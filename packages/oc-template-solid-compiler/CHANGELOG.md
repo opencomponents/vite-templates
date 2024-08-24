@@ -1,5 +1,13 @@
 # oc-template-solid-compiler
 
+## 0.11.3
+
+### Patch Changes
+
+- Update react and solid deps
+- Updated dependencies
+  - oc-template-solid@0.1.3
+
 ## 0.11.2
 
 ### Patch Changes

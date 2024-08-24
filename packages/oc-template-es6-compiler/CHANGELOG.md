@@ -1,5 +1,11 @@
 # oc-template-es6-compiler
 
+## 4.4.3
+
+### Patch Changes
+
+- Update react and solid deps
+
 ## 4.4.2
 
 ### Patch Changes

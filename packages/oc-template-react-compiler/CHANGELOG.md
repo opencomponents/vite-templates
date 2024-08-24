@@ -1,5 +1,16 @@
 # oc-template-react-compiler
 
+## 6.7.0
+
+### Minor Changes
+
+- Update react and solid deps
+
+### Patch Changes
+
+- Updated dependencies
+  - oc-template-react@4.1.0
+
 ## 6.6.2
 
 ### Patch Changes
