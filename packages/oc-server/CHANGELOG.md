@@ -1,5 +1,11 @@
 # oc-server
 
+## 1.1.6
+
+### Patch Changes
+
+- Swap express with fastify
+
 ## 1.1.5
 
 ### Patch Changes

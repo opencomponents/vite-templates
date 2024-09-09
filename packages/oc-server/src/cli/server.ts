@@ -1,7 +1,8 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import vm from 'node:vm';
-import express from 'express';
+import Fastify from 'fastify';
+import fastifyExpress from '@fastify/express';
 import { createServer as createViteServer } from 'vite';
 import esbuild from 'esbuild';
 import ocClientBrowser from 'oc-client-browser';
@@ -109,14 +110,13 @@ export async function createServer({
   port: string;
 }) {
   const { dev: clientJs } = ocClientBrowser.compileSync();
-  const app = express();
+  const app = Fastify({ logger: false });
+  await app.register(fastifyExpress);
   const dataProvider = getDataProvider();
   const plugins = getMockedPlugins(path.join(process.cwd(), '..'));
   for (const plugin of plugins) {
     plugin.register.register(null, null, () => {});
   }
-
-  app.use(express.json());
 
   const vite = await createViteServer({
     server: { middlewareMode: true },
@@ -130,16 +130,18 @@ export async function createServer({
 
   app.use(vite.middlewares);
 
-  app.get('/oc-client/client.js', (req, res) => {
-    res.status(200).set({ 'Content-Type': 'text/javascript' }).send(clientJs);
+  app.get('/oc-client/client.js', (request, reply) => {
+    reply.status(200);
+    reply.header('Content-Type', 'text/javascript');
+    reply.send(clientJs);
   });
 
-  app.post('/', async (req, res, next) => {
+  app.post('/', async (request, reply) => {
     try {
-      const { action, parameters } = req.body.components[0];
+      const { action, parameters } = (request.body as any).components[0];
       const { context, responseHeaders } = getContext(
         plugins,
-        req,
+        request,
         parameters,
         action
       );
@@ -158,26 +160,23 @@ export async function createServer({
         },
       ];
 
-      if (Object.keys(responseHeaders).length) {
-        res.set(responseHeaders);
+      for (const [key, value] of Object.entries(responseHeaders)) {
+        reply.header(key, value);
       }
 
-      res
-        .status(200)
-        .set({ 'Content-Type': 'application/json' })
-        .send(response);
+      return response;
     } catch (e) {
       vite.ssrFixStacktrace(e as Error);
-      next(e);
+      throw e;
     }
   });
 
-  app.use('*', async (req, res, next) => {
-    const url = req.originalUrl;
+  app.get('*', async (request, reply) => {
+    const url = request.originalUrl;
 
     try {
       const params = defaultParams;
-      const { context, responseHeaders } = getContext(plugins, req, params);
+      const { context, responseHeaders } = getContext(plugins, request, params);
       let htmlTemplate = await getHtmlTemplate(template.appBlock);
       const data = await dataProvider(context);
       htmlTemplate = htmlTemplate.replace(
@@ -186,18 +185,20 @@ export async function createServer({
       );
       htmlTemplate = await vite.transformIndexHtml(url, htmlTemplate);
 
-      if (Object.keys(responseHeaders).length) {
-        res.set(responseHeaders);
+      for (const [key, value] of Object.entries(responseHeaders)) {
+        reply.header(key, value);
       }
 
-      res.status(200).set({ 'Content-Type': 'text/html' }).end(htmlTemplate);
+      reply.status(200);
+      reply.header('Content-Type', 'text/html');
+      reply.send(htmlTemplate);
     } catch (e) {
       vite.ssrFixStacktrace(e as Error);
-      next(e);
+      throw e;
     }
   });
 
-  app.listen(port);
+  await app.listen({ port: port as any });
   console.log(`Listening on: http://localhost:${port}`);
 }
 
