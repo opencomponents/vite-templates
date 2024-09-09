@@ -1,6 +1,6 @@
 {
   "name": "oc-server",
-  "version": "1.1.6",
+  "version": "1.1.7",
   "description": "",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -21,11 +21,9 @@
     "dist/**"
   ],
   "license": "MIT",
-  "devDependencies": {
-    "@types/express": "^4.17.21"
-  },
   "dependencies": {
-    "express": "^4.19.2",
+    "@fastify/express": "^3.0.0",
+    "fastify": "^4.28.1",
     "oc-client-browser": "^1.8.0"
   }
 }

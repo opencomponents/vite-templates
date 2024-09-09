@@ -1,5 +1,11 @@
 # oc-server
 
+## 1.1.7
+
+### Patch Changes
+
+- Fix packages
+
 ## 1.1.6
 
 ### Patch Changes
