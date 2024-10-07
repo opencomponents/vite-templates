@@ -1,5 +1,13 @@
 # oc-template-vue-compiler
 
+## 0.6.4
+
+### Patch Changes
+
+- Pass element to getsettings
+- Updated dependencies
+  - oc-vite-compiler@3.8.3
+
 ## 0.6.3
 
 ### Patch Changes

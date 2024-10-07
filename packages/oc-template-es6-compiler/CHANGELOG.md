@@ -1,5 +1,13 @@
 # oc-template-es6-compiler
 
+## 4.4.4
+
+### Patch Changes
+
+- Pass element to getsettings
+- Updated dependencies
+  - oc-vite-compiler@3.8.3
+
 ## 4.4.3
 
 ### Patch Changes

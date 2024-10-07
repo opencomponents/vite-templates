@@ -1,5 +1,11 @@
 # oc-vite-compiler
 
+## 3.8.3
+
+### Patch Changes
+
+- Pass element to getsettings
+
 ## 3.8.2
 
 ### Patch Changes

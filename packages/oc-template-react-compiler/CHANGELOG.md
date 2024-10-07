@@ -1,5 +1,13 @@
 # oc-template-react-compiler
 
+## 6.7.1
+
+### Patch Changes
+
+- Pass element to getsettings
+- Updated dependencies
+  - oc-vite-compiler@3.8.3
+
 ## 6.7.0
 
 ### Minor Changes

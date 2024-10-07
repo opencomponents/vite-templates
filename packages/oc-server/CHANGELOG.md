@@ -1,5 +1,11 @@
 # oc-server
 
+## 1.1.8
+
+### Patch Changes
+
+- Pass element to getsettings
+
 ## 1.1.7
 
 ### Patch Changes

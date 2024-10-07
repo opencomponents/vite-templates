@@ -1,5 +1,13 @@
 # oc-template-solid-compiler
 
+## 0.11.4
+
+### Patch Changes
+
+- Pass element to getsettings
+- Updated dependencies
+  - oc-vite-compiler@3.8.3
+
 ## 0.11.3
 
 ### Patch Changes

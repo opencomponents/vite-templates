@@ -1,5 +1,13 @@
 # oc-template-preact-compiler
 
+## 0.8.4
+
+### Patch Changes
+
+- Pass element to getsettings
+- Updated dependencies
+  - oc-vite-compiler@3.8.3
+
 ## 0.8.3
 
 ### Patch Changes
