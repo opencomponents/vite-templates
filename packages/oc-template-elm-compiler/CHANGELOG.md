@@ -1,5 +1,13 @@
 # oc-template-elm-compiler
 
+## 0.6.8
+
+### Patch Changes
+
+- pick element from data-id
+- Updated dependencies
+  - oc-vite-compiler@3.8.4
+
 ## 0.6.7
 
 ### Patch Changes

@@ -1,5 +1,13 @@
 # oc-template-preact-compiler
 
+## 0.8.5
+
+### Patch Changes
+
+- pick element from data-id
+- Updated dependencies
+  - oc-vite-compiler@3.8.4
+
 ## 0.8.4
 
 ### Patch Changes

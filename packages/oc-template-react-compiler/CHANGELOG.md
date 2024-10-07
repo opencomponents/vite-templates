@@ -1,5 +1,13 @@
 # oc-template-react-compiler
 
+## 6.7.2
+
+### Patch Changes
+
+- pick element from data-id
+- Updated dependencies
+  - oc-vite-compiler@3.8.4
+
 ## 6.7.1
 
 ### Patch Changes

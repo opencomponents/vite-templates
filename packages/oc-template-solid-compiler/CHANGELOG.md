@@ -1,5 +1,13 @@
 # oc-template-solid-compiler
 
+## 0.11.5
+
+### Patch Changes
+
+- pick element from data-id
+- Updated dependencies
+  - oc-vite-compiler@3.8.4
+
 ## 0.11.4
 
 ### Patch Changes

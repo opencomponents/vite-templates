@@ -1,5 +1,13 @@
 # oc-template-es6-compiler
 
+## 4.4.5
+
+### Patch Changes
+
+- pick element from data-id
+- Updated dependencies
+  - oc-vite-compiler@3.8.4
+
 ## 4.4.4
 
 ### Patch Changes

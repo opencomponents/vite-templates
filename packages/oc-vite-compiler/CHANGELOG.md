@@ -1,5 +1,11 @@
 # oc-vite-compiler
 
+## 3.8.4
+
+### Patch Changes
+
+- pick element from data-id
+
 ## 3.8.3
 
 ### Patch Changes

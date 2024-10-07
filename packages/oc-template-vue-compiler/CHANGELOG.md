@@ -1,5 +1,13 @@
 # oc-template-vue-compiler
 
+## 0.6.5
+
+### Patch Changes
+
+- pick element from data-id
+- Updated dependencies
+  - oc-vite-compiler@3.8.4
+
 ## 0.6.4
 
 ### Patch Changes
