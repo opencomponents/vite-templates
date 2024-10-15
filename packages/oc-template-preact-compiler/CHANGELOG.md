@@ -1,5 +1,13 @@
 # oc-template-preact-compiler
 
+## 0.8.6
+
+### Patch Changes
+
+- Add servererror util and make htmlrender of id stronger
+- Updated dependencies
+  - oc-vite-compiler@3.8.5
+
 ## 0.8.5
 
 ### Patch Changes

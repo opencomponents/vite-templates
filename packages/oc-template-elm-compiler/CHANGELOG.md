@@ -1,5 +1,13 @@
 # oc-template-elm-compiler
 
+## 0.6.9
+
+### Patch Changes
+
+- Add servererror util and make htmlrender of id stronger
+- Updated dependencies
+  - oc-vite-compiler@3.8.5
+
 ## 0.6.8
 
 ### Patch Changes

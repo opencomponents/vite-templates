@@ -1,5 +1,13 @@
 # oc-template-react-compiler
 
+## 6.7.3
+
+### Patch Changes
+
+- Add servererror util and make htmlrender of id stronger
+- Updated dependencies
+  - oc-vite-compiler@3.8.5
+
 ## 6.7.2
 
 ### Patch Changes
