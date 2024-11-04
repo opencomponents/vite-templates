@@ -1,21 +1,22 @@
-interface OC {
-  conf: {
-    templates: Array<{
-      type: string;
-      externals: string[];
-    }>;
-  };
-  cmd: {
-    push: (cb: (oc: OC) => void) => void;
-  };
-  events: {
-    on: (eventName: string, fn: (...data: any[]) => void) => void;
-    off: (eventName: string, fn?: (...data: any[]) => void) => void;
-    fire: (eventName: string, data?: any) => void;
-    reset: () => void;
-  };
-  renderNestedComponent: (ocElement: HTMLElement, cb: () => void) => void;
-}
+export type Prettify<T> = {
+  [K in keyof T]: T[K];
+} & {};
+
+type JsonPrimitive = string | number | boolean | null;
+type JsonObject = { [key: string]: JsonPrimitive | JsonArray | JsonObject };
+interface JsonArray extends Array<JsonPrimitive | JsonArray | JsonObject> {}
+
+export type ToJson<T> = T extends Date | RegExp
+  ? string
+  : T extends Function
+  ? never
+  : T extends JsonPrimitive
+  ? T
+  : T extends Array<infer U>
+  ? ToJson<U>[]
+  : T extends object
+  ? { [K in keyof T]: ToJson<T[K]> }
+  : never;
 
 export interface AcceptLanguage {
   code: string;

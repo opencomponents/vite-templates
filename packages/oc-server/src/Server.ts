@@ -1,8 +1,4 @@
-import { DataContext, DataProvider } from './types';
-
-type Prettify<T> = {
-  [K in keyof T]: T[K];
-} & {};
+import { Prettify, ToJson, DataContext, DataProvider } from './types';
 
 export type ServerContext<E = { name: string }, P = any, S = any> = Omit<
   DataContext<any, E, P, S>,
@@ -176,7 +172,7 @@ type GetInitialData<TServer extends AnyServer> = TServer extends HandledServer<
   any,
   infer O
 >
-  ? Exclude<O, undefined | null>
+  ? Exclude<ToJson<O>, undefined | null>
   : any;
 export type InitialData = GetInitialData<RegisteredServer>;
 export type ComponentSettings = {

@@ -1,5 +1,11 @@
 # oc-server
 
+## 1.1.10
+
+### Patch Changes
+
+- Convert return from handler and actions to JSON
+
 ## 1.1.9
 
 ### Patch Changes
