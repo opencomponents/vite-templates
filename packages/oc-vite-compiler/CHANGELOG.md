@@ -1,5 +1,11 @@
 # oc-vite-compiler
 
+## 3.8.6
+
+### Patch Changes
+
+- Add witbParameters param to server
+
 ## 3.8.5
 
 ### Patch Changes

@@ -1,5 +1,11 @@
 # oc-server
 
+## 1.1.11
+
+### Patch Changes
+
+- Add witbParameters param to server
+
 ## 1.1.10
 
 ### Patch Changes
