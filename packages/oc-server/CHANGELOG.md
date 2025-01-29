@@ -1,5 +1,35 @@
 # oc-server
 
+## 1.1.10
+
+### Patch Changes
+
+- Convert return from handler and actions to JSON
+
+## 1.1.9
+
+### Patch Changes
+
+- Add servererror util and make htmlrender of id stronger
+
+## 1.1.8
+
+### Patch Changes
+
+- Pass element to getsettings
+
+## 1.1.7
+
+### Patch Changes
+
+- Fix packages
+
+## 1.1.6
+
+### Patch Changes
+
+- Swap express with fastify
+
 ## 1.1.5
 
 ### Patch Changes

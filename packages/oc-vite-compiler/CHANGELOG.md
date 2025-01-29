@@ -1,5 +1,23 @@
 # oc-vite-compiler
 
+## 3.8.5
+
+### Patch Changes
+
+- Add servererror util and make htmlrender of id stronger
+
+## 3.8.4
+
+### Patch Changes
+
+- pick element from data-id
+
+## 3.8.3
+
+### Patch Changes
+
+- Pass element to getsettings
+
 ## 3.8.2
 
 ### Patch Changes

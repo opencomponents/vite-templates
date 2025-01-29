@@ -1,5 +1,17 @@
 # create-oc
 
+## 0.0.31
+
+### Patch Changes
+
+- Update react and solid deps
+
+## 0.0.30
+
+### Patch Changes
+
+- Add ocserver dev
+
 ## 0.0.29
 
 ### Patch Changes

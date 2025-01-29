@@ -1,6 +1,5 @@
-import getMockedPlugins, { PluginMock } from './get-mocked-plugins';
-import path from 'path';
-import type { Request } from 'express';
+import { FastifyRequest } from 'fastify';
+import { PluginMock } from './get-mocked-plugins';
 
 interface Package {
   name: string;
@@ -68,7 +67,7 @@ export function parsePkg(pkg: Package) {
 
 export function getContext(
   plugins: PluginMock[],
-  req: Request,
+  req: FastifyRequest,
   params: any,
   action?: any
 ) {

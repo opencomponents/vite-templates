@@ -4,6 +4,7 @@
   "version": "1.0.0",
   "scripts": {
     "lint": "eslint --max-warnings 0 --ext .js,.jsx,.ts,.tsx src",
+    "dev": "oc-server dev",
     "build": "tsc --noEmit && oc package .",
     "test": "vitest"
   },
@@ -34,10 +35,10 @@
     "@testing-library/user-event": "^14.4.3",
     "@types/react": "^18.0.28",
     "jsdom": "^21.1.1",
-    "oc-server": "^1.1.5",
-    "oc-template-react-compiler": "^6.6.1",
-    "react": "18.2.0",
-    "react-dom": "18.2.0",
+    "oc-server": "^1.1.9",
+    "oc-template-react-compiler": "^6.7.3",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
     "typescript": "5.1.3",
     "vitest": "^0.32.2"
   }

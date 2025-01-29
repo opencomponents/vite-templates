@@ -4,6 +4,7 @@
   "version": "1.0.0",
   "scripts": {
     "lint": "eslint --max-warnings 0 --ext .js,.jsx,.ts,.tsx src",
+    "dev": "oc-server dev",
     "build": "vue-tsc --noEmit && oc package .",
     "test": "vitest"
   },
@@ -33,8 +34,8 @@
     "@types/testing-library__jest-dom": "^5.14.5",
     "@vitejs/plugin-vue": "^5.0.0",
     "jsdom": "^21.1.1",
-    "oc-server": "^1.1.5",
-    "oc-template-vue-compiler": "^0.6.1",
+    "oc-server": "^1.1.9",
+    "oc-template-vue-compiler": "^0.6.6",
     "typescript": "5.0.2",
     "vitest": "^0.29.7",
     "vue": "^3.3.11",

@@ -1,5 +1,11 @@
 # oc-template-react
 
+## 4.1.0
+
+### Minor Changes
+
+- Update react and solid deps
+
 ## 4.0.2
 
 ### Patch Changes

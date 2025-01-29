@@ -2,6 +2,9 @@
   "name": "base-component-es6",
   "description": "",
   "version": "1.0.0",
+  "scripts": {
+    "dev": "oc-server dev"
+  },
   "oc": {
     "files": {
       "data": "src/server.ts",
@@ -24,7 +27,7 @@
     }
   },
   "devDependencies": {
-    "oc-server": "^1.1.5",
-    "oc-template-es6-compiler": "^4.4.1"
+    "oc-server": "^1.1.9",
+    "oc-template-es6-compiler": "^4.4.6"
   }
 }

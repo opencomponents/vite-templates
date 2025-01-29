@@ -1,5 +1,43 @@
 # oc-template-solid-compiler
 
+## 0.11.6
+
+### Patch Changes
+
+- Add servererror util and make htmlrender of id stronger
+- Updated dependencies
+  - oc-vite-compiler@3.8.5
+
+## 0.11.5
+
+### Patch Changes
+
+- pick element from data-id
+- Updated dependencies
+  - oc-vite-compiler@3.8.4
+
+## 0.11.4
+
+### Patch Changes
+
+- Pass element to getsettings
+- Updated dependencies
+  - oc-vite-compiler@3.8.3
+
+## 0.11.3
+
+### Patch Changes
+
+- Update react and solid deps
+- Updated dependencies
+  - oc-template-solid@0.1.3
+
+## 0.11.2
+
+### Patch Changes
+
+- Add ocserver dev
+
 ## 0.11.1
 
 ### Patch Changes

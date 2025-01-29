@@ -1,5 +1,11 @@
 # oc-template-solid
 
+## 0.1.3
+
+### Patch Changes
+
+- Update react and solid deps
+
 ## 0.1.2
 
 ### Patch Changes

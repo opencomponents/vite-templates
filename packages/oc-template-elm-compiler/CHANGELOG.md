@@ -1,5 +1,29 @@
 # oc-template-elm-compiler
 
+## 0.6.9
+
+### Patch Changes
+
+- Add servererror util and make htmlrender of id stronger
+- Updated dependencies
+  - oc-vite-compiler@3.8.5
+
+## 0.6.8
+
+### Patch Changes
+
+- pick element from data-id
+- Updated dependencies
+  - oc-vite-compiler@3.8.4
+
+## 0.6.7
+
+### Patch Changes
+
+- Pass element to getsettings
+- Updated dependencies
+  - oc-vite-compiler@3.8.3
+
 ## 0.6.6
 
 ### Patch Changes
