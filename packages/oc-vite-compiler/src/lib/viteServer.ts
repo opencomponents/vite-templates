@@ -78,22 +78,27 @@ async function compileServer(
             if (id === higherOrderServerPath && !production) {
               code = `
             ${code}
+            let parameters = null;
             try {
-              const fs = require("fs");
-              const path = require("path");
-              const parameters = server._parameters;
-              if (Object.keys(parameters).length > 0) {
-                const pkgPath = path.join(process.cwd(), "package.json");
-                const pkg = JSON.parse(fs.readFileSync(pkgPath, "utf8"));
+              parameters = server._parameters;
+            } catch (e) {}
+
+            if (parameters && Object.keys(parameters).length > 0) {
+              try {
+                const fs = require("fs");
+                const path = require("path");
+                const finder = require('find-package-json');
+
+                const { value: pkg, filename: pkgPath } = finder("${publishPath}").next();
                 const prevParameters = pkg.oc.parameters || {};
-            
+          
                 if (JSON.stringify(prevParameters) !== JSON.stringify(parameters)) {
                   pkg.oc.parameters = Object.assign(prevParameters, parameters);
                   fs.writeFileSync(pkgPath, JSON.stringify(pkg, null, 2), "utf-8");
                 }
+              } catch (e){
+                console.log("There was an error trying to update the package.json file with the parameters");
               }
-            } catch (e){
-              console.log("fail", e);
             }
             `;
             }

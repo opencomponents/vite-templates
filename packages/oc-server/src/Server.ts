@@ -104,7 +104,7 @@ export class Server<
     return this as any;
   }
 
-  setParameters<T extends OcParameters>(
+  withParameters<T extends OcParameters>(
     params: T
   ): Server<
     E,

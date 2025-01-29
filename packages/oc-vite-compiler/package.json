@@ -30,6 +30,7 @@
     "builtin-modules": "^3.3.0",
     "cssesc": "^3.0.0",
     "es-module-lexer": "^1.4.1",
+    "find-package-json": "^1.2.0",
     "fs-extra": "^10.1.0",
     "oc-generic-template-compiler": "^2.1.4",
     "oc-hash-builder": "^1.0.5",
