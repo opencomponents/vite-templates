@@ -1,6 +1,6 @@
 {
   "name": "oc-template-es6-compiler",
-  "version": "4.4.6",
+  "version": "4.5.0",
   "description": "Compiler for the ES6 OC template",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -27,9 +27,9 @@
   "license": "MIT",
   "dependencies": {
     "oc-generic-template-compiler": "^2.1.4",
-    "oc-statics-compiler": "2.1.1",
+    "oc-statics-compiler": "^3.0.0",
     "oc-template-es6": "^1.0.7",
-    "oc-vite-compiler": "^3.8.5"
+    "oc-vite-compiler": "^3.9.0"
   },
   "files": [
     "dist/**",

@@ -1,5 +1,16 @@
 # oc-template-solid-compiler
 
+## 0.12.0
+
+### Minor Changes
+
+- Update oc-statics-compiler to use new major version of babel
+
+### Patch Changes
+
+- Updated dependencies
+  - oc-vite-compiler@3.9.0
+
 ## 0.11.6
 
 ### Patch Changes

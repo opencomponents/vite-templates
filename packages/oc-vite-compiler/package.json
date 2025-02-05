@@ -1,6 +1,6 @@
 {
   "name": "oc-vite-compiler",
-  "version": "3.8.6",
+  "version": "3.9.0",
   "description": "OC-Vite-Compiler",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -34,7 +34,7 @@
     "fs-extra": "^10.1.0",
     "oc-generic-template-compiler": "^2.1.4",
     "oc-hash-builder": "^1.0.5",
-    "oc-statics-compiler": "^2.1.1",
+    "oc-statics-compiler": "^3.0.0",
     "oc-view-wrapper": "^1.0.6",
     "oc-vite": "5.2.9",
     "vite": "5.2.9",

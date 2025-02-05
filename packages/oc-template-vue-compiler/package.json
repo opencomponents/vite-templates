@@ -1,6 +1,6 @@
 {
   "name": "oc-template-vue-compiler",
-  "version": "0.6.6",
+  "version": "0.7.0",
   "description": "Compiler for the vueJS OC template",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -30,7 +30,7 @@
   "dependencies": {
     "@vitejs/plugin-vue": "^4.5.2",
     "oc-template-vue": "^0.1.0",
-    "oc-vite-compiler": "^3.8.5"
+    "oc-vite-compiler": "^3.9.0"
   },
   "files": [
     "dist/**",

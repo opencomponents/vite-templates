@@ -1,5 +1,11 @@
 # oc-vite-compiler
 
+## 3.9.0
+
+### Minor Changes
+
+- Update oc-statics-compiler to use new major version of babel
+
 ## 3.8.6
 
 ### Patch Changes

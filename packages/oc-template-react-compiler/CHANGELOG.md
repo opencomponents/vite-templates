@@ -1,5 +1,16 @@
 # oc-template-react-compiler
 
+## 6.8.0
+
+### Minor Changes
+
+- Update oc-statics-compiler to use new major version of babel
+
+### Patch Changes
+
+- Updated dependencies
+  - oc-vite-compiler@3.9.0
+
 ## 6.7.3
 
 ### Patch Changes
