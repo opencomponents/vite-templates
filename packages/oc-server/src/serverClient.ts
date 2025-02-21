@@ -7,14 +7,14 @@ import {
   getSettings,
   GetMiddlewareInput,
 } from './Server';
-import { Prettify, ToJson } from './types';
+import { Prettify, ToPrettyJson } from './types';
 
 type IfAny<T, Y, N> = 0 extends 1 & T ? Y : N;
 type IsAny<T> = IfAny<T, true, never>;
 
 type InferInput<R> = R extends Action<infer I, any, any, any, any> ? I : any;
 type InferOutput<R> = R extends Action<any, infer O, any, any, any>
-  ? ToJson<O>
+  ? ToPrettyJson<O>
   : never;
 
 type ServerClient<TServer extends AnyServer> = {

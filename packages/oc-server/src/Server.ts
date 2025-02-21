@@ -1,4 +1,4 @@
-import { Prettify, ToJson, DataContext, DataProvider } from './types';
+import { Prettify, DataContext, DataProvider, ToPrettyJson } from './types';
 
 export type ServerContext<E = { name: string }, P = any, S = any> = Omit<
   DataContext<any, E, P, S>,
@@ -69,6 +69,10 @@ type TransformOcParameters<T extends OcParameters> = Prettify<
     >
 >;
 
+interface ServerOptions<S extends boolean> {
+  stream?: S;
+}
+
 export class Server<
   E = { name: string },
   P = unknown,
@@ -76,7 +80,8 @@ export class Server<
   InitialInput = any,
   InitialOutput = any,
   MiddlewareInput = any,
-  MiddlewareOutput = any
+  MiddlewareOutput = any,
+  Streaming extends boolean = false
 > {
   private _parameters: OcParameters = {};
   private _middleware: Action<
@@ -86,7 +91,7 @@ export class Server<
     P,
     unknown
   > | null = null;
-  constructor() {}
+  constructor(private readonly _options: ServerOptions<Streaming> = {}) {}
 
   middleware<I = MiddlewareInput, O = MiddlewareOutput>(
     action: Action<I, O, E, P, unknown>
@@ -139,12 +144,26 @@ export class Server<
 
   handler<I = InitialInput, O = InitialOutput>(
     action: Action<I, O, E, P, MiddlewareOutput>
-  ): HandledServer<E, P, A, I, O, MiddlewareInput, MiddlewareOutput> {
-    return new HandledServer<E, P, A, I, O, MiddlewareInput, MiddlewareOutput>(
-      action,
-      this._middleware,
-      this._parameters
-    );
+  ): HandledServer<
+    E,
+    P,
+    A,
+    I,
+    O,
+    MiddlewareInput,
+    MiddlewareOutput,
+    Streaming
+  > {
+    return new HandledServer<
+      E,
+      P,
+      A,
+      I,
+      O,
+      MiddlewareInput,
+      MiddlewareOutput,
+      Streaming
+    >(action, this._middleware, this._parameters, this._options);
   }
 }
 
@@ -155,7 +174,8 @@ class HandledServer<
   InitialInput = any,
   InitialOutput = any,
   MiddlewareInput = any,
-  MiddlewareOutput = any
+  MiddlewareOutput = any,
+  Streaming extends boolean = false
 > {
   public readonly actions: A = {} as any;
 
@@ -174,7 +194,8 @@ class HandledServer<
       P,
       unknown
     > | null = null,
-    private readonly _parameters: OcParameters = {}
+    private readonly _parameters: OcParameters = {},
+    private readonly _options: ServerOptions<Streaming> = {}
   ) {}
 
   action<ActionName extends string, I, O>(
@@ -187,7 +208,8 @@ class HandledServer<
     InitialInput,
     InitialOutput,
     MiddlewareInput,
-    MiddlewareOutput
+    MiddlewareOutput,
+    Streaming
   > {
     this.actions[name] = action as any;
     return this;
@@ -215,6 +237,8 @@ class HandledServer<
         cb(err);
         return;
       }
+      const stream = !!this._options.stream;
+      res[(context as any).streamSymbol] = stream;
       cb(null, res);
     };
   }
@@ -239,9 +263,14 @@ type GetInitialData<TServer extends AnyServer> = TServer extends HandledServer<
   any,
   any,
   any,
-  infer O
+  infer O,
+  any,
+  any,
+  infer Streaming
 >
-  ? Exclude<ToJson<O>, undefined | null>
+  ? Streaming extends true
+    ? Exclude<O, undefined | null>
+    : Exclude<ToPrettyJson<O>, undefined | null>
   : any;
 export type InitialData = GetInitialData<RegisteredServer>;
 export type ComponentSettings = {

@@ -38,6 +38,8 @@ export default function htmlTemplate({
   var props = JSON.stringify(model.component.props);
   oc = oc || {};
   oc.__${templateName}Template = oc.__${templateName}Template || { count: 0 };
+  oc.__data = oc.__data || {};
+  oc.__data[model.id] = model.component.props;
   var count = oc.__${templateName}Template.count;
   var templateId = "${templateId}-" + count;
   oc.__${templateName}Template.count++;
@@ -54,8 +56,8 @@ export default function htmlTemplate({
         'var targetNode = document.getElementById("' + templateId + '");' +
         'targetNode.setAttribute("id","");' +
         (ssr ? ssrCall : '') +
-        'oc.components["${hash}"]({ id: "' + model.id + '", component: { props:' + props + ' } });' +
-        'oc.${templateName}Components["${hash}"](' + props + ', targetNode, ' + !!modelHTML  + ');' +
+        'oc.components["${hash}"]({ id: "' + model.id + '", component: { props: oc.__data["' + model.id + '"]} });' +
+        'oc.${templateName}Components["${hash}"](oc.__data["' + model.id + '"], targetNode, ' + !!modelHTML  + ');' +
       '});' +
     '});' +
   '</script>'
