@@ -6,10 +6,16 @@ type JsonPrimitive = string | number | boolean | null;
 type JsonObject = { [key: string]: JsonPrimitive | JsonArray | JsonObject };
 interface JsonArray extends Array<JsonPrimitive | JsonArray | JsonObject> {}
 
-export type ToJson<T> = T extends Date | RegExp
+type CleanNeverProperties<T> = {
+  [K in keyof T as T[K] extends never ? never : K]: T[K];
+};
+
+type ToJson<T> = T extends Date | RegExp
   ? string
   : T extends Function
   ? never
+  : T extends Promise<any>
+  ? {}
   : T extends JsonPrimitive
   ? T
   : T extends Array<infer U>
@@ -17,6 +23,8 @@ export type ToJson<T> = T extends Date | RegExp
   : T extends object
   ? { [K in keyof T]: ToJson<T[K]> }
   : never;
+
+export type ToPrettyJson<T> = CleanNeverProperties<Prettify<ToJson<T>>>;
 
 export interface AcceptLanguage {
   code: string;
