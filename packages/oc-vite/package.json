@@ -1,7 +1,7 @@
 {
   "name": "oc-vite",
-  "version": "5.2.9",
-  "viteVersion": "5.2.9",
+  "version": "6.2.0",
+  "viteVersion": "6.2.0",
   "type": "module",
   "license": "MIT",
   "author": "Evan You",
@@ -31,15 +31,23 @@
     "./dist/client/*": "./dist/client/*",
     "./package.json": "./package.json"
   },
+  "imports": {
+    "#module-sync-enabled": {
+      "module-sync": "./misc/true.js",
+      "default": "./misc/false.js"
+    }
+  },
   "files": [
     "bin",
-    "dist/**",
+    "dist",
+    "misc/**/*.js",
     "client.d.ts",
     "index.cjs",
+    "index.d.cts",
     "types"
   ],
   "engines": {
-    "node": "^18.0.0 || >=20.0.0"
+    "node": "^18.0.0 || ^20.0.0 || >=22.0.0"
   },
   "repository": {
     "type": "git",
@@ -47,27 +55,37 @@
     "directory": "packages/vite"
   },
   "dependencies": {
-    "esbuild": "^0.20.1",
-    "postcss": "^8.4.38",
-    "rollup": "^4.13.0"
+    "esbuild": "^0.25.0",
+    "postcss": "^8.5.3",
+    "rollup": "^4.30.1"
   },
   "optionalDependencies": {
     "fsevents": "~2.3.3"
   },
   "peerDependencies": {
-    "@types/node": "^18.0.0 || >=20.0.0",
+    "@types/node": "^18.0.0 || ^20.0.0 || >=22.0.0",
+    "jiti": ">=1.21.0",
     "less": "*",
     "lightningcss": "^1.21.0",
     "sass": "*",
+    "sass-embedded": "*",
     "stylus": "*",
     "sugarss": "*",
-    "terser": "^5.4.0"
+    "terser": "^5.16.0",
+    "tsx": "^4.8.1",
+    "yaml": "^2.4.2"
   },
   "peerDependenciesMeta": {
     "@types/node": {
       "optional": true
     },
+    "jiti": {
+      "optional": true
+    },
     "sass": {
+      "optional": true
+    },
+    "sass-embedded": {
       "optional": true
     },
     "stylus": {
@@ -84,6 +102,15 @@
     },
     "terser": {
       "optional": true
+    },
+    "tsx": {
+      "optional": true
+    },
+    "yaml": {
+      "optional": true
     }
+  },
+  "devDependencies": {
+    "@types/jquery": "^3.5.32"
   }
 }
