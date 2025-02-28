@@ -21,12 +21,17 @@ function checkExternals(data: unknown): data is External[] {
   return Array.isArray(data) && data.every((item) => checkExternal(item));
 }
 
+// Minimum OC version required to support streaming
+const minOcVersion = '0.5.0';
+
 export default function createCompile(params: {
   plugins?: PluginOption[];
   viewWrapper?: ViteViewOptions['viewWrapper'];
   htmlTemplate?: ViteViewOptions['htmlTemplate'];
   getInfo: GetInfo;
 }) {
+  const getInfo = () => ({...params.getInfo(), minOcVersion });
+
   return genericCompile({
     compileView(options, cb) {
       let externals: External[];
@@ -58,6 +63,6 @@ export default function createCompile(params: {
     },
     compileServer: viteServer,
     compileStatics,
-    getInfo: params.getInfo,
+    getInfo,
   });
 }

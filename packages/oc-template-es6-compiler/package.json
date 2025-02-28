@@ -26,7 +26,7 @@
   },
   "license": "MIT",
   "dependencies": {
-    "oc-generic-template-compiler": "^2.1.4",
+    "oc-generic-template-compiler": "^2.2.0",
     "oc-statics-compiler": "^3.0.0",
     "oc-template-es6": "^1.0.7",
     "oc-vite-compiler": "^3.9.0"
