@@ -22,7 +22,7 @@ function checkExternals(data: unknown): data is External[] {
 }
 
 // Minimum OC version required to support streaming
-const minOcVersion = '0.5.0';
+const minOcVersion = '0.50.0';
 
 export default function createCompile(params: {
   plugins?: PluginOption[];

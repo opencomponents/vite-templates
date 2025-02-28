@@ -1,6 +1,5 @@
 ---
 'create-oc': major
-'oc-vite': major
 'oc-template-elm-compiler': major
 'oc-template-es6-compiler': major
 'oc-template-preact-compiler': major
