@@ -1,5 +1,11 @@
 # oc-server
 
+## 2.0.0
+
+### Major Changes
+
+- 3346c80: Add streaming support
+
 ## 1.1.11
 
 ### Patch Changes

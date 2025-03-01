@@ -1,5 +1,18 @@
 # oc-template-vue-compiler
 
+## 1.0.0
+
+### Major Changes
+
+- 3346c80: Add streaming support
+- aed2349: Update Vite to v6
+
+### Patch Changes
+
+- Updated dependencies [3346c80]
+- Updated dependencies [aed2349]
+  - oc-vite-compiler@4.0.0
+
 ## 0.7.0
 
 ### Minor Changes

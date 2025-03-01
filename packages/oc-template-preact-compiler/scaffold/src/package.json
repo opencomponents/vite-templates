@@ -35,8 +35,8 @@
     "@testing-library/react": "^14.0.0",
     "@testing-library/user-event": "^14.4.3",
     "jsdom": "^21.1.1",
-    "oc-server": "^1.1.11",
-    "oc-template-preact-compiler": "^0.9.0",
+    "oc-server": "^2.0.0",
+    "oc-template-preact-compiler": "^1.0.0",
     "preact": "^10.13.2",
     "typescript": "5.0.2",
     "vitest": "^0.29.7"

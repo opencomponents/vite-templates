@@ -1,5 +1,11 @@
 # create-oc
 
+## 1.0.0
+
+### Major Changes
+
+- aed2349: Update Vite to v6
+
 ## 0.0.31
 
 ### Patch Changes

@@ -1,5 +1,12 @@
 # oc-vite-compiler
 
+## 4.0.0
+
+### Major Changes
+
+- 3346c80: Add streaming support
+- aed2349: Update Vite to v6
+
 ## 3.9.0
 
 ### Minor Changes

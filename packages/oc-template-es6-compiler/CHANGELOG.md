@@ -1,5 +1,18 @@
 # oc-template-es6-compiler
 
+## 5.0.0
+
+### Major Changes
+
+- 3346c80: Add streaming support
+- aed2349: Update Vite to v6
+
+### Patch Changes
+
+- Updated dependencies [3346c80]
+- Updated dependencies [aed2349]
+  - oc-vite-compiler@4.0.0
+
 ## 4.5.0
 
 ### Minor Changes
