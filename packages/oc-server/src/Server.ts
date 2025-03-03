@@ -96,7 +96,7 @@ export class Server<
   middleware<I = MiddlewareInput, O = MiddlewareOutput>(
     action: Action<I, O, E, P, unknown>
   ): Omit<
-    Server<E, P, A, InitialInput, InitialOutput, I, O>,
+    Server<E, P, A, InitialInput, InitialOutput, I, O, Streaming>,
     P extends Record<string, unknown>
       ? IsGeneralStringName<E> extends false
         ? 'middleware' | 'definePlugins' | 'defineEnv'
@@ -118,7 +118,8 @@ export class Server<
     TransformOcParameters<T>,
     InitialOutput,
     TransformOcParameters<T>,
-    MiddlewareOutput
+    MiddlewareOutput,
+    Streaming
   > {
     this._parameters = params;
     return this as any;
@@ -126,17 +127,59 @@ export class Server<
 
   defineEnv<Env>(): P extends Record<string, any>
     ? Omit<
-        Server<Env, P, A, InitialInput, InitialOutput>,
+        Server<
+          Env,
+          P,
+          A,
+          InitialInput,
+          InitialOutput,
+          MiddlewareInput,
+          MiddlewareOutput,
+          Streaming
+        >,
         'defineEnv' | 'definePlugins'
       >
-    : Omit<Server<Env, P, A, InitialInput, InitialOutput>, 'defineEnv'> {
+    : Omit<
+        Server<
+          Env,
+          P,
+          A,
+          InitialInput,
+          InitialOutput,
+          MiddlewareInput,
+          MiddlewareOutput,
+          Streaming
+        >,
+        'defineEnv'
+      > {
     return this as any;
   }
 
   definePlugins<Plugins>(): IsGeneralStringName<E> extends true
-    ? Omit<Server<E, Plugins, A, InitialInput, InitialOutput>, 'definePlugins'>
+    ? Omit<
+        Server<
+          E,
+          Plugins,
+          A,
+          InitialInput,
+          InitialOutput,
+          MiddlewareInput,
+          MiddlewareOutput,
+          Streaming
+        >,
+        'definePlugins'
+      >
     : Omit<
-        Server<E, Plugins, A, InitialInput, InitialOutput>,
+        Server<
+          E,
+          Plugins,
+          A,
+          InitialInput,
+          InitialOutput,
+          MiddlewareInput,
+          MiddlewareOutput,
+          Streaming
+        >,
         'definePlugins' | 'defineEnv'
       > {
     return this as any;
