@@ -1,5 +1,13 @@
 # oc-template-react-compiler
 
+## 7.0.1
+
+### Patch Changes
+
+- Fix vite dep
+- Updated dependencies
+  - oc-vite-compiler@4.0.1
+
 ## 7.0.0
 
 ### Major Changes

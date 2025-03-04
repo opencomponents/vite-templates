@@ -1,5 +1,13 @@
 # oc-template-solid-compiler
 
+## 1.0.1
+
+### Patch Changes
+
+- Fix vite dep
+- Updated dependencies
+  - oc-vite-compiler@4.0.1
+
 ## 1.0.0
 
 ### Major Changes

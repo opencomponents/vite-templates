@@ -1,5 +1,11 @@
 # oc-vite-compiler
 
+## 4.0.1
+
+### Patch Changes
+
+- Fix vite dep
+
 ## 4.0.0
 
 ### Major Changes
