@@ -281,7 +281,7 @@ class HandledServer<
         return;
       }
       const stream = !!this._options.stream;
-      if ((context as any).streamSymbol) {
+      if (res && (context as any).streamSymbol) {
         res[(context as any).streamSymbol] = stream;
       }
 

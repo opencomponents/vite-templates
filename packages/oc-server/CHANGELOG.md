@@ -1,5 +1,11 @@
 # oc-server
 
+## 2.0.3
+
+### Patch Changes
+
+- Fix checking for streamsymbol only if is returning object and improve type for empty param-actions
+
 ## 2.0.2
 
 ### Patch Changes

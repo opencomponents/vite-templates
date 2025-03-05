@@ -17,14 +17,27 @@ type InferOutput<R> = R extends Action<any, infer O, any, any, any>
   ? ToPrettyJson<O>
   : never;
 
+type IsEmptyObject<T> = keyof T extends never ? true : false;
+
 type ServerClient<TServer extends AnyServer> = {
   readonly [Property in keyof TServer['actions']]: (
-    input: Prettify<
-      InferInput<TServer['actions'][Property]> &
-        (IsAny<GetMiddlewareInput<TServer>> extends never
-          ? GetMiddlewareInput<TServer>
-          : {})
-    >
+    ...args: IsEmptyObject<
+      Prettify<
+        InferInput<TServer['actions'][Property]> &
+          (IsAny<GetMiddlewareInput<TServer>> extends never
+            ? GetMiddlewareInput<TServer>
+            : {})
+      >
+    > extends true
+      ? []
+      : [
+          Prettify<
+            InferInput<TServer['actions'][Property]> &
+              (IsAny<GetMiddlewareInput<TServer>> extends never
+                ? GetMiddlewareInput<TServer>
+                : {})
+          >
+        ]
   ) => Promise<InferOutput<TServer['actions'][Property]>>;
 };
 
