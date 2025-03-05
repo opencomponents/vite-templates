@@ -1,5 +1,11 @@
 # oc-template-es6-compiler
 
+## 5.0.2
+
+### Patch Changes
+
+- fix stream adding
+
 ## 5.0.1
 
 ### Patch Changes

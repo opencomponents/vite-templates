@@ -1,5 +1,11 @@
 # oc-template-preact-compiler
 
+## 1.0.2
+
+### Patch Changes
+
+- fix stream adding
+
 ## 1.0.1
 
 ### Patch Changes

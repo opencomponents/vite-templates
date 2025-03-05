@@ -1,5 +1,11 @@
 # oc-template-react-compiler
 
+## 7.0.2
+
+### Patch Changes
+
+- fix stream adding
+
 ## 7.0.1
 
 ### Patch Changes

@@ -1,5 +1,11 @@
 # oc-server
 
+## 2.0.2
+
+### Patch Changes
+
+- fix stream adding
+
 ## 2.0.1
 
 ### Patch Changes

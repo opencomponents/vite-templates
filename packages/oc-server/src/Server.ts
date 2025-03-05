@@ -281,7 +281,10 @@ class HandledServer<
         return;
       }
       const stream = !!this._options.stream;
-      res[(context as any).streamSymbol] = stream;
+      if ((context as any).streamSymbol) {
+        res[(context as any).streamSymbol] = stream;
+      }
+
       cb(null, res);
     };
   }
