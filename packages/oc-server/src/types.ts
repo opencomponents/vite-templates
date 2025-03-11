@@ -2,7 +2,7 @@ export type Prettify<T> = {
   [K in keyof T]: T[K];
 } & {};
 
-type JsonPrimitive = string | number | boolean | null;
+type JsonPrimitive = string | number | boolean | null | undefined;
 type JsonObject = { [key: string]: JsonPrimitive | JsonArray | JsonObject };
 interface JsonArray extends Array<JsonPrimitive | JsonArray | JsonObject> {}
 

@@ -1,5 +1,11 @@
 # oc-server
 
+## 2.0.4
+
+### Patch Changes
+
+- fix tojson when returning optional params
+
 ## 2.0.3
 
 ### Patch Changes
