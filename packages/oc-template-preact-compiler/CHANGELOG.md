@@ -1,5 +1,13 @@
 # oc-template-preact-compiler
 
+## 1.0.3
+
+### Patch Changes
+
+- Fix SSR by checking document before looking for id
+- Updated dependencies
+  - oc-vite-compiler@4.0.2
+
 ## 1.0.2
 
 ### Patch Changes

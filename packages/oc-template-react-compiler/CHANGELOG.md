@@ -1,5 +1,13 @@
 # oc-template-react-compiler
 
+## 7.0.3
+
+### Patch Changes
+
+- Fix SSR by checking document before looking for id
+- Updated dependencies
+  - oc-vite-compiler@4.0.2
+
 ## 7.0.2
 
 ### Patch Changes

@@ -3,7 +3,7 @@ import http from 'http';
 const templates = ['react'];
 
 const templatesRequest = {
-  comp: templates.map((template) => ({
+  components: templates.map((template) => ({
     name: `base-component-${template}`,
     version: '1.x.x',
     parameters: { userId: 1 },
@@ -86,7 +86,7 @@ function renderHtml(body) {
   <script src="//localhost:3000/oc-client/client.js"></script>
   </head>
   <body>
-   ${ssr}
+   ${ssrs[0]}
   </body>
   </html>
   `;

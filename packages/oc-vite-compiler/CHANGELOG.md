@@ -1,5 +1,11 @@
 # oc-vite-compiler
 
+## 4.0.2
+
+### Patch Changes
+
+- Fix SSR by checking document before looking for id
+
 ## 4.0.1
 
 ### Patch Changes
