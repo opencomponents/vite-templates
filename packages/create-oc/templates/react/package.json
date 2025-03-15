@@ -18,15 +18,6 @@
       "static": [
         "public"
       ]
-    },
-    "parameters": {
-      "userId": {
-        "default": 1,
-        "description": "The user id from the user database",
-        "example": 1,
-        "mandatory": true,
-        "type": "number"
-      }
     }
   },
   "dependencies": {},

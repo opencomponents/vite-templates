@@ -1,5 +1,16 @@
 # oc-template-preact-compiler
 
+## 1.1.0
+
+### Minor Changes
+
+- Officially add withParameters and replace on package.json always on build
+
+### Patch Changes
+
+- Updated dependencies
+  - oc-vite-compiler@4.1.0
+
 ## 1.0.3
 
 ### Patch Changes

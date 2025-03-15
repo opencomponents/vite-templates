@@ -19,6 +19,7 @@ const higherOrderServerTemplate: ServerWrapper = ({
 ${
   exports.includes('server')
     ? `import { server } from '${removeExtension(serverPath)}'
+       export { server } from '${removeExtension(serverPath)}'
        const dataProvider = server.getData();`
     : `import { data as dataProvider } from '${removeExtension(serverPath)}'`
 }

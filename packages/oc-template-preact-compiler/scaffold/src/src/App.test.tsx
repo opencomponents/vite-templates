@@ -17,12 +17,24 @@ describe('App - Page', () => {
   it('Gets more data when clicking the button', () => {
     getData.mockImplementationOnce(() => Promise.resolve({}));
     render(
-      <DataProvider value={{ firstName: 'firstName', lastName: 'lastName', userId: 0, getData }}>
-        <App firstName="firstName" lastName="lastName" userId={0} />
+      <DataProvider
+        value={{
+          firstName: 'firstName',
+          lastName: 'lastName',
+          userId: 0,
+          getData,
+        }}
+      >
+        <App
+          firstName="firstName"
+          lastName="lastName"
+          born={1991}
+          hobbies={[]}
+        />
       </DataProvider>
     );
 
-    const extraInfoButton = screen.getByText(/Get extra information/i);
+    const extraInfoButton = screen.getByText(/Fun year fact/i);
     expect(extraInfoButton).toBeTruthy();
   });
 });

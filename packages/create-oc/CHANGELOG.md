@@ -1,5 +1,11 @@
 # create-oc
 
+## 1.1.0
+
+### Minor Changes
+
+- Officially add withParameters and replace on package.json always on build
+
 ## 1.0.1
 
 ### Patch Changes

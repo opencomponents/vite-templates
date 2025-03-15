@@ -1,5 +1,16 @@
 # oc-template-react-compiler
 
+## 7.1.0
+
+### Minor Changes
+
+- Officially add withParameters and replace on package.json always on build
+
+### Patch Changes
+
+- Updated dependencies
+  - oc-vite-compiler@4.1.0
+
 ## 7.0.3
 
 ### Patch Changes

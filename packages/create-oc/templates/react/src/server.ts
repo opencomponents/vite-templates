@@ -20,7 +20,16 @@ async function getFunFact(year: number) {
 }
 
 export const server = new Server()
-  .handler(async (params: { userId: number }) => {
+  .withParameters({
+    userId: {
+      default: 1,
+      description: 'The user id from the user database',
+      example: 1,
+      mandatory: true,
+      type: 'number',
+    },
+  })
+  .handler(async (params) => {
     const { userId } = params;
     const user = await getUser(userId);
     const [firstName, lastName] = user.name.split(/\s+/);

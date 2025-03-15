@@ -69,46 +69,7 @@ async function compileServer(
       appType: 'custom',
       root: componentPath,
       mode: production ? 'production' : 'development',
-      plugins: [
-        ...plugins,
-        ...basePlugins,
-        {
-          name: 'save-parameters',
-          transform(code, id) {
-            if (id === higherOrderServerPath && !production) {
-              code = `
-            ${code}
-            let parameters = null;
-            try {
-              parameters = server._parameters;
-            } catch (e) {}
-
-            if (parameters && Object.keys(parameters).length > 0) {
-              try {
-                const fs = require("fs");
-                const path = require("path");
-                const finder = require('find-package-json');
-
-                const { value: pkg, filename: pkgPath } = finder("${publishPath}").next();
-                const prevParameters = pkg.oc.parameters || {};
-          
-                if (JSON.stringify(prevParameters) !== JSON.stringify(parameters)) {
-                  pkg.oc.parameters = Object.assign(prevParameters, parameters);
-                  fs.writeFileSync(pkgPath, JSON.stringify(pkg, null, 2), "utf-8");
-                }
-              } catch (e){
-                console.log("There was an error trying to update the package.json file with the parameters");
-              }
-            }
-            `;
-            }
-            return {
-              code,
-              map: null,
-            };
-          },
-        },
-      ],
+      plugins: [...plugins, ...basePlugins],
       logLevel: options.verbose ? 'info' : 'silent',
       build: {
         lib: { entry: higherOrderServerPath, formats: ['cjs'] },
@@ -139,14 +100,24 @@ async function compileServer(
 
     await fs.ensureDir(publishPath);
     await fs.writeFile(path.join(publishPath, publishFileName), bundle);
+    let parameters: Record<string, unknown> | undefined = undefined;
     try {
-      require(path.join(publishPath, publishFileName));
+      const { server } = require(path.join(publishPath, publishFileName));
+      if (Object.keys(server._parameters).length > 0) {
+        if ('parameters' in options.componentPackage.oc) {
+          console.warn(
+            '\x1b[33m%s\x1b[0m',
+            'Warning: parameters defined in the server file will override the parameters defined in the package.json file. Please delete the package.json file parameters to avoid this warning.'
+          );
+        }
+        parameters = server._parameters;
+      }
     } catch {}
-
     return {
       type: 'node.js',
       hashKey: hashBuilder.fromString(bundle),
       src: publishFileName,
+      parameters,
     };
   } finally {
     await fs.remove(tempFolder);

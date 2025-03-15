@@ -1,5 +1,11 @@
 # oc-vite-compiler
 
+## 4.1.0
+
+### Minor Changes
+
+- Officially add withParameters and replace on package.json always on build
+
 ## 4.0.2
 
 ### Patch Changes

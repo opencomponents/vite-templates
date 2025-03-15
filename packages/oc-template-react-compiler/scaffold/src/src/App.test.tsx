@@ -26,14 +26,19 @@ describe('App - Page', () => {
           lastName: 'lastName',
           userId: 0,
           getData,
-          getSetting
+          getSetting,
         }}
       >
-        <App firstName="firstName" lastName="lastName" userId={0} />
+        <App
+          firstName="firstName"
+          lastName="lastName"
+          born={1991}
+          hobbies={[]}
+        />
       </DataProvider>
     );
 
-    const extraInfoButton = screen.getByText(/Get extra information/i);
+    const extraInfoButton = screen.getByText(/Fun year fact/i);
     expect(extraInfoButton).toBeTruthy();
   });
 });
