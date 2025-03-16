@@ -1,5 +1,11 @@
 # create-oc
 
+## 1.1.2
+
+### Patch Changes
+
+- add svelte to createoc
+
 ## 1.1.1
 
 ### Patch Changes

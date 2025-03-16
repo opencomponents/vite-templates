@@ -1,5 +1,11 @@
 # oc-template-react-compiler
 
+## 7.1.2
+
+### Patch Changes
+
+- add svelte to createoc
+
 ## 7.1.1
 
 ### Patch Changes

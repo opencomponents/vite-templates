@@ -1,5 +1,11 @@
 # oc-template-es6-compiler
 
+## 5.1.2
+
+### Patch Changes
+
+- add svelte to createoc
+
 ## 5.1.1
 
 ### Patch Changes
