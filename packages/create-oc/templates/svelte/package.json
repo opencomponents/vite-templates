@@ -1,0 +1,34 @@
+{
+  "name": "base-component-svelte",
+  "description": "",
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "oc-server dev",
+    "build": "npm run check && oc package .",
+    "check": "svelte-check --tsconfig ./tsconfig.app.json && tsc -p tsconfig.node.json",
+    "test": "vitest"
+  },
+  "oc": {
+    "files": {
+      "data": "src/server.ts",
+      "template": {
+        "src": "src/App.svelte",
+        "type": "oc-template-svelte"
+      },
+      "static": [
+        "public"
+      ]
+    }
+  },
+  "devDependencies": {
+    "@testing-library/jest-dom": "^5.16.5",
+    "@types/testing-library__jest-dom": "^5.14.5",
+    "@sveltejs/vite-plugin-svelte": "^5.0.3",
+    "jsdom": "^21.1.1",
+    "oc-server": "^2.0.4",
+    "oc-template-svelte-compiler": "^0.0.1",
+    "svelte": "^5.23.0",
+    "typescript": "5.0.2",
+    "vitest": "^0.29.7"
+  }
+}

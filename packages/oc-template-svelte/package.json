@@ -1,0 +1,39 @@
+{
+  "name": "oc-template-svelte",
+  "version": "0.0.2",
+  "description": "oc-template-svelte",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "clean": "rm -rf .turbo && rm -rf node_modules && rm -rf dist"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/opencomponents/vite-templates.git"
+  },
+  "bugs": {
+    "url": "https://github.com/opencomponents/vite-templates/issues"
+  },
+  "homepage": "https://github.com/opencomponents/vite-templates#readme",
+  "keywords": [
+    "oc",
+    "opencomponents",
+    "svelte",
+    "oc-template"
+  ],
+  "author": {
+    "name": "Ricardo Devis Agullo",
+    "email": "mkredz@gmail.com"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "minimal-request": "3.0.0",
+    "nice-cache": "0.0.5",
+    "oc-generic-template-renderer": "2.0.9"
+  },
+  "files": [
+    "dist/**"
+  ],
+  "externals": {}
+}

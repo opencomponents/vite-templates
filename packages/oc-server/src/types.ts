@@ -70,3 +70,6 @@ export type DataProvider<Parameters = any, Return = any, Environment = Env> = (
   context: DataContext<Parameters, Environment>,
   callback: Callback<Return>
 ) => void;
+
+type IfAny<T, Y, N> = 0 extends 1 & T ? Y : N;
+export type IsAny<T> = IfAny<T, true, never>;

@@ -1,4 +1,10 @@
-import { Prettify, DataContext, DataProvider, ToPrettyJson } from './types';
+import {
+  Prettify,
+  DataContext,
+  DataProvider,
+  ToPrettyJson,
+  IsAny,
+} from './types';
 
 export type ServerContext<E = { name: string }, P = any, S = any> = Omit<
   DataContext<any, E, P, S>,
@@ -124,7 +130,7 @@ export class Server<
     A,
     TransformOcParameters<T>,
     InitialOutput,
-    TransformOcParameters<T>,
+    MiddlewareInput,
     MiddlewareOutput,
     Streaming
   > {

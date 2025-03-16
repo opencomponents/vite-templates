@@ -1,5 +1,11 @@
 # oc-template-es6-compiler
 
+## 5.1.1
+
+### Patch Changes
+
+- Add svelte
+
 ## 5.1.0
 
 ### Minor Changes

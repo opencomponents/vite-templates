@@ -1,5 +1,11 @@
 # oc-template-preact-compiler
 
+## 1.1.1
+
+### Patch Changes
+
+- Add svelte
+
 ## 1.1.0
 
 ### Minor Changes

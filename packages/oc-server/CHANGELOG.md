@@ -1,5 +1,11 @@
 # oc-server
 
+## 2.0.5
+
+### Patch Changes
+
+- Add svelte
+
 ## 2.0.4
 
 ### Patch Changes
