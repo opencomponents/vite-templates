@@ -22,7 +22,6 @@ const { componentName, template } = await prompts([
       { title: 'Solid', value: 'solid' },
       { title: 'Preact', value: 'preact' },
       { title: 'Vue', value: 'vue' },
-      { title: 'Svelte', value: 'svelte' },
       { title: 'Elm', value: 'elm' },
     ],
   },

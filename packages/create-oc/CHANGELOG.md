@@ -1,5 +1,11 @@
 # create-oc
 
+## 1.1.3
+
+### Patch Changes
+
+- remove svelte until fix esm issue
+
 ## 1.1.2
 
 ### Patch Changes
