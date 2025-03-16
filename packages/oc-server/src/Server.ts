@@ -70,6 +70,13 @@ type TransformOcParameters<T extends OcParameters> = Prettify<
 >;
 
 interface ServerOptions<S extends boolean> {
+  /**
+   * If true, the server will stream the response to the client.
+   * This is useful for long polling or streaming responses.
+   * It will also serialize data structures like Map, Set, etc.
+   *
+   * @default false
+   */
   stream?: S;
 }
 
