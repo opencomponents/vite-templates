@@ -5,7 +5,7 @@ import fs from 'fs-extra';
 import coreModules from 'builtin-modules';
 import hashBuilder from 'oc-hash-builder';
 import serverWrapper, { ServerWrapper } from './serverWrapper';
-import type { CompilerServerOptions } from 'oc-generic-template-compiler';
+import type { CompilerServerOptions } from './createCompile';
 import type { PluginOption } from 'oc-vite';
 import { init, parse } from 'es-module-lexer';
 
@@ -23,7 +23,7 @@ async function compileServer(
 ) {
   const componentPath = options.componentPath;
   const serverFileName = options.componentPackage.oc.files.data;
-  let serverPath = path.join(options.componentPath, serverFileName);
+  let serverPath = path.join(options.componentPath, serverFileName!);
   if (process.platform === 'win32') {
     serverPath = serverPath.split('\\').join('\\\\');
   }

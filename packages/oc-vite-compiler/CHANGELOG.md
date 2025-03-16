@@ -1,5 +1,11 @@
 # oc-vite-compiler
 
+## 4.1.1
+
+### Patch Changes
+
+- Fix svelte build and new withParameters build too
+
 ## 4.1.0
 
 ### Minor Changes

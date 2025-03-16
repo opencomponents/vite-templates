@@ -6,7 +6,8 @@
     "dev": "oc-server dev",
     "build": "npm run check && oc package .",
     "check": "svelte-check --tsconfig ./tsconfig.app.json && tsc -p tsconfig.node.json",
-    "test": "vitest"
+    "test": "vitest",
+    "postinstall": "node fixBuild.mjs"
   },
   "oc": {
     "files": {
@@ -26,7 +27,7 @@
     "@sveltejs/vite-plugin-svelte": "^5.0.3",
     "jsdom": "^21.1.1",
     "oc-server": "^2.0.5",
-    "oc-template-svelte-compiler": "^0.0.3",
+    "oc-template-svelte-compiler": "^0.0.4",
     "svelte": "^5.23.0",
     "typescript": "5.0.2",
     "vitest": "^0.29.7"

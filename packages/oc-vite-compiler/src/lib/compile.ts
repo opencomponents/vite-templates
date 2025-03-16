@@ -1,7 +1,4 @@
-import {
-  createCompile as genericCompile,
-  GetInfo,
-} from 'oc-generic-template-compiler';
+import { createCompile as genericCompile, GetInfo } from './createCompile';
 import compileStatics from 'oc-statics-compiler';
 import viteServer from './viteServer';
 import viteView, { ViteViewOptions } from './viteView';
@@ -30,7 +27,7 @@ export default function createCompile(params: {
   htmlTemplate?: ViteViewOptions['htmlTemplate'];
   getInfo: GetInfo;
 }) {
-  const getInfo = () => ({...params.getInfo(), minOcVersion });
+  const getInfo = () => ({ ...params.getInfo(), minOcVersion });
 
   return genericCompile({
     compileView(options, cb) {

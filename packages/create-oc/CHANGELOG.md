@@ -1,5 +1,11 @@
 # create-oc
 
+## 1.1.4
+
+### Patch Changes
+
+- Fix svelte build and new withParameters build too
+
 ## 1.1.3
 
 ### Patch Changes

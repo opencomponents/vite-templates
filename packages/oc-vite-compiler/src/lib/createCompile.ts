@@ -122,7 +122,7 @@ export type CompileDependencies = {
 // publishPath
 // verbose,
 // watch,
-export default function createCompile(dependencies: CompileDependencies) {
+export function createCompile(dependencies: CompileDependencies) {
   const compileView = promisify(dependencies.compileView);
   const compileServer = promisify(dependencies.compileServer);
   const compileStatics = promisify(dependencies.compileStatics);

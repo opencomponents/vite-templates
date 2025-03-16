@@ -1,5 +1,13 @@
 # oc-template-svelte-compiler
 
+## 0.0.4
+
+### Patch Changes
+
+- Fix svelte build and new withParameters build too
+- Updated dependencies
+  - oc-vite-compiler@4.1.1
+
 ## 0.0.3
 
 ### Patch Changes

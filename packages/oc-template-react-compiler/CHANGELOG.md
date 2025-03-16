@@ -1,5 +1,13 @@
 # oc-template-react-compiler
 
+## 7.1.3
+
+### Patch Changes
+
+- Fix svelte build and new withParameters build too
+- Updated dependencies
+  - oc-vite-compiler@4.1.1
+
 ## 7.1.2
 
 ### Patch Changes

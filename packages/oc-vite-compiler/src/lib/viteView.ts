@@ -8,7 +8,7 @@ import ocViewWrapper from 'oc-view-wrapper';
 import cssModules from './cssModulesPlugin';
 import { providerFunctions } from './providerFunctions';
 import htmlTemplate, { HtmlTemplate } from './htmlTemplate';
-import type { CompilerOptions } from 'oc-generic-template-compiler';
+import type { CompilerOptions } from './createCompile';
 import type { PluginOption, Rollup } from 'vite';
 
 export interface ViteViewOptions {
