@@ -1,5 +1,11 @@
 # create-oc
 
+## 1.1.6
+
+### Patch Changes
+
+- Add Svelte again not its fixed
+
 ## 1.1.5
 
 ### Patch Changes
