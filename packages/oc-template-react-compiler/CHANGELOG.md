@@ -1,5 +1,13 @@
 # oc-template-react-compiler
 
+## 7.1.5
+
+### Patch Changes
+
+- Use new oc-vite
+- Updated dependencies
+  - oc-vite-compiler@4.1.2
+
 ## 7.1.4
 
 ### Patch Changes

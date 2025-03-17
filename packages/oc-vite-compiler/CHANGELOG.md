@@ -1,5 +1,11 @@
 # oc-vite-compiler
 
+## 4.1.2
+
+### Patch Changes
+
+- Use new oc-vite
+
 ## 4.1.1
 
 ### Patch Changes
