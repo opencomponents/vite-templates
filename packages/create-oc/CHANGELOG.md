@@ -1,5 +1,11 @@
 # create-oc
 
+## 1.1.7
+
+### Patch Changes
+
+- Add check against ctrl-c escape
+
 ## 1.1.6
 
 ### Patch Changes

@@ -27,6 +27,9 @@ const { componentName, template } = await prompts([
     ],
   },
 ]);
+if (!componentName || !template) {
+  process.exit(1);
+}
 
 try {
   fs.mkdirSync(`./${componentName}`);
