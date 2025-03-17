@@ -1,5 +1,11 @@
 # oc-template-es6-compiler
 
+## 5.1.4
+
+### Patch Changes
+
+- Update scaffold dependencies
+
 ## 5.1.3
 
 ### Patch Changes

@@ -1,5 +1,11 @@
 # oc-template-preact-compiler
 
+## 1.1.4
+
+### Patch Changes
+
+- Update scaffold dependencies
+
 ## 1.1.3
 
 ### Patch Changes

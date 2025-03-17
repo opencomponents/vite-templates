@@ -1,5 +1,11 @@
 # oc-template-svelte-compiler
 
+## 0.0.6
+
+### Patch Changes
+
+- Update scaffold dependencies
+
 ## 0.0.5
 
 ### Patch Changes

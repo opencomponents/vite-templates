@@ -1,5 +1,11 @@
 # oc-template-react-compiler
 
+## 7.1.4
+
+### Patch Changes
+
+- Update scaffold dependencies
+
 ## 7.1.3
 
 ### Patch Changes
