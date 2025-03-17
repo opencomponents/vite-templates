@@ -58,9 +58,9 @@ function checkPackages(pkgJson, vitePkgJson) {
 function fixBuild(path) {
   const file = fs.readFileSync(path, 'utf-8');
 
-  const buildCondition = 'config.build.lib ||';
+  const buildCondition = 'if (environment.config.build.lib) return true';
 
-  if (file.match(buildCondition).length !== 1) {
+  if (file.split(buildCondition).length !== 2) {
     throw new Error(
       'Source code does not match expectations for automatic replacement of condition'
     );
