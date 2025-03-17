@@ -331,6 +331,11 @@ type GetInitialData<TServer extends AnyServer> = TServer extends HandledServer<
     ? Exclude<O, undefined | null>
     : Exclude<ToPrettyJson<O>, undefined | null>
   : any;
+type GetHandlerParameters<TServer extends AnyServer> =
+  TServer extends HandledServer<any, any, any, infer I, any, any, any, any>
+    ? I
+    : any;
+export type HandlerParameters = GetHandlerParameters<RegisteredServer>;
 export type InitialData = GetInitialData<RegisteredServer>;
 export type ComponentSettings = {
   id: string;

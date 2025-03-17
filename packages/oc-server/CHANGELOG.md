@@ -1,5 +1,11 @@
 # oc-server
 
+## 2.0.6
+
+### Patch Changes
+
+- Export HandlerParameters type
+
 ## 2.0.5
 
 ### Patch Changes
