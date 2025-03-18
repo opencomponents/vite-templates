@@ -71,5 +71,12 @@ export type DataProvider<Parameters = any, Return = any, Environment = Env> = (
   callback: Callback<Return>
 ) => void;
 
-type IfAny<T, Y, N> = 0 extends 1 & T ? Y : N;
-export type IsAny<T> = IfAny<T, true, never>;
+type IfUnknown<T, Y, N> = [unknown] extends [T]
+  ? [T] extends [unknown]
+    ? Exclude<unknown, T> extends never
+      ? Y
+      : N
+    : N
+  : N;
+
+export type IsAnyOrUnknown<T> = IfUnknown<T, true, never>;

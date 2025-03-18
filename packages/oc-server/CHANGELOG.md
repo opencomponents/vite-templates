@@ -1,5 +1,11 @@
 # oc-server
 
+## 2.1.0
+
+### Minor Changes
+
+- Strict types for input and output (any to unknown)
+
 ## 2.0.6
 
 ### Patch Changes

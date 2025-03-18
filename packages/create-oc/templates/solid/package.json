@@ -25,7 +25,7 @@
     "@testing-library/jest-dom": "^6.5.0",
     "@types/testing-library__jest-dom": "^5.14.5",
     "jsdom": "^21.1.1",
-    "oc-server": "^2.0.6",
+    "oc-server": "^2.1.0",
     "oc-template-solid-compiler": "^1.1.5",
     "solid-js": "^1.9.5",
     "typescript": "5.5.4",

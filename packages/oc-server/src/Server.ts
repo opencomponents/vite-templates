@@ -3,7 +3,7 @@ import {
   DataContext,
   DataProvider,
   ToPrettyJson,
-  IsAny,
+  IsAnyOrUnknown,
 } from './types';
 
 export type ServerContext<E = { name: string }, P = any, S = any> = Omit<
@@ -90,8 +90,8 @@ export class Server<
   E = { name: string },
   P = unknown,
   A extends Record<string, AnyAction> = {},
-  InitialInput = any,
-  InitialOutput = any,
+  InitialInput = unknown,
+  InitialOutput = unknown,
   MiddlewareInput = any,
   MiddlewareOutput = any,
   Streaming extends boolean = false
@@ -327,10 +327,12 @@ type GetInitialData<TServer extends AnyServer> = TServer extends HandledServer<
   any,
   infer Streaming
 >
-  ? Streaming extends true
-    ? Exclude<O, undefined | null>
-    : Exclude<ToPrettyJson<O>, undefined | null>
-  : any;
+  ? IsAnyOrUnknown<O> extends never
+    ? Streaming extends true
+      ? Exclude<O, undefined | null>
+      : Exclude<ToPrettyJson<O>, undefined | null>
+    : unknown
+  : unknown;
 type GetHandlerParameters<TServer extends AnyServer> =
   TServer extends HandledServer<any, any, any, infer I, any, any, any, any>
     ? I

@@ -18,7 +18,7 @@
     }
   },
   "devDependencies": {
-    "oc-server": "^2.0.6",
+    "oc-server": "^2.1.0",
     "oc-template-es6-compiler": "^5.1.5"
   }
 }

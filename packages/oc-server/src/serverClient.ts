@@ -7,7 +7,7 @@ import {
   getSettings,
   GetMiddlewareInput,
 } from './Server';
-import { IsAny, Prettify, ToPrettyJson } from './types';
+import { IsAnyOrUnknown, Prettify, ToPrettyJson } from './types';
 
 type InferInput<R> = R extends Action<infer I, any, any, any, any> ? I : any;
 type InferOutput<R> = R extends Action<any, infer O, any, any, any>
@@ -21,7 +21,7 @@ type ServerClient<TServer extends AnyServer> = {
     ...args: IsEmptyObject<
       Prettify<
         InferInput<TServer['actions'][Property]> &
-          (IsAny<GetMiddlewareInput<TServer>> extends never
+          (IsAnyOrUnknown<GetMiddlewareInput<TServer>> extends never
             ? GetMiddlewareInput<TServer>
             : {})
       >
@@ -30,7 +30,7 @@ type ServerClient<TServer extends AnyServer> = {
       : [
           Prettify<
             InferInput<TServer['actions'][Property]> &
-              (IsAny<GetMiddlewareInput<TServer>> extends never
+              (IsAnyOrUnknown<GetMiddlewareInput<TServer>> extends never
                 ? GetMiddlewareInput<TServer>
                 : {})
           >
