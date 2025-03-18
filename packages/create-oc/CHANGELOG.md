@@ -1,5 +1,11 @@
 # create-oc
 
+## 1.1.11
+
+### Patch Changes
+
+- fix type import
+
 ## 1.1.9
 
 ### Patch Changes
