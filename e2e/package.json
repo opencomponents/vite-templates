@@ -17,6 +17,9 @@
     "execa": "^8.0.1",
     "oc": "^0.49.42"
   },
+  "engines": {
+    "node": ">=20.10.6"
+  },
   "devDependencies": {
     "@playwright/test": "^1.40.1",
     "@types/node": "^20.10.6"

@@ -1,5 +1,11 @@
 # create-oc
 
+## 1.1.9
+
+### Patch Changes
+
+- Allow parameters for create oc cli for name and template
+
 ## 1.1.8
 
 ### Patch Changes

@@ -65,7 +65,13 @@ async function start(clean = false) {
   if (clean) {
     fs.rmSync('./build', { recursive: true, force: true });
   }
-  const components = ['react', 'es6', 'solid', 'vue' /*'preact', 'elm' */];
+  const components = [
+    'react',
+    'es6',
+    'solid',
+    'vue',
+    'svelte' /*'preact', 'elm' */,
+  ];
 
   console.log('Initializing components');
   for (const component of components) {
