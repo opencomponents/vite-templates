@@ -18,7 +18,7 @@ export interface ViteViewOptions {
     providerFunctions: string;
   }) => string;
   plugins?: PluginOption[];
-  externals?: any;
+  externals?: Array<{ name: string; global: string; paths?: string[] }>;
   htmlTemplate?: (opts: HtmlTemplate) => void;
 }
 
@@ -66,10 +66,17 @@ async function compileView(options: ViteViewOptions & CompilerOptions) {
 
   await fs.outputFile(viewWrapperPath, viewWrapperContent);
 
-  const globals = externals.reduce((externals: any, dep: any) => {
-    externals[dep.name] = dep.global;
-    return externals;
-  }, {} as Record<string, string>);
+  const globals = externals.reduce(
+    (externals, dep: { name: string; global: string; paths?: string[] }) => {
+      externals[dep.name] = dep.global;
+      for (const path of dep.paths ?? []) {
+        const normalizedPath = path.replace(/^\//, '');
+        externals[`${dep.name}/${normalizedPath}`] = dep.global;
+      }
+      return externals;
+    },
+    {} as Record<string, string>
+  );
 
   const plugins = options?.plugins ?? [];
   const pluginsNames = plugins.map((x: any) => x?.name).filter(Boolean);

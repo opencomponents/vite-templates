@@ -1,5 +1,12 @@
 # oc-vite-compiler
 
+## 4.2.0
+
+### Minor Changes
+
+- Add ability to bundle react
+  Breaking: drop support for React 17 and lower
+
 ## 4.1.2
 
 ### Patch Changes

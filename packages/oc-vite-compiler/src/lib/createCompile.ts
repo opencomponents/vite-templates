@@ -55,7 +55,8 @@ type OcOptions = {
       minOcVersion?: string;
       externals?: Array<{
         name: string;
-        global: string | string[];
+        paths?: string[];
+        global: string;
         url: string;
       }>;
     };
@@ -100,7 +101,8 @@ export type GetInfo = () => {
   version: string;
   externals: Array<{
     name: string;
-    global: string | string[];
+    paths?: string[];
+    global: string;
     url: string;
   }>;
 };

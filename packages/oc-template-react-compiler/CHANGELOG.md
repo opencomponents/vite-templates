@@ -1,5 +1,18 @@
 # oc-template-react-compiler
 
+## 8.0.0
+
+### Major Changes
+
+- Add ability to bundle react
+  Breaking: drop support for React 17 and lower
+
+### Patch Changes
+
+- Updated dependencies
+  - oc-template-react@4.2.0
+  - oc-vite-compiler@4.2.0
+
 ## 7.1.5
 
 ### Patch Changes

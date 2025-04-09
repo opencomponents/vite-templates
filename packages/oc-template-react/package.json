@@ -1,6 +1,6 @@
 {
   "name": "oc-template-react",
-  "version": "4.1.0",
+  "version": "4.2.0",
   "description": "OC-Template-React",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -45,6 +45,9 @@
     },
     "react-dom": {
       "global": "ReactDOM",
+      "paths": [
+        "client"
+      ],
       "url": "https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js",
       "devUrl": "https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js"
     }
