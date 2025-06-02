@@ -1,0 +1,42 @@
+{
+  "name": "oc-template-esm-compiler",
+  "version": "8.0.0",
+  "description": "Compiler for the ESM OC template",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "clean": "rm -rf .turbo && rm -rf node_modules && rm -rf dist"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/opencomponents/vite-templates.git"
+  },
+  "bugs": {
+    "url": "https://github.com/opencomponents/vite-templates/issues"
+  },
+  "homepage": "https://github.com/opencomponents/vite-templates#readme",
+  "keywords": [
+    "oc",
+    "opencomponents",
+    "esm",
+    "oc-template"
+  ],
+  "author": {
+    "name": "Ricardo Devis Agullo",
+    "email": "mkredz@gmail.com"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "oc-template-esm": "^0.0.1",
+    "oc-vite-compiler": "^4.2.0"
+  },
+  "files": [
+    "dist/**",
+    "scaffold"
+  ],
+  "devDependencies": {
+    "prettier": "^2.3.2",
+    "prettier-config-guestline": "2.0.0"
+  }
+}
