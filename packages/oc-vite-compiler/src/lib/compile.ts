@@ -4,13 +4,20 @@ import viteServer from './viteServer';
 import viteView, { ViteViewOptions } from './viteView';
 import type { PluginOption } from 'vite';
 
-type External = ReturnType<GetInfo>['externals'][number];
+type External = {
+  name: string;
+  paths?: string[];
+  global?: string;
+  url: string;
+};
+
 function checkExternal(data: unknown): data is External {
   return (
     typeof data === 'object' &&
     data !== null &&
     typeof (data as { name: unknown }).name === 'string' &&
-    typeof (data as { global: unknown }).global === 'string' &&
+    (!(data as { global: unknown }).global ||
+      typeof (data as { global: unknown }).global === 'string') &&
     typeof (data as { url: unknown }).url === 'string'
   );
 }

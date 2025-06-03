@@ -6,7 +6,6 @@ import { InitialData } from 'oc-server';
 interface RendererOptions {
   mount(element: Element, props: InitialData, ssr: boolean): void;
   unmount(): void;
-  external?: string[];
 }
 
 declare function createComponent(opts: RendererOptions): RendererOptions;
@@ -21,6 +20,5 @@ export default createComponent({
   },
   unmount() {
     root?.unmount();
-  },
-  external: ['react', 'react-dom/']
+  }
 });

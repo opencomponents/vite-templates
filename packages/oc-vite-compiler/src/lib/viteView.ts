@@ -11,6 +11,26 @@ import htmlTemplate, { HtmlTemplate } from './htmlTemplate';
 import type { CompilerOptions } from './createCompile';
 import type { PluginOption, Rollup } from 'vite';
 
+interface External {
+  name: string;
+  paths?: string[];
+  global?: string;
+}
+
+interface GlobalExternal extends External {
+  global: string;
+}
+interface EsmExternal extends External {
+  global: undefined;
+}
+
+function isGlobalExternal(data: External): data is GlobalExternal {
+  return data.global !== undefined;
+}
+function isEsmExternal(data: External): data is EsmExternal {
+  return data.global === undefined;
+}
+
 export interface ViteViewOptions {
   publishFileName?: string;
   viewWrapper?: (opts: {
@@ -18,7 +38,7 @@ export interface ViteViewOptions {
     providerFunctions: string;
   }) => string;
   plugins?: PluginOption[];
-  externals?: Array<{ name: string; global: string; paths?: string[] }>;
+  externals?: Array<{ name: string; global?: string; paths?: string[] }>;
   htmlTemplate?: (opts: HtmlTemplate) => void;
 }
 
@@ -55,7 +75,8 @@ async function compileView(options: ViteViewOptions & CompilerOptions) {
   const tempPath = path.join(publishPath, 'temp');
   const publishFileName = options.publishFileName || 'template.js';
   const componentPackage = options.componentPackage;
-  const externals = options.externals || [];
+  const globalExternals = (options.externals || []).filter(isGlobalExternal);
+  const esmExternals = (options.externals || []).filter(isEsmExternal);
   const production = !!options.production;
   const viewExtension = viewFileName.match(/\.(jsx?|tsx?)$/)?.[0] ?? '.js';
 
@@ -66,17 +87,14 @@ async function compileView(options: ViteViewOptions & CompilerOptions) {
 
   await fs.outputFile(viewWrapperPath, viewWrapperContent);
 
-  const globals = externals.reduce(
-    (externals, dep: { name: string; global: string; paths?: string[] }) => {
-      externals[dep.name] = dep.global;
-      for (const path of dep.paths ?? []) {
-        const normalizedPath = path.replace(/^\//, '');
-        externals[`${dep.name}/${normalizedPath}`] = dep.global;
-      }
-      return externals;
-    },
-    {} as Record<string, string>
-  );
+  const globals = globalExternals.reduce((externals, dep) => {
+    externals[dep.name] = dep.global;
+    for (const path of dep.paths ?? []) {
+      const normalizedPath = path.replace(/^\//, '');
+      externals[`${dep.name}/${normalizedPath}`] = dep.global;
+    }
+    return externals;
+  }, {} as Record<string, string>);
 
   const plugins = options?.plugins ?? [];
   const pluginsNames = plugins.map((x: any) => x?.name).filter(Boolean);
@@ -136,7 +154,7 @@ async function compileView(options: ViteViewOptions & CompilerOptions) {
         templateId,
         templateName: shortTemplateType,
         css: cssStyles,
-        externals,
+        externals: globalExternals,
         bundle: iife,
         hash,
       });
@@ -210,7 +228,7 @@ async function compileView(options: ViteViewOptions & CompilerOptions) {
       write: false,
       minify: production,
       rollupOptions: {
-        external: Object.keys(globals),
+        external: [...Object.keys(globals), ...esmExternals.map((x) => x.name)],
         output: {
           globals,
         },
