@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { serverClient, InitialData, ActionOutput } from 'oc-server';
-import styles from './styles.css';
+import styles from './styles.module.css';
 import logo from '../public/logo.png';
 
 type AdditionalData = ActionOutput<'funFact'>;

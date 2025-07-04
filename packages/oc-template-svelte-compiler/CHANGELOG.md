@@ -1,5 +1,13 @@
 # oc-template-svelte-compiler
 
+## 0.0.10
+
+### Patch Changes
+
+- fix packages
+- Updated dependencies
+  - oc-vite-compiler@4.2.2
+
 ## 0.0.9
 
 ### Patch Changes

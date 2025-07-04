@@ -1,5 +1,11 @@
 # oc-vite-compiler
 
+## 4.2.2
+
+### Patch Changes
+
+- fix packages
+
 ## 4.2.1
 
 ### Patch Changes

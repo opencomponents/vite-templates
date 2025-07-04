@@ -1,6 +1,6 @@
 {
   "name": "oc-template-react-compiler",
-  "version": "8.0.1",
+  "version": "8.0.2",
   "description": "Compiler for the React OC template",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -30,7 +30,7 @@
   "dependencies": {
     "@vitejs/plugin-react": "^4.3.1",
     "oc-template-react": "^4.2.0",
-    "oc-vite-compiler": "^4.2.1",
+    "oc-vite-compiler": "^4.2.2",
     "react": "18.2.0",
     "react-dom": "18.2.0"
   },
