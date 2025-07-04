@@ -11,9 +11,9 @@
   },
   "oc": {
     "files": {
-      "data": "src/server.ts",
+      "data": "src/entry.server.ts",
       "template": {
-        "src": "src/App.tsx",
+        "src": "src/entry.client.tsx",
         "type": "oc-template-esm"
       },
       "static": [
