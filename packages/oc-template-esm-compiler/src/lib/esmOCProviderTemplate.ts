@@ -4,10 +4,10 @@ export default function esmOCProviderTemplate({ viewPath }: { viewPath: string }
   return `
   import Component from '${removeExtension(viewPath)}';
 
-  function renderer(props, element, ssr) {
-    Component.render(props, element, ssr);
-  }
+  export function mount(element, props) {
+    const { _staticPath, _baseUrl, _componentName, _componentVersion, ...rest } = props;
 
-  export default renderer;
+    Component.mount(element, rest);
+  }
 `;
 }

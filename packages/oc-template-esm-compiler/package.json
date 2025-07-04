@@ -3,7 +3,12 @@
   "version": "8.0.0",
   "description": "Compiler for the ESM OC template",
   "main": "dist/index.js",
+  "type": "module",
   "types": "dist/index.d.ts",
+  "exports": {
+    ".": "./dist/index.js",
+    "./renderer": "./dist/lib/renderer.js"
+  },
   "scripts": {
     "build": "tsc",
     "clean": "rm -rf .turbo && rm -rf node_modules && rm -rf dist"

@@ -1,9 +1,11 @@
 import { callbackify } from 'util';
 import path from 'path';
 import fs from 'fs-extra';
-import vite from 'oc-vite';
+import vite from 'vite';
+import EnvironmentPlugin from 'vite-plugin-environment';
 import { providerFunctions } from './providerFunctions';
 import { HtmlTemplate } from './htmlTemplate';
+import cssInjectedByJsPlugin from 'vite-plugin-css-injected-by-js';
 import type { CompilerOptions } from './createCompile';
 import type { PluginOption, Rollup } from 'vite';
 
@@ -18,7 +20,7 @@ export interface ViteViewOptions {
   htmlTemplate?: (opts: HtmlTemplate) => void;
 }
 
-const clientName = 'clientBundle';
+const clientName = 'template';
 const removeExtension = (path: string) => path.replace(/\.(t|j)sx?$/, '');
 const defaultViewWrapper = ({ viewPath }: { viewPath: string }) =>
   `import View from "${removeExtension(viewPath)}";
@@ -52,9 +54,16 @@ async function compileView(options: ViteViewOptions & CompilerOptions) {
   const componentPackage = options.componentPackage;
   const production = !!options.production;
   const viewExtension = viewFileName.match(/\.(jsx?|tsx?)$/)?.[0] ?? '.js';
+  const baseConfig = await vite
+    // @ts-ignore
+    .loadConfigFromFile(componentPath)
+    .catch(() => null);
 
   const viewWrapperFn = options.viewWrapper || defaultViewWrapper;
-  const viewWrapperContent = viewWrapperFn({ viewPath, providerFunctions });
+  const viewWrapperContent = viewWrapperFn({
+    viewPath,
+    providerFunctions,
+  });
   const viewWrapperName = `_viewWrapperEntry${viewExtension}`;
   const viewWrapperPath = path.join(tempPath, viewWrapperName);
 
@@ -62,10 +71,6 @@ async function compileView(options: ViteViewOptions & CompilerOptions) {
 
   const plugins = options?.plugins ?? [];
   const pluginsNames = plugins.map((x: any) => x?.name).filter(Boolean);
-  const baseConfig = await vite
-    // @ts-ignore
-    .loadConfigFromFile(process.cwd())
-    .catch(() => null);
   const basePlugins =
     baseConfig?.config?.plugins?.filter(
       (p: any) => !pluginsNames.includes(p?.name)
@@ -73,12 +78,14 @@ async function compileView(options: ViteViewOptions & CompilerOptions) {
 
   const otherAssets: vite.Rollup.OutputAsset[] = [];
   let hash = '';
+  const alias = baseConfig?.config?.resolve?.alias;
 
-  const result = await vite.build({
+  await vite.build({
     appType: 'custom',
     root: componentPath,
     mode: production ? 'production' : 'development',
     plugins: [
+      cssInjectedByJsPlugin(),
       {
         name: 'OcServerRuntime',
         enforce: 'pre',
@@ -100,11 +107,16 @@ async function compileView(options: ViteViewOptions & CompilerOptions) {
         },
       },
       ...plugins,
+      EnvironmentPlugin(['NODE_ENV']),
       ...basePlugins,
     ] as any,
     logLevel: 'silent',
+    resolve: {
+      alias,
+    },
     build: {
       sourcemap: true,
+      outDir: publishPath,
       lib: {
         entry: viewWrapperPath,
         formats: ['es'],
@@ -114,22 +126,25 @@ async function compileView(options: ViteViewOptions & CompilerOptions) {
       write: true,
       minify: production,
       rollupOptions: {
-        external: options.externals?.map((x) => x.name) ?? [],
+        external: baseConfig?.config?.build?.rollupOptions?.external ?? [],
+      },
+    },
+    experimental: {
+      renderBuiltUrl(filename, { hostType }) {
+        if (hostType === 'js') {
+          const { name, version } = options.componentPackage;
+          return {
+            runtime: `window.oc._esm['${name}@${version}'](${JSON.stringify(
+              filename
+            )})`,
+          };
+        } else {
+          return { relative: true };
+        }
       },
     },
   });
-  const out = (
-    Array.isArray(result) ? result[0] : result
-  ) as Rollup.RollupOutput;
-  const bundle = (
-    out.output.find((x) =>
-      (x as Rollup.OutputChunk)?.facadeModuleId?.endsWith(viewWrapperName)
-    )! as Rollup.OutputChunk
-  ).code;
 
-  await fs.unlink(viewWrapperPath);
-  await fs.mkdir(publishPath, { recursive: true });
-  await fs.writeFile(path.join(publishPath, publishFileName), bundle);
   if (staticFolder) {
     for (const asset of otherAssets) {
       // asset.fileName could have paths like assets/file.js
@@ -149,6 +164,7 @@ async function compileView(options: ViteViewOptions & CompilerOptions) {
       hashKey: hash,
       src: publishFileName,
     },
+    imports: alias as Record<string, string>,
     bundle: { hashKey: hash },
   };
 }

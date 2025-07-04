@@ -2,6 +2,7 @@ import { createCompile as genericCompile, GetInfo } from './createCompile';
 import compileStatics from 'oc-statics-compiler';
 import viteServer from './viteServer';
 import viteView, { ViteViewOptions } from './viteView';
+import viteEsmView from './viteEsmView';
 import type { PluginOption } from 'vite';
 
 type External = {
@@ -54,16 +55,21 @@ export default function createCompile(params: {
         externals = params.getInfo().externals;
       }
 
-      return viteView(
-        {
-          ...options,
-          plugins: params.plugins,
-          htmlTemplate: params.htmlTemplate,
-          viewWrapper: params.viewWrapper,
-          externals,
-        },
-        cb
-      );
+      const viewOptions = {
+        ...options,
+        plugins: params.plugins,
+        htmlTemplate: params.htmlTemplate,
+        viewWrapper: params.viewWrapper,
+        externals,
+      };
+
+      if (
+        options.componentPackage.oc.files.template.type === 'oc-template-esm'
+      ) {
+        return viteEsmView(viewOptions, cb);
+      }
+
+      return viteView(viewOptions, cb);
     },
     compileServer: viteServer,
     compileStatics,

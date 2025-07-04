@@ -27,6 +27,7 @@ interface PackageJson {
   devDependencies?: Record<string, string>;
 }
 export interface CompiledViewInfo {
+  imports?: Record<string, string>;
   template: {
     type: string;
     hashKey: string;
@@ -43,6 +44,7 @@ type OcOptions = {
   date: number;
   parameters?: Record<string, unknown>;
   files: {
+    imports?: Record<string, string>;
     client?: any;
     data?: string;
     dataProvider?: any;
@@ -139,6 +141,7 @@ export function createCompile(dependencies: CompileDependencies) {
       // Compile view
       const compiledViewInfo = await compileView(options);
       componentPackage.oc.files.template = compiledViewInfo.template;
+      componentPackage.oc.files.imports = compiledViewInfo.imports;
       delete componentPackage.oc.files.client;
 
       // Compile dataProvider
