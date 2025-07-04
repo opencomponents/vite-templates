@@ -1,5 +1,11 @@
 # oc-vite-compiler
 
+## 4.2.1
+
+### Patch Changes
+
+- Add ESM support
+
 ## 4.2.0
 
 ### Minor Changes

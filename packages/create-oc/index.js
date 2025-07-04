@@ -19,6 +19,7 @@ function checkNodeVersion() {
 checkNodeVersion();
 
 const templateChoices = [
+  { title: 'ESM (New)', value: 'esm' },
   { title: 'Vanilla', value: 'es6' },
   { title: 'React', value: 'react' },
   { title: 'Solid', value: 'solid' },

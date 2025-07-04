@@ -1,5 +1,11 @@
 # create-oc
 
+## 1.1.12
+
+### Patch Changes
+
+- Add ESM support
+
 ## 1.1.11
 
 ### Patch Changes

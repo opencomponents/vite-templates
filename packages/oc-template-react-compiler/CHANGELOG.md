@@ -1,5 +1,13 @@
 # oc-template-react-compiler
 
+## 8.0.1
+
+### Patch Changes
+
+- Add ESM support
+- Updated dependencies
+  - oc-vite-compiler@4.2.1
+
 ## 8.0.0
 
 ### Major Changes

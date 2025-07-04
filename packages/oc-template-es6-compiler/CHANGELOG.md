@@ -1,5 +1,13 @@
 # oc-template-es6-compiler
 
+## 5.1.6
+
+### Patch Changes
+
+- Add ESM support
+- Updated dependencies
+  - oc-vite-compiler@4.2.1
+
 ## 5.1.5
 
 ### Patch Changes

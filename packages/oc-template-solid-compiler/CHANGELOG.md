@@ -1,5 +1,13 @@
 # oc-template-solid-compiler
 
+## 1.1.6
+
+### Patch Changes
+
+- Add ESM support
+- Updated dependencies
+  - oc-vite-compiler@4.2.1
+
 ## 1.1.5
 
 ### Patch Changes

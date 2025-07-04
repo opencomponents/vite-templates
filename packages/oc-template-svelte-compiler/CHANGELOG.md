@@ -1,5 +1,13 @@
 # oc-template-svelte-compiler
 
+## 0.0.9
+
+### Patch Changes
+
+- Add ESM support
+- Updated dependencies
+  - oc-vite-compiler@4.2.1
+
 ## 0.0.8
 
 ### Patch Changes
