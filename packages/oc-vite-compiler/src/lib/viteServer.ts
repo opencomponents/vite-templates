@@ -13,6 +13,7 @@ interface ViteServerOptions {
   publishFileName?: string;
   serverWrapper?: ServerWrapper;
   plugins?: PluginOption[];
+  imports?: Record<string, string>;
 }
 
 const nodeModuleMatcher = /^[a-z@][a-z\-/0-9.]+$/i;
@@ -43,6 +44,7 @@ async function compileServer(
     serverPath,
     componentName,
     componentVersion,
+    esm: options.componentPackage.oc.files.template.type === 'oc-template-esm',
   });
   const tempFolder = path.join(publishPath, 'temp');
   const higherOrderServerPath = path.join(

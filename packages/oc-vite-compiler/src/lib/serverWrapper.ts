@@ -6,6 +6,7 @@ export type ServerWrapper = (options: {
   componentName: string;
   componentVersion: string;
   bundleHashKey: string;
+  esm?: boolean;
 }) => string;
 
 const higherOrderServerTemplate: ServerWrapper = ({
@@ -14,6 +15,7 @@ const higherOrderServerTemplate: ServerWrapper = ({
   componentName,
   componentVersion,
   bundleHashKey,
+  esm = false,
 }) => {
   return `
 ${
@@ -46,7 +48,8 @@ export const data = (context : any, callback : (error: any, data?: any) => void)
       component: {
         key: "${bundleHashKey}",
         src: srcPath + "template.js",
-        props
+        props,
+        esm: ${esm}
       }
     }));
   });

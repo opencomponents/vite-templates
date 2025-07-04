@@ -19,3 +19,15 @@ export const render = callbackify((options: SsrOptions) => {
     },
   });
 });
+
+type CompiledTemplate = (model: unknown) => string;
+type RenderOriginal = (
+  options: { model: unknown; template: CompiledTemplate },
+  cb: (err: Error | null, data: string) => void
+) => void;
+type Render = (
+  options: { model: unknown; template: CompiledTemplate },
+  cb: (err: Error | null, data: string) => void
+) => void;
+
+const r: Render = render;
