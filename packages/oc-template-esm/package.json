@@ -1,9 +1,17 @@
 {
   "name": "oc-template-esm",
   "version": "4.2.0",
+  "type": "module",
   "description": "OC-Template-ESM",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "require": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
   "scripts": {
     "build": "tsc",
     "clean": "rm -rf .turbo && rm -rf node_modules && rm -rf dist"

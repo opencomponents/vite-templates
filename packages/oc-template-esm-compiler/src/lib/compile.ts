@@ -1,6 +1,9 @@
 import { getInfo } from 'oc-template-esm';
-import { createCompile } from 'oc-vite-compiler';
-import esmOCProviderTemplate from './esmOCProviderTemplate';
+import esmOCProviderTemplate from './esmOCProviderTemplate.js';
+import { createRequire } from 'node:module'
+
+const require = createRequire(import.meta.url);
+const { createCompile } = require('oc-vite-compiler');
 
 export const compile = createCompile({
   plugins: [],

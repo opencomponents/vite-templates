@@ -1,5 +1,4 @@
-import React from 'react';
-import { SsrOptions, ssr } from './to-be-published/ssr';
+import { type SsrOptions, ssr } from './to-be-published/ssr.js';
 
 import { callbackify } from 'util';
 
@@ -9,7 +8,7 @@ export const render = callbackify((options: SsrOptions) => {
   };
 
   return ssr({
-    componentName: 'react',
+    componentName: 'esm',
     options,
     renderer,
     globals: {},

@@ -1,5 +1,5 @@
-import createPredicate from './get-js-from-url';
-import tryGetCached from './try-get-cached';
+import createPredicate from './get-js-from-url.js';
+import tryGetCached from './try-get-cached.js';
 
 export interface SsrOptions {
   key: string;

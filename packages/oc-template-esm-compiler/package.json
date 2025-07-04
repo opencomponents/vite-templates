@@ -6,8 +6,16 @@
   "type": "module",
   "types": "dist/index.d.ts",
   "exports": {
-    ".": "./dist/index.js",
-    "./renderer": "./dist/lib/renderer.js"
+    ".": {
+      "import": "./dist/index.js",
+      "require": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    },
+    "./renderer": {
+      "import": "./dist/lib/renderer.js",
+      "require": "./dist/lib/renderer.js",
+      "types": "./dist/lib/renderer.d.ts"
+    }
   },
   "scripts": {
     "build": "tsc",
@@ -43,5 +51,8 @@
   "devDependencies": {
     "prettier": "^2.3.2",
     "prettier-config-guestline": "2.0.0"
+  },
+  "peerDependencies": {
+    "oc-server": "^2.0.0"
   }
 }
