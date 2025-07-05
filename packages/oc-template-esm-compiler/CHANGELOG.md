@@ -1,5 +1,13 @@
 # oc-template-esm-compiler
 
+## 0.0.8
+
+### Patch Changes
+
+- fix getinitialdataa on esm
+- Updated dependencies
+  - oc-vite-compiler@4.2.7
+
 ## 0.0.6
 
 ### Patch Changes

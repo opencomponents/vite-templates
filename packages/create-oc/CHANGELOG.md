@@ -1,5 +1,11 @@
 # create-oc
 
+## 1.1.19
+
+### Patch Changes
+
+- fix getinitialdataa on esm
+
 ## 1.1.17
 
 ### Patch Changes

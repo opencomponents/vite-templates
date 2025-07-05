@@ -1,5 +1,11 @@
 # oc-vite-compiler
 
+## 4.2.7
+
+### Patch Changes
+
+- fix getinitialdataa on esm
+
 ## 4.2.5
 
 ### Patch Changes
