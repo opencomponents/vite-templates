@@ -102,9 +102,10 @@ async function compileServer(
 
     await fs.ensureDir(publishPath);
     await fs.writeFile(path.join(publishPath, publishFileName), bundle);
+    await fs.writeFile(path.join(publishPath, 'server.cjs'), bundle);
     let parameters: Record<string, unknown> | undefined = undefined;
     try {
-      const { server } = require(path.join(publishPath, publishFileName));
+      const { server } = require(path.join(publishPath, 'server.cjs'));
       if (Object.keys(server._parameters).length > 0) {
         if ('parameters' in options.componentPackage.oc) {
           console.warn(
@@ -114,7 +115,10 @@ async function compileServer(
         }
         parameters = server._parameters;
       }
-    } catch {}
+    } catch {
+    } finally {
+      await fs.remove(path.join(publishPath, 'server.cjs')).catch(() => {});
+    }
     return {
       type: 'node.js',
       hashKey: hashBuilder.fromString(bundle),

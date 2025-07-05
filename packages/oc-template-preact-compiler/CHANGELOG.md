@@ -1,5 +1,13 @@
 # oc-template-preact-compiler
 
+## 1.1.8
+
+### Patch Changes
+
+- Fix esm params/imports
+- Updated dependencies
+  - oc-vite-compiler@4.2.3
+
 ## 1.1.7
 
 ### Patch Changes

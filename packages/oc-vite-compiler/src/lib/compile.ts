@@ -26,15 +26,19 @@ function checkExternals(data: unknown): data is External[] {
   return Array.isArray(data) && data.every((item) => checkExternal(item));
 }
 
-// Minimum OC version required to support streaming
-const minOcVersion = '0.50.0';
-
 export default function createCompile(params: {
   plugins?: PluginOption[];
   viewWrapper?: ViteViewOptions['viewWrapper'];
   htmlTemplate?: ViteViewOptions['htmlTemplate'];
   getInfo: GetInfo;
 }) {
+  // Minimum OC version required to support streaming
+  let minOcVersion = '0.50.0';
+  const isEsm = params.getInfo().type === 'oc-template-esm';
+  if (isEsm) {
+    // Needs oc-client-browser on 0.50.8 to support ESM
+    minOcVersion = '0.50.8';
+  }
   const getInfo = () => ({ ...params.getInfo(), minOcVersion });
 
   return genericCompile({

@@ -55,8 +55,14 @@ async function compileView(options: ViteViewOptions & CompilerOptions) {
   const production = !!options.production;
   const viewExtension = viewFileName.match(/\.(jsx?|tsx?)$/)?.[0] ?? '.js';
   const baseConfig = await vite
-    // @ts-ignore
-    .loadConfigFromFile(componentPath)
+    .loadConfigFromFile(
+      {
+        command: 'build',
+        mode: production ? 'production' : 'development',
+      },
+      undefined,
+      componentPath
+    )
     .catch(() => null);
 
   const viewWrapperFn = options.viewWrapper || defaultViewWrapper;

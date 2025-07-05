@@ -1,5 +1,11 @@
 # oc-vite-compiler
 
+## 4.2.3
+
+### Patch Changes
+
+- Fix esm params/imports
+
 ## 4.2.2
 
 ### Patch Changes
