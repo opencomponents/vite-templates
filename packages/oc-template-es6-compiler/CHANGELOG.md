@@ -1,5 +1,13 @@
 # oc-template-es6-compiler
 
+## 5.1.9
+
+### Patch Changes
+
+- update build
+- Updated dependencies
+  - oc-vite-compiler@4.2.4
+
 ## 5.1.8
 
 ### Patch Changes

@@ -1,5 +1,13 @@
 # oc-template-react-compiler
 
+## 8.0.4
+
+### Patch Changes
+
+- update build
+- Updated dependencies
+  - oc-vite-compiler@4.2.4
+
 ## 8.0.3
 
 ### Patch Changes

@@ -1,6 +1,6 @@
 {
   "name": "oc-template-elm-compiler",
-  "version": "1.1.8",
+  "version": "1.1.9",
   "description": "Compiler for the Elm OC template",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -30,7 +30,7 @@
   "dependencies": {
     "elm": "^0.19.1-6",
     "oc-template-elm": "0.1.1",
-    "oc-vite-compiler": "^4.2.3",
+    "oc-vite-compiler": "^4.2.4",
     "vite-plugin-elm": "^2.8.0"
   },
   "files": [
