@@ -1,5 +1,13 @@
 # oc-template-esm-compiler
 
+## 0.0.6
+
+### Patch Changes
+
+- use ocvite
+- Updated dependencies
+  - oc-vite-compiler@4.2.5
+
 ## 0.0.5
 
 ### Patch Changes

@@ -1,5 +1,11 @@
 # oc-vite-compiler
 
+## 4.2.5
+
+### Patch Changes
+
+- use ocvite
+
 ## 4.2.4
 
 ### Patch Changes

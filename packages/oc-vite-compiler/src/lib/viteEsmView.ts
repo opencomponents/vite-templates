@@ -1,10 +1,11 @@
 import { callbackify } from 'util';
 import path from 'path';
 import fs from 'fs-extra';
-import vite from 'vite';
+import vite from 'oc-vite';
 import EnvironmentPlugin from 'vite-plugin-environment';
 import { providerFunctions } from './providerFunctions';
 import { HtmlTemplate } from './htmlTemplate';
+import cssModules from './cssModulesPlugin';
 import cssInjectedByJsPlugin from 'vite-plugin-css-injected-by-js';
 import type { CompilerOptions } from './createCompile';
 import type { PluginOption, Rollup } from 'vite';
@@ -91,6 +92,7 @@ async function compileView(options: ViteViewOptions & CompilerOptions) {
     root: componentPath,
     mode: production ? 'production' : 'development',
     plugins: [
+      cssModules(),
       cssInjectedByJsPlugin(),
       {
         name: 'OcServerRuntime',
