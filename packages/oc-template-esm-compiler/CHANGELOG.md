@@ -1,5 +1,16 @@
 # oc-template-esm-compiler
 
+## 0.1.0
+
+### Minor Changes
+
+- Fix loading server data on all bundles
+
+### Patch Changes
+
+- Updated dependencies
+  - oc-vite-compiler@4.2.8
+
 ## 0.0.8
 
 ### Patch Changes

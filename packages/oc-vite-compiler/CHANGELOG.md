@@ -1,5 +1,11 @@
 # oc-vite-compiler
 
+## 4.2.8
+
+### Patch Changes
+
+- Fix loading server data on all bundles
+
 ## 4.2.7
 
 ### Patch Changes

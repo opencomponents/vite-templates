@@ -118,12 +118,15 @@ async function compileView(options: ViteViewOptions & CompilerOptions) {
         name: 'InitialDataVariables',
         enforce: 'post',
         generateBundle(opts: any, bundle: any) {
-          const template = bundle['template.js'];
-          template.code = `
-          var __$$oc_initialData__;
-          var __$$oc_Settings__;
-          ${template.code}
+          const jsFiles = Object.keys(bundle).filter((x) => x.endsWith('.js'));
+          for (const jsFile of jsFiles) {
+            const template = bundle[jsFile];
+            template.code = `
+            var __$$oc_initialData__;
+            var __$$oc_Settings__;
+            ${template.code}
           `;
+          }
         },
       },
       ...plugins,
