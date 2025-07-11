@@ -9,13 +9,23 @@ export default function vueOCProviderTemplate({
   import { createApp } from 'vue'
   import View from '${viewPath}';
 
+  let app = null;
+
   function renderer(props, element, ssr) {
     const { _staticPath, _baseUrl, _componentName, _componentVersion, ...rest } = props;
     ${providerFunctions}
 
     rest.getData = getData;
     rest.getSetting = getSetting;
-    createApp(View, rest).mount(element, ssr);
+    app = createApp(View, rest)
+    app.mount(element, ssr);
+  }
+
+  element.parentElement.unmount = () => {
+    if (app) {
+      app.unmount();
+      app = null;
+    }
   }
 
   renderer.component = View;

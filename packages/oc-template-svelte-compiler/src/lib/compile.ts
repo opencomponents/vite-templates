@@ -6,5 +6,5 @@ import svelteOCProviderTemplate from './svelteOCProviderTemplate';
 export const compile = createCompile({
   plugins: [svelte() as any],
   viewWrapper: svelteOCProviderTemplate,
-  getInfo
+  getInfo: getInfo as any
 });

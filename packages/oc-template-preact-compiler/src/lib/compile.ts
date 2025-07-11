@@ -6,5 +6,5 @@ import preactOCProviderTemplate from './preactOCProviderTemplate';
 export const compile = createCompile({
   plugins: [preact() as any],
   viewWrapper: preactOCProviderTemplate,
-  getInfo
+  getInfo: getInfo as any
 });

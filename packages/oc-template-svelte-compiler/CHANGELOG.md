@@ -1,5 +1,11 @@
 # oc-template-svelte-compiler
 
+## 1.0.0
+
+### Major Changes
+
+- Add unmount capabilities
+
 ## 0.0.12
 
 ### Patch Changes

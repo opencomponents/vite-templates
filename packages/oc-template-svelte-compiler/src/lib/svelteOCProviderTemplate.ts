@@ -6,8 +6,10 @@ export default function svelteOCProviderTemplate({
   providerFunctions: string;
 }) {
   return `
-  import { mount } from 'svelte'
+  import { mount, unmount } from 'svelte'
   import View from '${viewPath}';
+
+  let app = null;
 
   function renderer(props, element, ssr) {
     const { _staticPath, _baseUrl, _componentName, _componentVersion, ...rest } = props;
@@ -15,10 +17,17 @@ export default function svelteOCProviderTemplate({
 
     rest.getData = getData;
     rest.getSetting = getSetting;
-    const app = mount(View, {
+    app = mount(View, {
       target: element,
       props: rest
     });
+  }
+
+  element.parentElement.unmount = () => {
+    if (app) {
+      unmount(app);
+      app = null;
+    }
   }
 
   renderer.component = View;

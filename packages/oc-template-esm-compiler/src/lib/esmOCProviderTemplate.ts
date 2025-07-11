@@ -11,6 +11,7 @@ export default function esmOCProviderTemplate({ viewPath }: { viewPath: string }
     const id = element.getAttribute('id');
     __$$oc_Settings__ = {id, element, staticPath: _staticPath, baseUrl: _baseUrl, name: _componentName, version: _componentVersion};
 
+    element.unmount = () => Component.unmount();
     Component.mount(element, rest);
   }
 `;

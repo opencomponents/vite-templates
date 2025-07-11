@@ -6,5 +6,5 @@ import solidOCProviderTemplate from './solidOCProviderTemplate';
 export const compile = createCompile({
   plugins: [solid() as any],
   viewWrapper: solidOCProviderTemplate,
-  getInfo
+  getInfo: getInfo as any
 });

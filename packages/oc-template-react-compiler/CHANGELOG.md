@@ -1,5 +1,11 @@
 # oc-template-react-compiler
 
+## 9.0.0
+
+### Major Changes
+
+- Add unmount capabilities
+
 ## 8.0.4
 
 ### Patch Changes

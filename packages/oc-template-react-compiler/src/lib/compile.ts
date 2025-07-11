@@ -6,5 +6,5 @@ import reactOCProviderTemplate from './reactOCProviderTemplate';
 export const compile = createCompile({
   plugins: [react() as any],
   viewWrapper: reactOCProviderTemplate,
-  getInfo
+  getInfo: getInfo as any
 });

@@ -32,11 +32,20 @@ export default function reactOCProviderTemplate({
     );
   }
 
+  let root = null;
+
   function renderer(props, element, ssr) {
     if (ssr) {
-      hydrateRoot(element, <OCProvider {...props} />);
+      root = hydrateRoot(element, <OCProvider {...props} />);
     } else {
-      createRoot(element).render(<OCProvider {...props} />);
+      root = createRoot(element);
+      root.render(<OCProvider {...props} />);
+    }
+    element.parentElement.unmount = () => {
+      if (root) {
+        root.unmount();
+        root = null;
+      }
     }
   }
 

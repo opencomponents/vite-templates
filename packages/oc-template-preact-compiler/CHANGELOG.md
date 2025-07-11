@@ -1,5 +1,11 @@
 # oc-template-preact-compiler
 
+## 2.0.0
+
+### Major Changes
+
+- Add unmount capabilities
+
 ## 1.1.9
 
 ### Patch Changes

@@ -6,5 +6,5 @@ import vueOCProviderTemplate from './vueOCProviderTemplate';
 export const compile = createCompile({
   plugins: [vue() as any],
   viewWrapper: vueOCProviderTemplate,
-  getInfo
+  getInfo: getInfo as any
 });

@@ -34,6 +34,10 @@ export default function preactOCProviderTemplate({
 
   function renderer(props, element, ssr) {
     render(<OCProvider {...props} />, element);
+
+    element.parentElement.unmount = () => {
+      render(null,  element);
+    }
   }
 
   renderer.component = OCProvider;
