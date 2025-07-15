@@ -4,12 +4,15 @@ import logo from '../public/logo.png';
 import { getSettings } from 'oc-server';
 
 const onRender = (cb: (element: HTMLElement) => void) => {
-  const { id } = getSettings();
-  window.oc.events.on('oc:rendered', (e, data) => {
-    if (data.id === id) {
-      cb(data.element);
-    }
-  });
+  const isBrowser = typeof window !== 'undefined';
+  if (isBrowser) {
+    const { id } = getSettings();
+    window.oc.events.on('oc:rendered', (e, data) => {
+      if (String(data.id) === id) {
+        cb(data.element);
+      }
+    });
+  }
 };
 
 export default ({ firstName, lastName, hobbies, born }: InitialData) => {

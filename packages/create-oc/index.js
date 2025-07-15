@@ -19,7 +19,6 @@ function checkNodeVersion() {
 checkNodeVersion();
 
 const templateChoices = [
-  { title: 'ESM (Beta)', value: 'esm' },
   { title: 'Vanilla', value: 'es6' },
   { title: 'React', value: 'react' },
   { title: 'Solid', value: 'solid' },
@@ -27,6 +26,7 @@ const templateChoices = [
   { title: 'Vue', value: 'vue' },
   { title: 'Svelte', value: 'svelte' },
   { title: 'Elm', value: 'elm' },
+  { title: 'ESM (Beta)', value: 'esm' },
 ];
 const templates = templateChoices.map((t) => t.value);
 

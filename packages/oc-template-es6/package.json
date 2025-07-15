@@ -1,6 +1,6 @@
 {
   "name": "oc-template-es6",
-  "version": "1.0.7",
+  "version": "2.0.0",
   "description": "OC template based on ES6 template literals",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -26,6 +26,8 @@
   },
   "license": "MIT",
   "dependencies": {
+    "minimal-request": "^3.0.0",
+    "nice-cache": "^0.0.5",
     "oc-generic-template-renderer": "2.0.9"
   },
   "files": [

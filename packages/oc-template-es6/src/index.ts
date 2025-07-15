@@ -10,4 +10,4 @@ export const getCompiledTemplate = genericRenderer.getCompiledTemplate;
 export const getInfo = () => {
   return genericRenderer.getInfo(packageJson);
 };
-export const render = genericRenderer.render;
+export { render } from './lib/render';
