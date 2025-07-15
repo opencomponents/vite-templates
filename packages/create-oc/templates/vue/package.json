@@ -22,6 +22,7 @@
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^5.16.5",
+    "@testing-library/vue": "^8.0.0",
     "@types/testing-library__jest-dom": "^5.14.5",
     "@vitejs/plugin-vue": "^5.2.1",
     "@vue/tsconfig": "^0.7.0",
