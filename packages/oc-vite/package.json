@@ -1,7 +1,7 @@
 {
   "name": "oc-vite",
-  "version": "6.2.2",
-  "viteVersion": "6.2.2",
+  "version": "6.3.6",
+  "viteVersion": "6.3.5",
   "type": "module",
   "license": "MIT",
   "author": "Evan You",
@@ -56,8 +56,11 @@
   },
   "dependencies": {
     "esbuild": "^0.25.0",
+    "fdir": "^6.4.4",
+    "picomatch": "^4.0.2",
     "postcss": "^8.5.3",
-    "rollup": "^4.30.1"
+    "rollup": "^4.34.9",
+    "tinyglobby": "^0.2.13"
   },
   "optionalDependencies": {
     "fsevents": "~2.3.3"

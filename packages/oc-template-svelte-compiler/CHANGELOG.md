@@ -1,5 +1,13 @@
 # oc-template-svelte-compiler
 
+## 1.0.1
+
+### Patch Changes
+
+- Allow users to augment ocevents
+- Updated dependencies
+  - oc-vite-compiler@4.2.9
+
 ## 1.0.0
 
 ### Major Changes

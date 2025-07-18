@@ -1,5 +1,13 @@
 # oc-template-elm-compiler
 
+## 1.1.10
+
+### Patch Changes
+
+- Allow users to augment ocevents
+- Updated dependencies
+  - oc-vite-compiler@4.2.9
+
 ## 1.1.9
 
 ### Patch Changes

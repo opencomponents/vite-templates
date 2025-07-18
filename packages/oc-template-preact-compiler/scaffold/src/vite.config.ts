@@ -6,6 +6,8 @@ export default defineConfig({
   plugins: [],
   // @ts-ignore Missing test property
   test: {
-    environment: 'jsdom'
+    environment: 'jsdom',
+    globals: true,
+    setupFiles: ['src/setupTests.js'],
   }
 });

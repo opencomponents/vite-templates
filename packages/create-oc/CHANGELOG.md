@@ -1,5 +1,11 @@
 # create-oc
 
+## 1.1.22
+
+### Patch Changes
+
+- Allow users to augment ocevents
+
 ## 1.1.21
 
 ### Patch Changes

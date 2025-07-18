@@ -1,5 +1,11 @@
 # oc-vite
 
+## 6.3.6
+
+### Patch Changes
+
+- Allow users to augment ocevents
+
 ## 5.3.0
 
 ### Minor Changes

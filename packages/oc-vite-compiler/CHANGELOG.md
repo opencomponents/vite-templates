@@ -1,5 +1,13 @@
 # oc-vite-compiler
 
+## 4.2.9
+
+### Patch Changes
+
+- Allow users to augment ocevents
+- Updated dependencies
+  - oc-vite@6.3.6
+
 ## 4.2.8
 
 ### Patch Changes

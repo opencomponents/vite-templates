@@ -1,5 +1,13 @@
 # oc-template-solid-compiler
 
+## 2.0.1
+
+### Patch Changes
+
+- Allow users to augment ocevents
+- Updated dependencies
+  - oc-vite-compiler@4.2.9
+
 ## 2.0.0
 
 ### Major Changes

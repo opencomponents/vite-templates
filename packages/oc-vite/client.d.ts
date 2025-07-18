@@ -1,5 +1,62 @@
 /// <reference path="./types/importMeta.d.ts" />
 
+// Users can augment this interface to add their own events
+interface OcEvents {}
+
+type OCNativeEvents = {
+  'oc:rendered': {
+    baseUrl: string;
+    html: string;
+    id: string;
+    element: HTMLElement;
+    key: string;
+    name: string;
+    version: string;
+  };
+  'oc:ready': OC;
+  'oc:cssDidMount': string;
+  'oc:componentDidMount': any;
+  'oc:failed': {
+    originalError: any;
+    data: any;
+    component: HTMLElement;
+  };
+};
+
+type OCListener<K extends keyof (OcEvents & OCNativeEvents)> = (
+  evt: { type: string },
+  data: K extends keyof OcEvents
+    ? OcEvents[K]
+    : K extends keyof OCNativeEvents
+    ? OCNativeEvents[K]
+    : never
+) => void;
+
+type OCFire<K extends keyof OcEvents> = (
+  evt: { type: string },
+  data: OcEvents[K]
+) => void;
+
+interface OCEvents {
+  on<K extends keyof (OcEvents & OCNativeEvents) | (string & {})>(
+    eventName: K,
+    fn: K extends keyof (OcEvents & OCNativeEvents)
+      ? OCListener<K>
+      : (...args: any[]) => void
+  ): void;
+  off<K extends keyof (OcEvents & OCNativeEvents) | (string & {})>(
+    eventName: K,
+    fn?: K extends keyof (OcEvents & OCNativeEvents)
+      ? OCListener<K>
+      : (...args: any[]) => void
+  ): void;
+  fire<K extends keyof OcEvents | (string & {})>(
+    eventName: K,
+    data?: K extends keyof OcEvents ? OcEvents[K] : any
+  ): void;
+  reset(): void;
+}
+
 interface OC {
   $: JQueryStatic;
   addStylesToHead: (styles: string) => void;
@@ -20,46 +77,13 @@ interface OC {
       externals: string[];
     }>;
   };
-  events: {
-    on: {
-      (
-        eventName: 'oc:rendered',
-        fn: (
-          evt: {},
-          data: {
-            baseUrl: string;
-            html: string;
-            id: string;
-            element: HTMLElement;
-            key: string;
-            name: string;
-            version: string;
-          }
-        ) => void
-      ): void;
-      (eventName: 'oc:ready', fn: (evt: {}, oc: OC) => void): void;
-      (eventName: 'oc:cssDidMount', fn: (evt: {}, css: string) => void): void;
-      (
-        eventName: 'oc:componentDidMount',
-        fn: (evt: {}, props: any) => void
-      ): void;
-      (
-        eventName: 'oc:failed',
-        fn: (
-          evt: {},
-          oc: {
-            originalError: any;
-            data: any;
-            component: HTMLElement;
-          }
-        ) => void
-      ): void;
-      (eventName: string, fn: (...data: any[]) => void): void;
-    };
-    off: (eventName: string, fn?: (...data: any[]) => void) => void;
-    fire: (eventName: string, data?: any) => void;
-    reset: () => void;
-  };
+  /**
+   * OC events API. Users can add their own events via declaration-merging
+   * by augmenting `OCEventMap`. Events whose name starts with the `"oc:"`
+   * prefix are considered internal: they are available for `on`/`off` but
+   * intentionally omitted from the autocompletion of `fire`.
+   */
+  events: OCEvents;
   getData: (
     options: {
       action?: string;
@@ -380,6 +404,11 @@ declare module '*?no-inline' {
 }
 
 declare module '*?url&inline' {
+  const src: string;
+  export default src;
+}
+
+declare module '*?url&no-inline' {
   const src: string;
   export default src;
 }
