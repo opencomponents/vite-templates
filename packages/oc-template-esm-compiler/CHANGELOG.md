@@ -1,5 +1,13 @@
 # oc-template-esm-compiler
 
+## 0.2.3
+
+### Patch Changes
+
+- Fix HMR on esm template
+- Updated dependencies
+  - oc-server@2.1.1
+
 ## 0.2.1
 
 ### Patch Changes

@@ -1,6 +1,6 @@
 {
   "name": "oc-template-esm-compiler",
-  "version": "0.2.1",
+  "version": "0.2.3",
   "description": "Compiler for the ESM OC template",
   "main": "dist/index.js",
   "type": "module",
@@ -10,6 +10,11 @@
       "import": "./dist/index.js",
       "require": "./dist/index.js",
       "types": "./dist/index.d.ts"
+    },
+    "./dist/lib/hmr": {
+      "import": "./dist/lib/hmr.js",
+      "require": "./dist/lib/hmr.js",
+      "types": "./dist/lib/hmr.d.ts"
     },
     "./renderer": {
       "import": "./dist/lib/renderer.js",
@@ -53,6 +58,6 @@
     "prettier-config-guestline": "2.0.0"
   },
   "peerDependencies": {
-    "oc-server": "^2.0.0"
+    "oc-server": "^2.1.1"
   }
 }

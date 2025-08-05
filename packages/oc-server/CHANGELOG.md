@@ -1,5 +1,11 @@
 # oc-server
 
+## 2.1.1
+
+### Patch Changes
+
+- Fix HMR on esm template
+
 ## 2.1.0
 
 ### Minor Changes

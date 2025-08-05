@@ -1,5 +1,3 @@
-import plugin from '@vitejs/plugin-react';
-
 export const appBlock = ({
   name,
   version,
@@ -19,19 +17,15 @@ export const appBlock = ({
   window.oc = window.oc || {};
   window.oc.cmd = window.oc.cmd || [];
 
-  import App from "${entry}";
-  import React from 'react';
-  import { createRoot } from 'react-dom/client';
+  import component from "${entry}";
 
-  const app = React.createElement(App, data);
   const container = document.getElementById('root');
-  const root = createRoot(container);
+  component.mount(container, data);
 
   window.oc.cmd.push(() => {
-    root.render(app);
     window.oc.events.fire('oc:rendered', { ...settings, element: container,  });
   });
 </script>
 `;
 
-export { plugin };
+export const plugin = () => {};

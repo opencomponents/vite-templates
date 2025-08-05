@@ -1,17 +1,16 @@
 import { FastifyRequest } from 'fastify';
 import { PluginMock } from './get-mocked-plugins';
 
+interface Parameters {
+  mandatory: boolean;
+  example: string | number | boolean;
+}
+
 interface Package {
   name: string;
   version: string;
   oc?: {
-    parameters?: Record<
-      string,
-      {
-        mandatory: boolean;
-        example: string | number | boolean;
-      }
-    >;
+    parameters?: Record<string, Parameters>;
     files: {
       data?: string;
       template?: {
@@ -20,6 +19,25 @@ interface Package {
       };
     };
   };
+}
+
+export function getDefaultParams(parameters: Record<string, Parameters>) {
+  const defaultParams = (() => {
+    let params = {};
+    if (parameters) {
+      params = Object.fromEntries(
+        Object.entries(parameters || {})
+          .filter(([, param]) => {
+            return !!param.mandatory && 'example' in param;
+          })
+          .map(([paramName, param]) => [paramName, param.example])
+      );
+    }
+
+    return params;
+  })();
+
+  return defaultParams;
 }
 
 export function parsePkg(pkg: Package) {
@@ -34,20 +52,6 @@ export function parsePkg(pkg: Package) {
     appEntry = `/${appEntry}`;
   }
 
-  const defaultParams = (() => {
-    let params = {};
-    if (pkg.oc?.parameters) {
-      params = Object.fromEntries(
-        Object.entries(pkg.oc.parameters || {})
-          .filter(([, param]) => {
-            return !!param.mandatory && 'example' in param;
-          })
-          .map(([paramName, param]) => [paramName, param.example])
-      );
-    }
-
-    return params;
-  })();
   const templateType = pkg.oc?.files?.template?.type;
   if (!templateType) {
     throw new Error(
@@ -58,7 +62,6 @@ export function parsePkg(pkg: Package) {
   return {
     name: pkg.name,
     version: pkg.version,
-    defaultParams,
     serverEntry,
     appEntry,
     templateType,

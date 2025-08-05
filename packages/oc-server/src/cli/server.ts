@@ -7,7 +7,7 @@ import { createServer as createViteServer } from 'vite';
 import esbuild from 'esbuild';
 import ocClientBrowser from 'oc-client-browser';
 import cssModulesPlugin from 'oc-vite-compiler/dist/lib/cssModulesPlugin';
-import { getContext, parsePkg } from './oc';
+import { getContext, getDefaultParams, parsePkg } from './oc';
 import getMockedPlugins from './get-mocked-plugins';
 
 const promisify =
@@ -18,11 +18,15 @@ const promisify =
     );
 
 const pk = require(path.join(process.cwd(), 'package.json'));
-const { name, version, appEntry, serverEntry, defaultParams } = parsePkg(pk);
+const { name, version, appEntry, serverEntry } = parsePkg(pk);
 
 function getDataProvider() {
   if (!serverEntry) {
-    return async (context: { params: {} }) => ({ ...(context.params ?? {}) });
+    return {
+      dataProvider: async (context: { params: {} }) => ({
+        ...(context.params ?? {}),
+      }),
+    };
   }
 
   const result = esbuild.buildSync({
@@ -35,12 +39,16 @@ function getDataProvider() {
   const backend = vm.runInNewContext(code, {
     ...globalThis,
     exports: {},
+    console,
     module: { exports: {} },
   });
 
   const dataProvider = backend.data || backend.server.getData();
 
-  return promisify(dataProvider);
+  return {
+    dataProvider: promisify(dataProvider),
+    parametersSchema: backend.server?._parameters,
+  };
 }
 
 function getBaseTemplate(appBlock: Template['appBlock']) {
@@ -112,11 +120,12 @@ export async function createServer({
   const { dev: clientJs } = ocClientBrowser.compileSync();
   const app = Fastify({ logger: false });
   await app.register(fastifyExpress);
-  const dataProvider = getDataProvider();
+  const { dataProvider, parametersSchema } = getDataProvider();
   const plugins = getMockedPlugins(path.join(process.cwd(), '..'));
   for (const plugin of plugins) {
     plugin.register.register(null, null, () => {});
   }
+  const defaultParams = getDefaultParams(pk.oc?.parameters ?? parametersSchema);
 
   const vite = await createViteServer({
     server: { middlewareMode: true },
