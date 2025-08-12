@@ -3,7 +3,7 @@ import path from 'node:path';
 import vm from 'node:vm';
 import Fastify from 'fastify';
 import fastifyExpress from '@fastify/express';
-import { createServer as createViteServer } from 'vite';
+import { loadConfigFromFile, createServer as createViteServer } from 'vite';
 import esbuild from 'esbuild';
 import ocClientBrowser from 'oc-client-browser';
 import cssModulesPlugin from 'oc-vite-compiler/dist/lib/cssModulesPlugin';
@@ -51,7 +51,10 @@ function getDataProvider() {
   };
 }
 
-function getBaseTemplate(appBlock: Template['appBlock']) {
+function getBaseTemplate(
+  appBlock: Template['appBlock'],
+  imports: Record<string, string> = {}
+) {
   const baseTemplate = `
 <!DOCTYPE html>
 <html>
@@ -66,6 +69,13 @@ function getBaseTemplate(appBlock: Template['appBlock']) {
       margin: 0;
     }
     </style>
+    ${
+      imports
+        ? `<script type="importmap">{"imports": ${JSON.stringify(
+            imports
+          )}}</script>`
+        : ''
+    }
   </head>
   <body>
     <script src="/oc-client/client.js"></script>
@@ -78,6 +88,7 @@ function getBaseTemplate(appBlock: Template['appBlock']) {
 
 async function getHtmlTemplate(
   appBlock: Template['appBlock'],
+  imports: Record<string, string> = {},
   filePath = 'index.html'
 ) {
   let template;
@@ -104,7 +115,7 @@ async function getHtmlTemplate(
       })}</body>`
     );
   } catch (error) {
-    template = getBaseTemplate(appBlock);
+    template = getBaseTemplate(appBlock, imports);
   }
 
   return template;
@@ -126,6 +137,16 @@ export async function createServer({
     plugin.register.register(null, null, () => {});
   }
   const defaultParams = getDefaultParams(pk.oc?.parameters ?? parametersSchema);
+
+  const baseConfig = await loadConfigFromFile(
+    {
+      command: 'build',
+      mode: 'development',
+    },
+    undefined,
+    process.cwd()
+  ).catch(() => null);
+  let imports = baseConfig?.config?.resolve?.alias;
 
   const vite = await createViteServer({
     server: { middlewareMode: true },
@@ -186,7 +207,12 @@ export async function createServer({
     try {
       const params = defaultParams;
       const { context, responseHeaders } = getContext(plugins, request, params);
-      let htmlTemplate = await getHtmlTemplate(template.appBlock);
+      let htmlTemplate = await getHtmlTemplate(
+        template.appBlock,
+        typeof imports === 'object' && !!imports
+          ? (imports as Record<string, string>)
+          : {}
+      );
       const data = await dataProvider(context);
       htmlTemplate = htmlTemplate.replace(
         '__INITIAL_DATA__',
