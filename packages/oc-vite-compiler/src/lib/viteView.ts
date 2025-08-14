@@ -35,6 +35,7 @@ export interface ViteViewOptions {
   publishFileName?: string;
   viewWrapper?: (opts: {
     viewPath: string;
+    production: boolean;
     providerFunctions: string;
   }) => string;
   plugins?: PluginOption[];
@@ -81,7 +82,11 @@ async function compileView(options: ViteViewOptions & CompilerOptions) {
   const viewExtension = viewFileName.match(/\.(jsx?|tsx?)$/)?.[0] ?? '.js';
 
   const viewWrapperFn = options.viewWrapper || defaultViewWrapper;
-  const viewWrapperContent = viewWrapperFn({ viewPath, providerFunctions });
+  const viewWrapperContent = viewWrapperFn({
+    viewPath,
+    production,
+    providerFunctions,
+  });
   const viewWrapperName = `_viewWrapperEntry${viewExtension}`;
   const viewWrapperPath = path.join(tempPath, viewWrapperName);
 
@@ -164,6 +169,30 @@ async function compileView(options: ViteViewOptions & CompilerOptions) {
            } 
            const { _staticPath, _baseUrl, _componentName, _componentVersion, ...rest } = model.component.props;
            var __$$oc_initialData__ = rest;
+           ${
+             production
+               ? ''
+               : `
+           if (model.component.development && typeof window !== 'undefined') {
+             const methods = ['log', 'error'];
+             for (const method of methods) {
+              const originalMethod = console[method];
+              console[method] = (...args) => {
+                originalMethod(...args);
+                window.oc?.getAction?.({
+                  action: '$$__oc__server___console__$$',
+                  component: _componentName,
+                  version: _componentVersion,
+                  baseUrl: _baseUrl,
+                  parameters: {
+                    message: args.join(' '),
+                    level: method,
+                  }
+                })?.catch(() => {});
+              }
+             }
+           }`
+           }
            var element = model.element || typeof document !== 'undefined' ? document.querySelector(window.oc.conf.tag || 'oc-component' + '[data-id="'+ model.id +'"]') : null;
            var __$$oc_Settings__ = {id: model.id, element: element, staticPath: _staticPath, baseUrl: _baseUrl, name: _componentName, version: _componentVersion};
            var innerFn = ${templateString};

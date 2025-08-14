@@ -13,6 +13,7 @@ import type { PluginOption, Rollup } from 'vite';
 export interface ViteViewOptions {
   publishFileName?: string;
   viewWrapper?: (opts: {
+    production: boolean;
     viewPath: string;
     providerFunctions: string;
   }) => string;
@@ -70,6 +71,7 @@ async function compileView(options: ViteViewOptions & CompilerOptions) {
   const viewWrapperContent = viewWrapperFn({
     viewPath,
     providerFunctions,
+    production,
   });
   const viewWrapperName = `_viewWrapperEntry${viewExtension}`;
   const viewWrapperPath = path.join(tempPath, viewWrapperName);

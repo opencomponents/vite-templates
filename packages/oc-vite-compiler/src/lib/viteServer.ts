@@ -42,6 +42,7 @@ async function compileServer(
     exports: entryExports.map((x) => x.n),
     bundleHashKey: options.compiledViewInfo.bundle.hashKey,
     serverPath,
+    production,
     componentName,
     componentVersion,
     esm: options.componentPackage.oc.files.template.type === 'oc-template-esm',
