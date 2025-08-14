@@ -19,7 +19,12 @@ async function getFunFact(year: number) {
   return yearsFunFactDatabase[year];
 }
 
-export const server = new Server()
+export const server = new Server({
+  development: {
+    // Echo console logs from the browser to the server
+    console: true,
+  },
+})
   .withParameters({
     userId: {
       default: 1,
