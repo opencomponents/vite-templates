@@ -1,5 +1,17 @@
 # oc-template-esm-compiler
 
+## 1.0.0
+
+### Minor Changes
+
+- Add option to browser logs
+
+### Patch Changes
+
+- Updated dependencies
+  - oc-server@3.0.0
+  - oc-vite-compiler@5.0.0
+
 ## 0.2.3
 
 ### Patch Changes

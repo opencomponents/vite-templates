@@ -1,5 +1,16 @@
 # oc-template-react-compiler
 
+## 10.0.0
+
+### Major Changes
+
+- Add option to browser logs
+
+### Patch Changes
+
+- Updated dependencies
+  - oc-vite-compiler@5.0.0
+
 ## 9.0.1
 
 ### Patch Changes

@@ -1,5 +1,16 @@
 # oc-template-solid-compiler
 
+## 3.0.0
+
+### Major Changes
+
+- Add option to browser logs
+
+### Patch Changes
+
+- Updated dependencies
+  - oc-vite-compiler@5.0.0
+
 ## 2.0.1
 
 ### Patch Changes

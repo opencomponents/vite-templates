@@ -1,5 +1,11 @@
 # create-oc
 
+## 1.1.24
+
+### Patch Changes
+
+- Add option to browser logs
+
 ## 1.1.22
 
 ### Patch Changes

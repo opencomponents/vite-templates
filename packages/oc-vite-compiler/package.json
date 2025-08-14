@@ -1,6 +1,6 @@
 {
   "name": "oc-vite-compiler",
-  "version": "4.2.9",
+  "version": "5.0.0",
   "description": "OC-Vite-Compiler",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",

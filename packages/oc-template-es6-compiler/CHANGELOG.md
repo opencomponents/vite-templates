@@ -1,5 +1,16 @@
 # oc-template-es6-compiler
 
+## 7.0.0
+
+### Major Changes
+
+- Add option to browser logs
+
+### Patch Changes
+
+- Updated dependencies
+  - oc-vite-compiler@5.0.0
+
 ## 6.0.1
 
 ### Patch Changes

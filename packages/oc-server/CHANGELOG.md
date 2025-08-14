@@ -1,5 +1,11 @@
 # oc-server
 
+## 3.0.0
+
+### Major Changes
+
+- Add option to browser logs
+
 ## 2.1.1
 
 ### Patch Changes

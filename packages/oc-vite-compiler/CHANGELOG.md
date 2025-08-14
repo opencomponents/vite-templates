@@ -1,5 +1,11 @@
 # oc-vite-compiler
 
+## 5.0.0
+
+### Major Changes
+
+- Add option to browser logs
+
 ## 4.2.9
 
 ### Patch Changes
