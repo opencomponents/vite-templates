@@ -7,6 +7,7 @@ export type ServerWrapper = (options: {
   componentVersion: string;
   bundleHashKey: string;
   esm?: boolean;
+  production: boolean;
 }) => string;
 
 const higherOrderServerTemplate: ServerWrapper = ({
@@ -15,6 +16,7 @@ const higherOrderServerTemplate: ServerWrapper = ({
   componentName,
   componentVersion,
   bundleHashKey,
+  production,
   esm = false,
 }) => {
   return `
@@ -27,7 +29,7 @@ ${
 }
 
 export const data = (context : any, callback : (error: any, data?: any) => void) => {
-  dataProvider(context, (error: any, model: any) => {
+  dataProvider(context, (error: any, model: any, meta: any = {}) => {
     if (error) {
       return callback(error);
     }
@@ -49,7 +51,8 @@ export const data = (context : any, callback : (error: any, data?: any) => void)
         key: "${bundleHashKey}",
         src: srcPath + "template.js",
         props,
-        esm: ${esm}
+        esm: ${esm},
+        development: ${production ? 'undefined' : 'meta'}
       }
     }));
   });

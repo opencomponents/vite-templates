@@ -6,6 +6,15 @@ import {
   IsAnyOrUnknown,
 } from './types';
 
+// Simple ANSI color utility function
+const styleText = (color: string, text: string): string => {
+  const colors = {
+    gray: '\x1b[90m',
+    reset: '\x1b[0m',
+  };
+  return `${colors[color as keyof typeof colors] || ''}${text}${colors.reset}`;
+};
+
 export type ServerContext<E = { name: string }, P = any, S = any> = Omit<
   DataContext<any, E, P, S>,
   'params' | 'action' | 'setEmptyResponse'
@@ -84,6 +93,15 @@ interface ServerOptions<S extends boolean> {
    * @default false
    */
   stream?: S;
+  development?: {
+    /**
+     * If true, the server will log the browser console.
+     * Useful for AI agents to debug on the terminal.
+     *
+     * @default false
+     */
+    console?: boolean;
+  };
 }
 
 export class Server<
@@ -252,7 +270,18 @@ class HandledServer<
     > | null = null,
     private readonly _parameters: OcParameters = {},
     private readonly _options: ServerOptions<Streaming> = {}
-  ) {}
+  ) {
+    if (this._options.development?.console) {
+      (this.actions as any)['$$__oc__server___console__$$'] = (params: {
+        message: string;
+        level: 'log' | 'error';
+      }) => {
+        console[params.level]?.(
+          `${styleText('gray', '[browser]')} ${params.message}`
+        );
+      };
+    }
+  }
 
   action<ActionName extends string, I, O>(
     name: ActionName,
@@ -298,7 +327,7 @@ class HandledServer<
         res[(context as any).streamSymbol] = stream;
       }
 
-      cb(null, res);
+      cb(null, res, { console: !!this._options.development?.console });
     };
   }
 }

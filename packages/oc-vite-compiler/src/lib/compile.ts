@@ -32,13 +32,8 @@ export default function createCompile(params: {
   htmlTemplate?: ViteViewOptions['htmlTemplate'];
   getInfo: GetInfo;
 }) {
-  // Minimum OC version required to support streaming
-  let minOcVersion = '0.50.0';
-  const isEsm = params.getInfo().type === 'oc-template-esm';
-  if (isEsm) {
-    // Needs oc-client-browser on 0.50.8 to support ESM
-    minOcVersion = '0.50.8';
-  }
+  // Minimum OC version required to support logs from browser
+  let minOcVersion = '0.50.18';
   const getInfo = () => ({ ...params.getInfo(), minOcVersion });
 
   return genericCompile({
