@@ -6,5 +6,5 @@ import elmOCProviderTemplate from './elmOCProviderTemplate';
 export const compile = createCompile({
   plugins: [elm() as any],
   viewWrapper: elmOCProviderTemplate,
-  getInfo
+  getInfo: getInfo as any
 });
