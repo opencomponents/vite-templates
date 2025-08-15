@@ -25,22 +25,24 @@ for (const template of templates) {
     fs.readFileSync(`../oc-server/package.json`, 'utf8')
   );
 
+  // Add rules
   tryCreateDir(`./templates/${template}/.cursor/rules`);
   fs.writeFileSync(
     `./templates/${template}/.cursor/rules/oc-project.mdc`,
     cursorRules
   );
 
+  // Update dependencies
   templatePkg.devDependencies[
     `oc-template-${template}-compiler`
   ] = `^${compilerPkg.version}`;
   templatePkg.devDependencies['oc-server'] = `^${ocServerPkg.version}`;
 
+  // Write and copy
   fs.writeFileSync(
     `./templates/${template}/package.json`,
     JSON.stringify(templatePkg, null, 2)
   );
-
   fs.cpSync(
     `./templates/${template}`,
     `../oc-template-${template}-compiler/scaffold/src`,
