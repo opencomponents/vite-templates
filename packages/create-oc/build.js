@@ -6,14 +6,6 @@ const templates = fs
   .map((x) => x.name);
 const cursorRules = fs.readFileSync('./oc-project.mdc', 'utf8');
 
-function tryCreateDir(path) {
-  try {
-    fs.mkdirSync(path, { recursive: true });
-  } catch (e) {
-    console.error(e);
-  }
-}
-
 for (const template of templates) {
   const compilerPkg = JSON.parse(
     fs.readFileSync(`../oc-template-${template}-compiler/package.json`, 'utf8')
@@ -26,7 +18,7 @@ for (const template of templates) {
   );
 
   // Add rules
-  tryCreateDir(`./templates/${template}/.cursor/rules`);
+  fs.mkdirSync(`./templates/${template}/.cursor/rules`, { recursive: true });
   fs.writeFileSync(
     `./templates/${template}/.cursor/rules/oc-project.mdc`,
     cursorRules
