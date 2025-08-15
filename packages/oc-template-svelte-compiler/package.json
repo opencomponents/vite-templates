@@ -1,6 +1,6 @@
 {
   "name": "oc-template-svelte-compiler",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Compiler for the Svelte OC template",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",

@@ -1,5 +1,11 @@
 # oc-template-react-compiler
 
+## 10.0.1
+
+### Patch Changes
+
+- Add cursor rules
+
 ## 10.0.0
 
 ### Major Changes

@@ -4,6 +4,15 @@ const templates = fs
   .readdirSync('./templates', { withFileTypes: true })
   .filter((x) => x.isDirectory)
   .map((x) => x.name);
+const cursorRules = fs.readFileSync('./oc-project.mdc', 'utf8');
+
+function tryCreateDir(path) {
+  try {
+    fs.mkdirSync(path, { recursive: true });
+  } catch (e) {
+    console.error(e);
+  }
+}
 
 for (const template of templates) {
   const compilerPkg = JSON.parse(
@@ -14,6 +23,12 @@ for (const template of templates) {
   );
   const ocServerPkg = JSON.parse(
     fs.readFileSync(`../oc-server/package.json`, 'utf8')
+  );
+
+  tryCreateDir(`./templates/${template}/.cursor/rules`);
+  fs.writeFileSync(
+    `./templates/${template}/.cursor/rules/oc-project.mdc`,
+    cursorRules
   );
 
   templatePkg.devDependencies[

@@ -1,5 +1,11 @@
 # oc-template-es6-compiler
 
+## 7.0.1
+
+### Patch Changes
+
+- Add cursor rules
+
 ## 7.0.0
 
 ### Major Changes

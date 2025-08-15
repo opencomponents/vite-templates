@@ -1,5 +1,11 @@
 # oc-template-svelte-compiler
 
+## 2.0.1
+
+### Patch Changes
+
+- Add cursor rules
+
 ## 2.0.0
 
 ### Major Changes

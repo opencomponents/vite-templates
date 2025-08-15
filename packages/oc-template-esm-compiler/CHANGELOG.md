@@ -1,5 +1,11 @@
 # oc-template-esm-compiler
 
+## 1.0.1
+
+### Patch Changes
+
+- Add cursor rules
+
 ## 1.0.0
 
 ### Minor Changes

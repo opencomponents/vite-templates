@@ -1,5 +1,11 @@
 # create-oc
 
+## 1.1.25
+
+### Patch Changes
+
+- Add cursor rules
+
 ## 1.1.24
 
 ### Patch Changes
