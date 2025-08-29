@@ -75,6 +75,10 @@ async function compileServer(
       plugins: [...plugins, ...basePlugins],
       logLevel: options.verbose ? 'info' : 'silent',
       build: {
+        sourcemap: production ? false : 'inline',
+        // Ensure sourcemap sources are computed relative to the component root
+        // instead of Vite's default outDir ("dist")
+        outDir: componentPath,
         lib: { entry: higherOrderServerPath, formats: ['cjs'] },
         write: false,
         minify: production,

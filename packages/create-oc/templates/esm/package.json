@@ -29,7 +29,7 @@
     "@vitejs/plugin-react": "^4.6.0",
     "happy-dom": "^18.0.1",
     "oc-server": "^3.0.0",
-    "oc-template-esm-compiler": "^1.0.0",
+    "oc-template-esm-compiler": "^1.1.0",
     "react": "19.1.0",
     "react-dom": "19.1.0",
     "typescript": "5.8.3",

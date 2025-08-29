@@ -1,5 +1,11 @@
 # oc-vite-compiler
 
+## 5.1.0
+
+### Minor Changes
+
+- Add sourcemaps to dev servers
+
 ## 5.0.0
 
 ### Major Changes

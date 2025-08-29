@@ -1,5 +1,16 @@
 # oc-template-react-compiler
 
+## 10.1.0
+
+### Minor Changes
+
+- Add sourcemaps to dev servers
+
+### Patch Changes
+
+- Updated dependencies
+  - oc-vite-compiler@5.1.0
+
 ## 10.0.1
 
 ### Patch Changes

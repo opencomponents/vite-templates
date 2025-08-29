@@ -1,5 +1,16 @@
 # oc-template-esm-compiler
 
+## 1.1.0
+
+### Minor Changes
+
+- Add sourcemaps to dev servers
+
+### Patch Changes
+
+- Updated dependencies
+  - oc-vite-compiler@5.1.0
+
 ## 1.0.1
 
 ### Patch Changes

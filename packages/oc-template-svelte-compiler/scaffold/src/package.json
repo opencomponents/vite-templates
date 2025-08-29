@@ -28,7 +28,7 @@
     "@types/testing-library__jest-dom": "^5.14.5",
     "jsdom": "^21.1.1",
     "oc-server": "^3.0.0",
-    "oc-template-svelte-compiler": "^2.0.0",
+    "oc-template-svelte-compiler": "^2.1.0",
     "svelte": "^5.23.0",
     "svelte-check": "^4.0.0",
     "typescript": "5.0.2",
