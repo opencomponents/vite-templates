@@ -6,6 +6,7 @@ import logo from '../public/logo.png';
 type AdditionalData = ActionOutput<'funFact'>;
 
 const App: React.FC<InitialData> = (props: InitialData) => {
+  // These come from the server.ts handler return value
   const { firstName, lastName, born, hobbies } = props;
   const [additionalData, setAdditionalData] = useState<AdditionalData | null>(
     null
@@ -15,6 +16,8 @@ const App: React.FC<InitialData> = (props: InitialData) => {
   const getFunFact = async () => {
     setError('');
     try {
+      // Call server action with type safety
+      // serverClient provides autocomplete and type checking
       const data = await serverClient.funFact({ year: born });
       setAdditionalData(data);
     } catch (err) {
@@ -28,6 +31,7 @@ const App: React.FC<InitialData> = (props: InitialData) => {
 
   return (
     <div className={styles.container}>
+      {/* Static assets are imported from ../public/ */}
       <img width="50" height="50" src={logo} alt="Logo" />
       <h1 style={{ margin: '0 0 20px 0' }}>
         Hello, <span style={{ textDecoration: 'underline' }}>{firstName}</span>{' '}
@@ -47,4 +51,5 @@ const App: React.FC<InitialData> = (props: InitialData) => {
   );
 };
 
+// Default export is required for OC build process
 export default App;
