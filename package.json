@@ -3,21 +3,21 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "build": "turbo run build --filter=packages/*",
-    "lint": "turbo run lint",
-    "clean": "turbo run clean && rm -rf node_modules",
+    "build": "turbo build",
+    "lint": "turbo lint",
+    "clean": "turbo clean && rm -rf node_modules",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "changeset": "changeset",
     "version-packages": "changeset version",
     "publish-packages": "turbo run build lint && changeset version && changeset publish",
-    "release": "turbo run build --filter=docs^... && changeset publish"
+    "release": "turbo build --filter=docs^... && changeset publish"
   },
   "private": true,
   "devDependencies": {
     "@changesets/cli": "^2.27.1",
     "eslint": "^7.32.0",
     "prettier": "^2.5.1",
-    "turbo": "^2.5.0",
+    "turbo": "^2.5.6",
     "typescript": "^5.5.4",
     "vitest": "^0.34.6"
   },
@@ -28,5 +28,5 @@
   "workspaces": [
     "packages/*"
   ],
-  "packageManager": "pnpm@10.6.2+sha512.47870716bea1572b53df34ad8647b42962bc790ce2bf4562ba0f643237d7302a3d6a8ecef9e4bdfc01d23af1969aa90485d4cebb0b9638fa5ef1daef656f6c1b"
+  "packageManager": "npm@11.5.1"
 }
