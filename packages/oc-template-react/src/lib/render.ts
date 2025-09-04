@@ -29,5 +29,3 @@ type Render = (
   options: { model: unknown; template: CompiledTemplate },
   cb: (err: Error | null, data: string) => void
 ) => void;
-
-const r: Render = render;
