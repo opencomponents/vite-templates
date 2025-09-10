@@ -13,9 +13,11 @@ import type { PluginOption, Rollup } from 'vite';
 export interface ViteViewOptions {
   publishFileName?: string;
   viewWrapper?: (opts: {
+    styleId?: string;
     production: boolean;
     viewPath: string;
     providerFunctions: string;
+    shadowDOM?: boolean | 'open' | 'closed';
   }) => string;
   plugins?: PluginOption[];
   externals?: Array<{ name: string; paths?: string[] }>;
@@ -42,6 +44,7 @@ async function compileView(options: ViteViewOptions & CompilerOptions) {
     }
     return pathStr;
   }
+  const styleId = crypto.randomUUID();
 
   const staticFiles = options.componentPackage.oc.files.static;
   let staticFolder = Array.isArray(staticFiles) ? staticFiles[0] : staticFiles;
@@ -68,10 +71,19 @@ async function compileView(options: ViteViewOptions & CompilerOptions) {
     .catch(() => null);
 
   const viewWrapperFn = options.viewWrapper || defaultViewWrapper;
+  let shadowDOM: boolean | 'open' | 'closed' | undefined = undefined;
+  const shadowDOMRaw = (options as any)?.componentPackage?.oc?.files?.template
+    ?.shadowDOM;
+  if (shadowDOMRaw === true) shadowDOM = 'open';
+  else if (shadowDOMRaw === 'open' || shadowDOMRaw === 'closed')
+    shadowDOM = shadowDOMRaw;
+
   const viewWrapperContent = viewWrapperFn({
+    styleId,
     viewPath,
     providerFunctions,
     production,
+    shadowDOM,
   });
   const viewWrapperName = `_viewWrapperEntry${viewExtension}`;
   const viewWrapperPath = path.join(tempPath, viewWrapperName);
@@ -95,7 +107,7 @@ async function compileView(options: ViteViewOptions & CompilerOptions) {
     mode: production ? 'production' : 'development',
     plugins: [
       cssModules(),
-      cssInjectedByJsPlugin(),
+      cssInjectedByJsPlugin({ styleId }),
       {
         name: 'OcServerRuntime',
         enforce: 'pre',
