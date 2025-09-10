@@ -1,5 +1,16 @@
 # oc-template-esm-compiler
 
+## 1.2.0
+
+### Minor Changes
+
+- Add shadowDOM prop to esm template
+
+### Patch Changes
+
+- Updated dependencies
+  - oc-vite-compiler@5.1.1
+
 ## 1.1.0
 
 ### Minor Changes
