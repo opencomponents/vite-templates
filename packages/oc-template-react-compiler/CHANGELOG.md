@@ -1,5 +1,13 @@
 # oc-template-react-compiler
 
+## 10.1.1
+
+### Patch Changes
+
+- Fix SSR render
+- Updated dependencies
+  - oc-vite-compiler@5.1.1
+
 ## 10.1.0
 
 ### Minor Changes

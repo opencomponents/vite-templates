@@ -1,5 +1,11 @@
 # oc-vite-compiler
 
+## 5.1.1
+
+### Patch Changes
+
+- Fix SSR render
+
 ## 5.1.0
 
 ### Minor Changes
