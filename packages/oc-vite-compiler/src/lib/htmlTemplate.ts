@@ -43,7 +43,7 @@ export default function htmlTemplate({
   var count = oc.__${templateName}Template.count;
   var templateId = "${templateId}-" + count;
   oc.__${templateName}Template.count++;
-  var ssrCall = 'oc.components["${hash}"]({ component: { props:' + props + ' } });';
+  var ssrCall = 'oc.components["${hash}"]({ id: "' + model.id + '", component: { props:' + props + ' } });';
 
   return '<div id="' + templateId + '" class="${templateId}">' + modelHTML + '</div>' +
     '${css ? '<style>' + escapeCSS(css) + '</style>' : ''}' +
