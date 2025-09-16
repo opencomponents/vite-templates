@@ -1,5 +1,11 @@
 # oc-vite-compiler
 
+## 5.1.2
+
+### Patch Changes
+
+- Fix publish of ssr fix
+
 ## 5.1.1
 
 ### Patch Changes

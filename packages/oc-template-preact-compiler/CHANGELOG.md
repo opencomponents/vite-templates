@@ -1,5 +1,13 @@
 # oc-template-preact-compiler
 
+## 3.1.2
+
+### Patch Changes
+
+- Fix publish of ssr fix
+- Updated dependencies
+  - oc-vite-compiler@5.1.2
+
 ## 3.1.1
 
 ### Patch Changes
