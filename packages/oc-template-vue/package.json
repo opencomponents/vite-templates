@@ -28,9 +28,9 @@
   },
   "license": "MIT",
   "dependencies": {
-    "minimal-request": "3.0.0",
     "nice-cache": "0.0.5",
-    "oc-generic-template-renderer": "2.0.9"
+    "oc-generic-template-renderer": "2.0.9",
+    "vue": "^3.4.3"
   },
   "files": [
     "dist/**"

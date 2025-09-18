@@ -32,7 +32,7 @@ export async function ssr({
   const key = options.key;
   const componentKey = options.model.component.key;
   const extractor = (key: string, context: any) =>
-    context.oc.reactComponents[key].component;
+    context.oc.vueComponents[key].component;
   const getJsFromUrl = createPredicate({
     model: options.model,
     key,
