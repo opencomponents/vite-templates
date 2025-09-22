@@ -70,7 +70,8 @@ async function start(clean = false) {
     'es6',
     'solid',
     'vue',
-    'svelte' /*'preact', 'elm' */,
+    /*'svelte' ,'preact', 'elm' */
+    ,
   ];
 
   console.log('Initializing components');
@@ -85,12 +86,13 @@ async function start(clean = false) {
       dirPath: './build',
       logger: {
         ok: console.log,
-        error: console.error,
+        err: console.error,
         log: console.info,
         warn: console.warn,
       },
     },
     (err, res) => {
+      console.log('ERR:', err);
       process.on('SIGINT', () =>
         res.close(() => {
           console.log('Server closed');
