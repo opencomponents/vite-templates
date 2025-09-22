@@ -53,7 +53,10 @@ export const server = new Server({
 
     // Set cache headers when same params produce same result
     // This improves performance by reducing server load
-    ctx.setHeader('Cache-Control', 'max-age=300'); // Cache for 5 minutes
+    // Don't cache in local environment because we might get render mismatches
+    if (ctx.env.name !== 'local') {
+      ctx.setHeader('Cache-Control', 'max-age=300'); // Cache for 5 minutes
+    }
 
     // Return data that will be passed as props to React component
     return {
