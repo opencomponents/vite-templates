@@ -68,10 +68,11 @@ async function start(clean = false) {
   const components = [
     'react',
     'es6',
-    'solid',
-    'vue',
-    /*'svelte' ,'preact', 'elm' */
-    ,
+    // 'solid',
+    // 'vue',
+    // 'svelte',
+    // 'preact',
+    // 'elm',
   ];
 
   console.log('Initializing components');
@@ -92,7 +93,10 @@ async function start(clean = false) {
       },
     },
     (err, res) => {
-      console.log('ERR:', err);
+      if (err) {
+        console.error('Error:', err);
+      }
+
       process.on('SIGINT', () =>
         res.close(() => {
           console.log('Server closed');
