@@ -1,5 +1,11 @@
 # oc-server
 
+## 3.1.1
+
+### Patch Changes
+
+- Add more meaningful message to errors when requiering hmr
+
 ## 3.0.0
 
 ### Major Changes

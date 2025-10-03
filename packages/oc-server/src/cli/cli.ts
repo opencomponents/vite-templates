@@ -58,17 +58,42 @@ export function cli() {
     process.exit(0);
   }
 
-  let template: Template;
-  try {
-    template = require(`${templateType}-compiler/dist/lib/hmr`);
-  } catch (e) {
-    console.error(
-      `The template ${templateType} is not supported. Try updating to the last version`
-    );
+  function tryRequire(name: string) {
+    try {
+      return { success: true, value: require(name) };
+    } catch (e) {
+      return { success: false, value: e as Error };
+    }
+  }
+
+  const result = tryRequire(`${templateType}-compiler/dist/lib/hmr`);
+
+  if (!result.success) {
+    const code = String((result.value as { code: string }).code);
+
+    if (code === 'ERR_REQUIRE_ESM') {
+      console.error(
+        'You are using an older version of node that does not support ESM on require. Please update to the latest 22.x or higher'
+      );
+    } else if (code === 'MODULE_NOT_FOUND') {
+      const baseResult = tryRequire(`${templateType}-compiler`);
+      if (baseResult.success) {
+        console.error(
+          `The template ${templateType} is not supported. Try updating to the last version`
+        );
+      } else {
+        console.error(
+          `Could not find the template compiler library: ${templateType}-compiler in your project`
+        );
+      }
+    } else {
+      console.error(result.value);
+    }
+
     process.exit(1);
   }
 
   if (command === 'dev') {
-    createServer({ template, port });
+    createServer({ template: result.value, port });
   }
 }

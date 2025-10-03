@@ -27,7 +27,7 @@
     "@vitejs/plugin-vue": "^5.2.1",
     "@vue/tsconfig": "^0.7.0",
     "jsdom": "^21.1.1",
-    "oc-server": "^3.1.0",
+    "oc-server": "^3.1.1",
     "oc-template-vue-compiler": "^3.1.2",
     "typescript": "5.8.2",
     "vitest": "^0.29.7",
