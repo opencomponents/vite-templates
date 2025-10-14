@@ -30,6 +30,12 @@ const templateChoices = [
 ];
 const templates = templateChoices.map((t) => t.value);
 
+const esmVariantChoices = [
+  { title: 'React', value: 'esm.react' },
+  { title: 'Remix (Experimental)', value: 'esm.remix' },
+];
+const esmVariants = esmVariantChoices.map((t) => t.value);
+
 let {
   values: { name: componentName, template },
 } = parseArgs({
@@ -43,7 +49,10 @@ let {
     },
   },
 });
-if (template && !templates.includes(template)) {
+// Check if template is a valid ESM variant
+if (template && esmVariants.includes(template)) {
+  // Template is already a specific ESM variant, keep it
+} else if (template && !templates.includes(template)) {
   template = null;
 }
 
@@ -67,6 +76,22 @@ if (!componentName) {
 }
 if (!template) {
   template = answers.template;
+}
+
+// If ESM was selected, show submenu for variants
+if (template === 'esm') {
+  const variantAnswer = await prompts({
+    type: 'select',
+    name: 'variant',
+    message: 'Select ESM variant',
+    choices: esmVariantChoices,
+  });
+
+  if (!variantAnswer.variant) {
+    process.exit(1);
+  }
+
+  template = variantAnswer.variant;
 }
 
 if (!componentName || !template) {

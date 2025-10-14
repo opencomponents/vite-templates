@@ -7,8 +7,19 @@ const templates = fs
 const cursorRules = fs.readFileSync('./oc-project.mdc', 'utf8');
 
 for (const template of templates) {
+  // Add rules
+  fs.mkdirSync(`./templates/${template}/.cursor/rules`, { recursive: true });
+  fs.writeFileSync(
+    `./templates/${template}/.cursor/rules/oc-project.mdc`,
+    cursorRules
+  );
+  const baseTemplate = template.replace(/\..+$/, '');
+
   const compilerPkg = JSON.parse(
-    fs.readFileSync(`../oc-template-${template}-compiler/package.json`, 'utf8')
+    fs.readFileSync(
+      `../oc-template-${baseTemplate}-compiler/package.json`,
+      'utf8'
+    )
   );
   const templatePkg = JSON.parse(
     fs.readFileSync(`./templates/${template}/package.json`, 'utf8')
@@ -17,16 +28,9 @@ for (const template of templates) {
     fs.readFileSync(`../oc-server/package.json`, 'utf8')
   );
 
-  // Add rules
-  fs.mkdirSync(`./templates/${template}/.cursor/rules`, { recursive: true });
-  fs.writeFileSync(
-    `./templates/${template}/.cursor/rules/oc-project.mdc`,
-    cursorRules
-  );
-
   // Update dependencies
   templatePkg.devDependencies[
-    `oc-template-${template}-compiler`
+    `oc-template-${baseTemplate}-compiler`
   ] = `^${compilerPkg.version}`;
   templatePkg.devDependencies['oc-server'] = `^${ocServerPkg.version}`;
 
@@ -37,7 +41,7 @@ for (const template of templates) {
   );
   fs.cpSync(
     `./templates/${template}`,
-    `../oc-template-${template}-compiler/scaffold/src`,
+    `../oc-template-${baseTemplate}-compiler/scaffold/src`,
     { recursive: true }
   );
 }
