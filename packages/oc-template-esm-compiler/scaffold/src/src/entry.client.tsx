@@ -1,15 +1,15 @@
-import { createComponent } from "oc-template-esm-compiler/renderer";
-import { createRoot, Root } from "react-dom/client";
-import App from "./App";
+import { createComponent } from 'oc-template-esm-compiler/renderer';
+import { createRoot } from '@remix-run/dom';
+import App from './App';
 
-let root: Root | undefined = undefined;
+let root: ReturnType<typeof createRoot> | undefined = undefined;
 
 export default createComponent({
-  mount(element, props) {
-    root = createRoot(element);
-    root.render(<App {...props} />);
+  mount(element) {
+    root = createRoot(element as HTMLElement);
+    root.render(<App />);
   },
   unmount() {
-    root?.unmount();
+    root?.remove();
   },
 });

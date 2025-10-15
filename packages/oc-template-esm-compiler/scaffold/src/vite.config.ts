@@ -1,24 +1,21 @@
-import { defineConfig } from "vite";
-import react from "@vitejs/plugin-react";
+import { defineConfig } from 'vite';
 
 // https://vitejs.dev/config/
 export default defineConfig({
   // Add your own plugins here for thinkgs like eslint or typecheckers
-  plugins: [react()],
   resolve: {
     alias: {
-      react: "https://esm.sh/react@19.1.0",
-      "react-dom": "https://esm.sh/react-dom@19.1.0",
-      "react-dom/": "https://esm.sh/react-dom@19.1.0/",
+      '@remix-run/dom':
+        'https://esm.sh/@remix-run/dom@0.0.0-experimental-remix-jam.6',
+      '@remix-run/events':
+        'https://esm.sh/@remix-run/events@0.0.0-experimental-remix-jam.5',
+      '@remix-run/events/':
+        'https://esm.sh/@remix-run/events@0.0.0-experimental-remix-jam.5/',
     },
   },
   build: {
     rollupOptions: {
-      external: ["react", "react-dom"],
+      external: ['@remix-run/dom', '@remix-run/events'],
     },
   },
-  // @ts-ignore Missing test property
-  test: {
-    environment: 'jsdom'
-  }
 });

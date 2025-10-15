@@ -1,5 +1,13 @@
 # oc-template-preact-compiler
 
+## 3.1.3
+
+### Patch Changes
+
+- Add signal option to serverClient and getAction
+- Updated dependencies
+  - oc-vite-compiler@5.1.3
+
 ## 3.1.2
 
 ### Patch Changes

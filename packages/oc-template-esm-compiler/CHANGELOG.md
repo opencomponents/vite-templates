@@ -1,5 +1,14 @@
 # oc-template-esm-compiler
 
+## 2.0.1
+
+### Patch Changes
+
+- Add signal option to serverClient and getAction
+- Updated dependencies
+  - oc-server@3.2.1
+  - oc-vite-compiler@5.1.3
+
 ## 2.0.0
 
 ### Patch Changes

@@ -101,6 +101,7 @@ interface OC {
     parameters?: Record<string, any>;
     version?: string;
     baseUrl?: string;
+    signal?: AbortSignal;
   }) => void;
   load: (
     placeholder: string,

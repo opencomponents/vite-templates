@@ -1,5 +1,13 @@
 # oc-vite-compiler
 
+## 5.1.3
+
+### Patch Changes
+
+- Add signal option to serverClient and getAction
+- Updated dependencies
+  - oc-vite@6.3.7
+
 ## 5.1.2
 
 ### Patch Changes

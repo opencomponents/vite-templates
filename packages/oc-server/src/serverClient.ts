@@ -26,14 +26,15 @@ type ServerClient<TServer extends AnyServer> = {
             : {})
       >
     > extends true
-      ? []
+      ? [options?: { signal?: AbortSignal }]
       : [
           Prettify<
             InferInput<TServer['actions'][Property]> &
               (IsAnyOrUnknown<GetMiddlewareInput<TServer>> extends never
                 ? GetMiddlewareInput<TServer>
                 : {})
-          >
+          >,
+          options?: { signal?: AbortSignal }
         ]
   ) => Promise<InferOutput<TServer['actions'][Property]>>;
 };
@@ -42,7 +43,7 @@ export const serverClient: ServerClient<RegisteredServer> = new Proxy(
   {},
   {
     get(_target, prop: string) {
-      return (data: any) => {
+      return (data?: any, options?: { signal?: AbortSignal }) => {
         const componentName = 'COMPONENT_NAME';
         const componentVersion = 'COMPONENT_VERSION';
         const baseUrl =
@@ -55,6 +56,7 @@ export const serverClient: ServerClient<RegisteredServer> = new Proxy(
           component: componentName,
           version: componentVersion,
           parameters: data,
+          signal: options?.signal,
         });
       };
     },

@@ -1,5 +1,11 @@
 # oc-vite
 
+## 6.3.7
+
+### Patch Changes
+
+- Add signal option to serverClient and getAction
+
 ## 6.3.6
 
 ### Patch Changes
