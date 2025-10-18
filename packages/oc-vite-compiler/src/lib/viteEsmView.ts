@@ -107,7 +107,24 @@ async function compileView(options: ViteViewOptions & CompilerOptions) {
     mode: production ? 'production' : 'development',
     plugins: [
       cssModules(),
-      cssInjectedByJsPlugin({ styleId }),
+      cssInjectedByJsPlugin({
+        styleId,
+        injectCode: (cssCode: string) => {
+          return `try {
+            if (typeof document != 'undefined') {
+              var elementStyle = document.createElement('style');
+              elementStyle.appendChild(document.createTextNode(${cssCode}));
+              if (${shadowDOM ? 'true' : 'false'}) {
+                elementStyle.setAttribute('type', 'oc/css');
+              }
+              elementStyle.setAttribute('id', '${styleId}');
+              document.head.appendChild(elementStyle);
+            }
+          } catch (e) {
+            console.error('vite-plugin-css-injected-by-js', e);
+          }`;
+        },
+      }),
       {
         name: 'OcServerRuntime',
         enforce: 'pre',
