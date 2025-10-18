@@ -12,6 +12,11 @@ interface Template {
 }
 
 export function cli() {
+  console.warn(
+    '\x1b[33m%s\x1b[0m',
+    'WARNING: The "oc-server dev" command is deprecated. Please use the Vite plugin instead by adding ocVitePlugin() to your vite.config.ts. See documentation for migration guide.'
+  );
+
   const {
     positionals: [command],
     values: { help, port = '5000' },
