@@ -1,5 +1,11 @@
 # oc-vite-compiler
 
+## 5.1.4
+
+### Patch Changes
+
+- Fix shadowdom global pollution
+
 ## 5.1.3
 
 ### Patch Changes

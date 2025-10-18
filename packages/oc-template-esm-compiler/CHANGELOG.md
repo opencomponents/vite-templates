@@ -1,5 +1,13 @@
 # oc-template-esm-compiler
 
+## 2.0.2
+
+### Patch Changes
+
+- Fix shadowdom global pollution
+- Updated dependencies
+  - oc-vite-compiler@5.1.4
+
 ## 2.0.1
 
 ### Patch Changes
