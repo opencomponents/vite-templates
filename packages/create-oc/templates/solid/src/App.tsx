@@ -1,5 +1,9 @@
-import { createSignal, Show, For } from 'solid-js';
-import { serverClient, InitialData, ActionOutput } from 'oc-server';
+import { createSignal, Show } from 'solid-js';
+import {
+  serverClient,
+  type InitialData,
+  type ActionOutput,
+} from 'oc-server/client';
 import styles from './styles.css';
 import logo from '../public/logo.png';
 

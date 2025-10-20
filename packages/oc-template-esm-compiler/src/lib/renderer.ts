@@ -1,4 +1,4 @@
-import type { InitialData } from 'oc-server';
+import type { InitialData } from 'oc-server/client';
 
 type RendererContext = {
   shadowRoot?: ShadowRoot | null;

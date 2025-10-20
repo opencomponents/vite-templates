@@ -1,5 +1,9 @@
 import { useState } from 'preact/hooks';
-import { ActionOutput, InitialData, serverClient } from 'oc-server';
+import {
+  type ActionOutput,
+  type InitialData,
+  serverClient,
+} from 'oc-server/client';
 import styles from './styles.css';
 import logo from '../public/logo.png';
 

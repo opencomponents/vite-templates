@@ -1,5 +1,9 @@
 import { useState } from 'react';
-import { serverClient, InitialData, ActionOutput } from 'oc-server';
+import {
+  serverClient,
+  type InitialData,
+  type ActionOutput,
+} from 'oc-server/client';
 import styles from './styles.module.css';
 import logo from '../public/logo.png';
 

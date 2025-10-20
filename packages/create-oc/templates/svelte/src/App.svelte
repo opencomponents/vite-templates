@@ -1,6 +1,6 @@
 <script lang="ts">
   import logo from '../public/logo.png';
-  import { type InitialData, serverClient } from 'oc-server';
+  import { type InitialData, serverClient } from 'oc-server/client';
 
   let funFact: string | null = $state(null);
   let { born, firstName, hobbies, lastName }: InitialData = $props();

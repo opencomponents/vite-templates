@@ -1,7 +1,6 @@
-import { InitialData, serverClient } from 'oc-server';
+import { InitialData, serverClient, getSettings } from 'oc-server/client';
 import styles from './styles.css';
 import logo from '../public/logo.png';
-import { getSettings } from 'oc-server';
 
 const onRender = (cb: (element: HTMLElement) => void) => {
   const isBrowser = typeof window !== 'undefined';

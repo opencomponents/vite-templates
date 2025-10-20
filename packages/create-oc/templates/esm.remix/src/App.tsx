@@ -1,4 +1,8 @@
-import { serverClient, type ActionOutput, getInitialData } from 'oc-server';
+import {
+  serverClient,
+  type ActionOutput,
+  getInitialData,
+} from 'oc-server/client';
 import type { Remix } from '@remix-run/dom';
 import { press } from '@remix-run/events/press';
 import styles from './styles.module.css';
