@@ -396,17 +396,6 @@ export type ComponentSettings = {
   version: string;
 };
 
-declare const __$$oc_initialData__: InitialData;
-declare const __$$oc_Settings__: ComponentSettings;
-
-export const getInitialData: () => InitialData = () =>
-  typeof __$$oc_initialData__ !== 'undefined'
-    ? __$$oc_initialData__
-    : ({} as any);
-
-export const getSettings: () => ComponentSettings = () =>
-  typeof __$$oc_Settings__ !== 'undefined' ? __$$oc_Settings__ : ({} as any);
-
 type ErrorCodes =
   | 400
   | 401
