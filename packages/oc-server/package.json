@@ -15,6 +15,11 @@
       "require": "./dist/index.js",
       "types": "./dist/index.d.ts"
     },
+    "./client": {
+      "import": "./dist/serverClient.js",
+      "require": "./dist/serverClient.js",
+      "types": "./dist/serverClient.d.ts"
+    },
     "./vite": {
       "import": "./dist/vite/plugin.js",
       "require": "./dist/vite/plugin.js",
