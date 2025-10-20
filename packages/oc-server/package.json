@@ -4,10 +4,22 @@
   "description": "",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
-  "bin": "dist/cli/index.js",
+  "bin": "dist/cli.js",
   "scripts": {
     "build": "tsc",
     "clean": "rm -rf .turbo && rm -rf node_modules && rm -rf dist"
+  },
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "require": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    },
+    "./vite": {
+      "import": "./dist/vite/plugin.js",
+      "require": "./dist/vite/plugin.js",
+      "types": "./dist/vite/plugin.d.ts"
+    }
   },
   "keywords": [
     "oc",

@@ -4,11 +4,13 @@ interface OcVitePluginOptions {
   port?: number;
 }
 
-export function ocVitePlugin(options: OcVitePluginOptions = {}): Plugin {
+export function oc(options: OcVitePluginOptions = {}): Plugin {
   const moduleRequire = typeof require !== 'undefined' ? require : null;
-  
+
   if (!moduleRequire) {
-    throw new Error('oc-vite-plugin requires a CommonJS environment with require() available');
+    throw new Error(
+      'oc-vite-plugin requires a CommonJS environment with require() available'
+    );
   }
 
   return {
@@ -20,15 +22,19 @@ export function ocVitePlugin(options: OcVitePluginOptions = {}): Plugin {
       const esbuild = moduleRequire('esbuild');
       const { loadConfigFromFile } = moduleRequire('vite');
       const ocClientBrowser = moduleRequire('oc-client-browser');
-      const { getContext, getDefaultParams, parsePkg } = moduleRequire('./cli/oc');
-      const getMockedPlugins = moduleRequire('./cli/get-mocked-plugins').default;
+      const { getContext, getDefaultParams, parsePkg } = moduleRequire('./oc');
+      const getMockedPlugins = moduleRequire('./get-mocked-plugins').default;
 
-      const pkg = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'package.json'), 'utf-8'));
+      const pkg = JSON.parse(
+        fs.readFileSync(path.join(process.cwd(), 'package.json'), 'utf-8')
+      );
       const parsedPkg = parsePkg(pkg);
       const templateType = parsedPkg.templateType;
 
       const { createRequire } = moduleRequire('module');
-      const projectRequire = createRequire(path.join(process.cwd(), 'package.json'));
+      const projectRequire = createRequire(
+        path.join(process.cwd(), 'package.json')
+      );
 
       const tryRequire = (name: string) => {
         try {
@@ -65,50 +71,54 @@ export function ocVitePlugin(options: OcVitePluginOptions = {}): Plugin {
 
       const template = result.value;
 
-        const promisify = (fn: any) => (...args: any) =>
+      const promisify =
+        (fn: any) =>
+        (...args: any) =>
           new Promise((resolve, reject) =>
-            fn(...args, (err: any, data: any) => (err ? reject(err) : resolve(data)))
+            fn(...args, (err: any, data: any) =>
+              err ? reject(err) : resolve(data)
+            )
           );
 
-        const getDataProvider = (serverEntry?: string) => {
-          if (!serverEntry) {
-            return {
-              dataProvider: async (context: { params: {} }) => ({
-                ...(context.params ?? {}),
-              }),
-            };
-          }
-
-          const result = esbuild.buildSync({
-            entryPoints: [serverEntry],
-            bundle: true,
-            format: 'cjs',
-            write: false,
-          });
-          const code = result.outputFiles[0].text;
-          const backend = vm.runInNewContext(code, {
-            ...globalThis,
-            exports: {},
-            console,
-            module: { exports: {} },
-          });
-
-          const dataProvider = backend.data || backend.server.getData();
-
+      const getDataProvider = (serverEntry?: string) => {
+        if (!serverEntry) {
           return {
-            dataProvider: promisify(dataProvider),
-            parametersSchema: backend.server?._parameters,
+            dataProvider: async (context: { params: {} }) => ({
+              ...(context.params ?? {}),
+            }),
           };
-        };
+        }
 
-        const getBaseTemplate = (
-          appBlock: any,
-          name: string,
-          version: string,
-          appEntry: string,
-          imports: Record<string, string> = {}
-        ) => {
-          return `
+        const result = esbuild.buildSync({
+          entryPoints: [serverEntry],
+          bundle: true,
+          format: 'cjs',
+          write: false,
+        });
+        const code = result.outputFiles[0].text;
+        const backend = vm.runInNewContext(code, {
+          ...globalThis,
+          exports: {},
+          console,
+          module: { exports: {} },
+        });
+
+        const dataProvider = backend.data || backend.server.getData();
+
+        return {
+          dataProvider: promisify(dataProvider),
+          parametersSchema: backend.server?._parameters,
+        };
+      };
+
+      const getBaseTemplate = (
+        appBlock: any,
+        name: string,
+        version: string,
+        appEntry: string,
+        imports: Record<string, string> = {}
+      ) => {
+        return `
 <!DOCTYPE html>
 <html>
   <head>
@@ -122,7 +132,13 @@ export function ocVitePlugin(options: OcVitePluginOptions = {}): Plugin {
       margin: 0;
     }
     </style>
-    ${imports ? `<script type="importmap">{"imports": ${JSON.stringify(imports)}}</script>` : ''}
+    ${
+      imports
+        ? `<script type="importmap">{"imports": ${JSON.stringify(
+            imports
+          )}}</script>`
+        : ''
+    }
   </head>
   <body>
     <script src="/oc-client/client.js"></script>
@@ -130,25 +146,30 @@ export function ocVitePlugin(options: OcVitePluginOptions = {}): Plugin {
   </body>
 </html>
   `;
-        };
+      };
 
-        const getHtmlTemplate = async (
-          appBlock: any,
-          name: string,
-          version: string,
-          appEntry: string,
-          imports: Record<string, string> = {},
-          filePath = 'index.html'
-        ) => {
-          let htmlTemplate;
-          try {
-            htmlTemplate = fs.readFileSync(path.resolve(process.cwd(), filePath), 'utf-8');
-            if (!htmlTemplate.includes('</body>')) {
-              throw new Error('If you use a custom html entry it has to have a closing body tag');
-            }
-            htmlTemplate = htmlTemplate.replace(
-              '</body>',
-              `<script>
+      const getHtmlTemplate = async (
+        appBlock: any,
+        name: string,
+        version: string,
+        appEntry: string,
+        imports: Record<string, string> = {},
+        filePath = 'index.html'
+      ) => {
+        let htmlTemplate;
+        try {
+          htmlTemplate = fs.readFileSync(
+            path.resolve(process.cwd(), filePath),
+            'utf-8'
+          );
+          if (!htmlTemplate.includes('</body>')) {
+            throw new Error(
+              'If you use a custom html entry it has to have a closing body tag'
+            );
+          }
+          htmlTemplate = htmlTemplate.replace(
+            '</body>',
+            `<script>
         if (!window.oc?.status) {
           const script = document.createElement('script');
           script.src = '/oc-client/client.js';
@@ -156,13 +177,19 @@ export function ocVitePlugin(options: OcVitePluginOptions = {}): Plugin {
         }
       </script>
       ${appBlock({ name, version, entry: appEntry })}</body>`
-            );
-          } catch (error) {
-            htmlTemplate = getBaseTemplate(appBlock, name, version, appEntry, imports);
-          }
+          );
+        } catch (error) {
+          htmlTemplate = getBaseTemplate(
+            appBlock,
+            name,
+            version,
+            appEntry,
+            imports
+          );
+        }
 
-          return htmlTemplate;
-        };
+        return htmlTemplate;
+      };
 
       const name = parsedPkg.name;
       const version = parsedPkg.version;
@@ -178,7 +205,9 @@ export function ocVitePlugin(options: OcVitePluginOptions = {}): Plugin {
         plugin.register.register(null, null, () => {});
       }
 
-      const defaultParams = getDefaultParams(pkg.oc?.parameters ?? parametersSchema);
+      const defaultParams = getDefaultParams(
+        pkg.oc?.parameters ?? parametersSchema
+      );
 
       const baseConfig = await loadConfigFromFile(
         {
