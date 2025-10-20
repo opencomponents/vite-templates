@@ -1,13 +1,25 @@
 /// <reference types="oc-vite/client" />
 
-import {
+import type {
   AnyServer,
   RegisteredServer,
   Action,
-  getSettings,
   GetMiddlewareInput,
+  ComponentSettings,
+  InitialData,
 } from './Server';
-import { IsAnyOrUnknown, Prettify, ToPrettyJson } from './types';
+import type { IsAnyOrUnknown, Prettify, ToPrettyJson } from './types';
+
+declare const __$$oc_initialData__: InitialData;
+declare const __$$oc_Settings__: ComponentSettings;
+
+export const getInitialData: () => InitialData = () =>
+  typeof __$$oc_initialData__ !== 'undefined'
+    ? __$$oc_initialData__
+    : ({} as any);
+
+export const getSettings: () => ComponentSettings = () =>
+  typeof __$$oc_Settings__ !== 'undefined' ? __$$oc_Settings__ : ({} as any);
 
 type InferInput<R> = R extends Action<infer I, any, any, any, any> ? I : any;
 type InferOutput<R> = R extends Action<any, infer O, any, any, any>

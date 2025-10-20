@@ -4,10 +4,27 @@
   "description": "",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
-  "bin": "dist/cli/index.js",
+  "bin": "dist/cli.js",
   "scripts": {
     "build": "tsc",
     "clean": "rm -rf .turbo && rm -rf node_modules && rm -rf dist"
+  },
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "require": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    },
+    "./client": {
+      "import": "./dist/client.js",
+      "require": "./dist/client.js",
+      "types": "./dist/client.d.ts"
+    },
+    "./vite": {
+      "import": "./dist/vite/plugin.js",
+      "require": "./dist/vite/plugin.js",
+      "types": "./dist/vite/plugin.d.ts"
+    }
   },
   "keywords": [
     "oc",
@@ -25,5 +42,11 @@
     "@fastify/express": "^3.0.0",
     "fastify": "^4.28.1",
     "oc-client-browser": "^1.8.0"
+  },
+  "peerDependencies": {
+    "vite": "^5.0.0 || ^6.0.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.1.3"
   }
 }
