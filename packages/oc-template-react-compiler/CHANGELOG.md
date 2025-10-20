@@ -1,5 +1,11 @@
 # oc-template-react-compiler
 
+## 10.1.4
+
+### Patch Changes
+
+- Move oc-server dev to vite plugin
+
 ## 10.1.3
 
 ### Patch Changes

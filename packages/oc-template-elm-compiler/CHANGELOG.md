@@ -1,5 +1,11 @@
 # oc-template-elm-compiler
 
+## 2.1.4
+
+### Patch Changes
+
+- Move oc-server dev to vite plugin
+
 ## 2.1.3
 
 ### Patch Changes

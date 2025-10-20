@@ -1,5 +1,11 @@
 # oc-template-es6-compiler
 
+## 7.1.4
+
+### Patch Changes
+
+- Move oc-server dev to vite plugin
+
 ## 7.1.3
 
 ### Patch Changes

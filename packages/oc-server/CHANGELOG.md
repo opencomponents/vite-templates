@@ -1,5 +1,11 @@
 # oc-server
 
+## 4.0.0
+
+### Major Changes
+
+- Move oc-server dev to vite plugin
+
 ## 3.2.1
 
 ### Patch Changes

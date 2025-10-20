@@ -1,5 +1,13 @@
 # oc-template-esm-compiler
 
+## 3.0.0
+
+### Patch Changes
+
+- Move oc-server dev to vite plugin
+- Updated dependencies
+  - oc-server@4.0.0
+
 ## 2.0.2
 
 ### Patch Changes

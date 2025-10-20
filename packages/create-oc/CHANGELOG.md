@@ -1,5 +1,11 @@
 # create-oc
 
+## 1.1.30
+
+### Patch Changes
+
+- Move oc-server dev to vite plugin
+
 ## 1.1.25
 
 ### Patch Changes

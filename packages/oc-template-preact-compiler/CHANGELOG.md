@@ -1,5 +1,11 @@
 # oc-template-preact-compiler
 
+## 3.1.4
+
+### Patch Changes
+
+- Move oc-server dev to vite plugin
+
 ## 3.1.3
 
 ### Patch Changes
