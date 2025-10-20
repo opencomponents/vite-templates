@@ -16,6 +16,31 @@ function checkNodeVersion() {
   }
 }
 
+function createOcJson(cwd, importmap) {
+  let oc = {};
+  try {
+    oc = fs.readFileSync(path.join(cwd, 'oc.json'), 'utf-8');
+  } catch {}
+
+  if (!oc.$schema) {
+    oc.$schema = 'https://opencomponents.github.io/schema.json';
+  }
+  oc.importmap = oc.importmap?.imports
+    ? {
+        imports: {
+          ...oc.importmap.imports,
+          ...importmap,
+        },
+      }
+    : importmap;
+
+  fs.writeFileSync(
+    path.join(cwd, 'oc.json'),
+    JSON.stringify(oc, null, 2),
+    'utf-8'
+  );
+}
+
 checkNodeVersion();
 
 const templateChoices = [
@@ -131,6 +156,30 @@ replaceJson(`./${componentName}/package.json`, (pkg) => ({
     start: `oc dev .. --components ${componentName}`,
   },
 }));
+
+const imports = (() => {
+  switch (template) {
+    case 'esm.react':
+      return {
+        react: 'https://esm.sh/react@19.1.0',
+        'react-dom': 'https://esm.sh/react-dom@19.1.0',
+        'react-dom/': 'https://esm.sh/react-dom@19.1.0/',
+      };
+    case 'esm.remix':
+      return {
+        '@remix-run/dom':
+          'https://esm.sh/@remix-run/dom@0.0.0-experimental-remix-jam.6',
+        '@remix-run/events':
+          'https://esm.sh/@remix-run/events@0.0.0-experimental-remix-jam.5',
+        '@remix-run/events/':
+          'https://esm.sh/@remix-run/events@0.0.0-experimental-remix-jam.5/',
+      };
+    default:
+      return undefined;
+  }
+})();
+
+createOcJson(process.cwd(), imports ? { imports } : undefined);
 
 console.log('Finished. To start your oc for the first time:');
 console.log();

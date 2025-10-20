@@ -62,6 +62,9 @@ export default function esmOCProviderTemplate({
       shadowRoot = element.attachShadow({ mode });
       if (styleElement && shadowRoot) {
         const clone = styleElement.cloneNode(true);
+        // Original style element has type='oc/css' so styles dont apply to global scope
+        // We remove it in the clone so they work on the shadow root
+        clone.removeAttribute('type');
         shadowRoot.appendChild(clone);
       }
       const container = document.createElement('div');
