@@ -1,5 +1,11 @@
 # oc-template-esm-compiler
 
+## 3.0.1
+
+### Patch Changes
+
+- Accept a callback fn for createComponent
+
 ## 3.0.0
 
 ### Patch Changes

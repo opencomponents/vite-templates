@@ -9,6 +9,9 @@ interface RendererOptions {
   unmount?(): void;
 }
 
-export function createComponent(opts: RendererOptions) {
+export function createComponent(opts: RendererOptions | (() => RendererOptions)) {
+  if (typeof opts === 'function') {
+    return opts();
+  }
   return opts;
 }
