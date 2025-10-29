@@ -1,6 +1,6 @@
 {
   "name": "oc-template-esm-compiler",
-  "version": "3.0.2",
+  "version": "3.0.3",
   "description": "Compiler for the ESM OC template",
   "main": "dist/index.js",
   "type": "module",

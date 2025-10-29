@@ -1,5 +1,11 @@
 # oc-template-esm-compiler
 
+## 3.0.3
+
+### Patch Changes
+
+- Fix callback fn uniqueness
+
 ## 3.0.2
 
 ### Patch Changes

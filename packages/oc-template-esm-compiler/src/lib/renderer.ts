@@ -10,8 +10,5 @@ interface RendererOptions {
 }
 
 export function createComponent(opts: RendererOptions | (() => RendererOptions)) {
-  if (typeof opts === 'function') {
-    return opts();
-  }
   return opts;
 }

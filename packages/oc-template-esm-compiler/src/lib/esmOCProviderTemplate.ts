@@ -48,6 +48,8 @@ export default function esmOCProviderTemplate({
     const styleElement = ${styleId ? `document.getElementById('${styleId}')` : 'null'};
     const styleId = ${styleId ? `'${styleId}'` : 'undefined'};
     let shadowRoot = undefined;
+    const methods = typeof Component === 'function' ? Component() : Component;
+
     ${
       // If shadowRootMode is set at build time, attach a shadow root and mount into it
       // We also clone the styleElement into the shadow root when present
@@ -69,15 +71,15 @@ export default function esmOCProviderTemplate({
       }
       const container = document.createElement('div');
       shadowRoot.appendChild(container);
-      element.unmount = () => Component.unmount?.();
-      Component.mount(container, rest, { shadowRoot });
+      element.unmount = () => methods.unmount?.();
+      methods.mount(container, rest, { shadowRoot });
       return;
     }
       `
     }
 
-    element.unmount = () => Component.unmount?.();
-    Component.mount(element, rest, { styleElement, styleId, shadowRoot: null });
+    element.unmount = () => methods.unmount?.();
+    methods.mount(element, rest, { styleElement, styleId, shadowRoot: null });
   }
 `;
 }
