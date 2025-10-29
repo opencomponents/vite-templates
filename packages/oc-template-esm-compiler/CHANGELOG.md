@@ -1,5 +1,11 @@
 # oc-template-esm-compiler
 
+## 3.0.2
+
+### Patch Changes
+
+- update examples with callback
+
 ## 3.0.1
 
 ### Patch Changes

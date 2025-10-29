@@ -1,5 +1,11 @@
 # create-oc
 
+## 1.1.31
+
+### Patch Changes
+
+- update examples with callback
+
 ## 1.1.30
 
 ### Patch Changes
