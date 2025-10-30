@@ -1,5 +1,11 @@
 # create-oc
 
+## 1.1.33
+
+### Patch Changes
+
+- Move to Vite 7
+
 ## 1.1.31
 
 ### Patch Changes

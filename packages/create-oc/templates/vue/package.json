@@ -2,6 +2,7 @@
   "name": "base-component-vue",
   "description": "",
   "version": "1.0.0",
+  "type": "module",
   "scripts": {
     "lint": "eslint --max-warnings 0 --ext .js,.jsx,.ts,.tsx src",
     "dev": "oc-server dev",
@@ -28,8 +29,9 @@
     "@vue/tsconfig": "^0.7.0",
     "jsdom": "^21.1.1",
     "oc-server": "^4.0.0",
-    "oc-template-vue-compiler": "^3.1.4",
+    "oc-template-vue-compiler": "^4.0.0",
     "typescript": "5.8.2",
+    "vite": "^7.1.12",
     "vitest": "^0.29.7",
     "vue": "^3.5.13",
     "vue-tsc": "^2.2.4"

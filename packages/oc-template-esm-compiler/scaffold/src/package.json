@@ -26,8 +26,9 @@
     "@remix-run/events": "^0.0.0-experimental-remix-jam.5",
     "happy-dom": "^18.0.1",
     "oc-server": "^4.0.0",
-    "oc-template-esm-compiler": "^3.0.3",
+    "oc-template-esm-compiler": "^4.0.0",
     "typescript": "5.8.3",
+    "vite": "^7.1.12",
     "vitest": "^3.2.4"
   }
 }

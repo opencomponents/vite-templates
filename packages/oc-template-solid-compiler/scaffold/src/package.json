@@ -2,6 +2,7 @@
   "name": "base-component-solid",
   "description": "",
   "version": "1.0.0",
+  "type": "module",
   "scripts": {
     "lint": "eslint --max-warnings 0 --ext .js,.jsx,.ts,.tsx src",
     "dev": "oc-server dev",
@@ -26,9 +27,10 @@
     "@types/testing-library__jest-dom": "^5.14.5",
     "jsdom": "^21.1.1",
     "oc-server": "^4.0.0",
-    "oc-template-solid-compiler": "^3.1.4",
+    "oc-template-solid-compiler": "^4.0.0",
     "solid-js": "^1.9.5",
     "typescript": "5.5.4",
+    "vite": "^7.1.12",
     "vitest": "^2.0.5"
   }
 }

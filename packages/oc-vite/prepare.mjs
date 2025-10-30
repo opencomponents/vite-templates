@@ -34,6 +34,7 @@ function checkPackages(pkgJson, vitePkgJson) {
     'license',
     'author',
     'keywords',
+    'exports',
   ];
   const differences = [];
 
@@ -129,14 +130,13 @@ async function main() {
 
   console.log('Building');
   fixBuild('./vite/packages/vite/src/node/plugins/asset.ts');
-  fixRollup('./vite/packages/vite/rollup.config.ts');
+  fixRollup('./vite/packages/vite/rolldown.config.ts');
   await exec('pnpm build', { cwd: './vite/packages/vite' });
 
   console.log('Moving folders');
   fs.renameSync('./vite/packages/vite/dist', './dist');
   fs.renameSync('./vite/packages/vite/bin', './bin');
   fs.renameSync('./vite/packages/vite/types', './types');
-  fs.renameSync('./vite/packages/vite/index.cjs', './index.cjs');
   fs.renameSync('./vite/packages/vite/client.d.ts', './client.d.ts');
 }
 

@@ -1,5 +1,11 @@
 # oc-vite
 
+## 7.1.12
+
+### Patch Changes
+
+- Move to Vite 7
+
 ## 6.3.7
 
 ### Patch Changes

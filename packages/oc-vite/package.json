@@ -1,7 +1,7 @@
 {
   "name": "oc-vite",
-  "version": "6.3.7",
-  "viteVersion": "6.3.5",
+  "version": "7.1.12",
+  "viteVersion": "7.1.12",
   "type": "module",
   "license": "MIT",
   "author": "Evan You",
@@ -20,15 +20,16 @@
   "main": "./dist/node/index.js",
   "types": "./dist/node/index.d.ts",
   "exports": {
-    ".": {
-      "types": "./dist/node/index.d.ts",
-      "import": "./dist/node/index.js",
-      "require": "./index.cjs"
-    },
+    ".": "./dist/node/index.js",
     "./client": {
       "types": "./client.d.ts"
     },
+    "./module-runner": "./dist/node/module-runner.js",
     "./dist/client/*": "./dist/client/*",
+    "./types/*": {
+      "types": "./types/*"
+    },
+    "./types/internal/*": null,
     "./package.json": "./package.json"
   },
   "imports": {
@@ -47,7 +48,7 @@
     "types"
   ],
   "engines": {
-    "node": "^18.0.0 || ^20.0.0 || >=22.0.0"
+    "node": "^20.19.0 || >=22.12.0"
   },
   "repository": {
     "type": "git",
@@ -56,24 +57,24 @@
   },
   "dependencies": {
     "esbuild": "^0.25.0",
-    "fdir": "^6.4.4",
-    "picomatch": "^4.0.2",
-    "postcss": "^8.5.3",
-    "rollup": "^4.34.9",
-    "tinyglobby": "^0.2.13"
+    "fdir": "^6.5.0",
+    "picomatch": "^4.0.3",
+    "postcss": "^8.5.6",
+    "rollup": "^4.43.0",
+    "tinyglobby": "^0.2.15"
   },
   "optionalDependencies": {
     "fsevents": "~2.3.3"
   },
   "peerDependencies": {
-    "@types/node": "^18.0.0 || ^20.0.0 || >=22.0.0",
+    "@types/node": "^20.19.0 || >=22.12.0",
     "jiti": ">=1.21.0",
-    "less": "*",
+    "less": "^4.0.0",
     "lightningcss": "^1.21.0",
-    "sass": "*",
-    "sass-embedded": "*",
-    "stylus": "*",
-    "sugarss": "*",
+    "sass": "^1.70.0",
+    "sass-embedded": "^1.70.0",
+    "stylus": ">=0.54.8",
+    "sugarss": "^5.0.0",
     "terser": "^5.16.0",
     "tsx": "^4.8.1",
     "yaml": "^2.4.2"

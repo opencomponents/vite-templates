@@ -1,5 +1,16 @@
 # oc-template-elm-compiler
 
+## 3.0.0
+
+### Major Changes
+
+- Move to Vite 7
+
+### Patch Changes
+
+- Updated dependencies
+  - oc-vite-compiler@6.0.0
+
 ## 2.1.4
 
 ### Patch Changes

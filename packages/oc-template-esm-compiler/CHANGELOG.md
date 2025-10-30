@@ -1,5 +1,16 @@
 # oc-template-esm-compiler
 
+## 4.0.0
+
+### Major Changes
+
+- Move to Vite 7
+
+### Patch Changes
+
+- Updated dependencies
+  - oc-vite-compiler@6.0.0
+
 ## 3.0.3
 
 ### Patch Changes

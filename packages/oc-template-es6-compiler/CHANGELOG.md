@@ -1,5 +1,16 @@
 # oc-template-es6-compiler
 
+## 8.0.0
+
+### Major Changes
+
+- Move to Vite 7
+
+### Patch Changes
+
+- Updated dependencies
+  - oc-vite-compiler@6.0.0
+
 ## 7.1.4
 
 ### Patch Changes

@@ -1,5 +1,16 @@
 # oc-vite-compiler
 
+## 6.0.0
+
+### Major Changes
+
+- Move to Vite 7
+
+### Patch Changes
+
+- Updated dependencies
+  - oc-vite@7.1.12
+
 ## 5.1.4
 
 ### Patch Changes

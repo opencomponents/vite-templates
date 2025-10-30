@@ -2,6 +2,7 @@
   "name": "base-component-preact",
   "description": "",
   "version": "1.0.0",
+  "type": "module",
   "scripts": {
     "lint": "eslint --max-warnings 0 --ext .js,.jsx,.ts,.tsx src",
     "dev": "oc-server dev",
@@ -27,9 +28,10 @@
     "@testing-library/user-event": "^14.4.3",
     "jsdom": "^21.1.1",
     "oc-server": "^4.0.0",
-    "oc-template-preact-compiler": "^3.1.4",
+    "oc-template-preact-compiler": "^4.0.0",
     "preact": "^10.13.2",
     "typescript": "5.0.2",
-    "vitest": "^0.29.7"
+    "vitest": "^0.29.7",
+    "vite": "^7.1.12"
   }
 }

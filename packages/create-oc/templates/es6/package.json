@@ -2,6 +2,7 @@
   "name": "base-component-es6",
   "description": "",
   "version": "1.0.0",
+  "type": "module",
   "scripts": {
     "dev": "oc-server dev"
   },
@@ -19,6 +20,7 @@
   },
   "devDependencies": {
     "oc-server": "^4.0.0",
-    "oc-template-es6-compiler": "^7.1.4"
+    "oc-template-es6-compiler": "^8.0.0",
+    "vite": "^7.1.12"
   }
 }

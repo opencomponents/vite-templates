@@ -1,6 +1,6 @@
 {
   "name": "oc-template-svelte-compiler",
-  "version": "2.1.4",
+  "version": "3.0.0",
   "description": "Compiler for the Svelte OC template",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -30,7 +30,7 @@
   "dependencies": {
     "@sveltejs/vite-plugin-svelte": "^5.0.3",
     "oc-template-svelte": "^0.0.2",
-    "oc-vite-compiler": "^5.1.3",
+    "oc-vite-compiler": "^6.0.0",
     "svelte": "^5.23.0"
   },
   "files": [

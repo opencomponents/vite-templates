@@ -27,12 +27,16 @@ for (const template of templates) {
   const ocServerPkg = JSON.parse(
     fs.readFileSync(`../oc-server/package.json`, 'utf8')
   );
+  const viteVersion = JSON.parse(
+    fs.readFileSync(`../oc-vite/package.json`, 'utf8')
+  ).viteVersion;
 
   // Update dependencies
   templatePkg.devDependencies[
     `oc-template-${baseTemplate}-compiler`
   ] = `^${compilerPkg.version}`;
   templatePkg.devDependencies['oc-server'] = `^${ocServerPkg.version}`;
+  templatePkg.devDependencies['vite'] = `^${viteVersion}`;
 
   // Write and copy
   fs.writeFileSync(
