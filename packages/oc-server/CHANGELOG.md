@@ -1,5 +1,11 @@
 # oc-server
 
+## 4.0.1
+
+### Patch Changes
+
+- fix peerdep for vite
+
 ## 4.0.0
 
 ### Major Changes
