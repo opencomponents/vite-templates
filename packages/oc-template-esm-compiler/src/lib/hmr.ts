@@ -20,7 +20,8 @@ export const appBlock = ({
   import component from "${entry}";
 
   const container = document.getElementById('root');
-  component.mount(container, data);
+  const methods = typeof component === 'function' ? component() : component;
+  methods.mount(container, data);
 
   window.oc.cmd.push(() => {
     window.oc.events.fire('oc:rendered', { ...settings, element: container,  });

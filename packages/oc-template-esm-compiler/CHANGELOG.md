@@ -1,5 +1,11 @@
 # oc-template-esm-compiler
 
+## 4.0.1
+
+### Patch Changes
+
+- Fix hmr for fn returning
+
 ## 4.0.0
 
 ### Major Changes
