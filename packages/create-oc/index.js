@@ -19,7 +19,7 @@ function checkNodeVersion() {
 function createOcJson(cwd, importmap) {
   let oc = {};
   try {
-    oc = fs.readFileSync(path.join(cwd, 'oc.json'), 'utf-8');
+    oc = JSON.parse(fs.readFileSync(path.join(cwd, 'oc.json'), 'utf-8'));
   } catch {}
 
   if (!oc.$schema) {
