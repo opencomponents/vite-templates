@@ -5,6 +5,7 @@ import type {
   RegisteredServer,
   Action,
   GetMiddlewareInput,
+  GetStreaming,
   ComponentSettings,
   InitialData,
 } from './Server';
@@ -22,8 +23,16 @@ export const getSettings: () => ComponentSettings = () =>
   typeof __$$oc_Settings__ !== 'undefined' ? __$$oc_Settings__ : ({} as any);
 
 type InferInput<R> = R extends Action<infer I, any, any, any, any> ? I : any;
-type InferOutput<R> = R extends Action<any, infer O, any, any, any>
-  ? ToPrettyJson<O>
+type InferOutput<R, Streaming extends boolean> = R extends Action<
+  any,
+  infer O,
+  any,
+  any,
+  any
+>
+  ? Streaming extends true
+    ? O
+    : ToPrettyJson<O>
   : never;
 
 type IsEmptyObject<T> = keyof T extends never ? true : false;
@@ -48,7 +57,9 @@ type ServerClient<TServer extends AnyServer> = {
           >,
           options?: { signal?: AbortSignal }
         ]
-  ) => Promise<InferOutput<TServer['actions'][Property]>>;
+  ) => Promise<
+    InferOutput<TServer['actions'][Property], GetStreaming<TServer>>
+  >;
 };
 
 export const serverClient: ServerClient<RegisteredServer> = new Proxy(

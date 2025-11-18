@@ -346,6 +346,19 @@ export type RegisteredServer = Register extends {
 
 export type GetMiddlewareInput<TServer extends AnyServer> =
   TServer extends HandledServer<any, any, any, any, any, infer I> ? I : any;
+export type GetStreaming<TServer extends AnyServer> =
+  TServer extends HandledServer<
+    any,
+    any,
+    any,
+    any,
+    any,
+    any,
+    any,
+    infer Streaming
+  >
+    ? Streaming
+    : false;
 type GetEnv<TServer extends AnyServer> = TServer extends HandledServer<
   infer E,
   any,

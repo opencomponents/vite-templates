@@ -1,5 +1,11 @@
 # oc-server
 
+## 4.0.2
+
+### Patch Changes
+
+- infer streaming on actions too
+
 ## 4.0.1
 
 ### Patch Changes

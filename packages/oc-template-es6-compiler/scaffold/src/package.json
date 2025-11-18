@@ -19,7 +19,7 @@
     }
   },
   "devDependencies": {
-    "oc-server": "^4.0.1",
+    "oc-server": "^4.0.2",
     "oc-template-es6-compiler": "^8.0.0",
     "vite": "^7.1.12"
   }
