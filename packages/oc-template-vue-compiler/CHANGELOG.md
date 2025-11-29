@@ -1,5 +1,11 @@
 # oc-template-vue-compiler
 
+## 4.0.1
+
+### Patch Changes
+
+- Fix rendering on vue
+
 ## 4.0.0
 
 ### Major Changes

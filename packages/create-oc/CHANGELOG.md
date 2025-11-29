@@ -1,5 +1,11 @@
 # create-oc
 
+## 1.1.35
+
+### Patch Changes
+
+- Fix rendering on vue
+
 ## 1.1.33
 
 ### Patch Changes
