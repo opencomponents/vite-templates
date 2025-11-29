@@ -19,12 +19,12 @@ export default function vueOCProviderTemplate({
     rest.getSetting = getSetting;
     app = createApp(View, rest)
     app.mount(element, ssr);
-  }
 
-  element.parentElement.unmount = () => {
-    if (app) {
-      app.unmount();
-      app = null;
+    element.parentElement.unmount = () => {
+      if (app) {
+        app.unmount();
+        app = null;
+      }
     }
   }
 

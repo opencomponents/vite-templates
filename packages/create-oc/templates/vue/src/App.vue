@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import logo from '../public/logo.png';
-import { serverClient, ActionOutput } from 'oc-server'
+import { serverClient, ActionOutput } from 'oc-server/client'
 const props = defineProps<{ firstName: string, lastName: string, born: number, hobbies: string[] }>()
 
 const additionalData = ref<ActionOutput<'funFact'> | null>(null);
