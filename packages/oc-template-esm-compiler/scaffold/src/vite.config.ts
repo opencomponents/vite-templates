@@ -6,7 +6,7 @@ export default defineConfig({
   plugins: [oc()],
   build: {
     rollupOptions: {
-      external: ['@remix-run/dom', '@remix-run/events'],
+      external: ['@remix-run/component'],
     },
   },
 });

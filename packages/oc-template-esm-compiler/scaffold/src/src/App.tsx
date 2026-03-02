@@ -3,14 +3,13 @@ import {
   type ActionOutput,
   getInitialData,
 } from 'oc-server/client';
-import type { Remix } from '@remix-run/dom';
-import { press } from '@remix-run/events/press';
+import { on, type Handle } from '@remix-run/component';
 import styles from './styles.module.css';
 import logo from '../public/logo.png';
 
 type AdditionalData = ActionOutput<'funFact'>;
 
-export default function App(this: Remix.Handle) {
+export default function App(handle: Handle) {
   const { firstName, lastName, born, hobbies } = getInitialData();
   let additionalData: AdditionalData | null = null;
   let error = '';
@@ -23,7 +22,7 @@ export default function App(this: Remix.Handle) {
     } catch (err) {
       error = String(err);
     } finally {
-      this.update();
+      handle.update();
     }
   };
 
@@ -45,7 +44,10 @@ export default function App(this: Remix.Handle) {
         </div>
       </div>
       {additionalData && <div>{additionalData.funFact}</div>}
-      <button className={styles.button} on={press(getFunFact)}>
+      <button
+        className={styles.button}
+        mix={[on('click', () => getFunFact())]}
+      >
         Fun year fact
       </button>
     </div>

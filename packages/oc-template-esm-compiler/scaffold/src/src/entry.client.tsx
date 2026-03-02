@@ -1,5 +1,5 @@
 import { createComponent } from 'oc-template-esm-compiler/renderer';
-import { createRoot } from '@remix-run/dom';
+import { createRoot } from '@remix-run/component';
 import App from './App';
 
 export default createComponent(() => {
@@ -11,7 +11,7 @@ export default createComponent(() => {
       root.render(<App />);
     },
     unmount() {
-      root?.remove();
+      root?.dispose();
     },
   };
 });

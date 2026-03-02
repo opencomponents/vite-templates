@@ -29,7 +29,7 @@
     "@vue/tsconfig": "^0.7.0",
     "jsdom": "^21.1.1",
     "oc-server": "^4.0.2",
-    "oc-template-vue-compiler": "^4.0.0",
+    "oc-template-vue-compiler": "^4.0.1",
     "typescript": "5.8.2",
     "vite": "^7.1.12",
     "vitest": "^0.29.7",

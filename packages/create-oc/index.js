@@ -25,7 +25,8 @@ function createOcJson(cwd, importmap) {
   if (!oc.$schema) {
     oc.$schema = 'https://opencomponents.github.io/schema.json';
   }
-  oc.importmap = oc.importmap?.imports
+  oc.development = {};
+  oc.development.importmap = oc.importmap?.imports
     ? {
         imports: {
           ...oc.importmap.imports,
