@@ -46,7 +46,9 @@ export default function App(handle: Handle) {
       {additionalData && <div>{additionalData.funFact}</div>}
       <button
         className={styles.button}
-        mix={[on('click', () => getFunFact())]}
+        on={{
+          click: getFunFact,
+        }}
       >
         Fun year fact
       </button>

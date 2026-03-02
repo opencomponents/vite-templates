@@ -168,12 +168,8 @@ const imports = (() => {
       };
     case 'esm.remix':
       return {
-        '@remix-run/dom':
-          'https://esm.sh/@remix-run/dom@0.0.0-experimental-remix-jam.6',
-        '@remix-run/events':
-          'https://esm.sh/@remix-run/events@0.0.0-experimental-remix-jam.5',
-        '@remix-run/events/':
-          'https://esm.sh/@remix-run/events@0.0.0-experimental-remix-jam.5/',
+        '@remix-run/component': 'https://esm.sh/@remix-run/component@0.5.0',
+        '@remix-run/component/': 'https://esm.sh/@remix-run/component@0.5.0/',
       };
     default:
       return undefined;
