@@ -3,7 +3,7 @@ import {
   type ActionOutput,
   getInitialData,
 } from 'oc-server/client';
-import { on, type Handle } from '@remix-run/component';
+import { type Handle } from '@remix-run/component';
 import styles from './styles.module.css';
 import logo from '../public/logo.png';
 

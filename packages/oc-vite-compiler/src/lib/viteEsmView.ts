@@ -66,7 +66,7 @@ async function compileView(options: ViteViewOptions & CompilerOptions) {
         mode: production ? 'production' : 'development',
       },
       undefined,
-      componentPath
+      componentPath,
     )
     .catch(() => null);
 
@@ -94,7 +94,7 @@ async function compileView(options: ViteViewOptions & CompilerOptions) {
   const pluginsNames = plugins.map((x: any) => x?.name).filter(Boolean);
   const basePlugins =
     baseConfig?.config?.plugins?.filter(
-      (p: any) => !pluginsNames.includes(p?.name)
+      (p: any) => !pluginsNames.includes(p?.name),
     ) ?? [];
 
   const otherAssets: vite.Rollup.OutputAsset[] = [];
@@ -132,11 +132,11 @@ async function compileView(options: ViteViewOptions & CompilerOptions) {
           if (id.includes('node_modules/oc-server/dist/serverClient.js')) {
             code = code.replace(
               /("|')COMPONENT_NAME("|')/,
-              `"${componentPackage.name}"`
+              `"${componentPackage.name}"`,
             );
             code = code.replace(
               /("|')COMPONENT_VERSION("|')/,
-              `"${componentPackage.version}"`
+              `"${componentPackage.version}"`,
             );
             return {
               code,
@@ -169,7 +169,7 @@ async function compileView(options: ViteViewOptions & CompilerOptions) {
       alias,
     },
     build: {
-      sourcemap: true,
+      sourcemap: !production,
       outDir: publishPath,
       lib: {
         entry: viewWrapperPath,
@@ -189,7 +189,7 @@ async function compileView(options: ViteViewOptions & CompilerOptions) {
           const { name, version } = options.componentPackage;
           return {
             runtime: `window.oc._esm['${name}@${version}'](${JSON.stringify(
-              filename
+              filename,
             )})`,
           };
         } else {
@@ -207,7 +207,7 @@ async function compileView(options: ViteViewOptions & CompilerOptions) {
       await fs.writeFile(
         path.join(publishPath, staticFolder, asset.fileName),
         (asset as Rollup.OutputAsset).source,
-        'utf-8'
+        'utf-8',
       );
     }
   }

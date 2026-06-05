@@ -1,5 +1,11 @@
 # oc-vite-compiler
 
+## 6.0.1
+
+### Patch Changes
+
+- sourcemaps only in dev
+
 ## 6.0.0
 
 ### Major Changes
