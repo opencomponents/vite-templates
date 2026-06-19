@@ -1,5 +1,13 @@
 # oc-template-vue-compiler
 
+## 4.0.2
+
+### Patch Changes
+
+- allow getSetting in componentdidmount to return the id
+- Updated dependencies
+  - oc-vite-compiler@6.0.2
+
 ## 4.0.1
 
 ### Patch Changes

@@ -25,7 +25,7 @@
     "@remix-run/component": "^0.5.0",
     "happy-dom": "^18.0.1",
     "oc-server": "^4.0.2",
-    "oc-template-esm-compiler": "^4.0.2",
+    "oc-template-esm-compiler": "^4.0.3",
     "typescript": "5.8.3",
     "vite": "^7.1.12",
     "vitest": "^3.2.4"

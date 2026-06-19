@@ -1,5 +1,13 @@
 # oc-template-elm-compiler
 
+## 3.0.1
+
+### Patch Changes
+
+- allow getSetting in componentdidmount to return the id
+- Updated dependencies
+  - oc-vite-compiler@6.0.2
+
 ## 3.0.0
 
 ### Major Changes

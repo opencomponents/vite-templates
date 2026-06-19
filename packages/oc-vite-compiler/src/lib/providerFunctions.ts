@@ -20,6 +20,7 @@ export const providerFunctions = `
   
   function _getSetting(providerProps, setting) {
     const settingHash = {
+      id:  __$$oc_Settings__.id,
       name: providerProps._componentName,
       version: providerProps._componentVersion,
       baseUrl: providerProps._baseUrl,
