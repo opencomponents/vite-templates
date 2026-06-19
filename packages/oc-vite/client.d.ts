@@ -15,7 +15,12 @@ type OCNativeEvents = {
   };
   'oc:ready': OC;
   'oc:cssDidMount': string;
-  'oc:componentDidMount': any;
+  'oc:componentDidMount': {
+    [key: string]: any;
+    getSetting: (
+      key: 'id' | 'name' | 'version' | 'baseUrl' | 'staticPath'
+    ) => string;
+  };
   'oc:failed': {
     originalError: any;
     data: any;

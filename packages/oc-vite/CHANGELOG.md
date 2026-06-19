@@ -1,5 +1,11 @@
 # oc-vite
 
+## 7.1.13
+
+### Patch Changes
+
+- allow getSetting in componentdidmount to return the id
+
 ## 7.1.12
 
 ### Patch Changes

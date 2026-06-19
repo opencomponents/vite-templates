@@ -1,5 +1,13 @@
 # oc-vite-compiler
 
+## 6.0.2
+
+### Patch Changes
+
+- allow getSetting in componentdidmount to return the id
+- Updated dependencies
+  - oc-vite@7.1.13
+
 ## 6.0.1
 
 ### Patch Changes
