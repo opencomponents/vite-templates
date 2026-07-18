@@ -1,5 +1,11 @@
 # create-oc
 
+## 1.1.40
+
+### Patch Changes
+
+- Update the Remix ESM template to use the stable `@remix-run/ui` runtime.
+
 ## 1.1.35
 
 ### Patch Changes

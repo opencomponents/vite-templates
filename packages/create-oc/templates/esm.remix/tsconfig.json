@@ -16,8 +16,9 @@
     "moduleResolution": "bundler",
     "resolveJsonModule": true,
     "isolatedModules": true,
+    "types": [],
     "jsx": "react-jsx",
-    "jsxImportSource": "@remix-run/component"
+    "jsxImportSource": "@remix-run/ui"
   },
   "include": ["src"],
   "exclude": ["src/_package"]
