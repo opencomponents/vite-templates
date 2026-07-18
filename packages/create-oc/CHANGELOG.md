@@ -1,5 +1,11 @@
 # create-oc
 
+## 1.1.41
+
+### Patch Changes
+
+- Remove the experimental label from the Remix ESM template option.
+
 ## 1.1.40
 
 ### Patch Changes
