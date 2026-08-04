@@ -28,8 +28,5 @@
   "workspaces": [
     "packages/*"
   ],
-  "packageManager": "npm@11.5.1",
-  "overrides": {
-    "seroval": "1.5.6"
-  }
+  "packageManager": "npm@11.5.1"
 }
