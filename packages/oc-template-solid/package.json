@@ -30,7 +30,7 @@
   "dependencies": {
     "nice-cache": "0.0.5",
     "oc-generic-template-renderer": "2.0.9",
-    "solid-js": "^1.8.21"
+    "solid-js": "^1.9.14"
   },
   "files": [
     "dist/**"

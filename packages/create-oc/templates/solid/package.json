@@ -28,7 +28,7 @@
     "jsdom": "^21.1.1",
     "oc-server": "^4.0.2",
     "oc-template-solid-compiler": "^4.0.1",
-    "solid-js": "^1.9.5",
+    "solid-js": "^1.9.14",
     "typescript": "5.5.4",
     "vite": "^7.1.12",
     "vitest": "^2.0.5"
