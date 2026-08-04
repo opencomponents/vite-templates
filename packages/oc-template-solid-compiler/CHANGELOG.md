@@ -1,5 +1,11 @@
 # oc-template-solid-compiler
 
+## 4.0.2
+
+### Patch Changes
+
+- bump solid
+
 ## 4.0.1
 
 ### Patch Changes

@@ -3,7 +3,7 @@ import {
   type ActionOutput,
   getInitialData,
 } from 'oc-server/client';
-import { type Handle } from '@remix-run/component';
+import { on, type Handle } from '@remix-run/ui';
 import styles from './styles.module.css';
 import logo from '../public/logo.png';
 
@@ -26,32 +26,32 @@ export default function App(handle: Handle) {
     }
   };
 
-  if (error) {
-    return <div>Something wrong happened!</div>;
-  }
+  return () => {
+    if (error) {
+      return <div>Something wrong happened!</div>;
+    }
 
-  return () => (
-    <div className={styles.container}>
-      <img width="50" height="50" src={logo} alt="Logo" />
-      <h1 style={{ margin: '0 0 20px 0' }}>
-        Hello, <span style={{ textDecoration: 'underline' }}>{firstName}</span>{' '}
-        {lastName}
-      </h1>
-      <div className={styles.info}>
-        <div className={styles.block}>Born: {born}</div>
-        <div className={styles.block}>
-          Hobbies: {hobbies.map((x) => x.toLowerCase()).join(', ')}
+    return (
+      <div className={styles.container}>
+        <img width="50" height="50" src={logo} alt="Logo" />
+        <h1 style={{ margin: '0 0 20px 0' }}>
+          Hello, <span style={{ textDecoration: 'underline' }}>{firstName}</span>{' '}
+          {lastName}
+        </h1>
+        <div className={styles.info}>
+          <div className={styles.block}>Born: {born}</div>
+          <div className={styles.block}>
+            Hobbies: {hobbies.map((x) => x.toLowerCase()).join(', ')}
+          </div>
         </div>
+        {additionalData && <div>{additionalData.funFact}</div>}
+        <button
+          className={styles.button}
+          mix={[on<HTMLButtonElement>('click', getFunFact)]}
+        >
+          Fun year fact
+        </button>
       </div>
-      {additionalData && <div>{additionalData.funFact}</div>}
-      <button
-        className={styles.button}
-        on={{
-          click: getFunFact,
-        }}
-      >
-        Fun year fact
-      </button>
-    </div>
-  );
+    );
+  };
 }
