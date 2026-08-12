@@ -13,6 +13,7 @@ export default function esmOCProviderTemplate({
 }) {
   return `
   import Component from '${removeExtension(viewPath)}';
+  import { getShadowRoot } from 'oc-template-esm-compiler/renderer';
 
   export function mount(element, props, ctx = {}) {
     const { _staticPath, _baseUrl, _componentName, _componentVersion, ...rest } = props;
@@ -47,21 +48,18 @@ export default function esmOCProviderTemplate({
    }
     const styleElement = ${styleId ? `document.getElementById('${styleId}')` : 'null'};
     const styleId = ${styleId ? `'${styleId}'` : 'undefined'};
-    let shadowRoot = undefined;
     const methods = typeof Component === 'function' ? Component() : Component;
 
     ${
-      // If shadowRootMode is set at build time, attach a shadow root and mount into it
-      // We also clone the styleElement into the shadow root when present
-      // Closed mode returns null on element.shadowRoot; we still pass the value we hold
-      // via local variable for consumers that need it.
-      // Note: we mount into a container div to not clobber host shadow contents.
-      // If no shadowRootMode, mount into light DOM as before.
+      // If shadowDOM is set at build time we attach a shadow root and mount into
+      // a container inside it, cloning the styleElement so styles apply in scope.
+      // Closed mode returns null on element.shadowRoot; we still pass the value
+      // we hold via the context for consumers that need it.
       `
     if (${shadowDOM ? 'true' : 'false'}) {
       const mode = ${shadowDOM === true ? "'open'" : `'${shadowDOM}'`};
       element.innerHTML = '';
-      shadowRoot = element.attachShadow({ mode });
+      const shadowRoot = element.attachShadow({ mode });
       if (styleElement && shadowRoot) {
         const clone = styleElement.cloneNode(true);
         // Original style element has type='oc/css' so styles dont apply to global scope
@@ -72,14 +70,18 @@ export default function esmOCProviderTemplate({
       const container = document.createElement('div');
       shadowRoot.appendChild(container);
       element.unmount = () => methods.unmount?.();
-      methods.mount(container, rest, { shadowRoot });
+      methods.mount(container, rest, { shadowRoot, styleElement, styleId });
       return;
     }
       `
     }
 
+    // The mount element may already live inside a shadow root that the embedding
+    // page owns; resolve it so the component can adapt (styles, portals, ...).
+    // No shadow root -> light DOM, shadowRoot is null.
+    const shadowRoot = getShadowRoot(element);
     element.unmount = () => methods.unmount?.();
-    methods.mount(element, rest, { styleElement, styleId, shadowRoot: null });
+    methods.mount(element, rest, { shadowRoot, styleElement, styleId });
   }
 `;
 }
