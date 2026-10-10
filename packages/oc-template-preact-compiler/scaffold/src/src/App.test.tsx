@@ -1,10 +1,7 @@
 import { describe, it, afterEach, beforeEach, expect, vi } from 'vitest';
-import { render, screen } from '@testing-library/react';
-import { DataProvider } from 'oc-template-preact-compiler/dist/utils/useData';
+import { render, screen } from '@testing-library/preact';
 
 import App from './App';
-
-const getData = vi.fn();
 
 describe('App - Page', () => {
   beforeEach(() => {
@@ -15,23 +12,13 @@ describe('App - Page', () => {
   });
 
   it('Gets more data when clicking the button', () => {
-    getData.mockImplementationOnce(() => Promise.resolve({}));
     render(
-      <DataProvider
-        value={{
-          firstName: 'firstName',
-          lastName: 'lastName',
-          userId: 0,
-          getData,
-        }}
-      >
-        <App
-          firstName="firstName"
-          lastName="lastName"
-          born={1991}
-          hobbies={[]}
-        />
-      </DataProvider>
+      <App
+        firstName="firstName"
+        lastName="lastName"
+        born={1991}
+        hobbies={[]}
+      />
     );
 
     const extraInfoButton = screen.getByText(/Fun year fact/i);

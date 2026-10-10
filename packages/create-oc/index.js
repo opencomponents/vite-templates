@@ -162,14 +162,16 @@ const imports = (() => {
   switch (template) {
     case 'esm.react':
       return {
-        react: 'https://esm.sh/react@19.1.0',
-        'react-dom': 'https://esm.sh/react-dom@19.1.0',
-        'react-dom/': 'https://esm.sh/react-dom@19.1.0/',
+        react: 'https://esm.sh/react@19.3.0',
+        'react-dom': 'https://esm.sh/react-dom@19.3.0',
+        'react-dom/': 'https://esm.sh/react-dom@19.3.0/',
       };
     case 'esm.remix':
       return {
         '@remix-run/component': 'https://esm.sh/@remix-run/component@0.5.0',
         '@remix-run/component/': 'https://esm.sh/@remix-run/component@0.5.0/',
+        '@remix-run/ui': 'https://esm.sh/@remix-run/ui@0.4.0',
+        '@remix-run/ui/': 'https://esm.sh/@remix-run/ui@0.4.0/',
       };
     default:
       return undefined;

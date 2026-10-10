@@ -13,6 +13,6 @@ export default defineConfig({
   },
   // @ts-ignore Missing test property
   test: {
-    environment: 'jsdom',
+    environment: 'happy-dom',
   },
 });
