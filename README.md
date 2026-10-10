@@ -118,18 +118,17 @@ Functional programming template using the Elm language.
 - Strong type system
 - No runtime exceptions
 
-### 🚧 ESM (Beta)
+### 📦 ESM
 
 **Template ID:** `esm`
 
-Experimental template using ES modules with modern JavaScript features.
+Template using native ES modules with modern JavaScript features. Choose a variant when scaffolding: React or Remix.
 
 **Features:**
 
 - Native ES modules
 - Modern JavaScript
-- Experimental features
-- Beta status
+- React and Remix variants
 
 ## Template Structure
 

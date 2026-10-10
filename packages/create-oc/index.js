@@ -52,7 +52,7 @@ const templateChoices = [
   { title: 'Vue', value: 'vue' },
   { title: 'Svelte', value: 'svelte' },
   { title: 'Elm', value: 'elm' },
-  { title: 'ESM (Beta)', value: 'esm' },
+  { title: 'ESM', value: 'esm' },
 ];
 const templates = templateChoices.map((t) => t.value);
 
