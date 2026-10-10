@@ -9,4 +9,8 @@ export default defineConfig({
       external: ['@remix-run/component'],
     },
   },
+  // @ts-ignore Missing test property
+  test: {
+    environment: 'happy-dom',
+  },
 });
