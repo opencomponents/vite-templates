@@ -4,6 +4,7 @@
 
   let funFact: string | null = $state(null);
   let { born, firstName, hobbies, lastName }: InitialData = $props();
+  let hobbiesFormatted = hobbies.map((x) => x.toLowerCase()).join(', ');
   let getFunFact = async () => {
     let response = await serverClient.funFact({ year: born });
     funFact = response.funFact;
@@ -20,7 +21,7 @@
   <div class="info">
     <div class="block">Born: {born}</div>
     <div class="block">
-      Hobbies: {hobbies}
+      Hobbies: {hobbiesFormatted}
     </div>
   </div>
   {#if funFact}

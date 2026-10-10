@@ -21,13 +21,13 @@ export default function svelteOCProviderTemplate({
       target: element,
       props: rest
     });
-  }
 
-  element.parentElement.unmount = () => {
-    if (app) {
-      unmount(app);
-      app = null;
-    }
+    element.parentElement.unmount = () => {
+      if (app) {
+        unmount(app);
+        app = null;
+      }
+    };
   }
 
   renderer.component = View;

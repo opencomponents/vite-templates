@@ -28,5 +28,10 @@
   "workspaces": [
     "packages/*"
   ],
-  "packageManager": "npm@11.5.1"
+  "packageManager": "npm@11.5.1",
+  "allowScripts": {
+    "elm@0.19.1-6": true,
+    "esbuild@0.25.12": true,
+    "esbuild@0.21.5": true
+  }
 }

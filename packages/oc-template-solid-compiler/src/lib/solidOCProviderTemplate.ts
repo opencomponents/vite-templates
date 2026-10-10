@@ -32,13 +32,13 @@ export default function solidOCProviderTemplate({
 
   function renderer(props, element, ssr) {
     dispose = render(() => <OCProvider {...props} />, element);
-  }
 
-  element.parentElement.unmount = () => {
-    if (dispose) {
-      dispose();
-      dispose = null;
-    }
+    element.parentElement.unmount = () => {
+      if (dispose) {
+        dispose();
+        dispose = null;
+      }
+    };
   }
 
   renderer.component = OCProvider;

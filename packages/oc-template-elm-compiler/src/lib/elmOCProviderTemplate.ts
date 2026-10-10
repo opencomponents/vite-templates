@@ -15,7 +15,7 @@ function elmEntry({
     const { _baseUrl, _componentName, _componentVersion, _staticPath, ...rest } = props;
     const app = Elm["${extractName(viewPath)}"].init({
       node,
-      flags: rest
+      flags: { ...rest, staticPath: _staticPath }
     })
 
     ${providerFunctions}
@@ -54,7 +54,7 @@ function jsEntry({ viewPath, providerFunctions }: { viewPath: string; providerFu
     const { _baseUrl, _componentName, _componentVersion, _staticPath, ...rest } = props;
     const app = program.init({
       node,
-      flags: rest
+      flags: { ...rest, staticPath: _staticPath }
     })
 
     ${providerFunctions}
