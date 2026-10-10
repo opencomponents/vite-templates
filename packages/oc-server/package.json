@@ -41,7 +41,8 @@
   "dependencies": {
     "@fastify/express": "^3.0.0",
     "fastify": "^4.28.1",
-    "oc-client-browser": "^1.8.0"
+    "oc-client-browser": "^1.8.0",
+    "oc-vite-compiler": "^6.0.2"
   },
   "peerDependencies": {
     "vite": "^5.0.0 || ^6.0.0 || ^7.0.0"
