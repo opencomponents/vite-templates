@@ -1,6 +1,5 @@
 node_modules
 build
-/react
 /test-results/
 /playwright-report/
 /blob-report/

@@ -4,6 +4,7 @@ tmp
 _package
 .nx/cache
 .turbo
+*.tsbuildinfo
 
 # dependencies
 node_modules

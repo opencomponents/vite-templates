@@ -28,7 +28,7 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@sveltejs/vite-plugin-svelte": "^5.0.3",
+    "@sveltejs/vite-plugin-svelte": "^6.0.0",
     "oc-template-svelte": "^0.0.2",
     "oc-vite-compiler": "^6.0.2",
     "svelte": "^5.23.0"

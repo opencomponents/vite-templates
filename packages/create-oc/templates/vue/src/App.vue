@@ -12,20 +12,20 @@ const hobbies = props.hobbies.map((x) => x.toLowerCase()).join(', ')
 </script>
 
 <template>
-  <div className="container">
+  <div class="container">
     <img width="50" height="50" v-bind:src="logo" alt="Logo" />
 
     <h1>
       Hello, <span>{{ firstName }}</span> {{ lastName }}
     </h1>
-    <div className="info">
-      <div className="block">Born: {{ born }}</div>
-      <div className="block">
+    <div class="info">
+      <div class="block">Born: {{ born }}</div>
+      <div class="block">
         Hobbies: {{ hobbies }}
       </div>
     </div>
     <div v-if="additionalData">{{ additionalData?.funFact }}</div>
-    <button className="button" @click="getFunFact">
+    <button class="button" @click="getFunFact">
       Fun year fact
     </button>
   </div>

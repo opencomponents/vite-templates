@@ -3,12 +3,13 @@
   "type": "module",
   "private": true,
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "End-to-end tests: serves every template via the OC dev registry and checks preview render + fun-fact action in a browser.",
   "scripts": {
     "start": "node registry.js",
     "start:clean": "node registry.js clean",
-    "test": "playwright test --timeout=900000"
+    "test": "playwright test",
+    "test:update": "playwright test --update-snapshots",
+    "test:package": "node package-check.mjs"
   },
   "keywords": [],
   "author": "",
@@ -21,7 +22,11 @@
     "node": ">=20.10.6"
   },
   "devDependencies": {
-    "@playwright/test": "^1.40.1",
+    "@playwright/test": "^1.64.0",
     "@types/node": "^20.10.6"
+  },
+  "allowScripts": {
+    "core-js@2.6.12": true,
+    "esbuild@0.19.11": true
   }
 }

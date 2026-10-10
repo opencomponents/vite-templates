@@ -1,4 +1,4 @@
-import { serverClient } from 'oc-server';
+import { serverClient } from 'oc-server/client';
 import { Elm } from './Main.elm';
 
 export default {
