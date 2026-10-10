@@ -9,6 +9,9 @@ const EXPECTED = {
   born: '1991',
   hobbies: 'running, rugby',
   funFact: 'The first web page was created in 1991 by Tim Berners-Lee.',
+  // Every template uses the same palette: container #3b246c, button #a97613.
+  containerBackground: 'rgb(59, 36, 108)',
+  buttonBackground: 'rgb(169, 118, 19)',
 };
 
 for (const template of TEMPLATES) {
@@ -32,9 +35,30 @@ for (const template of TEMPLATES) {
       name: 'Fun year fact',
     });
     await expect(funFactButton).toBeVisible();
+
+    // The component CSS must be bundled and applied: container and button
+    // come from per-template stylesheets, so these fail loudly when CSS
+    // bundling/injection breaks for a template. Unlike screenshots, computed
+    // styles are identical across OSes and browsers.
+    const container = page
+      .getByRole('heading', { name: /Hello/ })
+      .locator('..');
+    await expect(container).toHaveCSS(
+      'background-color',
+      EXPECTED.containerBackground
+    );
+    await expect(funFactButton).toHaveCSS(
+      'background-color',
+      EXPECTED.buttonBackground
+    );
+
+    await expect(page).toHaveScreenshot(`${template}-initial.png`);
+
     await funFactButton.click();
 
     // Client-side action round-trip; auto-retries until hydration + fetch complete.
     await expect(page.getByText(EXPECTED.funFact)).toBeVisible();
+
+    await expect(page).toHaveScreenshot(`${template}-fun-fact.png`);
   });
 }

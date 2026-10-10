@@ -22,12 +22,20 @@ export default defineConfig({
   expect: {
     /* Auto-retry assertions long enough for dev-server compile + hydration. */
     timeout: 30 * 1000,
+    toHaveScreenshot: {
+      /* Font antialiasing differs across machines/browsers; 2% absorbs it
+         while still catching missing styles, broken layout, or empty renders. */
+      maxDiffPixelRatio: 0.02,
+    },
   },
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
   reporter: process.env.CI ? [['list'], ['html']] : 'html',
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     baseURL,
+    /* No CSS animations in the templates, but disable them anyway so
+       screenshots are deterministic. */
+    animations: 'disabled',
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: 'on-first-retry',
   },
