@@ -345,10 +345,12 @@ function writeOcJson(components) {
     }
   }
   if (components.includes('esm.remix')) {
-    const ui = esmVersionOf('esm.remix', '@remix-run/ui');
-    if (ui) {
-      imports['@remix-run/ui'] = `https://esm.sh/@remix-run/ui@${ui}`;
-      imports['@remix-run/ui/'] = `https://esm.sh/@remix-run/ui@${ui}/`;
+    const runtime = esmVersionOf('esm.remix', '@remix-run/component');
+    if (runtime) {
+      imports['@remix-run/component'] =
+        `https://esm.sh/@remix-run/component@${runtime}`;
+      imports['@remix-run/component/'] =
+        `https://esm.sh/@remix-run/component@${runtime}/`;
     }
   }
   fs.mkdirSync(BUILD_DIR, { recursive: true });

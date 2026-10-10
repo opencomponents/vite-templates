@@ -22,7 +22,7 @@
     }
   },
   "devDependencies": {
-    "@remix-run/ui": "^0.4.0",
+    "@remix-run/component": "^1.0.0",
     "happy-dom": "^20.14.6",
     "oc-server": "^4.0.2",
     "oc-template-esm-compiler": "^4.0.3",

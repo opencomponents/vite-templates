@@ -18,7 +18,7 @@
     "isolatedModules": true,
     "types": [],
     "jsx": "react-jsx",
-    "jsxImportSource": "@remix-run/ui"
+    "jsxImportSource": "@remix-run/component"
   },
   "include": ["src"],
   "exclude": ["src/_package"]
