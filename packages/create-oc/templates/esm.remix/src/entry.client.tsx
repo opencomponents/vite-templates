@@ -1,5 +1,5 @@
 import { createComponent } from 'oc-template-esm-compiler/renderer';
-import { createRoot } from '@remix-run/ui';
+import { createRoot } from '@remix-run/component';
 import App from './App';
 
 export default createComponent(() => {

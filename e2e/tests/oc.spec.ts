@@ -1,7 +1,17 @@
 import { test, expect } from '@playwright/test';
 
 // Keep in sync with COMPONENTS in e2e/registry.js.
-const TEMPLATES = ['react', 'es6', 'solid', 'vue', 'svelte', 'preact', 'elm'];
+const TEMPLATES = [
+  'react',
+  'es6',
+  'solid',
+  'vue',
+  'svelte',
+  'preact',
+  'elm',
+  'esm.react',
+  'esm.remix',
+];
 
 const EXPECTED = {
   firstName: 'Jane',
@@ -15,9 +25,12 @@ const EXPECTED = {
 };
 
 for (const template of TEMPLATES) {
+  // The served URL derives from the staged package.json name, where dots
+  // are normalized to dashes (see registry.js).
+  const urlName = `base-component-${template.replace(/\./g, '-')}`;
   test(`renders ${template} and serves fun fact`, async ({ page }) => {
     await page.goto(
-      `/base-component-${template}/1.0.0/~preview?userId=1`,
+      `/${urlName}/1.0.0/~preview?userId=1`,
       { waitUntil: 'domcontentloaded' }
     );
 

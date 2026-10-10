@@ -16,7 +16,7 @@
   "license": "ISC",
   "dependencies": {
     "execa": "^8.0.1",
-    "oc": "^0.49.42"
+    "oc": "^0.50.64"
   },
   "engines": {
     "node": ">=20.10.6"
@@ -27,6 +27,7 @@
   },
   "allowScripts": {
     "core-js@2.6.12": true,
-    "esbuild@0.19.11": true
+    "esbuild@0.28.2": true,
+    "esbuild@0.25.12": true
   }
 }
