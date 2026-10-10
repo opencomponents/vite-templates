@@ -28,6 +28,9 @@ function discoverComponents() {
   const components = fs
     .readdirSync(BUILD_DIR)
     .filter((entry) => entry.startsWith('base-component-'))
+    // Dots are invalid in component names, so dotted directories are always
+    // leftovers from older runs (see registry.js safeName normalization).
+    .filter((entry) => !entry.slice('base-component-'.length).includes('.'))
     .sort();
   if (components.length === 0) {
     throw new Error(`No base-component-* directories found in ${BUILD_DIR}`);

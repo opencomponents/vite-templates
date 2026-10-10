@@ -10,7 +10,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const REPO_ROOT = path.resolve(__dirname, '..');
 
 // The templates covered by e2e. Keep in sync with e2e/tests/oc.spec.ts.
-// Covers every stable template scaffolded by create-oc (ESM variants are beta, excluded).
+// Covers every template scaffolded by create-oc, including both ESM variants.
 const COMPONENTS = [
   'react',
   'es6',
@@ -19,7 +19,28 @@ const COMPONENTS = [
   'svelte',
   'preact',
   'elm',
+  'esm.react',
+  'esm.remix',
 ];
+
+// Both ESM variants share one template runtime + compiler package.
+function templatePackageFor(component) {
+  if (component.startsWith('esm.')) {
+    return 'oc-template-esm';
+  }
+  return `oc-template-${component}`;
+}
+
+function compilerPackageFor(component) {
+  if (component.startsWith('esm.')) {
+    return 'oc-template-esm-compiler';
+  }
+  return `oc-template-${component}-compiler`;
+}
+
+function componentDirName(component) {
+  return `base-component-${component.replace(/\./g, '-')}`;
+}
 
 const BUILD_DIR = path.join(__dirname, 'build');
 // Port 3000 is often taken (and CI runners vary), so allow override.
@@ -32,10 +53,9 @@ function localPackageDir(packageName) {
 
 function assertBuilt() {
   const required = [
-    ...COMPONENTS.flatMap((c) => [
-      `oc-template-${c}`,
-      `oc-template-${c}-compiler`,
-    ]),
+    ...new Set(
+      COMPONENTS.flatMap((c) => [templatePackageFor(c), compilerPackageFor(c)])
+    ),
     'oc-vite-compiler',
     'oc-vite',
     'oc-server',
@@ -226,10 +246,9 @@ async function npmInstall(componentDir, args = []) {
 // server starts, and sidesteps this process's module resolution cache, which
 // may still point at dependency paths removed by pruning.
 async function preflightComponent(component, componentDir) {
-  const targets = [
-    `oc-template-${component}-compiler`,
-    'oc-server',
-  ].map((p) => path.join(componentDir, 'node_modules', p));
+  const targets = [compilerPackageFor(component), 'oc-server'].map((p) =>
+    path.join(componentDir, 'node_modules', p)
+  );
   const script = targets
     .map((t) => `require(${JSON.stringify(t)});`)
     .join('');
@@ -245,7 +264,7 @@ async function preflightComponent(component, componentDir) {
   }
 }
 
-async function initialize(component, { clean }) {
+async function initialize(component) {
   const templateSrc = path.join(
     REPO_ROOT,
     'packages',
@@ -256,14 +275,17 @@ async function initialize(component, { clean }) {
   if (!fs.existsSync(templateSrc)) {
     throw new Error(`Unknown template "${component}": ${templateSrc} missing`);
   }
-  const componentDir = path.join(BUILD_DIR, `base-component-${component}`);
+  // The served component URL derives from package.json `name`, which must be
+  // unique per staged component and match [a-zA-Z0-9-_]; the registry also
+  // resolves components by directory. The ESM variants share the name
+  // `base-component-esm`, so both directory and package name use the dashed
+  // form below (a no-op for the other templates).
+  const safeName = componentDirName(component);
+  const componentDir = path.join(BUILD_DIR, safeName);
 
   // Start from a pristine copy of the template so changed files can't leak
-  // between runs. node_modules is kept (unless clean) and reconciled by the
-  // install below, which is fast when warm.
-  if (clean) {
-    fs.rmSync(componentDir, { recursive: true, force: true });
-  }
+  // between runs. node_modules is kept and reconciled by the install below,
+  // which is fast when warm (a clean run wipes the whole build dir up front).
   fs.mkdirSync(componentDir, { recursive: true });
   fs.cpSync(templateSrc, componentDir, { recursive: true, force: true });
 
@@ -274,6 +296,7 @@ async function initialize(component, { clean }) {
   // (npm rejects --allow-scripts on project installs, hence package.json.)
   const componentPkgPath = path.join(componentDir, 'package.json');
   const componentPkg = JSON.parse(fs.readFileSync(componentPkgPath, 'utf8'));
+  componentPkg.name = safeName;
   componentPkg.allowScripts = {
     ...(componentPkg.allowScripts ?? {}),
     elm: true,
@@ -286,8 +309,8 @@ async function initialize(component, { clean }) {
 
   // Test the local workspace packages instead of the published copies.
   const localPackages = [
-    `oc-template-${component}`,
-    `oc-template-${component}-compiler`,
+    templatePackageFor(component),
+    compilerPackageFor(component),
     'oc-vite-compiler',
     'oc-vite',
     'oc-server',
@@ -299,6 +322,53 @@ async function initialize(component, { clean }) {
     pruneStaleNestedDeps(packageName, componentDir);
   }
   await preflightComponent(component, componentDir);
+}
+
+// Writes build/oc.json with the development import map for the staged ESM
+// components, mirroring what `create-oc` scaffolds. The dev registry injects
+// it into preview pages so ESM bundles can resolve bare imports (react,
+// @remix-run/ui, ...) in the browser. Versions come from the installed tree
+// so the map can never drift from the tested code.
+function writeOcJson(components) {
+  const imports = {};
+  const esmVersionOf = (component, dep) =>
+    readInstalledVersion(
+      path.join(BUILD_DIR, componentDirName(component), 'node_modules', dep)
+    );
+  if (components.includes('esm.react')) {
+    const react = esmVersionOf('esm.react', 'react');
+    const reactDom = esmVersionOf('esm.react', 'react-dom');
+    if (react && reactDom) {
+      imports['react'] = `https://esm.sh/react@${react}`;
+      imports['react-dom'] = `https://esm.sh/react-dom@${reactDom}`;
+      imports['react-dom/'] = `https://esm.sh/react-dom@${reactDom}/`;
+    }
+  }
+  if (components.includes('esm.remix')) {
+    const ui = esmVersionOf('esm.remix', '@remix-run/ui');
+    if (ui) {
+      imports['@remix-run/ui'] = `https://esm.sh/@remix-run/ui@${ui}`;
+      imports['@remix-run/ui/'] = `https://esm.sh/@remix-run/ui@${ui}/`;
+    }
+  }
+  fs.mkdirSync(BUILD_DIR, { recursive: true });
+  fs.writeFileSync(
+    path.join(BUILD_DIR, 'oc.json'),
+    JSON.stringify(
+      {
+        $schema: 'https://opencomponents.github.io/schema.json',
+        development: { importmap: { imports } },
+      },
+      null,
+      2
+    )
+  );
+  const mapped = Object.keys(imports);
+  console.log(
+    mapped.length > 0
+      ? `ESM import map: ${mapped.join(', ')}`
+      : 'No ESM components selected, writing empty import map'
+  );
 }
 
 function resolveComponents() {
@@ -321,24 +391,31 @@ async function start(clean = false) {
   const components = resolveComponents();
   assertBuilt();
 
+  if (clean) {
+    // Wipe everything so renamed components or dependency changes leave no
+    // stale directories behind; each initialize() then reinstalls from scratch.
+    fs.rmSync(BUILD_DIR, { recursive: true, force: true });
+  }
+
   console.log(`Initializing components: ${components.join(', ')}`);
   for (const component of components) {
-    await initialize(component, { clean });
+    await initialize(component);
   }
+  writeOcJson(components);
 
   // Compilers may shell out to binaries from component dependencies
   // (e.g. the elm compiler). npm scripts put node_modules/.bin on PATH
   // automatically; the dev server does not, so do it here.
   const delim = process.platform === 'win32' ? ';' : ':';
   const bins = components.map((c) =>
-    path.join(BUILD_DIR, `base-component-${c}`, 'node_modules', '.bin')
+    path.join(BUILD_DIR, componentDirName(c), 'node_modules', '.bin')
   );
   process.env.PATH = `${bins.join(delim)}${delim}${process.env.PATH}`;
 
   console.log(`Starting dev server on port ${PORT}`);
   cli.dev(
     {
-      components: components.map((c) => `base-component-${c}`),
+      components: components.map((c) => componentDirName(c)),
       // Absolute so the server works regardless of the caller's cwd
       // (Playwright runs it from e2e/, humans may run it from anywhere).
       dirPath: BUILD_DIR,
