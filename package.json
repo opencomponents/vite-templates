@@ -29,6 +29,9 @@
     "packages/*"
   ],
   "packageManager": "npm@11.5.1",
+  "overrides": {
+    "esbuild": "0.25.12"
+  },
   "allowScripts": {
     "elm@0.19.1-6": true,
     "esbuild@0.25.12": true,
