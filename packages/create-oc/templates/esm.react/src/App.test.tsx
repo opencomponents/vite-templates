@@ -13,14 +13,7 @@ describe('App - Page', () => {
   });
 
   it('Gets more data when clicking the button', () => {
-    render(
-      <App
-        firstName="firstName"
-        lastName="lastName"
-        born={1991}
-        hobbies={[]}
-      />
-    );
+    render(<App name="firstName" year={1991} />);
 
     const extraInfoButton = screen.getByText(/Fun year fact/i);
     expect(extraInfoButton).toBeTruthy();

@@ -14,32 +14,45 @@ const onRender = (cb: (element: HTMLElement) => void) => {
   }
 };
 
-export default ({ firstName, lastName, hobbies, born }: InitialData) => {
+export default ({ name, year }: InitialData) => {
   onRender((element) => {
-    element
-      .querySelector(`.${styles.button}`)
-      ?.addEventListener('click', async () => {
-        const { funFact } = await serverClient.funFact({ year: born });
-        element.querySelector('#fun-year-fact')!.innerHTML = funFact;
-      });
+    const button = element.querySelector(
+      `.${styles.button}`
+    ) as HTMLButtonElement | null;
+    button?.addEventListener('click', async () => {
+      const target = element.querySelector('#fun-year-fact')!;
+      button.disabled = true;
+      button.textContent = 'Loading…';
+      try {
+        // Call the server action
+        const { funFact } = await serverClient.funFact({ year });
+        target.className = styles.fact;
+        target.textContent = funFact;
+      } catch (err) {
+        target.className = styles.error;
+        target.textContent = String(err);
+      } finally {
+        button.disabled = false;
+        button.textContent = 'Fun year fact';
+      }
+    });
   });
 
   return /* html */ `
     <div class="${styles.container}">
-      <img width="50" height="50" src="${logo}" alt="Logo" />
-      <h1 style="margin: 0 0 20px 0;">
-        Hello, <span style="text-decoration: underline;">${firstName}</span> ${lastName}
-      </h1>
-      <div class=${styles.info}>
-        <div class=${styles.block}>Born: ${born}</div>
-        <div class=${styles.block}>
-          <div>Hobbies: ${hobbies.map((x) => x.toLowerCase()).join(', ')}</div>
+      <div class="${styles.card}">
+        <div class="${styles.brand}">
+          <img class="${styles.logo}" width="40" height="40" src="${logo}" alt="Logo" />
+          <p class="${styles.eyebrow}">OpenComponents · Vite</p>
         </div>
+        <h1 class="${styles.title}">Hello, <span class="${styles.name}">${name}</span></h1>
+        <p class="${styles.subtitle}">Born in <span class="${styles.pill}">${year}</span></p>
+        <p class="${styles.hint}">Press the button to fetch a fun fact about that year from the server.</p>
+        <div id="fun-year-fact"></div>
+        <button class="${styles.button}">
+          Fun year fact
+        </button>
       </div>
-      <div id="fun-year-fact"></div>
-      <button class=${styles.button}>
-        Fun year fact
-      </button>
     </div>
   `;
 };

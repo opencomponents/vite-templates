@@ -7,46 +7,62 @@ import {
 import styles from './styles.module.css';
 import logo from '../public/logo.png';
 
-type AdditionalData = ActionOutput<'funFact'>;
+type FunFact = ActionOutput<'funFact'>;
 
 const App: React.FC<InitialData> = (props: InitialData) => {
-  const { firstName, lastName, born, hobbies } = props;
-  const [additionalData, setAdditionalData] = useState<AdditionalData | null>(
-    null
-  );
+  // These come from the entry.server.ts handler return value
+  const { name, year } = props;
+  const [fact, setFact] = useState<FunFact | null>(null);
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
   const getFunFact = async () => {
+    setLoading(true);
     setError('');
     try {
-      const data = await serverClient.funFact({ year: born });
-      setAdditionalData(data);
+      // Call the server action with type safety
+      setFact(await serverClient.funFact({ year }));
     } catch (err) {
       setError(String(err));
+    } finally {
+      setLoading(false);
     }
   };
 
-  if (error) {
-    return <div>Something wrong happened!</div>;
-  }
-
   return (
     <div className={styles.container}>
-      <img width="50" height="50" src={logo} alt="Logo" />
-      <h1 style={{ margin: '0 0 20px 0' }}>
-        Hello, <span style={{ textDecoration: 'underline' }}>{firstName}</span>{' '}
-        {lastName}
-      </h1>
-      <div className={styles.info}>
-        <div className={styles.block}>Born: {born}</div>
-        <div className={styles.block}>
-          Hobbies: {hobbies.map((x) => x.toLowerCase()).join(', ')}
+      <div className={styles.card}>
+        <div className={styles.brand}>
+          {/* Static assets are imported from ../public/ */}
+          <img
+            className={styles.logo}
+            width="40"
+            height="40"
+            src={logo}
+            alt="Logo"
+          />
+          <p className={styles.eyebrow}>OpenComponents · Vite</p>
         </div>
+        <h1 className={styles.title}>
+          Hello, <span className={styles.name}>{name}</span>
+        </h1>
+        <p className={styles.subtitle}>
+          Born in <span className={styles.pill}>{year}</span>
+        </p>
+        <p className={styles.hint}>
+          Press the button to fetch a fun fact about that year from the
+          server.
+        </p>
+        {fact && <div className={styles.fact}>{fact.funFact}</div>}
+        {error && <div className={styles.error}>{error}</div>}
+        <button
+          className={styles.button}
+          onClick={getFunFact}
+          disabled={loading}
+        >
+          {loading ? 'Loading…' : 'Fun year fact'}
+        </button>
       </div>
-      {additionalData && <div>{additionalData.funFact}</div>}
-      <button className={styles.button} onClick={getFunFact}>
-        Fun year fact
-      </button>
     </div>
   );
 };

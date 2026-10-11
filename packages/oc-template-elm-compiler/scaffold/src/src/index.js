@@ -4,8 +4,12 @@ import { Elm } from './Main.elm';
 export default {
   js: (app) => {
     app.ports.askFunFact.subscribe(async (params) => {
-      const data = await serverClient.funFact(params);
-      app.ports.getFunFact.send(data);
+      try {
+        const data = await serverClient.funFact(params);
+        app.ports.getFunFact.send({ funFact: data.funFact, error: '' });
+      } catch (err) {
+        app.ports.getFunFact.send({ funFact: '', error: String(err) });
+      }
     });
   },
   program: Elm.Main,

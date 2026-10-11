@@ -7,10 +7,8 @@ describe('App - Page', () => {
   it('renders the fun fact button', () => {
     const { body } = render(App, {
       props: {
-        firstName: 'firstName',
-        lastName: 'Doe',
-        born: 1991,
-        hobbies: [],
+        name: 'firstName',
+        year: 1991,
       },
     });
 

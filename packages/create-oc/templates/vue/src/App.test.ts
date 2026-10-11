@@ -19,17 +19,14 @@ describe('App - Page', () => {
     getSetting.mockImplementationOnce(() => ({}));
     render(App, {
       props: {
-        firstName: 'firstName',
-        lastName: 'lastName',
-        born: 1991,
-        hobbies: [],
+        name: 'firstName',
+        year: 1991,
       },
       global: {
         provide: {
           dataProvider: {
-            firstName: 'firstName',
-            lastName: 'lastName',
-            userId: 0,
+            name: 'firstName',
+            year: 1991,
             getData,
             getSetting,
           },
