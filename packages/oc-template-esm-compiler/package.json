@@ -1,6 +1,6 @@
 {
   "name": "oc-template-esm-compiler",
-  "version": "4.0.3",
+  "version": "4.1.0",
   "description": "Compiler for the ESM OC template",
   "main": "dist/index.js",
   "type": "module",
@@ -46,7 +46,7 @@
   },
   "license": "MIT",
   "dependencies": {
-    "oc-server": "^4.0.2",
+    "oc-server": "^4.0.3",
     "oc-template-esm": "^0.0.1",
     "oc-vite-compiler": "^6.0.2"
   },
@@ -59,6 +59,6 @@
     "prettier-config-guestline": "2.0.0"
   },
   "peerDependencies": {
-    "oc-server": "^4.0.0"
+    "oc-server": "^4.0.3"
   }
 }
