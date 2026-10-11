@@ -49,10 +49,6 @@ const App: React.FC<InitialData> = (props: InitialData) => {
         <p className={styles.subtitle}>
           Born in <span className={styles.pill}>{year}</span>
         </p>
-        <p className={styles.hint}>
-          Press the button to fetch a fun fact about that year from the
-          server.
-        </p>
         {fact && <div className={styles.fact}>{fact.funFact}</div>}
         {error && <div className={styles.error}>{error}</div>}
         <button

@@ -31,9 +31,6 @@ async function getFunFact() {
       </div>
       <h1 class="title">Hello, <span class="name">{{ name }}</span></h1>
       <p class="subtitle">Born in <span class="pill">{{ year }}</span></p>
-      <p class="hint">
-        Press the button to fetch a fun fact about that year from the server.
-      </p>
       <div v-if="fact" class="fact">{{ fact.funFact }}</div>
       <div v-if="error" class="error">{{ error }}</div>
       <button class="button" @click="getFunFact" :disabled="loading">
@@ -47,7 +44,8 @@ async function getFunFact() {
 .container {
   background-color: #0f172a;
   color: #fff;
-  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  font-family: 'DejaVu Sans', system-ui, -apple-system, 'Segoe UI', Roboto,
+    sans-serif;
   padding: 56px 24px;
 }
 
@@ -108,13 +106,6 @@ async function getFunFact() {
   border-radius: 999px;
   padding: 2px 12px;
   font-weight: 700;
-}
-
-.hint {
-  margin: 12px 0 0 0;
-  font-size: 14px;
-  line-height: 1.5;
-  color: #64748b;
 }
 
 .button {

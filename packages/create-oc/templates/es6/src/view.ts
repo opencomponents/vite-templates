@@ -47,7 +47,6 @@ export default ({ name, year }: InitialData) => {
         </div>
         <h1 class="${styles.title}">Hello, <span class="${styles.name}">${name}</span></h1>
         <p class="${styles.subtitle}">Born in <span class="${styles.pill}">${year}</span></p>
-        <p class="${styles.hint}">Press the button to fetch a fun fact about that year from the server.</p>
         <div id="fun-year-fact"></div>
         <button class="${styles.button}">
           Fun year fact

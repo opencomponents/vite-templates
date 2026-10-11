@@ -96,7 +96,7 @@ view model =
         [ css
             [ backgroundColor (hex "0f172a")
             , color (hex "fff")
-            , fontFamilies [ "system-ui", "-apple-system", "Segoe UI", "Roboto", "sans-serif" ]
+            , fontFamilies [ "DejaVu Sans", "system-ui", "-apple-system", "Segoe UI", "Roboto", "sans-serif" ]
             , padding2 (px 56) (px 24)
             , displayFlex
             , justifyContent center
@@ -158,9 +158,6 @@ view model =
                     ]
                     [ text (String.fromInt model.year) ]
                 ]
-            , p
-                [ css [ margin4 (px 12) (px 0) (px 0) (px 0), fontSize (px 14), lineHeight (num 1.5), color (hex "64748b") ] ]
-                [ text "Press the button to fetch a fun fact about that year from the server." ]
             , case model.funFact of
                 Nothing ->
                     text ""

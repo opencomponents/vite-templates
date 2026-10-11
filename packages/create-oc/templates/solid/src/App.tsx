@@ -48,10 +48,6 @@ const App = (props: InitialData) => {
         <p class={styles.subtitle}>
           Born in <span class={styles.pill}>{props.year}</span>
         </p>
-        <p class={styles.hint}>
-          Press the button to fetch a fun fact about that year from the
-          server.
-        </p>
         <Show when={fact()}>
           <div class={styles.fact}>{fact()!.funFact}</div>
         </Show>
