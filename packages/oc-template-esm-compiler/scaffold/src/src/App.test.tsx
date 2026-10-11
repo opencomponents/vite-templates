@@ -7,10 +7,8 @@ describe('App - Page', () => {
   it('renders the fun fact button', async () => {
     // Seed the initial data the same way server-side rendering does.
     (globalThis as any).__$$oc_initialData__ = {
-      firstName: 'firstName',
-      lastName: 'Doe',
-      born: 1991,
-      hobbies: [],
+      name: 'firstName',
+      year: 1991,
     };
     try {
       const view = render(<App />);

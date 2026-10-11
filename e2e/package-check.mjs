@@ -9,8 +9,8 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const BUILD_DIR = path.join(__dirname, 'build');
 
 // Markers proving the component CSS made it into the production bundle.
-// Every template paints the container #3b246c and the button #a97613.
-const CSS_MARKERS = ['3b246c', 'a97613'];
+// Every template paints the container #0f172a and the button #4f46e5.
+const CSS_MARKERS = ['0f172a', '4f46e5'];
 
 const quietLogger = {
   ok() {},

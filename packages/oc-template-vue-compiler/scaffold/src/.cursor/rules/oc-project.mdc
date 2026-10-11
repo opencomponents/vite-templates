@@ -56,7 +56,7 @@ OpenComponents is a microfrontend technology that resembles a Vite project but w
 
 ### Parameters vs Actions
 
-- **Parameters**: Initial props passed via URL query string (like `?userId=1`)
+- **Parameters**: Initial props passed via URL query string (like `?name=Ada&year=1986`)
 - **Actions**: Server endpoints that the client can call after initial render
 
 ### Streaming Mode Benefits

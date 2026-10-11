@@ -22,19 +22,13 @@ describe('App - Page', () => {
     render(
       <DataProvider
         value={{
-          firstName: 'firstName',
-          lastName: 'lastName',
-          userId: 0,
+          name: 'firstName',
+          year: 1991,
           getData,
           getSetting,
         }}
       >
-        <App
-          firstName="firstName"
-          lastName="lastName"
-          born={1991}
-          hobbies={[]}
-        />
+        <App name="firstName" year={1991} />
       </DataProvider>
     );
 
