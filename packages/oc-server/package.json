@@ -7,6 +7,7 @@
   "bin": "dist/cli.js",
   "scripts": {
     "build": "tsc",
+    "test": "vitest run test --threads=false",
     "clean": "rm -rf .turbo && rm -rf node_modules && rm -rf dist"
   },
   "exports": {
@@ -39,13 +40,16 @@
   ],
   "license": "MIT",
   "dependencies": {
-    "@fastify/express": "^3.0.0",
-    "fastify": "^4.28.1",
+    "@fastify/express": "^4.0.9",
+    "fastify": "^5.12.7",
     "oc-client-browser": "^1.8.0",
     "oc-vite-compiler": "^6.0.2"
   },
   "peerDependencies": {
     "vite": "^5.0.0 || ^6.0.0 || ^7.0.0"
+  },
+  "engines": {
+    "node": ">=20"
   },
   "devDependencies": {
     "typescript": "^5.1.3"

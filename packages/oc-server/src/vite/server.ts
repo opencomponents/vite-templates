@@ -159,6 +159,9 @@ export async function createServer({
   });
 
   app.use(vite.middlewares);
+  app.addHook('onClose', async () => {
+    await vite.close();
+  });
 
   app.get('/oc-client/client.js', (request, reply) => {
     reply.status(200);
@@ -235,6 +238,7 @@ export async function createServer({
 
   await app.listen({ port: port as any });
   console.log(`Listening on: http://localhost:${port}`);
+  return app;
 }
 
 interface Template {
