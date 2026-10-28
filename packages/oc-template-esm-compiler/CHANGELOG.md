@@ -1,5 +1,12 @@
 # oc-template-esm-compiler
 
+## 4.1.1
+
+### Patch Changes
+
+- Updated dependencies [0ad076b]
+  - oc-server@4.0.4
+
 ## 4.1.0
 
 ### Minor Changes
