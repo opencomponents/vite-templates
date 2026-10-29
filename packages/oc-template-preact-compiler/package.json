@@ -31,10 +31,10 @@
     "@preact/preset-vite": "^2.7.0",
     "oc-template-preact": "^0.1.1",
     "oc-vite-compiler": "^6.0.2",
-    "preact": "^10"
+    "preact": "^10 || ^11.0.1"
   },
   "peerDependencies": {
-    "preact": "^10"
+    "preact": "^10 || ^11.0.1"
   },
   "files": [
     "dist/**",

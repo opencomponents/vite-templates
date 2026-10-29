@@ -196,6 +196,24 @@ function pruneStaleNestedDeps(packageName, componentDir) {
       continue; // Only copy: removing it would break resolution entirely.
     }
     const range = ranges[name];
+    const peerRange = localPkg.peerDependencies?.[name];
+    const directRanges = [
+      localPkg.dependencies?.[name],
+      localPkg.optionalDependencies?.[name],
+    ].filter(Boolean);
+    if (
+      peerRange !== undefined &&
+      satisfiesRange(topVersion, peerRange) &&
+      directRanges.every((directRange) =>
+        satisfiesRange(topVersion, directRange)
+      )
+    ) {
+      // A compatible peer should share the consumer's instance.
+      const nestedPackage = `${name}@${nestedVersion ?? 'unknown'}`;
+      fs.rmSync(path.join(nestedRoot, name), { recursive: true, force: true });
+      pruned.push(`${nestedPackage} (peer uses top-level ${topVersion})`);
+      continue;
+    }
     if (
       range !== undefined &&
       nestedVersion !== null &&
