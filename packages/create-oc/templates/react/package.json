@@ -28,7 +28,7 @@
     "@testing-library/user-event": "^14.4.3",
     "@types/react": "^18.0.28",
     "jsdom": "^30.1.2",
-    "oc-server": "^4.0.3",
+    "oc-server": "^4.0.4",
     "oc-template-react-compiler": "^11.0.2",
     "react": "18.3.1",
     "react-dom": "18.3.1",

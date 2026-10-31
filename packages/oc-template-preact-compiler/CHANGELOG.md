@@ -1,5 +1,13 @@
 # oc-template-preact-compiler
 
+## 4.0.3
+
+### Patch Changes
+
+- 6bb0342: Support Preact 11 while preserving Preact 10 compatibility. The compiler uses the consumer's Preact instance so its renderer and component hooks stay aligned.
+- Updated dependencies [3de229d]
+  - oc-vite-compiler@6.0.3
+
 ## 4.0.2
 
 ### Patch Changes

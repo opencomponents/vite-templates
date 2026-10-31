@@ -1,5 +1,11 @@
 # oc-vite-compiler
 
+## 6.0.3
+
+### Patch Changes
+
+- 3de229d: Drop the unused `find-package-json` dependency and replace `builtin-modules` with Node's built-in `module.builtinModules`.
+
 ## 6.0.2
 
 ### Patch Changes
