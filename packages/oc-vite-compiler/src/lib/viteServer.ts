@@ -1,13 +1,17 @@
+import { builtinModules } from 'module';
 import path from 'path';
 import { callbackify } from 'util';
 import vite, { Rollup } from 'oc-vite';
 import fs from 'fs-extra';
-import coreModules from 'builtin-modules';
 import hashBuilder from 'oc-hash-builder';
 import serverWrapper, { ServerWrapper } from './serverWrapper';
 import type { CompilerServerOptions } from './createCompile';
 import type { PluginOption } from 'oc-vite';
 import { init, parse } from 'es-module-lexer';
+
+const coreModules = builtinModules
+  .filter((x) => !/^_|^(internal|v8|node-inspect)\/|\//.test(x) && x !== 'sys')
+  .sort();
 
 interface ViteServerOptions {
   publishFileName?: string;
