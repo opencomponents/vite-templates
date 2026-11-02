@@ -451,7 +451,11 @@ type ErrorCodes =
   | 510
   | 511;
 export class ServerError extends Error {
+  /** Same as `statusCode`. The OC registry reads the HTTP status from `status`. */
+  public readonly status: ErrorCodes;
+
   constructor(public statusCode: ErrorCodes, message: string) {
     super(message);
+    this.status = statusCode;
   }
 }
