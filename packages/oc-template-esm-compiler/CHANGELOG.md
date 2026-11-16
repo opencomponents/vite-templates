@@ -1,5 +1,14 @@
 # oc-template-esm-compiler
 
+## 4.1.2
+
+### Patch Changes
+
+- allow nested template render on shadow root
+- Updated dependencies [9c62280]
+- Updated dependencies
+  - oc-vite-compiler@6.0.4
+
 ## 4.1.1
 
 ### Patch Changes

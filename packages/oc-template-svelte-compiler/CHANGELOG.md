@@ -1,5 +1,14 @@
 # oc-template-svelte-compiler
 
+## 3.0.3
+
+### Patch Changes
+
+- allow nested template render on shadow root
+- Updated dependencies [9c62280]
+- Updated dependencies
+  - oc-vite-compiler@6.0.4
+
 ## 3.0.2
 
 ### Patch Changes
