@@ -1,4 +1,4 @@
-import { renderToString } from 'solid-js/web';
+import { renderToString } from '@solidjs/web';
 import { callbackify } from 'util';
 
 import { ssr, type SsrOptions } from './to-be-published/ssr';

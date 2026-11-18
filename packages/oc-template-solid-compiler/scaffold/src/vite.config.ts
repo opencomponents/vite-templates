@@ -1,5 +1,5 @@
 import { defineConfig } from 'vite';
-import solidPlugin from 'vite-plugin-solid';
+import { plugin as solidPlugin } from 'oc-template-solid-compiler/dist/lib/hmr';
 
 // https://vitejs.dev/config/
 export default defineConfig({

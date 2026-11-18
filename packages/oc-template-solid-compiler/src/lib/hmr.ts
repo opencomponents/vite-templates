@@ -1,4 +1,4 @@
-import vitePlugin from 'vite-plugin-solid';
+import vitePlugin from '@solidjs/vite-plugin';
 
 export const appBlock = ({
   name,
@@ -20,7 +20,7 @@ export const appBlock = ({
   window.oc.cmd = window.oc.cmd || [];
 
   import App from "${entry}";
-  import { render } from 'solid-js/web';
+  import { render } from '@solidjs/web';
 
   const container = document.getElementById('root');
 

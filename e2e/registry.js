@@ -259,6 +259,53 @@ async function npmInstall(componentDir, args = []) {
   });
 }
 
+// Local dependencies that the published copy does not declare (e.g. a new
+// framework major adding a package) are missing from the installed tree, and
+// overlaying dist alone cannot fix that.
+function missingLocalDeps(packageName, componentDir) {
+  const localPkg = JSON.parse(
+    fs.readFileSync(path.join(localPackageDir(packageName), 'package.json'), 'utf8')
+  );
+  const destRoot = path.join(componentDir, 'node_modules', packageName);
+  return Object.keys(localPkg.dependencies ?? {}).filter(
+    (name) =>
+      ![destRoot, componentDir].some((root) =>
+        fs.existsSync(path.join(root, 'node_modules', name, 'package.json'))
+      )
+  );
+}
+
+// Installs local packages from packed tarballs, so npm resolves their local
+// dependency metadata exactly as it would for the next release. The tree is
+// reinstalled from scratch: incremental installs can skip platform-specific
+// optional dependencies (npm/cli#4828), e.g. rolldown's native binding.
+async function installLocalTarballs(packageNames, componentDir) {
+  const tarballDir = path.join(BUILD_DIR, '.tarballs');
+  fs.mkdirSync(tarballDir, { recursive: true });
+  const componentPkgPath = path.join(componentDir, 'package.json');
+  const componentPkg = JSON.parse(fs.readFileSync(componentPkgPath, 'utf8'));
+  for (const packageName of packageNames) {
+    const { stdout } = await execa(
+      'npm',
+      ['pack', '--json', '--ignore-scripts', '--pack-destination', tarballDir],
+      { cwd: localPackageDir(packageName) }
+    );
+    const spec = `file:${path.join(tarballDir, JSON.parse(stdout)[0].filename)}`;
+    const directField = ['dependencies', 'devDependencies'].find(
+      (field) => componentPkg[field]?.[packageName]
+    );
+    if (directField) {
+      componentPkg[directField][packageName] = spec;
+    } else {
+      componentPkg.overrides = { ...componentPkg.overrides, [packageName]: spec };
+    }
+  }
+  fs.writeFileSync(componentPkgPath, JSON.stringify(componentPkg, null, 2));
+  fs.rmSync(path.join(componentDir, 'node_modules'), { recursive: true, force: true });
+  fs.rmSync(path.join(componentDir, 'package-lock.json'), { force: true });
+  await npmInstall(componentDir);
+}
+
 // Requires the overlaid local packages in a FRESH child process. This catches
 // broken trees (missing/unresolvable deps) with a clear error before the dev
 // server starts, and sidesteps this process's module resolution cache, which
@@ -305,6 +352,13 @@ async function initialize(component) {
   // between runs. node_modules is kept and reconciled by the install below,
   // which is fast when warm (a clean run wipes the whole build dir up front).
   fs.mkdirSync(componentDir, { recursive: true });
+  // A tree left by installLocalTarballs() is locked to tarballs that may be
+  // stale, so drop it and let the steps below rebuild it.
+  const lockPath = path.join(componentDir, 'package-lock.json');
+  if (fs.existsSync(lockPath) && fs.readFileSync(lockPath, 'utf8').includes('.tarballs/')) {
+    fs.rmSync(path.join(componentDir, 'node_modules'), { recursive: true, force: true });
+    fs.rmSync(lockPath, { force: true });
+  }
   fs.cpSync(templateSrc, componentDir, { recursive: true, force: true });
 
   // npm v11+ blocks dependency install scripts by default. The elm package
@@ -333,11 +387,24 @@ async function initialize(component) {
     'oc-vite',
     'oc-server',
   ];
+  const unpublished = localPackages.filter(
+    (packageName) => missingLocalDeps(packageName, componentDir).length > 0
+  );
+  if (unpublished.length > 0) {
+    console.log(
+      `Installing local tarballs for ${unpublished.join(', ')} (local dependencies not in the published release)`
+    );
+    await installLocalTarballs(unpublished, componentDir);
+  }
   for (const packageName of localPackages) {
     overlayLocalBuild(packageName, componentDir);
   }
+  // Tarball installs already match the local metadata: nothing is stale, and
+  // their nested copies may serve transitive deps (e.g. a plugin's own vite).
   for (const packageName of localPackages) {
-    pruneStaleNestedDeps(packageName, componentDir);
+    if (!unpublished.includes(packageName)) {
+      pruneStaleNestedDeps(packageName, componentDir);
+    }
   }
   await preflightComponent(component, componentDir);
 }
