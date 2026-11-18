@@ -26,14 +26,14 @@
     "@testing-library/user-event": "^14.6.1",
     "@types/react": "^19.1.8",
     "@types/react-dom": "^19.1.6",
-    "@vitejs/plugin-react": "^4.6.0",
+    "@vitejs/plugin-react": "^5.2.0",
     "happy-dom": "^20.14.6",
     "oc-server": "^4.0.5",
-    "oc-template-esm-compiler": "^4.1.1",
+    "oc-template-esm-compiler": "^4.1.2",
     "react": "19.3.0",
     "react-dom": "19.3.0",
     "typescript": "5.9.3",
-    "vite": "^7.1.12",
+    "vite": "^8.3.8",
     "vitest": "^5.0.3"
   }
 }

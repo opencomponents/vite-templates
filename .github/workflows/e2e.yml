@@ -35,14 +35,21 @@ jobs:
         # packages/oc-vite/prepare.mjs (clone + build upstream vite), so the
         # published dist for the same version is identical. Fetch it instead
         # of rebuilding (~30s vs ~10min). The dist is gitignored build output.
+        # A version that is not published yet (an upgrade PR) is built instead.
         run: |
           VER=$(node -p "require('./packages/oc-vite/package.json').version")
           mkdir -p /tmp/oc-vite-pkg && cd /tmp/oc-vite-pkg
-          npm pack oc-vite@$VER
-          tar -xzf oc-vite-$VER.tgz
-          for f in dist bin types misc client.d.ts index.cjs index.d.cts; do
-            [ -e "package/$f" ] && cp -r "package/$f" "$GITHUB_WORKSPACE/packages/oc-vite/$f"
-          done
+          if npm pack oc-vite@$VER; then
+            tar -xzf oc-vite-$VER.tgz
+            for f in dist bin types misc client.d.ts; do
+              if [ -e "package/$f" ]; then
+                cp -r "package/$f" "$GITHUB_WORKSPACE/packages/oc-vite/$f"
+              fi
+            done
+          else
+            corepack enable pnpm
+            cd "$GITHUB_WORKSPACE/packages/oc-vite" && node prepare.mjs
+          fi
           test -d "$GITHUB_WORKSPACE/packages/oc-vite/dist"
 
       - name: Build all packages

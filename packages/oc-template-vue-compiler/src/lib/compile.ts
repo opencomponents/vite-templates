@@ -4,7 +4,7 @@ import { createCompile } from 'oc-vite-compiler';
 import vueOCProviderTemplate from './vueOCProviderTemplate';
 
 export const compile = createCompile({
-  plugins: [vue() as any],
+  plugins: [vue({}) as any],
   viewWrapper: vueOCProviderTemplate,
   getInfo: getInfo as any
 });

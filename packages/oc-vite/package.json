@@ -1,7 +1,7 @@
 {
   "name": "oc-vite",
-  "version": "7.1.13",
-  "viteVersion": "7.1.12",
+  "version": "8.3.8",
+  "viteVersion": "8.3.8",
   "type": "module",
   "license": "MIT",
   "author": "Evan You",
@@ -10,11 +10,11 @@
     "vite": "bin/vite.js"
   },
   "keywords": [
-    "frontend",
-    "framework",
-    "hmr",
-    "dev-server",
     "build-tool",
+    "dev-server",
+    "framework",
+    "frontend",
+    "hmr",
     "vite"
   ],
   "main": "./dist/node/index.js",
@@ -25,6 +25,7 @@
       "types": "./client.d.ts"
     },
     "./module-runner": "./dist/node/module-runner.js",
+    "./internal": "./dist/node/internal.js",
     "./dist/client/*": "./dist/client/*",
     "./types/*": {
       "types": "./types/*"
@@ -36,15 +37,15 @@
     "#module-sync-enabled": {
       "module-sync": "./misc/true.js",
       "default": "./misc/false.js"
-    }
+    },
+    "#types/*": "./types/*.d.ts",
+    "#dep-types/*": "./src/types/*.d.ts"
   },
   "files": [
     "bin",
     "dist",
     "misc/**/*.js",
     "client.d.ts",
-    "index.cjs",
-    "index.d.cts",
     "types"
   ],
   "engines": {
@@ -56,21 +57,21 @@
     "directory": "packages/vite"
   },
   "dependencies": {
-    "esbuild": "^0.25.0",
-    "fdir": "^6.5.0",
-    "picomatch": "^4.0.3",
-    "postcss": "^8.5.6",
-    "rollup": "^4.43.0",
-    "tinyglobby": "^0.2.15"
+    "lightningcss": "^1.33.0",
+    "picomatch": "^4.0.7",
+    "postcss": "^8.5.32",
+    "rolldown": "~1.2.18",
+    "tinyglobby": "^0.2.17"
   },
   "optionalDependencies": {
     "fsevents": "~2.3.3"
   },
   "peerDependencies": {
     "@types/node": "^20.19.0 || >=22.12.0",
+    "@vitejs/devtools": "^0.7.1 || ^0.8.0",
+    "esbuild": "^0.27.0 || ^0.28.0",
     "jiti": ">=1.21.0",
     "less": "^4.0.0",
-    "lightningcss": "^1.21.0",
     "sass": "^1.70.0",
     "sass-embedded": "^1.70.0",
     "stylus": ">=0.54.8",
@@ -81,6 +82,12 @@
   },
   "peerDependenciesMeta": {
     "@types/node": {
+      "optional": true
+    },
+    "@vitejs/devtools": {
+      "optional": true
+    },
+    "esbuild": {
       "optional": true
     },
     "jiti": {
@@ -99,9 +106,6 @@
       "optional": true
     },
     "sugarss": {
-      "optional": true
-    },
-    "lightningcss": {
       "optional": true
     },
     "terser": {

@@ -41,12 +41,13 @@
   "license": "MIT",
   "dependencies": {
     "@fastify/express": "^4.0.9",
+    "esbuild": "^0.25.12",
     "fastify": "^5.12.7",
     "oc-client-browser": "^1.8.0",
     "oc-vite-compiler": "^6.0.2"
   },
   "peerDependencies": {
-    "vite": "^5.0.0 || ^6.0.0 || ^7.0.0"
+    "vite": "^5.0.0 || ^6.0.0 || ^7.0.0 || ^8.0.0"
   },
   "engines": {
     "node": ">=20"

@@ -1,7 +1,7 @@
 import { builtinModules } from 'module';
 import path from 'path';
 import { callbackify } from 'util';
-import vite, { Rollup } from 'oc-vite';
+import vite, { type Rolldown } from 'oc-vite';
 import fs from 'fs-extra';
 import hashBuilder from 'oc-hash-builder';
 import serverWrapper, { ServerWrapper } from './serverWrapper';
@@ -72,11 +72,36 @@ async function compileServer(
         (p: any) => !pluginsNames.includes(p?.name)
       ) ?? [];
 
+    const external = (id: string) => {
+      if (id === 'oc-server') return false;
+      if (nodeModuleMatcher.test(id)) {
+        if (moduleWithPathMatcher.test(id)) {
+          id = id.split('/')[0];
+        }
+
+        if (!externals.includes(id)) {
+          throw new Error(
+            `Missing dependencies from package.json => ${id}`
+          );
+        }
+        return true;
+      }
+      return false;
+    };
+    // Set after config merging: vite would merge it with a vite.config.ts
+    // `external` array, and rolldown rejects functions inside arrays
+    const serverExternal: PluginOption = {
+      name: 'OcServerExternal',
+      enforce: 'post',
+      options(inputOptions) {
+        inputOptions.external = external;
+      },
+    };
     const result = await vite.build({
       appType: 'custom',
       root: componentPath,
       mode: production ? 'production' : 'development',
-      plugins: [...plugins, ...basePlugins],
+      plugins: [...plugins, ...basePlugins, serverExternal],
       logLevel: options.verbose ? 'info' : 'silent',
       build: {
         sourcemap: production ? false : 'inline',
@@ -86,28 +111,10 @@ async function compileServer(
         lib: { entry: higherOrderServerPath, formats: ['cjs'] },
         write: false,
         minify: production,
-        rollupOptions: {
-          external: (id) => {
-            if (id === 'oc-server') return false;
-            if (nodeModuleMatcher.test(id)) {
-              if (moduleWithPathMatcher.test(id)) {
-                id = id.split('/')[0];
-              }
-
-              if (!externals.includes(id)) {
-                throw new Error(
-                  `Missing dependencies from package.json => ${id}`
-                );
-              }
-              return true;
-            }
-            return false;
-          },
-        },
       },
     });
     const out = Array.isArray(result) ? result[0] : result;
-    const bundle = (out as Rollup.RollupOutput).output[0].code;
+    const bundle = (out as Rolldown.RolldownOutput).output[0].code;
 
     await fs.ensureDir(publishPath);
     await fs.writeFile(path.join(publishPath, publishFileName), bundle);

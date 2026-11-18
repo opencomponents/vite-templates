@@ -377,7 +377,18 @@ async function initialize(component) {
   fs.writeFileSync(componentPkgPath, JSON.stringify(componentPkg, null, 2));
 
   console.log(`Installing packages for ${component}`);
-  await npmInstall(componentDir);
+  // The template may only install against unpublished local metadata (e.g.
+  // a peer range widened for a new vite major), so a failure falls back to
+  // installing every local package from a tarball.
+  const publishedInstall = await npmInstall(componentDir).then(
+    () => true,
+    (err) => {
+      console.warn(
+        `Install against published packages failed for ${component}: ${err.shortMessage}`
+      );
+      return false;
+    }
+  );
 
   // Test the local workspace packages instead of the published copies.
   const localPackages = [
@@ -387,17 +398,22 @@ async function initialize(component) {
     'oc-vite',
     'oc-server',
   ];
-  const unpublished = localPackages.filter(
-    (packageName) => missingLocalDeps(packageName, componentDir).length > 0
-  );
+  const unpublished = publishedInstall
+    ? localPackages.filter(
+        (packageName) => missingLocalDeps(packageName, componentDir).length > 0
+      )
+    : localPackages;
   if (unpublished.length > 0) {
     console.log(
       `Installing local tarballs for ${unpublished.join(', ')} (local dependencies not in the published release)`
     );
     await installLocalTarballs(unpublished, componentDir);
   }
+  // Tarballs already contain the local build (and npm may nest them).
   for (const packageName of localPackages) {
-    overlayLocalBuild(packageName, componentDir);
+    if (!unpublished.includes(packageName)) {
+      overlayLocalBuild(packageName, componentDir);
+    }
   }
   // Tarball installs already match the local metadata: nothing is stale, and
   // their nested copies may serve transitive deps (e.g. a plugin's own vite).
