@@ -8,7 +8,8 @@ import { HtmlTemplate } from './htmlTemplate';
 import cssModules from './cssModulesPlugin';
 import cssInjectedByJsPlugin from 'vite-plugin-css-injected-by-js';
 import type { CompilerOptions } from './createCompile';
-import type { PluginOption, Rollup } from 'vite';
+import { externalsPlugins } from './externals';
+import type { PluginOption, Rolldown } from 'oc-vite';
 
 export interface ViteViewOptions {
   publishFileName?: string;
@@ -97,9 +98,12 @@ async function compileView(options: ViteViewOptions & CompilerOptions) {
       (p: any) => !pluginsNames.includes(p?.name),
     ) ?? [];
 
-  const otherAssets: vite.Rollup.OutputAsset[] = [];
+  const otherAssets: Rolldown.OutputAsset[] = [];
   let hash = '';
   const alias = baseConfig?.config?.resolve?.alias;
+  const userExternal = baseConfig?.config?.build?.rollupOptions?.external ?? [];
+  const ownedExternal = (Array.isArray(userExternal) ? userExternal : [userExternal])
+    .filter((x): x is string | RegExp => typeof x === 'string' || x instanceof RegExp);
 
   await vite.build({
     appType: 'custom',
@@ -162,6 +166,7 @@ async function compileView(options: ViteViewOptions & CompilerOptions) {
       },
       ...plugins,
       EnvironmentPlugin(['NODE_ENV']),
+      ...externalsPlugins(ownedExternal),
       ...basePlugins,
     ] as any,
     logLevel: 'silent',
@@ -180,7 +185,7 @@ async function compileView(options: ViteViewOptions & CompilerOptions) {
       write: true,
       minify: production,
       rollupOptions: {
-        external: baseConfig?.config?.build?.rollupOptions?.external ?? [],
+        external: typeof userExternal === 'function' ? userExternal : [],
       },
     },
     experimental: {
@@ -206,7 +211,7 @@ async function compileView(options: ViteViewOptions & CompilerOptions) {
       await fs.ensureFile(path.join(publishPath, staticFolder, asset.fileName));
       await fs.writeFile(
         path.join(publishPath, staticFolder, asset.fileName),
-        (asset as Rollup.OutputAsset).source,
+        (asset as Rolldown.OutputAsset).source,
         'utf-8',
       );
     }

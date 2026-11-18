@@ -2,7 +2,7 @@
   "compilerOptions": {
     "target": "ES2022",
     "jsx": "react-jsx",
-    "module": "commonjs",
+    "module": "node20",
     "declaration": true,
     "outDir": "./dist",
     "esModuleInterop": true,

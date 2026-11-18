@@ -8,8 +8,9 @@ import ocViewWrapper from 'oc-view-wrapper';
 import cssModules from './cssModulesPlugin';
 import { providerFunctions } from './providerFunctions';
 import htmlTemplate, { HtmlTemplate } from './htmlTemplate';
+import { externalsPlugins } from './externals';
 import type { CompilerOptions } from './createCompile';
-import type { PluginOption, Rollup } from 'vite';
+import type { PluginOption, Rolldown } from 'oc-vite';
 
 interface External {
   name: string;
@@ -112,7 +113,7 @@ async function compileView(options: ViteViewOptions & CompilerOptions) {
       (p: any) => !pluginsNames.includes(p?.name)
     ) ?? [];
 
-  const otherAssets: vite.Rollup.OutputAsset[] = [];
+  const otherAssets: Rolldown.OutputAsset[] = [];
   let hash = '';
   const wrapperPlugin: vite.PluginOption = {
     name: 'WrapEntry',
@@ -240,6 +241,10 @@ async function compileView(options: ViteViewOptions & CompilerOptions) {
       },
       ...plugins,
       EnvironmentPlugin(['NODE_ENV']),
+      ...externalsPlugins([
+        ...Object.keys(globals),
+        ...esmExternals.map((x) => x.name),
+      ]),
       cssModules(),
       ...basePlugins,
     ] as any,
@@ -257,7 +262,6 @@ async function compileView(options: ViteViewOptions & CompilerOptions) {
       write: false,
       minify: production,
       rollupOptions: {
-        external: [...Object.keys(globals), ...esmExternals.map((x) => x.name)],
         output: {
           globals,
         },
@@ -277,11 +281,11 @@ async function compileView(options: ViteViewOptions & CompilerOptions) {
   });
   const out = (
     Array.isArray(result) ? result[0] : result
-  ) as Rollup.RollupOutput;
+  ) as Rolldown.RolldownOutput;
   const bundle = (
     out.output.find((x) =>
-      (x as Rollup.OutputChunk)?.facadeModuleId?.endsWith(viewWrapperName)
-    )! as Rollup.OutputChunk
+      (x as Rolldown.OutputChunk)?.facadeModuleId?.endsWith(viewWrapperName)
+    )! as Rolldown.OutputChunk
   ).code;
 
   await fs.unlink(viewWrapperPath);
@@ -294,7 +298,7 @@ async function compileView(options: ViteViewOptions & CompilerOptions) {
       await fs.ensureFile(path.join(publishPath, staticFolder, asset.fileName));
       await fs.writeFile(
         path.join(publishPath, staticFolder, asset.fileName),
-        (asset as Rollup.OutputAsset).source,
+        (asset as Rolldown.OutputAsset).source,
         'utf-8'
       );
     }

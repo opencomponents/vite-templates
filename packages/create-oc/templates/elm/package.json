@@ -19,9 +19,9 @@
   "dependencies": {},
   "devDependencies": {
     "oc-server": "^4.0.5",
-    "oc-template-elm-compiler": "^3.0.2",
+    "oc-template-elm-compiler": "^3.0.3",
     "elm": "^0.19.1-6",
     "typescript": "^5.9.3",
-    "vite": "^7.1.12"
+    "vite": "^8.3.8"
   }
 }
