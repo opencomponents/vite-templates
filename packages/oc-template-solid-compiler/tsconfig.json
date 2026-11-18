@@ -2,7 +2,7 @@
   "compilerOptions": {
     "target": "ES2022",
     "jsx": "preserve",
-    "jsxImportSource": "solid-js",
+    "jsxImportSource": "@solidjs/web",
     "module": "CommonJS",
     "declaration": true,
     "outDir": "./dist",

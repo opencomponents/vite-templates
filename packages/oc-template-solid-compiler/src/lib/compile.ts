@@ -1,5 +1,5 @@
 import { getInfo } from 'oc-template-solid';
-import solid from 'vite-plugin-solid';
+import solid from '@solidjs/vite-plugin';
 import { createCompile } from 'oc-vite-compiler';
 import solidOCProviderTemplate from './solidOCProviderTemplate';
 

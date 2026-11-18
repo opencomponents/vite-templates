@@ -13,8 +13,7 @@ type PromiseData<T = any> = T & {
 };
 
 export const DataProvider = (props: any) => {
-  // @ts-ignore children props
-  return <DataContext.Provider value={props.value}>{props.children}</DataContext.Provider>;
+  return <DataContext value={props.value}>{props.children}</DataContext>;
 };
 
 export function useData<T = any>(): PromiseData<T> {

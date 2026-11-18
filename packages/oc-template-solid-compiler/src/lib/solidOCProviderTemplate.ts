@@ -8,7 +8,7 @@ export default function solidOCProviderTemplate({
   providerFunctions: string;
 }) {
   return `
-  import { render } from 'solid-js/web';
+  import { render } from '@solidjs/web';
   import View from '${removeExtension(viewPath)}';
   import { DataProvider } from 'oc-template-solid-compiler/dist/utils/useData'
 
