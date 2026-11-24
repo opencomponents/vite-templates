@@ -1,0 +1,13 @@
+{
+  "name": "multi-instance-fixture",
+  "version": "1.0.0",
+  "type": "module",
+  "oc": {
+    "files": {
+      "template": {
+        "src": "src/view.js",
+        "type": "oc-template-esm"
+      }
+    }
+  }
+}

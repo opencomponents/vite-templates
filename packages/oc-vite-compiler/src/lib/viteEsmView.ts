@@ -9,6 +9,7 @@ import cssModules from './cssModulesPlugin';
 import cssInjectedByJsPlugin from 'vite-plugin-css-injected-by-js';
 import type { CompilerOptions } from './createCompile';
 import { externalsPlugins } from './externals';
+import instanceIsolationPlugin from './instanceIsolation';
 import type { PluginOption, Rolldown } from 'oc-vite';
 
 export interface ViteViewOptions {
@@ -164,6 +165,7 @@ async function compileView(options: ViteViewOptions & CompilerOptions) {
           }
         },
       },
+      instanceIsolationPlugin(),
       ...plugins,
       EnvironmentPlugin(['NODE_ENV']),
       ...externalsPlugins(ownedExternal),
