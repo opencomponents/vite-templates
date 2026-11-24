@@ -1,5 +1,15 @@
 # oc-vite-compiler
 
+## 7.0.0
+
+### Major Changes
+
+- e858133: Build with Vite 8 (Rolldown) through oc-vite 8.3.8. Components need `vite@^8` and the framework plugins that support it: `@vitejs/plugin-react@^5.2`, `@vitejs/plugin-vue@^6`, `@sveltejs/vite-plugin-svelte@^7` (with `svelte@^5.46.4`), `@preact/preset-vite@^2.10.6` and `vite-plugin-elm@^3.1`. Externals required from CommonJS dependencies are now converted to imports, as Rolldown leaves those `require()` calls in the bundle. `oc-server` accepts Vite 8 as a peer and depends on `esbuild` directly, which Vite 8 no longer installs.
+
+### Patch Changes
+
+- d9e1e2f: ESM components now evaluate their code once per mounted instance, as the other templates do. Before, every instance of the same component version on a page shared one module scope, so `getInitialData()`, `getSettings()` and `serverClient` returned the last-mounted instance's values when a page mounted the component more than once with different parameters. Module-level state of a component is now per instance; code that must run once per page (for example `customElements.define`) needs a guard. Bundles that cannot be wrapped safely (code-split chunks, top-level `await`) build as before, with a warning.
+
 ## 6.0.4
 
 ### Patch Changes
