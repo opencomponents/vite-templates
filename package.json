@@ -10,7 +10,7 @@
     "changeset": "changeset",
     "version-packages": "changeset version",
     "publish-packages": "turbo run build lint && changeset version && changeset publish",
-    "release": "turbo build --filter=docs^... && changeset publish"
+    "release": "turbo build && changeset publish"
   },
   "private": true,
   "devDependencies": {
