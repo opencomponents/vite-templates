@@ -59,6 +59,7 @@ const templates = templateChoices.map((t) => t.value);
 const esmVariantChoices = [
   { title: 'React', value: 'esm.react' },
   { title: 'Remix', value: 'esm.remix' },
+  { title: 'Effect UI', value: 'esm.effect' },
 ];
 const esmVariants = esmVariantChoices.map((t) => t.value);
 

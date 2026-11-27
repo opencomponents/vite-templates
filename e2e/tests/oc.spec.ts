@@ -11,6 +11,7 @@ const TEMPLATES = [
   'elm',
   'esm.react',
   'esm.remix',
+  'esm.effect',
 ];
 
 const EXPECTED = {

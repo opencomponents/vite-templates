@@ -10,7 +10,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const REPO_ROOT = path.resolve(__dirname, '..');
 
 // The templates covered by e2e. Keep in sync with e2e/tests/oc.spec.ts.
-// Covers every template scaffolded by create-oc, including both ESM variants.
+// Covers every template scaffolded by create-oc, including every ESM variant.
 const COMPONENTS = [
   'react',
   'es6',
@@ -21,9 +21,10 @@ const COMPONENTS = [
   'elm',
   'esm.react',
   'esm.remix',
+  'esm.effect',
 ];
 
-// Both ESM variants share one template runtime + compiler package.
+// All ESM variants share one template runtime + compiler package.
 function templatePackageFor(component) {
   if (component.startsWith('esm.')) {
     return 'oc-template-esm';
@@ -136,18 +137,78 @@ function copyDirIfExists(src, dest) {
   return true;
 }
 
-// Overlays the local build output (dist + scaffold) onto the published copy
+// npm can place a transitive dependency at the component root or nested under
+// its parent (vite 8.4 currently makes it nest oc-vite). Find every copy that
+// Node can resolve through the local package graph.
+function installedPackageDirs(
+  packageName,
+  componentDir,
+  localPackages,
+  memo = new Map()
+) {
+  if (memo.has(packageName)) {
+    return memo.get(packageName);
+  }
+  const dirs = [];
+  memo.set(packageName, dirs);
+  const addIfInstalled = (dir) => {
+    if (
+      !dirs.includes(dir) &&
+      fs.existsSync(path.join(dir, 'package.json'))
+    ) {
+      dirs.push(dir);
+    }
+  };
+
+  addIfInstalled(path.join(componentDir, 'node_modules', packageName));
+  for (const parentName of localPackages) {
+    if (parentName === packageName) {
+      continue;
+    }
+    const parentPkg = JSON.parse(
+      fs.readFileSync(
+        path.join(localPackageDir(parentName), 'package.json'),
+        'utf8'
+      )
+    );
+    const ranges = {
+      ...(parentPkg.dependencies ?? {}),
+      ...(parentPkg.peerDependencies ?? {}),
+      ...(parentPkg.optionalDependencies ?? {}),
+    };
+    if (!(packageName in ranges)) {
+      continue;
+    }
+    for (const parentDir of installedPackageDirs(
+      parentName,
+      componentDir,
+      localPackages,
+      memo
+    )) {
+      addIfInstalled(path.join(parentDir, 'node_modules', packageName));
+    }
+  }
+  return dirs;
+}
+
+// Overlays the local build output (dist + scaffold) onto the published copies
 // installed in the component, so e2e exercises local code.
-function overlayLocalBuild(packageName, componentDir) {
+function overlayLocalBuild(packageName, componentDir, localPackages) {
   const srcRoot = localPackageDir(packageName);
-  const destRoot = path.join(componentDir, 'node_modules', packageName);
-  if (!fs.existsSync(path.join(destRoot, 'package.json'))) {
+  const destRoots = installedPackageDirs(
+    packageName,
+    componentDir,
+    localPackages
+  );
+  if (destRoots.length === 0) {
     throw new Error(
       `Expected installed dependency "${packageName}" in ${componentDir} (did "npm install" fail?)`
     );
   }
-  for (const subdir of ['dist', 'scaffold']) {
-    copyDirIfExists(path.join(srcRoot, subdir), path.join(destRoot, subdir));
+  for (const destRoot of destRoots) {
+    for (const subdir of ['dist', 'scaffold']) {
+      copyDirIfExists(path.join(srcRoot, subdir), path.join(destRoot, subdir));
+    }
   }
 }
 
@@ -412,7 +473,7 @@ async function initialize(component) {
   // Tarballs already contain the local build (and npm may nest them).
   for (const packageName of localPackages) {
     if (!unpublished.includes(packageName)) {
-      overlayLocalBuild(packageName, componentDir);
+      overlayLocalBuild(packageName, componentDir, localPackages);
     }
   }
   // Tarball installs already match the local metadata: nothing is stale, and
@@ -470,7 +531,7 @@ function writeOcJson(components) {
   console.log(
     mapped.length > 0
       ? `ESM import map: ${mapped.join(', ')}`
-      : 'No ESM components selected, writing empty import map'
+      : 'No external ESM imports required, writing empty import map'
   );
 }
 

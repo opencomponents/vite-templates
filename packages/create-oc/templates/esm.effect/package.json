@@ -1,0 +1,34 @@
+{
+  "name": "base-component-esm",
+  "description": "",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite dev",
+    "build": "tsc --noEmit && oc package .",
+    "test": "vitest"
+  },
+  "oc": {
+    "files": {
+      "data": "src/entry.server.ts",
+      "template": {
+        "src": "src/entry.client.ts",
+        "type": "oc-template-esm"
+      },
+      "static": [
+        "public"
+      ]
+    }
+  },
+  "devDependencies": {
+    "@effect/ui": "https://pkg.pr.new/Effect-TS/ui/@effect/ui@e0b7cec",
+    "@effect/vitest": "4.1.5",
+    "effect": "4.1.5",
+    "happy-dom": "^20.14.6",
+    "oc-server": "^4.0.5",
+    "oc-template-esm-compiler": "^4.1.2",
+    "typescript": "5.9.3",
+    "vite": "^8.3.8",
+    "vitest": "^5.0.3"
+  }
+}

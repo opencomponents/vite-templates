@@ -6,7 +6,7 @@ import { fileURLToPath, pathToFileURL } from 'node:url';
 // A page can mount the same ESM component version more than once with
 // different parameters; each instance must keep its own initial data
 // (getInitialData) and settings (getSettings, serverClient).
-const TEMPLATES = ['esm.react', 'esm.remix'];
+const TEMPLATES = ['esm.react', 'esm.remix', 'esm.effect'];
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
