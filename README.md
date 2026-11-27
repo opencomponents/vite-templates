@@ -122,13 +122,13 @@ Functional programming template using the Elm language.
 
 **Template ID:** `esm`
 
-Template using native ES modules with modern JavaScript features. Choose a variant when scaffolding: React or Remix.
+Template using native ES modules with modern JavaScript features. Choose a variant when scaffolding: React, Remix or Effect UI. Variants can also be specified directly as `esm.react`, `esm.remix` or `esm.effect`.
 
 **Features:**
 
 - Native ES modules
 - Modern JavaScript
-- React and Remix variants
+- React, Remix and Effect UI variants
 
 ## Template Structure
 
@@ -241,6 +241,8 @@ Templates are configured to load framework dependencies from CDN in production:
 - **Other frameworks**: Various CDN configurations
 
 This approach reduces bundle sizes and allows for better caching across components.
+
+The Effect UI ESM variant bundles its framework runtime because `@effect/ui` is in public preview and is distributed through pinned pkg.pr.new snapshots rather than npm releases.
 
 ## Contributing
 

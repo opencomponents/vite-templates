@@ -10,7 +10,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const REPO_ROOT = path.resolve(__dirname, '..');
 
 // The templates covered by e2e. Keep in sync with e2e/tests/oc.spec.ts.
-// Covers every template scaffolded by create-oc, including both ESM variants.
+// Covers every template scaffolded by create-oc, including every ESM variant.
 const COMPONENTS = [
   'react',
   'es6',
@@ -21,9 +21,10 @@ const COMPONENTS = [
   'elm',
   'esm.react',
   'esm.remix',
+  'esm.effect',
 ];
 
-// Both ESM variants share one template runtime + compiler package.
+// All ESM variants share one template runtime + compiler package.
 function templatePackageFor(component) {
   if (component.startsWith('esm.')) {
     return 'oc-template-esm';
@@ -470,7 +471,7 @@ function writeOcJson(components) {
   console.log(
     mapped.length > 0
       ? `ESM import map: ${mapped.join(', ')}`
-      : 'No ESM components selected, writing empty import map'
+      : 'No external ESM imports required, writing empty import map'
   );
 }
 

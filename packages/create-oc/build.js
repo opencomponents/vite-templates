@@ -3,7 +3,8 @@ import fs from 'fs';
 const templates = fs
   .readdirSync('./templates', { withFileTypes: true })
   .filter((x) => x.isDirectory)
-  .map((x) => x.name);
+  .map((x) => x.name)
+  .sort();
 const cursorRules = fs.readFileSync('./oc-project.mdc', 'utf8');
 
 for (const template of templates) {
@@ -43,9 +44,11 @@ for (const template of templates) {
     `./templates/${template}/package.json`,
     JSON.stringify(templatePkg, null, 2)
   );
-  fs.cpSync(
-    `./templates/${template}`,
-    `../oc-template-${baseTemplate}-compiler/scaffold/src`,
-    { recursive: true }
-  );
+  // ESM variants share one compiler scaffold. Replace it on every copy
+  // so the result is one coherent variant, not a merge of several.
+  const scaffoldPath = `../oc-template-${baseTemplate}-compiler/scaffold/src`;
+  if (baseTemplate === 'esm') {
+    fs.rmSync(scaffoldPath, { recursive: true, force: true });
+  }
+  fs.cpSync(`./templates/${template}`, scaffoldPath, { recursive: true });
 }
